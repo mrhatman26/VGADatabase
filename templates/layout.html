@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ page_name }}</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" media="(orientation: landscape)">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style_phone.css') }}" media="(orientation: portrait)">
+    </head>
+    <body>
+        <div id="title">
+            <h1>IMBDb User Rating Predictor</h1>
+        </div>
+        <nav>
+            <ul>
+                <a href="{{ url_for('home') }}" class="nav_link"><li>About</li></a>
+                <a href="{{ url_for('predict_submit') }}" class="nav_link"><li>Predict</li></a>
+            </ul>
+        </nav>
+        <div class="main">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
