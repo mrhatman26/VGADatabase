@@ -163,7 +163,7 @@ CREATE TABLE link_tags_aliases(
     user_id INT NOT NULL,
     link_date TEXT,
     PRIMARY KEY(tag_id),
-    FOREIGN KEY(tag_id) REFERENCES table_tags(tag_id)
+    FOREIGN KEY(tag_id) REFERENCES table_tags(tag_id),
     FOREIGN KEY(alias_id) REFERENCES table_aliases(alias_id),
     FOREIGN KEY(user_id) REFERENCES table_users(user_id)
 );
@@ -219,7 +219,7 @@ CREATE TABLE link_tag_user(
     user_id INT NOT NULL,
     tag_link_created BOOLEAN NOT NULL,
     tag_cDate TEXT,
-    tag_link_approved BOOLEAN NOT NULOL,
+    tag_link_approved BOOLEAN NOT NULL,
     tag_aDate TEXT,
     PRIMARY KEY(tag_id),
     FOREIGN KEY(tag_id) REFERENCES table_tags(tag_id),
@@ -359,9 +359,9 @@ DROP TABLE IF EXISTS link_genre_user;
 CREATE TABLE link_genre_user(
     genre_id INT NOT NULL,
     user_id INT NOT NULL,
-    genre_link_created BOOLEAN INT NOT NULL,
+    genre_link_created BOOLEAN NOT NULL,
     genre_cDate TEXT,
-    genre_link_approved BOOLEAN INT NOT NULL,
+    genre_link_approved BOOLEAN NOT NULL,
     genre_aDate TEXT,
     PRIMARY KEY(genre_id),
     FOREIGN KEY(genre_id) REFERENCES table_genres(genre_id),
@@ -372,7 +372,7 @@ DROP TABLE IF EXISTS link_age_user;
 CREATE TABLE link_age_user(
     age_id INT NOT NULL,
     user_id INT NOT NULL,
-    PRIMARY KEY(age_id)
+    PRIMARY KEY(age_id),
     FOREIGN KEY(age_id) REFERENCES table_age_ratings(age_id),
     FOREIGN KEY(user_id) REFERENCES table_users(user_id)
 );

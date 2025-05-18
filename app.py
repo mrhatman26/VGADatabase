@@ -4,6 +4,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user
 
 '''Server Vars'''
 app = Flask(__name__) #Create the flask application
+deployed = False
 
 '''General Routes'''
 #Home/Index
@@ -16,11 +17,9 @@ def home():
 #404 is page not found.
 @app.errorhandler(404)
 def page_invalid(e):
-    add_access_log(request.remote_addr, log_get_user(), "/404/ (page_invalid)", False, False)
     return render_template('errors/404.html'), 404
 @app.errorhandler(405)
 def page_wrong_method(e):
-    add_access_log(request.remote_addr, log_get_user(), "/405/ (page_wrong_method)", False, False)
     abort(404)
 #For simplicity, if the website encounters a 405 error, it will redirect and show as a 404 instead.
 
@@ -29,7 +28,6 @@ def page_wrong_method(e):
 #Even though this supresses the "favicon.ico" 404 error, it does not show this icon when bookmarked.
 @app.route('/favicon.ico')
 def favicon():
-    add_access_log(request.remote_addr, log_get_user(), "/favicon.ico (favicon)", False, False)
     return url_for("static", filename="favicon.ico")
 
 #Launch Website
