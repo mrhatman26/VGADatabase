@@ -8,7 +8,7 @@ page_max = 10
 current_page_no = 0
 page_data_list = []
 
-def get_current_page_data(current_page_url, current_page_no, page_data_list):
+def get_current_page_data(current_page_url, page_data_list):
     page_list = []
     request = requests.get(current_page_url)
     soup = bs(request.content, "html.parser")
@@ -75,7 +75,7 @@ while current_page_no < page_max:
     link_no = 0
     for link in links:
         print("Scraping subpages: " + str(link_no + 1) + "/" + str(no_links), end="\r")
-        get_current_page_data(base_url + link["href"], current_page_no, page_data_list)
+        get_current_page_data(base_url + link["href"], page_data_list)
         link_no += 1
     print("\n")
     next_page = soup.find_all("div", attrs={"class":"mw-allpages-nav"})
