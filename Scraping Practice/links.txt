@@ -924,6 +924,8 @@
 /wiki/%22Big_Daddy%22_Garlits
 "Big Five" factors
 /wiki/%22Big_Five%22_factors
+"Big Inch" Pipeline
+/wiki/%22Big_Inch%22_Pipeline
 "Big Jim" Folsom
 /wiki/%22Big_Jim%22_Folsom
 "Big John" Merritt
@@ -3166,5 +3168,3 @@
 /wiki/%22Louder_Than_Bombs%22
 "Love, Peace & Nappiness"
 /wiki/%22Love,_Peace_%26_Nappiness%22
-"Love & Theft"
-/wiki/%22Love_%26_Theft%22

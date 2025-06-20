@@ -1,49 +1,88 @@
-import requests
+import requests, csv, pyperclip, re
 from bs4 import BeautifulSoup as bs
 from urllib.parse import unquote
 
 base_url = "https://en.wikipedia.org/"
 request_url = "https://en.wikipedia.org/wiki/Special:AllPages"
-page_max = 5
+page_max = 10
 current_page_no = 0
+page_data_list = []
 
-def get_current_page_data(current_page_url, current_page_no):
+def get_current_page_data(current_page_url, current_page_no, page_data_list):
+    page_list = []
     request = requests.get(current_page_url)
     soup = bs(request.content, "html.parser")
-    span = soup.find_all("span", attrs={"class": "mw-page-title-main"})
-    if len(span) >= 1:
-        if current_page_no == 0:
-            wiki_page_file = open("wiki_pages.txt", "w", encoding="utf-8")
-            wiki_page_file.write(span[0].text)
-            wiki_page_file.close()
+    title_span = soup.find_all("span", attrs={"class": "mw-page-title-main"})
+    title_list = soup.find_all("h1", attrs={"id": "firstHeading"})
+    if len(title_span) >= 1 or len(title_list) >= 1:#Page is valid and not a redirect
+        page_list.append(current_page_url)
+        if (len(title_span) >= 1):
+            page_list.append(title_span[0].get_text())
         else:
-            wiki_page_file = open("wiki_pages.txt", "a", encoding="utf-8")
-            wiki_page_file.write(span[0].text)
-            wiki_page_file.close()
+            page_list.append(title_list[0].get_text())
+        contents_html = soup.find_all("ul", attrs={"class": "vector-toc-contents"})
+        contents_list = []
+        for list_item in contents_html:
+            for item in list_item:
+                for sub_item in item:
+                    if sub_item != "\n":
+                        sub_item_text = sub_item.get_text().replace("\n", "")
+                        slice_counter = 0
+                        while slice_counter < len(sub_item_text):
+                            if sub_item_text[slice_counter].isnumeric():
+                                slice_counter += 1
+                            else:
+                                break
+                        sub_item_text = sub_item_text[slice_counter:]
+                        if re.search("\\.[0-9]+", sub_item_text) is not None:
+                            sub_item_text = re.split("\\.[0-9]+", sub_item_text)
+                        contents_list.append(sub_item_text)
+        page_list.append(contents_list)
+        page_list.append("")
+        main_body = soup.find_all("div", attrs={"id": "mw-content-text"})
+        for item in main_body:
+            description = item.find_next("p")
+            page_list[2] += description.get_text()
+    else:
+        print("No title detected, HTML added to clipboard")
+        pyperclip.copy(str(soup.prettify()))
+        input("(Press ENTER to continue)")
+    if len(page_list) > 0:
+        page_data_list.append(page_list)
+
+def save_page_data(page_data_list):
+    print("Saving scraped page data")
+    with open("wiki_pages.csv", "w", encoding="utf-8", newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["url", "title", "contents", "description"])
+        for item in page_data_list:
+            writer.writerow(item)
+    csvfile.close()
+
 
 while current_page_no < page_max:
+    print(str(current_page_no + 1) + "/" + str(page_max) + " pages")
     print("Next URL:\n" + str(request_url) + "\n")
-    request = requests.get(request_url)
+    try:
+        request = requests.get(request_url, allow_redirects=True)
+    except Exception as e:
+        print("Error: Request to " + request_url + " timed out or failed.")
+        print("Actual error:\n" + str(e))
+        break
     soup = bs(request.content, "html.parser")
     links = soup.find_all("a", attrs={"class":"mw-redirect"})
-    if current_page_no == 0:
-        temp_file = open("temp.txt", "w", encoding="utf-8")
-    else:
-        temp_file = open("temp.txt", "a", encoding="utf-8")
+    no_links = len(links)
     link_no = 0
     for link in links:
-        print("Saving pages: " + str(link_no) + "/" + str(len(links)), end="\r")
-        temp_file.write(link.text)
-        temp_file.write("\n")
-        temp_file.write(link["href"])
-        get_current_page_data(base_url + link["href"], current_page_no)
-        temp_file.write("\n")
+        print("Scraping subpages: " + str(link_no + 1) + "/" + str(no_links), end="\r")
+        get_current_page_data(base_url + link["href"], current_page_no, page_data_list)
         link_no += 1
-    temp_file.close()
+    print("\n")
     next_page = soup.find_all("div", attrs={"class":"mw-allpages-nav"})
     for div in next_page:
         for link in div:
             if "Next page" in link.text:
                 request_url = base_url + unquote(link["href"])
     current_page_no += 1
+save_page_data(page_data_list)
     
