@@ -1,10 +1,11 @@
-import requests, csv, pyperclip, re
+import requests, csv, pyperclip, re, time
 from bs4 import BeautifulSoup as bs
 from urllib.parse import unquote
 
+start_time = time.time()
 base_url = "https://en.wikipedia.org/"
 request_url = "https://en.wikipedia.org/wiki/Special:AllPages"
-page_max = 10
+page_max = 5
 current_page_no = 0
 page_data_list = []
 
@@ -22,7 +23,7 @@ def get_current_page_data(current_page_url, page_data_list):
             page_list.append(title_list[0].get_text())
         contents_html = soup.find_all("ul", attrs={"class": "vector-toc-contents"})
         contents_list = []
-        for list_item in contents_html:
+        for list_item in contents_html: #For some reason, you must use three for loops to successfully loop through the contents list? Odd.
             for item in list_item:
                 for sub_item in item:
                     if sub_item != "\n":
@@ -52,7 +53,7 @@ def get_current_page_data(current_page_url, page_data_list):
 
 def save_page_data(page_data_list):
     print("Saving scraped page data")
-    with open("wiki_pages.csv", "w", encoding="utf-8", newline='') as csvfile:
+    with open("beautiful_soup_wiki_pages.csv", "w", encoding="utf-8", newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["url", "title", "contents", "description"])
         for item in page_data_list:
@@ -85,4 +86,7 @@ while current_page_no < page_max:
                 request_url = base_url + unquote(link["href"])
     current_page_no += 1
 save_page_data(page_data_list)
-    
+print("Scraping took " + str(time.time() - start_time) + " seconds") 
+time_file = open("beautifulsoup_scrape_time.txt", "w")
+time_file.write("Scraping took " + str(time.time() - start_time) + " seconds")
+time_file.close()

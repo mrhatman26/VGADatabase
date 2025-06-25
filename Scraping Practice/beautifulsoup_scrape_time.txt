@@ -1,0 +1,1 @@
+Scraping took 220.06811451911926 seconds
