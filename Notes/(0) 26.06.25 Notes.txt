@@ -46,3 +46,20 @@ things and see how they go.
 the search page. I have no idea how to even begin to fix that... Added an
 error check to raise an exception if this happens, but that's not a fix at
 all.
+
+19:34: Will give Steam half an hour to respond properlly and if not, I'm
+calling it a day. Then I will surely fail to get this going tomorrow. :/
+No red velvet for me. :(
+
+20:12: For now, Steam is responding agian. The first idea I had was to use the
+normal URL (https://store.steampowered.com/search) to get the first batch of
+games and THEN using the XHR URL. However, while it returns the games, it does
+so in a way that is unlike the previous HTML. From exploring it, each game is
+within the previous game's anchor tag? Will investigate this but I first have
+other chores to do.
+
+21:54: Previous note disappeared apparently... Anyway, I was having problems
+with the HTML of the XHR request URL. Turns out, I overlooked something really
+simple... It is not HTML, it is a JSON dataset that contains HTML. I will
+finish this here for today. Tomorrow's going to be hell trying to figure out
+how to read this JSON because it is stupidly formatted...
