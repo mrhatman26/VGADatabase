@@ -1,0 +1,12 @@
+Each game is held in an anchor element with each anchor element being children
+of the divider with an id of "search_resultsRows". 
+Each anchor element has classname of "search_result_row ds_collapse_flag_
+app_impression_tracked" (Needs investigating though because when I loaded the
+page before, the app_impression_tracked part was not in the classname????)
+
+Each anchor element also has a child span element which holds the title of the
+video game. So, I use that to display in the console what the next game is.
+(Idea: Have a custom print function that can be supressed if debug is false or
+something like that)
+
+Going to investigate this further.
