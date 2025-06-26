@@ -32,3 +32,17 @@ games that requests gets. The total (when starting at 1) was 51, so when
 starting at 0, we get 50 instead. I think this might be the key where I have
 it go through 50 games, then go to that URL at first, but add 50 every time
 50. If this works, I foresee a red velvet cake in my future :)
+
+18:55: Setup the code to go through the first batch of games and then use the
+XHR URL to get the next batch of games using the current_game_no counter in
+the place of the &start and &count numbers in the URL. Let's see how this
+fails.
+
+19:01: Okay, so it really does not work. It returns... Some sort of HTML, but
+it seems to not contain the same elements as the normal page. Will try two
+things and see how they go.
+
+19:23: Okay, new problem: Steam keeps giving the site error page rather than
+the search page. I have no idea how to even begin to fix that... Added an
+error check to raise an exception if this happens, but that's not a fix at
+all.
