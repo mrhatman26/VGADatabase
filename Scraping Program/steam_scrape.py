@@ -20,6 +20,6 @@ while current_game_no < max_game_no:
     print("Next URL is:\n" + request_url + "\n")
     all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
     for item in all_games:
-        print(item.find_all("span", attrs="class"))
+        print(item.find_all("span", attrs={"class": "title"})[0].text)
         input("...")
     break
