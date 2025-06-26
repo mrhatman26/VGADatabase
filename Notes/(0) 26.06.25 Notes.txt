@@ -21,3 +21,14 @@ Infinite scrolling. On the all games page as it is now, the last game is
 "Planet Zoo". When in a browser, the user would just simply scroll down to
 this game and the page would load more. However, requests is static and only
 calls the page once. Research time...
+
+9:58: Based off of some quick research at
+https://scrapeops.io/python-web-scraping-playbook/python-scroll-infinite-pages/
+XHR requests might be the key. Everytime the Steam all games page gets to the
+bottom of the page, it makes an XHR rquest to the following URL
+https://store.steampowered.com/search/results/?query&start=50&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1
+The start number and counter number both being 50 got me to test how many
+games that requests gets. The total (when starting at 1) was 51, so when
+starting at 0, we get 50 instead. I think this might be the key where I have
+it go through 50 games, then go to that URL at first, but add 50 every time
+50. If this works, I foresee a red velvet cake in my future :)

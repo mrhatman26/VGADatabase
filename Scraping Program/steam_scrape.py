@@ -15,11 +15,13 @@ def get_page_data():
 def save_game_data():
     pass
 
+counter = 0
 while current_game_no < max_game_no:
     print(str(current_game_no) + "/" + str(max_game_no) + " games.")
     print("Next URL is:\n" + request_url + "\n")
     all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
     for item in all_games:
         print(item.find_all("span", attrs={"class": "title"})[0].text)
-        input("...")
+        counter += 1
     break
+print(counter)
