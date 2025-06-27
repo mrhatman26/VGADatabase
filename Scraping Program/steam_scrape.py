@@ -58,7 +58,7 @@ def get_page_data(page_url, title, price):
             user_tags.append(tag)
     current_game_data[5] = user_tags
     #Get price [6]
-    current_game_data[6] = price
+    current_game_data[6] = price.encode('latin-1').decode('utf-8')
     #Get game features [7]
     features_list = []
     features_row = game_soup.find_all("a", attrs={"class": "game_area_details_specs_ctn"})
@@ -74,14 +74,10 @@ def get_page_data(page_url, title, price):
     for span in game_soup.find_all("div", attrs={"id": "genresAndManufacturer"})[0].find_all("span"):
         genres.append(span.text)
     current_game_data[9] = genres
-    #no = 0
-    #for item in current_game_data:
-    #    cprint(str(no) + ":\n" + str(item) + "\n")
-    #    no += 1
     game_data.append(current_game_data)
 
 def save_game_data():
-    cprint("Saving scraped game data to CSV file...", end_para="\r")
+    cprint("Saving scraped game data to CSV file...", end_para="")
     with open("scraped_steam_game_data.csv", "w", encoding="utf-8", newline='') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres"])
@@ -110,7 +106,12 @@ while current_game_no < max_game_no:
     if len(all_games) < 1:
         error_check(main_soup, main_page)
     for game in all_games:
-        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, game.find_all("div", attrs={"class": "discount_final_price"})[0].text)
+        price = game.find_all("div", attrs={"class": "discount_final_price"})
+        if len(price) > 0:
+            price = price[0].text
+        else:
+            price = "Free"
+        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price)
         current_game_no += 1
     request_url = new_infite_url(current_game_no)
 save_game_data()

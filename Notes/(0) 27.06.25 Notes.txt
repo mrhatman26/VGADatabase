@@ -91,4 +91,8 @@ the are other alternatives other than just paragraphs tags... -_-
 2:54: So if the paragraph tag cannot be found either, I have just had the
 program ignore that game because it is likely not to be an actual game.
 Meanwhile, the code to get the price is now causing an error so I'm going to
-see what that's about...
+see what that's about... 
+
+22:15: Okay, wow! It's working! I've saved scraped game data to a CSV file!
+Yes!!!! Buuuuuuut... The price of all things is encoded WRONG and contains a
+weird A with a line above it. Time to try and fix this I suppose...
