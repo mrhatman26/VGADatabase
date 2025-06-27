@@ -10,7 +10,8 @@ max_game_no = 100
 current_game_no = 0
 sprint = False #sprint = Surpress Print
 
-def get_page_data(page_url):
+def get_page_data(page_url, title, price):
+    current_game_data = [None] * 10 #Create a list of ten items each of which is None.
     game_page = requests.get(page_url)
     game_soup = bs(game_page.content, "html.parser")
     print(game_soup.prettify())    
@@ -37,9 +38,7 @@ while current_game_no < max_game_no:
     all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
     if len(all_games) < 1:
         error_check(main_soup, main_page)
-    for item in all_games:
-        #cprint(item.find_all("span", attrs={"class": "title"})[0].text, sprint)
-        #cprint(item["href"], sprint)
-        get_page_data(item["href"])
+    for game in all_games:
+        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text)
         current_game_no += 1
     request_url = new_infite_url(current_game_no)

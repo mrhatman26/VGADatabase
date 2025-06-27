@@ -27,3 +27,19 @@ set to true. Anyway, onto reading each page.
 14:48: Not really noteworthy, but I just found out something I should have
 already known about Python. If a variable is declared BEFORE a function, then
 that function can access it. Really useful actually.
+
+15:10: Okay, so let's plan what I want to collect from the page:
+Let's go for the following and try and keep it simple:
+1: Title
+2: Description
+3: Release Date
+4: Developer
+5: Publisher
+6: Popular User Defined Tags (As a sublist)
+7: The Price (Problem: Games have other products listed on their pages, so it
+might be best to get the price from the main page rather than the game's page)
+8: Game Features List (Sublist again)
+9: Supported Languages (Maybe? I'll save this 'till last)
+10: Genres
+That is a lot to collect and might make this a slow process, but let's see how
+this goes...
