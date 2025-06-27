@@ -6,9 +6,9 @@ base_url = "https://store.steampowered.com/"
 infite_url = "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
 request_url = infite_url
 game_data = []
-max_game_no = 100
+max_game_no = 200
 current_game_no = 0
-sprint = False #sprint = Surpress Print
+sprint = True #sprint = Surpress Print
 dev_row = []
 tag_row = []
 user_tags = []
@@ -18,13 +18,26 @@ mangen_block = []
 genres = []
 
 def get_page_data(page_url, title, price):
+    cprint("Scraping game page of " + title, surpress=sprint)
     current_game_data = [None] * 10 #Create a list of ten items each of which is None.
-    game_page = requests.get(page_url)
+    game_page = requests.get(page_url, allow_redirects=True)
     game_soup = bs(game_page.content, "html.parser")
+    #Check for age verification page
     #Get title [0]
-    current_game_data[0] = title#game_soup.find_all("div", attrs={"class": "apphub_AppName"})[0].text
+    current_game_data[0] = title
     #Get description [1]
-    current_game_data[1] = game_soup.find_all("div", attrs={"class": "game_description_snippet"})[0].text.replace("\n", "").replace("\t", "")
+    current_game_data[1] = game_soup.find_all("div", attrs={"class": "game_description_snippet"})
+    if len(current_game_data[1]) > 0: #Check to see if the description as a divider exists
+        current_game_data[1] = current_game_data[1][0].text.replace("\n", "").replace("\t", "")
+    else: #If it does not exist, it might be a paragprah tag without a class or ID instead of a div with a class.
+        current_game_data[1] = game_soup.find_all("div", attrs={"class": "glance_details"})
+        if len(current_game_data[1]) > 0: #Check to see if the description as a paragraph exists.
+            current_game_data[1] = current_game_data[1][0].find_all("p")[0].text
+        else: #The description as a paragraph does not exist either. The page might no be a game page at all! So return instead
+            print("Warning: Game page of " + title + " contains no description. It might not be a game page. URL saved to clipboard.")
+            pyperclip.copy(page_url)
+            input("(Press ENTER to continue)")
+            return
     #Get release date [2]
     current_game_data[2] = game_soup.find_all("div", attrs={"class": "date"})[0].text #IT CAN'T BE THAT SIMPLE!
     #Get developer and publisher [3] & [4]
@@ -89,8 +102,8 @@ def error_check(main_page):
     raise Exception("No games found. Page HTML saved to clipboard.")
 
 while current_game_no < max_game_no:
-    cprint(str(current_game_no) + "/" + str(max_game_no) + " games.", sprint)
-    cprint("Next URL is:\n" + request_url + "\n", sprint)
+    print(str(current_game_no) + "/" + str(max_game_no) + " games.")
+    print("Next URL is:\n" + request_url + "\n")
     main_page = requests.get(request_url)
     main_soup = bs(main_page.json()["results_html"], "html.parser")
     all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})

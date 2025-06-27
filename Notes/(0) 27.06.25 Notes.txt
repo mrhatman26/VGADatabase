@@ -78,3 +78,17 @@ to a CSV file now. Then I guess I'll see how much it fails on a full run of a
 bunch of games rather than the first 50.
 
 21:16: Added function to save to CSV file... Let's see what goes wrong then...
+
+21:20: Okay, it seems to work fine, but I forgot about the age restriction
+page where it asks for your birthdate... Well, time to see what I can do, but
+it requires you to enter something so I'm not sure it's possible...
+
+21:39: The problem was that some pages have paragraphs with no classes as
+their descriptions for some weird reason, not the age verification page. So, I
+added a fix for that... Buuuut... There's another problem where it seems
+the are other alternatives other than just paragraphs tags... -_-
+
+2:54: So if the paragraph tag cannot be found either, I have just had the
+program ignore that game because it is likely not to be an actual game.
+Meanwhile, the code to get the price is now causing an error so I'm going to
+see what that's about...
