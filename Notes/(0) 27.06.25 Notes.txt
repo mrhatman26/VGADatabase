@@ -23,3 +23,7 @@ used to tell Python want to put at the end of a print and flush_para which
 flushes the text buffer. The flush value won't be useful in the scraping
 program, but it is useful in Flask which only prints consitently if flush is
 set to true. Anyway, onto reading each page.
+
+14:48: Not really noteworthy, but I just found out something I should have
+already known about Python. If a variable is declared BEFORE a function, then
+that function can access it. Really useful actually.

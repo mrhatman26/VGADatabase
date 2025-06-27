@@ -4,14 +4,16 @@ from custom_print import cprint
 
 base_url = "https://store.steampowered.com/"
 infite_url = "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
-request_url = infite_url#"https://store.steampowered.com/search/?term="
+request_url = infite_url
 game_data = []
 max_game_no = 100
 current_game_no = 0
-sprint = True #sprint = Surpress Print
+sprint = False #sprint = Surpress Print
 
-def get_page_data():
-    pass
+def get_page_data(page_url):
+    game_page = requests.get(page_url)
+    game_soup = bs(game_page.content, "html.parser")
+    print(game_soup.prettify())    
 
 def save_game_data():
     pass
@@ -36,7 +38,8 @@ while current_game_no < max_game_no:
     if len(all_games) < 1:
         error_check(main_soup, main_page)
     for item in all_games:
-        cprint(item.find_all("span", attrs={"class": "title"})[0].text, sprint)
-        cprint(item["href"], sprint)
+        #cprint(item.find_all("span", attrs={"class": "title"})[0].text, sprint)
+        #cprint(item["href"], sprint)
+        get_page_data(item["href"])
         current_game_no += 1
     request_url = new_infite_url(current_game_no)
