@@ -49,3 +49,9 @@ game's description and release date (along with the price and title given from
 the parent page). The description contained both a new line and a truncate
 (tab) so it took me a while to fix that by simply replacing them. Let's get
 the other stuff done. Will I finish them by the end of today? Probably not!
+
+16:12: After some fiddling around with the has_attr method, I found that I
+could use the href to distinguish between the publisher and developer as the
+href either contains /developer/ or /publisher/. As for the has_attr method,
+it seems really useless? Sometimes it won't detect an attribute when a tag has
+it and I cannot find a reason as to why... Maybe my own stupidity?

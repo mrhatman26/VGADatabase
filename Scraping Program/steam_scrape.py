@@ -27,7 +27,7 @@ def get_page_data(page_url, title, price):
     for row in dev_row:
         row_anchor = row.find_all("a")
         for anchor in row_anchor:
-            if anchor.has_attr("class"):
+            if "developer" in anchor["href"]:
                 current_game_data[3] = anchor.text
             else:
                 current_game_data[4] = anchor.text
@@ -37,8 +37,10 @@ def get_page_data(page_url, title, price):
     #Get game features [7]
     #Get supported languages [8] (MAYBE)
     #Get genres [9]
+    no = 0
     for item in current_game_data:
-        print(str(item) + "\n")
+        print(str(no) + ":\n" + str(item) + "\n")
+        no += 1
     input("...")
 
 def save_game_data():
