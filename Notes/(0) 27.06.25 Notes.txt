@@ -43,3 +43,9 @@ might be best to get the price from the main page rather than the game's page)
 10: Genres
 That is a lot to collect and might make this a slow process, but let's see how
 this goes...
+
+15:56: Okay, suspiciously easy thus far... I've got the program to get the
+game's description and release date (along with the price and title given from
+the parent page). The description contained both a new line and a truncate
+(tab) so it took me a while to fix that by simply replacing them. Let's get
+the other stuff done. Will I finish them by the end of today? Probably not!

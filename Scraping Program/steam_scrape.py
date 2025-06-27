@@ -9,12 +9,37 @@ game_data = []
 max_game_no = 100
 current_game_no = 0
 sprint = False #sprint = Surpress Print
+dev_row = []
 
 def get_page_data(page_url, title, price):
     current_game_data = [None] * 10 #Create a list of ten items each of which is None.
     game_page = requests.get(page_url)
     game_soup = bs(game_page.content, "html.parser")
-    print(game_soup.prettify())    
+    #Get title [0]
+    current_game_data[0] = title#game_soup.find_all("div", attrs={"class": "apphub_AppName"})[0].text
+    #Get description [1]
+    print("\t" in game_soup.find_all("div", attrs={"class": "game_description_snippet"})[0].text.replace("\n", ""))
+    current_game_data[1] = game_soup.find_all("div", attrs={"class": "game_description_snippet"})[0].text.replace("\n", "").replace("\t", "")
+    #Get release date [2]
+    current_game_data[2] = game_soup.find_all("div", attrs={"class": "date"})[0].text #IT CAN'T BE THAT SIMPLE!
+    #Get developer and publisher [3] & [4]
+    dev_row = game_soup.find_all("div", attrs={"class": "dev_row"})
+    for row in dev_row:
+        row_anchor = row.find_all("a")
+        for anchor in row_anchor:
+            if anchor.has_attr("class"):
+                current_game_data[3] = anchor.text
+            else:
+                current_game_data[4] = anchor.text
+    #Get user defined tags [5]
+    #Get price [6]
+    current_game_data[6] = price
+    #Get game features [7]
+    #Get supported languages [8] (MAYBE)
+    #Get genres [9]
+    for item in current_game_data:
+        print(str(item) + "\n")
+    input("...")
 
 def save_game_data():
     pass
@@ -39,6 +64,6 @@ while current_game_no < max_game_no:
     if len(all_games) < 1:
         error_check(main_soup, main_page)
     for game in all_games:
-        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text)
+        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, game.find_all("div", attrs={"class": "discount_final_price"})[0].text)
         current_game_no += 1
     request_url = new_infite_url(current_game_no)
