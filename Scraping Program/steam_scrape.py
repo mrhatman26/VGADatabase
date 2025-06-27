@@ -21,6 +21,7 @@ def get_page_data(page_url, title, price):
     cprint("Scraping game page of " + title, surpress=sprint)
     current_game_data = [None] * 10 #Create a list of ten items each of which is None.
     game_page = requests.get(page_url, allow_redirects=True)
+    game_page.encoding = "UTF-8"
     game_soup = bs(game_page.content, "html.parser")
     #Check for age verification page
     #Get title [0]
@@ -58,7 +59,7 @@ def get_page_data(page_url, title, price):
             user_tags.append(tag)
     current_game_data[5] = user_tags
     #Get price [6]
-    current_game_data[6] = price.encode('latin-1').decode('utf-8')
+    current_game_data[6] = price
     #Get game features [7]
     features_list = []
     features_row = game_soup.find_all("a", attrs={"class": "game_area_details_specs_ctn"})
@@ -101,6 +102,7 @@ while current_game_no < max_game_no:
     print(str(current_game_no) + "/" + str(max_game_no) + " games.")
     print("Next URL is:\n" + request_url + "\n")
     main_page = requests.get(request_url)
+    main_page.encoding = "UTF-8"
     main_soup = bs(main_page.json()["results_html"], "html.parser")
     all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
     if len(all_games) < 1:
