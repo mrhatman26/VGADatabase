@@ -62,3 +62,19 @@ removed with the strip() method. Some of the tags were empty, white space or a
 plus (a button I presume) and so this helped with that a lot. This took a bit
 longer that I thought it would. I'm going to stop working at 5 and maybe do
 more stuff later. For now though, on to the other data!
+
+17:02: Okay, that was quite a headache... The features list could have been
+easier if it weren't for a really annoying thing about beaultifulsoup. You can
+iterate on a child element in a for loop, but you can't select only ONE of its
+elements. In this case, each feature anchor had two dividers with the second
+divider holding the name of the feature (what I wanted), but I could not just
+put feature[1] like other times, no, I had to iterate through the two dividers
+and figure out which one was the feature's name with has_attr. Why? I don't
+know, it's times like this where Google is utterly useless for some reasson.
+
+21:07: A small addition. The genres can now be scraped... Though the code for
+it is a bit sloppy. Going to add the ability for the program to save the data
+to a CSV file now. Then I guess I'll see how much it fails on a full run of a
+bunch of games rather than the first 50.
+
+21:16: Added function to save to CSV file... Let's see what goes wrong then...

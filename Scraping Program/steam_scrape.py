@@ -12,6 +12,10 @@ sprint = False #sprint = Surpress Print
 dev_row = []
 tag_row = []
 user_tags = []
+features_row = []
+features_list = []
+mangen_block = []
+genres = []
 
 def get_page_data(page_url, title, price):
     current_game_data = [None] * 10 #Create a list of ten items each of which is None.
@@ -43,16 +47,35 @@ def get_page_data(page_url, title, price):
     #Get price [6]
     current_game_data[6] = price
     #Get game features [7]
+    features_list = []
+    features_row = game_soup.find_all("a", attrs={"class": "game_area_details_specs_ctn"})
+    for feature in features_row:
+        for div in feature:
+            if div.has_attr("class") and div.text != "":
+                features_list.append(div.text)
+    current_game_data[7] = features_list
     #Get supported languages [8] (MAYBE)
+    current_game_data[8] = []
     #Get genres [9]
-    no = 0
-    for item in current_game_data:
-        cprint(str(no) + ":\n" + str(item) + "\n")
-        no += 1
-    input("...")
+    genres = []
+    for span in game_soup.find_all("div", attrs={"id": "genresAndManufacturer"})[0].find_all("span"):
+        genres.append(span.text)
+    current_game_data[9] = genres
+    #no = 0
+    #for item in current_game_data:
+    #    cprint(str(no) + ":\n" + str(item) + "\n")
+    #    no += 1
+    game_data.append(current_game_data)
 
 def save_game_data():
-    pass
+    cprint("Saving scraped game data to CSV file...", end_para="\r")
+    with open("scraped_steam_game_data.csv", "w", encoding="utf-8", newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres"])
+        for game in game_data:
+            writer.writerow(game)
+    csvfile.close()
+    cprint("Done")
 
 def new_infite_url(game_no):
     return "https://store.steampowered.com/search/results/?query&start=" + str(game_no) + "&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
@@ -77,3 +100,4 @@ while current_game_no < max_game_no:
         get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, game.find_all("div", attrs={"class": "discount_final_price"})[0].text)
         current_game_no += 1
     request_url = new_infite_url(current_game_no)
+save_game_data()
