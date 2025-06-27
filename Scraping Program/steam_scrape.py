@@ -10,6 +10,8 @@ max_game_no = 100
 current_game_no = 0
 sprint = False #sprint = Surpress Print
 dev_row = []
+tag_row = []
+user_tags = []
 
 def get_page_data(page_url, title, price):
     current_game_data = [None] * 10 #Create a list of ten items each of which is None.
@@ -18,7 +20,6 @@ def get_page_data(page_url, title, price):
     #Get title [0]
     current_game_data[0] = title#game_soup.find_all("div", attrs={"class": "apphub_AppName"})[0].text
     #Get description [1]
-    print("\t" in game_soup.find_all("div", attrs={"class": "game_description_snippet"})[0].text.replace("\n", ""))
     current_game_data[1] = game_soup.find_all("div", attrs={"class": "game_description_snippet"})[0].text.replace("\n", "").replace("\t", "")
     #Get release date [2]
     current_game_data[2] = game_soup.find_all("div", attrs={"class": "date"})[0].text #IT CAN'T BE THAT SIMPLE!
@@ -32,6 +33,13 @@ def get_page_data(page_url, title, price):
             else:
                 current_game_data[4] = anchor.text
     #Get user defined tags [5]
+    user_tags = []
+    tag_row = game_soup.find_all("div", attrs={"class": "glance_tags popular_tags"})
+    for tag in tag_row[0]:
+        tag = tag.text.strip()
+        if tag != "" and tag != "+":
+            user_tags.append(tag)
+    current_game_data[5] = user_tags
     #Get price [6]
     current_game_data[6] = price
     #Get game features [7]
@@ -39,7 +47,7 @@ def get_page_data(page_url, title, price):
     #Get genres [9]
     no = 0
     for item in current_game_data:
-        print(str(no) + ":\n" + str(item) + "\n")
+        cprint(str(no) + ":\n" + str(item) + "\n")
         no += 1
     input("...")
 

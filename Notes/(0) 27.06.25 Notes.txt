@@ -55,3 +55,10 @@ could use the href to distinguish between the publisher and developer as the
 href either contains /developer/ or /publisher/. As for the has_attr method,
 it seems really useless? Sometimes it won't detect an attribute when a tag has
 it and I cannot find a reason as to why... Maybe my own stupidity?
+
+16:38: User tags can now be collected. And I've learned yet another basic
+thing about Python... Strings can have special characters and whitespace
+removed with the strip() method. Some of the tags were empty, white space or a
+plus (a button I presume) and so this helped with that a lot. This took a bit
+longer that I thought it would. I'm going to stop working at 5 and maybe do
+more stuff later. For now though, on to the other data!
