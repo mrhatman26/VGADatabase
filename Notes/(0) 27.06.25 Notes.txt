@@ -1,0 +1,25 @@
+14:15: After experimenting with saving the JSON file from the requests, I
+noticed that it is formatted as three lines. Line 1 is the opening bracket,
+line 2 is a key called "success" which has the value of 1 and line 3 is... All
+of the HTML. All of it. So, when getting the JSON file, I simply use
+dictionary syntax to get the HTML which results in the line of:
+HTML = main_page.json()["results_html"]
+Then, using BeautifulSoup, it makes the HTML look like the HTML from calling
+the normal search page URL. But I did not check for if it has the correct
+ID/Class names. 
+Overall, it looks like it'd be best not to use the normal search page and
+instead use the XHR requests right off the bat. Let's see how this goes, eh?
+
+14:27: It worked! It now successfully gets the next batch of games and is also
+able to get the links to each game. Now the next part might be the hard part
+as it involves going to each game page and getting the information from there.
+But before that, I am going to implement a custom print function that can be
+surpressed.
+
+14:36: Implemented custom print function called "cprint". It takes one
+parameter which is the text intended to be printed along with three optional
+parameters which are: surpress which does not print if true, end_para which is
+used to tell Python want to put at the end of a print and flush_para which
+flushes the text buffer. The flush value won't be useful in the scraping
+program, but it is useful in Flask which only prints consitently if flush is
+set to true. Anyway, onto reading each page.
