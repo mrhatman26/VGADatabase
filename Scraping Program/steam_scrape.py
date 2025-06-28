@@ -127,7 +127,6 @@ def get_page_data(page_url, title, price):
         current_game_data[8] = language_dict
     else:
         current_game_data[8] = na
-    input("...")
     #Get genres [9]
     genres = []
     genres_span = game_soup.find_all("div", attrs={"id": "genresAndManufacturer"})
