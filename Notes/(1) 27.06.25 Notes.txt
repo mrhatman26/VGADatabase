@@ -1,0 +1,107 @@
+14:15: After experimenting with saving the JSON file from the requests, I
+noticed that it is formatted as three lines. Line 1 is the opening bracket,
+line 2 is a key called "success" which has the value of 1 and line 3 is... All
+of the HTML. All of it. So, when getting the JSON file, I simply use
+dictionary syntax to get the HTML which results in the line of:
+HTML = main_page.json()["results_html"]
+Then, using BeautifulSoup, it makes the HTML look like the HTML from calling
+the normal search page URL. But I did not check for if it has the correct
+ID/Class names. 
+Overall, it looks like it'd be best not to use the normal search page and
+instead use the XHR requests right off the bat. Let's see how this goes, eh?
+
+14:27: It worked! It now successfully gets the next batch of games and is also
+able to get the links to each game. Now the next part might be the hard part
+as it involves going to each game page and getting the information from there.
+But before that, I am going to implement a custom print function that can be
+surpressed.
+
+14:36: Implemented custom print function called "cprint". It takes one
+parameter which is the text intended to be printed along with three optional
+parameters which are: surpress which does not print if true, end_para which is
+used to tell Python want to put at the end of a print and flush_para which
+flushes the text buffer. The flush value won't be useful in the scraping
+program, but it is useful in Flask which only prints consitently if flush is
+set to true. Anyway, onto reading each page.
+
+14:48: Not really noteworthy, but I just found out something I should have
+already known about Python. If a variable is declared BEFORE a function, then
+that function can access it. Really useful actually.
+
+15:10: Okay, so let's plan what I want to collect from the page:
+Let's go for the following and try and keep it simple:
+1: Title
+2: Description
+3: Release Date
+4: Developer
+5: Publisher
+6: Popular User Defined Tags (As a sublist)
+7: The Price (Problem: Games have other products listed on their pages, so it
+might be best to get the price from the main page rather than the game's page)
+8: Game Features List (Sublist again)
+9: Supported Languages (Maybe? I'll save this 'till last)
+10: Genres
+That is a lot to collect and might make this a slow process, but let's see how
+this goes...
+
+15:56: Okay, suspiciously easy thus far... I've got the program to get the
+game's description and release date (along with the price and title given from
+the parent page). The description contained both a new line and a truncate
+(tab) so it took me a while to fix that by simply replacing them. Let's get
+the other stuff done. Will I finish them by the end of today? Probably not!
+
+16:12: After some fiddling around with the has_attr method, I found that I
+could use the href to distinguish between the publisher and developer as the
+href either contains /developer/ or /publisher/. As for the has_attr method,
+it seems really useless? Sometimes it won't detect an attribute when a tag has
+it and I cannot find a reason as to why... Maybe my own stupidity?
+
+16:38: User tags can now be collected. And I've learned yet another basic
+thing about Python... Strings can have special characters and whitespace
+removed with the strip() method. Some of the tags were empty, white space or a
+plus (a button I presume) and so this helped with that a lot. This took a bit
+longer that I thought it would. I'm going to stop working at 5 and maybe do
+more stuff later. For now though, on to the other data!
+
+17:02: Okay, that was quite a headache... The features list could have been
+easier if it weren't for a really annoying thing about beaultifulsoup. You can
+iterate on a child element in a for loop, but you can't select only ONE of its
+elements. In this case, each feature anchor had two dividers with the second
+divider holding the name of the feature (what I wanted), but I could not just
+put feature[1] like other times, no, I had to iterate through the two dividers
+and figure out which one was the feature's name with has_attr. Why? I don't
+know, it's times like this where Google is utterly useless for some reasson.
+
+21:07: A small addition. The genres can now be scraped... Though the code for
+it is a bit sloppy. Going to add the ability for the program to save the data
+to a CSV file now. Then I guess I'll see how much it fails on a full run of a
+bunch of games rather than the first 50.
+
+21:16: Added function to save to CSV file... Let's see what goes wrong then...
+
+21:20: Okay, it seems to work fine, but I forgot about the age restriction
+page where it asks for your birthdate... Well, time to see what I can do, but
+it requires you to enter something so I'm not sure it's possible...
+
+21:39: The problem was that some pages have paragraphs with no classes as
+their descriptions for some weird reason, not the age verification page. So, I
+added a fix for that... Buuuut... There's another problem where it seems
+the are other alternatives other than just paragraphs tags... -_-
+
+2:54: So if the paragraph tag cannot be found either, I have just had the
+program ignore that game because it is likely not to be an actual game.
+Meanwhile, the code to get the price is now causing an error so I'm going to
+see what that's about... 
+
+22:15: Okay, wow! It's working! I've saved scraped game data to a CSV file!
+Yes!!!! Buuuuuuut... The price of all things is encoded WRONG and contains a
+weird A with a line above it. Time to try and fix this I suppose...
+
+22:33: Couldn't find a solution to the encoding problem. Oh well, at least it
+works. Or does it? Time to run it and get like... 5000 games!!!! I bet the
+servers will hate me, yay! Oh, and there'll probably be errors as well,
+yay.......
+
+22:43: Oh yeah, there were errors. I'm just going to have the program check if
+each element exists and put none or something if it doesn't. Why didn't I do
+this before? IDK.

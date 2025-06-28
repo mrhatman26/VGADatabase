@@ -1,0 +1,22 @@
+9:12: Technically a day off, but that encoding issue was really bugging me
+since the program worked fine apart from that. But, I fixed it by changing
+UTF-8 encoding on the CSV writer to UTF-8-SIG which according to a
+Stackoverflow comment puts the BOM in the meta data rather than inside the
+document. Excel sees the BOM in the metadata and understands that the file is
+UTF-8 and not something else. Don't trust Excel to handle bomb defusal or
+however that joke went in my head.
+
+9:35: Forgot to mention I am doing a massive test of the program. I'm having
+it do ten thousand (10, 000) games. I wonder what errors will occur?
+
+10:32: Okay, so it took well over an hour, but collecting 10 thousand games
+apparently worked just fine... I am quite surprised there wasn't an error
+honestly... My next thing will be to at least try and get the supported
+languages part. Though that looks like it will be quite complicated.
+
+19:53: After nearly 3 hours, I have finally got the program to get the
+supported languages. Except, I made it so that it got exactly how the game
+implements that language. Why? I really don't know. I am going to see how much
+this slows the program down and, if it is significant enough, I will change th
+code to ONLY get the languages, not how they are implemented. It'd be cool to
+keep that though.
