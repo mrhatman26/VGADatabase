@@ -24,6 +24,7 @@ current_language = ""
 row_counter = 0
 column_counter = 0
 na = "N/A"
+start_time = time.time()
 
 def get_page_data(page_url, title, price):
     cprint("Scraping game page of " + title, surpress=sprint)
@@ -116,14 +117,11 @@ def get_page_data(page_url, title, price):
                             current_language = column
                             language_dict[current_language] = [None] * len(language_features)
                         else:
-                            print(column)
-                            print(language_features, "\n", column_counter)
                             if column == "✔":
                                 language_dict[current_language][column_counter - 1] = {language_features[column_counter - 1]: True}
                             else:
                                 language_dict[current_language][column_counter - 1] = {language_features[column_counter - 1]: False}
                         column_counter += 1
-        print(language_dict, "\n", language_features)
         current_game_data[8] = language_dict
     else:
         current_game_data[8] = na
@@ -169,20 +167,33 @@ def error_check(main_page):
 
 while current_game_no < max_game_no:
     print(str(current_game_no) + "/" + str(max_game_no) + " games.")
-    print("Next URL is:\n" + request_url + "\n")
+    print("\nNext URL is:\n" + request_url + "\n")
     main_page = requests.get(request_url)
-    main_page.encoding = "utf-8"
-    main_soup = bs(main_page.json()["results_html"], "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
-    all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
-    if len(all_games) < 1:
-        error_check(main_soup, main_page)
-    for game in all_games:
-        price = game.find_all("div", attrs={"class": "discount_final_price"})
-        if len(price) > 0:
-            price = price[0].text
+    if main_page.status_code == 200:
+        main_page.encoding = "utf-8"
+        main_soup = bs(main_page.json()["results_html"], "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
+        all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
+        if len(all_games) < 1:
+            error_check(main_soup, main_page)
+        for game in all_games:
+            price = game.find_all("div", attrs={"class": "discount_final_price"})
+            if len(price) > 0:
+                price = price[0].text
+            else:
+                price = "Free"
+            get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price)
+            current_game_no += 1
+        request_url = new_infite_url(current_game_no)
+    else:
+        print("Main Page request got " + str(main_page.status_code) + " status code instead of 200.")
+        if input("Try again? (Y/N)").upper() in "YES" "Y":
+            print("Trying again...")
         else:
-            price = "Free"
-        get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price)
-        current_game_no += 1
-    request_url = new_infite_url(current_game_no)
+            print("Scraping failed...")
+            import sys
+            sys.exit()
 save_game_data()
+print("Scraping took " + str(time.time() - start_time) + " seconds") 
+time_file = open("scrape_time.txt", "w")
+time_file.write("Scraping took " + str(time.time() - start_time) + " seconds")
+time_file.close()

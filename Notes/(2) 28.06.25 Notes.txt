@@ -20,3 +20,18 @@ implements that language. Why? I really don't know. I am going to see how much
 this slows the program down and, if it is significant enough, I will change th
 code to ONLY get the languages, not how they are implemented. It'd be cool to
 keep that though.
+
+21:17: Okay, I'm having it do the 10 thousand game test again. One problem
+that arose is that the JSON loading was suddenly failing. Turns out, the
+problem can be solved (at least for now) by checking to make sure the request
+actually gets a 200 HTTP status code. It was occasionally giving me a 502 (Bad
+gateway) code instead. So now, it asks you if you want to try again when it
+detects a bad error code. If you choose to try again, it will try load the
+page again, if you choose not to, it will end the scraping there. I think I
+might make it save the collected data if you choose to say no because right
+now it doesn't. Will report what happens if there's another error or, less
+likely, if it reaches ten thousand games.
+
+21:56: Okay... It finished getting the 10 thousand games... BUT EXCEL HAD TO
+HAVE THE CSV FILE OPEN!!!! Damn it... Going to add a try except to avoid this
+in the future. Then I'll run it again.
