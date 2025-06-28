@@ -34,4 +34,10 @@ likely, if it reaches ten thousand games.
 
 21:56: Okay... It finished getting the 10 thousand games... BUT EXCEL HAD TO
 HAVE THE CSV FILE OPEN!!!! Damn it... Going to add a try except to avoid this
-in the future. Then I'll run it again.
+in the future. Then I'll run it again.i
+
+23:25: Added that CSV try except and ran it again. It works! Data scraped
+successfully. Using the time module, I got a time of 4678 seconds which is
+about 1 hour and 17 minutes. Good time for ten thousand items I think.
+That's all for today, I'm really tired. Tomorrow I will be tidying the program
+up a bit and writing about it in my report.
