@@ -141,18 +141,32 @@ def get_page_data(page_url, title, price):
     game_data.append(current_game_data)
 
 def save_game_data():
-    cprint("Saving scraped game data to CSV file...", end_para="")
-    with open("scraped_steam_game_data.csv", "w", encoding="utf-8-sig", newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres"])
-        game_no = str(len(game_data))
-        counter = 1
-        for game in game_data:
-            cprint("Saving " + str(counter) + " of " + game_no + " games...", surpress=sprint)
-            writer.writerow(game)
-            counter += 1
-    csvfile.close()
-    cprint("Done")
+    while True:
+        print("Saving scraped game data to CSV file...", end="")
+        try:
+            with open("scraped_steam_game_data.csv", "w", encoding="utf-8-sig", newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(["game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres"])
+                game_no = str(len(game_data))
+                counter = 1
+                for game in game_data:
+                    cprint("Saving " + str(counter) + " of " + game_no + " games...", surpress=sprint)
+                    writer.writerow(game)
+                    counter += 1
+            csvfile.close()
+            print("Done")
+            break
+        except Exception as e:
+            try:
+                csvfile.close()
+            except:
+                pass
+            print("Failed.\nFailed to save data to CSV file. Most likely the file is open in Excel.\n Actual error: " + str(e))
+            if input("Try again? (Y/N)").upper() in "YES" "Y":
+                print("Trying again...")
+            else:
+                print("Saving failed...")
+                break
 
 def new_infite_url(game_no):
     return "https://store.steampowered.com/search/results/?query&start=" + str(game_no) + "&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
