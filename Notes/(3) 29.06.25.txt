@@ -55,3 +55,7 @@ think I might add two new columns: Steam URL and game_no.
 
 20:09: It works. Only problem is, there are two games with no DEVELOPER now.
 DAMNIT! Let's change the code to fix that I guess...
+
+22:38: Okay, finally done! The big test shows no blanks! I also added the game
+no and Steam URL. Finally! I will push this to the git and write about it in
+my report as I should have done today.
