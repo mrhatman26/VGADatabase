@@ -18,6 +18,7 @@ auto_retry = True #If set to True, the program will automatically try requesting
 dev_row = []
 is_developer = False
 publishers = []
+developers = []
 publisher_found = False
 tag_row = []
 user_tags = []
@@ -39,7 +40,7 @@ def get_page_data(page_url, title, price):
     #This function gets each game's data from the URL provided.
     #However, the price and title of each game are provided from the main page as it is easier to get them on the main page than the game page.
     cprint("Scraping game page of " + title, surpress=sprint)
-    current_game_data = [None] * 10
+    current_game_data = [None] * 11
     #Create a list of ten empty items. This list will hold the game data about to be collected.
     game_page = requests.get(page_url, allow_redirects=True)
     game_page.encoding = "utf-8"
@@ -69,6 +70,7 @@ def get_page_data(page_url, title, price):
     dev_row = game_soup.find_all("div", attrs={"class": "dev_row"})
     #Get the developer information from the developer divider.
     publishers = []
+    developers = []
     publisher_found = False
     if len(dev_row) > 0:
         for row in dev_row:
@@ -81,13 +83,17 @@ def get_page_data(page_url, title, price):
             row_anchor = row.find_all("a") #Get the anchors in the developer divider. They hold the developer's names.
             for anchor in row_anchor:
                 if is_developer is True:
-                    current_game_data[3] = anchor.text
+                    if anchor.text not in developers:
+                        developers.append(anchor.text)
+                    current_game_data[3] = developers
                 else:
                     if anchor.text not in publishers:
                         publishers.append(anchor.text)
                     current_game_data[4] = publishers
-        if publisher_found is False:
+        if publisher_found is False or len(publishers) < 1:
             current_game_data[4] = na
+        if len(developers) < 1:
+            current_game_data[3] = na
     else:
         current_game_data[3] = na
         current_game_data[4] = na
@@ -193,6 +199,8 @@ def get_page_data(page_url, title, price):
     else:
         #If no genres can be found, save them as N/A instead.
         current_game_data[9] = na
+    #Save game's URL
+    current_game_data[10] = page_url
     #Save ALL collected game data to the game_data list.
     game_data.append(current_game_data)
 
@@ -204,11 +212,12 @@ def save_game_data():
         try:
             with open("scraped_steam_game_data.csv", "w", encoding="utf-8-sig", newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres"])
+                writer.writerow(["game_no", "game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres", "steam_url"])
                 game_no = str(len(game_data))
                 counter = 1
                 for game in game_data:
                     cprint("Saving " + str(counter) + " of " + game_no + " games...", surpress=sprint)
+                    game.insert(0, counter - 1)
                     writer.writerow(game)
                     counter += 1
             csvfile.close()

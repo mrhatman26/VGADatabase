@@ -52,3 +52,6 @@ publishers before are still blank? What?
 found AT ALL and if not, the publisher is set to N/A. This seems to work, but
 I think a big ten thousand test should be done to make sure. If it does, I
 think I might add two new columns: Steam URL and game_no.
+
+20:09: It works. Only problem is, there are two games with no DEVELOPER now.
+DAMNIT! Let's change the code to fix that I guess...
