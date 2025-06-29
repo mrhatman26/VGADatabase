@@ -6,7 +6,13 @@ base_url = "https://store.steampowered.com/"
 infite_url = "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
 request_url = infite_url
 game_data = []
-max_game_no = int(input("How many games?: "))
+while True:
+    try:
+        max_game_no = int(input("How many games?: "))
+        break
+    except:
+        print("Please enter a valid number")
+        time.sleep(3)
 current_game_no = 0
 sprint = False #sprint = Surpress Print
 dev_row = []
