@@ -275,21 +275,33 @@ while current_game_no < max_game_no:
     main_page = requests.get(request_url) #Get the next 50 games using the infinite URL.
     if main_page.status_code == 200: #If the request returned a 200 (OK) HTTP code, continue to scrape recieved game data.
         main_page.encoding = "utf-8" #Set encoding to UTF-8 to avoid encoding artefacts.
-        main_soup = bs(main_page.json()["results_html"], "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
-        #Have BeautifulSoup parse the HTML from the recieved JSON file. Sometimes, BeautifulSoup would use the wrong encodings and so the ones it kept guessing are excluded.
-        all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
-        #Find all of the video games in the HTML. Each one is an achor tag with the class of "search_result_row ds_collapse_flag".
-        if len(all_games) < 1: #If there are no games, that meanss the page recieved is not the correct one.
-            error_check(main_soup, main_page)
-        for game in all_games:
-            price = game.find_all("div", attrs={"class": "discount_final_price"}) #Get the the divider that holds the game's price.
-            if len(price) > 0: #If the price is found, save the text.
-                price = price[0].text
-            else: #Some games are free and this is shown as FREE in place of the price. However, some games are free, but the price is blank. So if that is the case, set them to free here.
-                price = "Free"
-            get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price) #Get the game data using the game's anchor element href.
-            current_game_no += 1
-        request_url = new_infite_url(current_game_no)
+        if 'application/json' in main_page.headers.get('Content-Type'):
+            main_soup = bs(main_page.json()["results_html"], "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
+            #Have BeautifulSoup parse the HTML from the recieved JSON file. Sometimes, BeautifulSoup would use the wrong encodings and so the ones it kept guessing are excluded.
+            all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
+            #Find all of the video games in the HTML. Each one is an achor tag with the class of "search_result_row ds_collapse_flag".
+            if len(all_games) < 1: #If there are no games, that meanss the page recieved is not the correct one.
+                error_check(main_soup, main_page)
+            for game in all_games:
+                price = game.find_all("div", attrs={"class": "discount_final_price"}) #Get the the divider that holds the game's price.
+                if len(price) > 0: #If the price is found, save the text.
+                    price = price[0].text
+                else: #Some games are free and this is shown as FREE in place of the price. However, some games are free, but the price is blank. So if that is the case, set them to free here.
+                    price = "Free"
+                get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price) #Get the game data using the game's anchor element href.
+                current_game_no += 1
+            request_url = new_infite_url(current_game_no)
+        else:
+            print("Main Page request has no JSON file to read. Status code of the request was: " + str(main_page.status_code))
+            if auto_retry is False:
+                if input("Try again? (Y/N)").upper() in "YES" "Y":
+                    print("Trying again...")
+                else:
+                    print("Scraping failed...")
+                    import sys
+                    sys.exit()
+            else:
+                print("Trying again...")
     else: #If the request returned any other HTTP code (usually 502 for some reason), warn the user and ask if they'd like to try again (unless auto_retry is True)
         print("Main Page request got " + str(main_page.status_code) + " status code instead of 200.")
         if auto_retry is False:
