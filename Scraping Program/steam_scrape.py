@@ -2,7 +2,6 @@ import requests, csv, time, pyperclip, json
 from bs4 import BeautifulSoup as bs
 from custom_print import cprint
 
-base_url = "https://store.steampowered.com/"
 infite_url = "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
 request_url = infite_url
 game_data = []
