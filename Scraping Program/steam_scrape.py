@@ -14,6 +14,7 @@ while True:
         time.sleep(3)
 current_game_no = 0
 sprint = False #sprint = Surpress Print
+auto_retry = True #If set to True, the program will automatically try requesting the game page again without asking the user.
 dev_row = []
 tag_row = []
 user_tags = []
@@ -205,12 +206,15 @@ while current_game_no < max_game_no:
         request_url = new_infite_url(current_game_no)
     else:
         print("Main Page request got " + str(main_page.status_code) + " status code instead of 200.")
-        if input("Try again? (Y/N)").upper() in "YES" "Y":
-            print("Trying again...")
+        if auto_retry is False:
+            if input("Try again? (Y/N)").upper() in "YES" "Y":
+                print("Trying again...")
+            else:
+                print("Scraping failed...")
+                import sys
+                sys.exit()
         else:
-            print("Scraping failed...")
-            import sys
-            sys.exit()
+            print("Trying again...")
 save_game_data()
 print("Scraping took " + str(time.time() - start_time) + " seconds") 
 time_file = open("scrape_time.txt", "w")
