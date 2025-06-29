@@ -16,6 +16,7 @@ current_game_no = 0
 sprint = False #sprint = Surpress Print
 auto_retry = True #If set to True, the program will automatically try requesting the game page again without asking the user.
 dev_row = []
+is_developer = False
 tag_row = []
 user_tags = []
 features_row = []
@@ -67,9 +68,15 @@ def get_page_data(page_url, title, price):
     #Get the developer information from the developer divider.
     if len(dev_row) > 0:
         for row in dev_row:
+            for item in row.find_all("div", attrs={"class": "subtitle column"}):
+                if item.text.strip() == "Developer:":
+                    is_developer = True
+                else:
+                    is_developer = False
             row_anchor = row.find_all("a") #Get the anchors in the developer divider. They hold the developer's names.
             for anchor in row_anchor:
-                if "developer" in anchor["href"]: #If the href of the anchor has "developer", in it, save it as the developer, else, save it as the publisher.
+                #"developer" in anchor["href"] or "curator" in anchor["href"]: #If the href of the anchor has "developer", in it, save it as the developer, else, save it as the publisher.
+                if is_developer is True:
                     current_game_data[3] = anchor.text
                 else:
                     current_game_data[4] = anchor.text
@@ -226,9 +233,28 @@ def error_check(main_page):
             raise Exception("Steam returned 'Site Error' page and so the search page has no been loaded. Page HTML saved to clipboard")
     raise Exception("No games found. Page HTML saved to clipboard.")
 
+def convert_time(time):
+    time = round(time)
+    hours = 0
+    minutes = 0
+    seconds = 0
+    while True:
+        if time >= 3600: #An hour
+            time -= 3600
+            hours += 1
+        elif time >= 60: #A minute
+            time -= 60
+            minutes += 1
+        elif time >= 1: #A second
+            time -= 1
+            seconds += 1
+        else:
+            break
+    return [hours, minutes, seconds]
+
 while current_game_no < max_game_no:
-    print(str(current_game_no) + "/" + str(max_game_no) + " games.")
-    print("\nNext URL is:\n" + request_url + "\n")
+    print("\n" + str(current_game_no) + "/" + str(max_game_no) + " games.")
+    print("Next URL is:\n" + request_url + "\n")
     main_page = requests.get(request_url) #Get the next 50 games using the infinite URL.
     if main_page.status_code == 200: #If the request returned a 200 (OK) HTTP code, continue to scrape recieved game data.
         main_page.encoding = "utf-8" #Set encoding to UTF-8 to avoid encoding artefacts.
@@ -260,9 +286,13 @@ while current_game_no < max_game_no:
             print("Trying again...")
 #With all game data collected, save it to a CSV file.
 save_game_data()
-print("Scraping took " + str(time.time() - start_time) + " seconds") 
+actual_final_time = time.time() - start_time
+final_time = convert_time(actual_final_time)
+print("Scraping took " + str(final_time[0]) + " hours, " + str(final_time[1]) + " minutes and " + str(final_time[2]) + " seconds")
+print("(Actual time was " + str(actual_final_time) + " seconds)") 
 #Save the time it took the program to the scrape_time.txt file.
 time_file = open("scrape_time.txt", "w")
 time_file.write("Scraping took " + str(time.time() - start_time) + " seconds")
+time_file.write("\n(" + str(final_time[0]) + " hours, " + str(final_time[1]) + " minutes and " + str(final_time[2]) + " seconds")
 time_file.close()
 #END OF LINE
