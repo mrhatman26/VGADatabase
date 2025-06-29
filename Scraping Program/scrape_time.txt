@@ -1,2 +1,2 @@
-Scraping took 431.97290658950806 seconds
-(0 hours, 7 mintes and 12 seconds
+Scraping took 250.2935435771942 seconds
+(0 hours, 4 minutes and 10 seconds

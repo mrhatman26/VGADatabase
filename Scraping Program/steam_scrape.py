@@ -17,6 +17,8 @@ sprint = False #sprint = Surpress Print
 auto_retry = True #If set to True, the program will automatically try requesting the game page again without asking the user.
 dev_row = []
 is_developer = False
+publishers = []
+publisher_found = False
 tag_row = []
 user_tags = []
 features_row = []
@@ -66,20 +68,26 @@ def get_page_data(page_url, title, price):
     #Get developer and publisher [3] & [4]
     dev_row = game_soup.find_all("div", attrs={"class": "dev_row"})
     #Get the developer information from the developer divider.
+    publishers = []
+    publisher_found = False
     if len(dev_row) > 0:
         for row in dev_row:
             for item in row.find_all("div", attrs={"class": "subtitle column"}):
                 if item.text.strip() == "Developer:":
                     is_developer = True
-                else:
+                if item.text.strip() == "Publisher:":
+                    publisher_found = True
                     is_developer = False
             row_anchor = row.find_all("a") #Get the anchors in the developer divider. They hold the developer's names.
             for anchor in row_anchor:
-                #"developer" in anchor["href"] or "curator" in anchor["href"]: #If the href of the anchor has "developer", in it, save it as the developer, else, save it as the publisher.
                 if is_developer is True:
                     current_game_data[3] = anchor.text
                 else:
-                    current_game_data[4] = anchor.text
+                    if anchor.text not in publishers:
+                        publishers.append(anchor.text)
+                    current_game_data[4] = publishers
+        if publisher_found is False:
+            current_game_data[4] = na
     else:
         current_game_data[3] = na
         current_game_data[4] = na
@@ -212,7 +220,7 @@ def save_game_data():
             except:
                 pass
             print("Failed.\nFailed to save data to CSV file. Most likely the file is open in Excel.\n Actual error: " + str(e))
-            if input("Try again? (Y/N)").upper() in "YES" "Y":
+            if input("Try again? (Y/N): ").upper() in "YES" "Y":
                 print("Trying again...")
             else:
                 print("Saving failed...")

@@ -30,3 +30,25 @@ item test now and then the big test if there are no issues.
 12:37: Did the 1000 item test and some publishers are still blank... Looking
 at one of them, there is, of course, no publisher listed. So, if this is the
 case, I will have the code put N/A instead of nothing.
+
+12:41: Added code to put N/A if there is no publisher. Let's see how this
+goes.
+
+17:27: Had trip to Booths. Took a long while, anyway, the code from before did
+not work. Apparently, there is nothing to put in the publisher column, but
+whatever that nothing is it isn't whitespace nor is it an empty string? I've
+tried to find the games with no publisher, but it won't print the publisher
+text? Odd. Anyway, I did notice that some games have multiple publishers and
+so I've made it so the publishers are list rather than a singular item. Let's
+see the results, eh?
+
+17:30: HAHAHAHAHA! I forgot to reset the publishers list between each game...
+So every game apparently has EVERY publisher, lol. Trying again...
+
+17:56: Okay, so that list thing worked, but the games that had blank
+publishers before are still blank? What?
+
+18:43: New approach: I added a variable to check if the publisher has been
+found AT ALL and if not, the publisher is set to N/A. This seems to work, but
+I think a big ten thousand test should be done to make sure. If it does, I
+think I might add two new columns: Steam URL and game_no.
