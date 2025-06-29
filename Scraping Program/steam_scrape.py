@@ -30,82 +30,102 @@ current_language = ""
 row_counter = 0
 column_counter = 0
 na = "N/A"
-start_time = time.time()
+start_time = time.time() #Get the time of when the program (roughly) began
 
 def get_page_data(page_url, title, price):
+    #This function gets each game's data from the URL provided.
+    #However, the price and title of each game are provided from the main page as it is easier to get them on the main page than the game page.
     cprint("Scraping game page of " + title, surpress=sprint)
-    current_game_data = [None] * 10 #Create a list of ten items each of which is None.
+    current_game_data = [None] * 10
+    #Create a list of ten empty items. This list will hold the game data about to be collected.
     game_page = requests.get(page_url, allow_redirects=True)
     game_page.encoding = "utf-8"
     game_soup = bs(game_page.content, "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
-    #Check for age verification page
+    #Get the game's page and parse it with BeautifulSoup. Like the main page, use UTF-8 encoding.
     #Get title [0]
     current_game_data[0] = title
     #Get description [1]
     current_game_data[1] = game_soup.find_all("div", attrs={"class": "game_description_snippet"})
     if len(current_game_data[1]) > 0: #Check to see if the description as a divider exists
-        current_game_data[1] = current_game_data[1][0].text.replace("\n", "").replace("\t", "")
+        current_game_data[1] = current_game_data[1][0].text.replace("\n", "").replace("\t", "") #Save the description if it exists.
     else: #If it does not exist, it might be a paragprah tag without a class or ID instead of a div with a class.
         current_game_data[1] = game_soup.find_all("div", attrs={"class": "glance_details"})
         if len(current_game_data[1]) > 0: #Check to see if the description as a paragraph exists.
-            current_game_data[1] = current_game_data[1][0].find_all("p")[0].text
-        else: #The description as a paragraph does not exist either. The page might no be a game page at all! So return instead
+            current_game_data[1] = current_game_data[1][0].find_all("p")[0].text #Save the description if it exists.
+        else: #The description as a paragraph does not exist either. The page might no be a game page at all! Set game description to N/A
             current_game_data[1] = na
     #Get release date [2]
     current_game_data[2] = game_soup.find_all("div", attrs={"class": "date"})
+    #Get the release date divider and save the release date.
     if len(current_game_data[2]) > 0:
         current_game_data[2] = current_game_data[2][0].text
     else:
+        #If no release date is found, save N/A instead.
         current_game_data[2] = na
     #Get developer and publisher [3] & [4]
     dev_row = game_soup.find_all("div", attrs={"class": "dev_row"})
+    #Get the developer information from the developer divider.
     if len(dev_row) > 0:
         for row in dev_row:
-            row_anchor = row.find_all("a")
+            row_anchor = row.find_all("a") #Get the anchors in the developer divider. They hold the developer's names.
             for anchor in row_anchor:
-                if "developer" in anchor["href"]:
+                if "developer" in anchor["href"]: #If the href of the anchor has "developer", in it, save it as the developer, else, save it as the publisher.
                     current_game_data[3] = anchor.text
                 else:
                     current_game_data[4] = anchor.text
     else:
         current_game_data[3] = na
         current_game_data[4] = na
+        #If the developer divider cannot be found, save the developer and publisher as N/A instead.
     #Get user defined tags [5]
     user_tags = []
     tag_row = game_soup.find_all("div", attrs={"class": "glance_tags popular_tags"})
+    #Get the user tags from the 'glance tags' divider. 
     if len(tag_row) > 0:
         for tag in tag_row[0]:
+            #For each tag, strip the text of artefacts and, if the tag is not empty and is not the plus (+) button, append it to user_tags.
             tag = tag.text.strip()
             if tag != "" and tag != "+":
                 user_tags.append(tag)
         current_game_data[5] = user_tags
+        #Save the user_tags list to the current_game_data list.
     else:
+        #If the glance tags divider cannot be found, save the tags as N/A instead.
         current_game_data[5] = na
     #Get price [6]
     current_game_data[6] = price
     #Get game features [7]
     features_list = []
     features_row = game_soup.find_all("a", attrs={"class": "game_area_details_specs_ctn"})
+    #Get game features from the features area.
     if len(features_row) > 0:
+        #For each divider in each feature, if the divider has the class attribute and is not empty, save to the features list.
         for feature in features_row:
             for div in feature:
                 if div.has_attr("class") and div.text != "":
                     features_list.append(div.text)
         current_game_data[7] = features_list
+        #Save the features list to current_game_data.
     else:
+        #If the features anchor cannot be found, save the features as N/A instead.
         current_game_data[7] = na
-    #Get supported languages [8] (MAYBE)
+    #Get supported languages [8]
     row_counter = 0
     current_language = ""
     language_features = []
     language_table = game_soup.find_all("table", attrs={"class": "game_language_options"})
+    #Find the language table. 
     if len(language_table) > 0:
         for row in language_table[0]:
+            #For each row in the language table, make sure the row is not blank and is not only spaces.
             if str(row) != "" and str(row).isspace() is False:
+                #Then, try and find the headers (features) and the languages (rows)
                 features = row.find_all("th")
                 languages = row.find_all("td")
                 if len(features) > 0:
+                    #If the features are found, and they are not blank or just spaces, save them to the language_features list.
                     for feature in features:
+                        #Oddly, the features are sometimes BeautifulSoup objects and other times, they are just strings. Either way, they are stripped of artefacts here.
                         if type(feature) == str:
                             feature = feature.strip()
                         else:
@@ -113,40 +133,57 @@ def get_page_data(page_url, title, price):
                         if feature != "" and feature.isspace() is False:
                             language_features.append(feature)
                 if len(languages) > 0:
+                    #If the languages are found...
                     column_counter = 0
                     for column in languages:
+                        #Oddly, the languages are sometimes BeautifulSoup objects and other times, they are just strings. Either way, they are stripped of artefacts here.
                         if type(column) == str:
                             column = column.strip()
                         else:
                             column = column.text.strip()
                         if column_counter == 0:
+                            #If on the first column of the row, then it is a new language. Save the language to the current_language.
                             current_language = column
                             language_dict[current_language] = [None] * len(language_features)
+                            #Save the new language to the language_dict and set its value to a list of None (where the number of None is equal to the number of language_features).
                         else:
-                            if column == "✔":
+                            if column == "✔": #If the column contains a check mark...
                                 language_dict[current_language][column_counter - 1] = {language_features[column_counter - 1]: True}
+                                #Set the current language to have the language feature by setting it to a dictionary which holds the language feature as the key and True as its value.
                             else:
                                 language_dict[current_language][column_counter - 1] = {language_features[column_counter - 1]: False}
+                                #Set the current language to NOT have the language feature by setting it to a dictionary which holds the language feature as the key and False as its value.
                         column_counter += 1
         current_game_data[8] = language_dict
+        #Save the languages found to current_game_data.
+        #This chunk of code is honestly scary. AND I WROTE IT!
     else:
+        #If the languages cannot be found, save them as N/A
         current_game_data[8] = na
     #Get genres [9]
     genres = []
     genres_span = game_soup.find_all("div", attrs={"id": "genresAndManufacturer"})
+    #Get the genres divider with the id of "genresAndManufacturer" (genres_span is a relic name from when the code targeted a span instead of a dividr)
     if len(genres_span) > 0:
         genres_span = genres_span[0].find_all("span")
+        #For each span found in the genres divider, loop through the span and save the genres found to the genres list.
         if len(genres_span) > 0:
             for span in genres_span:
                 genres.append(span.text)
             current_game_data[9] = genres
+            #Save the genres list to current_game_data
         else:
+            #If no genres can be found, save them as N/A instead.
             current_game_data[9] = na
     else:
+        #If no genres can be found, save them as N/A instead.
         current_game_data[9] = na
+    #Save ALL collected game data to the game_data list.
     game_data.append(current_game_data)
 
 def save_game_data():
+    #This function saves the collected game data to a CSV file.
+    #If the CSV file is open in Excel (or is failed to be written to for another reason), the user is given the choice to try saving it again.
     while True:
         print("Saving scraped game data to CSV file...", end="")
         try:
@@ -175,9 +212,13 @@ def save_game_data():
                 break
 
 def new_infite_url(game_no):
+    #Set the inifite URL to contain the current game number. 
+    #From experimentation, the count number does not change the number of games returned; it is always 50 so I've left it as that.
     return "https://store.steampowered.com/search/results/?query&start=" + str(game_no) + "&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
 
 def error_check(main_page):
+    #This function checks alerts the user to a faulty game page. If it detects "Site Error" page in the title, then the page returned was Steam's own error page, else, something worse went wrong.
+    #This was necessary on the 26th of June because Steam was overloaded due to starting its summer sale.
     main_page = bs(main_page.content, "html.parser")
     pyperclip.copy(main_page.prettify())
     for title in main_page.find_all("title"):
@@ -188,23 +229,25 @@ def error_check(main_page):
 while current_game_no < max_game_no:
     print(str(current_game_no) + "/" + str(max_game_no) + " games.")
     print("\nNext URL is:\n" + request_url + "\n")
-    main_page = requests.get(request_url)
-    if main_page.status_code == 200:
-        main_page.encoding = "utf-8"
+    main_page = requests.get(request_url) #Get the next 50 games using the infinite URL.
+    if main_page.status_code == 200: #If the request returned a 200 (OK) HTTP code, continue to scrape recieved game data.
+        main_page.encoding = "utf-8" #Set encoding to UTF-8 to avoid encoding artefacts.
         main_soup = bs(main_page.json()["results_html"], "html.parser", exclude_encodings=["iso-8859-7", "iso-8859-1"])
+        #Have BeautifulSoup parse the HTML from the recieved JSON file. Sometimes, BeautifulSoup would use the wrong encodings and so the ones it kept guessing are excluded.
         all_games = main_soup.find_all("a", attrs={"class": "search_result_row ds_collapse_flag"})
-        if len(all_games) < 1:
+        #Find all of the video games in the HTML. Each one is an achor tag with the class of "search_result_row ds_collapse_flag".
+        if len(all_games) < 1: #If there are no games, that meanss the page recieved is not the correct one.
             error_check(main_soup, main_page)
         for game in all_games:
-            price = game.find_all("div", attrs={"class": "discount_final_price"})
-            if len(price) > 0:
+            price = game.find_all("div", attrs={"class": "discount_final_price"}) #Get the the divider that holds the game's price.
+            if len(price) > 0: #If the price is found, save the text.
                 price = price[0].text
-            else:
+            else: #Some games are free and this is shown as FREE in place of the price. However, some games are free, but the price is blank. So if that is the case, set them to free here.
                 price = "Free"
-            get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price)
+            get_page_data(game["href"], game.find_all("span", attrs={"class": "title"})[0].text, price) #Get the game data using the game's anchor element href.
             current_game_no += 1
         request_url = new_infite_url(current_game_no)
-    else:
+    else: #If the request returned any other HTTP code (usually 502 for some reason), warn the user and ask if they'd like to try again (unless auto_retry is True)
         print("Main Page request got " + str(main_page.status_code) + " status code instead of 200.")
         if auto_retry is False:
             if input("Try again? (Y/N)").upper() in "YES" "Y":
@@ -215,8 +258,11 @@ while current_game_no < max_game_no:
                 sys.exit()
         else:
             print("Trying again...")
+#With all game data collected, save it to a CSV file.
 save_game_data()
 print("Scraping took " + str(time.time() - start_time) + " seconds") 
+#Save the time it took the program to the scrape_time.txt file.
 time_file = open("scrape_time.txt", "w")
 time_file.write("Scraping took " + str(time.time() - start_time) + " seconds")
 time_file.close()
+#END OF LINE
