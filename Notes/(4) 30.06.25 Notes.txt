@@ -1,0 +1,17 @@
+9:49: Was going to start writing about the scraping program, but then I
+noticed something. I'm missing a clarifier that determines what it is that's
+being scraped. That is, I completely forgot that Steam doesn't just games, but
+hardware and software as well (and game bundles too). So, the data needs to
+account for that. I have an idea as to how this might be achieved, but first,
+I need a shower.
+
+11:56: I implemented the idea I had and it, surprisingly, works. Going to do
+the big ten thousand test for this, but, due to how long that will take, I
+won't be around to supervise it in case anything goes wrong because I'll be at
+work. I expect to get back and see an exception error of some sort. Either
+that or strangley missing data that wasn't missing before or I didn't notice
+it before. So work will be fun...
+
+21:41: Too warm to do anything else after work... But the program worked. I
+will leave the scraping here now and focus on data analysis and also writing
+about the scraping program... I just hope the heat goes away... -_-

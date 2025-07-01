@@ -1,0 +1,61 @@
+11:38: Cleaned up the scraper code somewhat, not really. But I did add
+(useless) comments to it. Going to try running it again to make sure I didn't
+break it and then I'll do another ten thousand items test again to make damn
+sure I didn't break anything.
+
+11:45: First test worked, but now I've noticed something. The developer column
+for some games, such as Elden Ring, is empty. Looking at Elden Ring
+specifically, it's URL for it's developer contains "curator" instead of
+developer. Will test my new code that checks for this and see if there are
+more alternate URLs. If I find too many more, I'll switch it to check for the
+PUBLISHER first.
+
+11:52: Okay, so first test seems to make this work... Will check on 1000 items
+to make sure before doing the big test.
+
+12:02: That seems to have worked, but now some of the publisher columns are
+blank... Odd...
+
+12:03: Oh, sometimes the publisher is a curator too... WHYYY
+
+12:14: Changed the code to check the 'subtitle column' divider before getting
+the developer/publisher. This either contains developer or publisher so it's a
+better check than my silly URL idea. Going to write a function to convert time
+and then I'll do a 1000 item check followed by the big one.
+
+12:26: Okay, added a time converter so I don't have to use a website everytime
+to check the program time which is always in seconds. Going to do the 1000
+item test now and then the big test if there are no issues.
+
+12:37: Did the 1000 item test and some publishers are still blank... Looking
+at one of them, there is, of course, no publisher listed. So, if this is the
+case, I will have the code put N/A instead of nothing.
+
+12:41: Added code to put N/A if there is no publisher. Let's see how this
+goes.
+
+17:27: Had trip to Booths. Took a long while, anyway, the code from before did
+not work. Apparently, there is nothing to put in the publisher column, but
+whatever that nothing is it isn't whitespace nor is it an empty string? I've
+tried to find the games with no publisher, but it won't print the publisher
+text? Odd. Anyway, I did notice that some games have multiple publishers and
+so I've made it so the publishers are list rather than a singular item. Let's
+see the results, eh?
+
+17:30: HAHAHAHAHA! I forgot to reset the publishers list between each game...
+So every game apparently has EVERY publisher, lol. Trying again...
+
+17:56: Okay, so that list thing worked, but the games that had blank
+publishers before are still blank? What?
+
+18:43: New approach: I added a variable to check if the publisher has been
+found AT ALL and if not, the publisher is set to N/A. This seems to work, but
+I think a big ten thousand test should be done to make sure. If it does, I
+think I might add two new columns: Steam URL and game_no.
+
+20:09: It works. Only problem is, there are two games with no DEVELOPER now.
+DAMNIT! Let's change the code to fix that I guess...
+
+22:38: Okay, finally done! The big test shows no blanks! I also added the game
+no and Steam URL. Finally! I will push this to the git and write about it in
+my report as I should have done today.

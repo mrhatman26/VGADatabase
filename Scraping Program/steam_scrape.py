@@ -33,6 +33,7 @@ language_features = []
 current_language = ""
 row_counter = 0
 column_counter = 0
+game_type = []
 na = "N/A"
 start_time = time.time() #Get the time of when the program (roughly) began
 
@@ -40,7 +41,7 @@ def get_page_data(page_url, title, price):
     #This function gets each game's data from the URL provided.
     #However, the price and title of each game are provided from the main page as it is easier to get them on the main page than the game page.
     cprint("Scraping game page of " + title, surpress=sprint)
-    current_game_data = [None] * 11
+    current_game_data = [None] * 12
     #Create a list of ten empty items. This list will hold the game data about to be collected.
     game_page = requests.get(page_url, allow_redirects=True)
     game_page.encoding = "utf-8"
@@ -199,8 +200,25 @@ def get_page_data(page_url, title, price):
     else:
         #If no genres can be found, save them as N/A instead.
         current_game_data[9] = na
+    #Save type (Game, software, hardware, bundles, etc.) [10] #All found within the top bit that goes All Games > Game
+    game_type = game_soup.find_all("div", attrs={"class": "blockbg"})
+    if len(game_type) > 0:
+        for item in game_type:
+            item = item.text.upper()
+            if "GAMES" in item:
+                current_game_data[10] = "Game"
+            elif "BUNDLE" in item:
+                current_game_data[10] = "Bundle"
+            elif "HARDWARE" in item:
+                current_game_data[10] = "Hardware"
+            elif "SOFTWARE" in item:
+                current_game_data[10] = "Software"
+            else:
+                current_game_data[10] = na
+    else:
+        current_game_data[10] = na
     #Save game's URL
-    current_game_data[10] = page_url
+    current_game_data[11] = page_url
     #Save ALL collected game data to the game_data list.
     game_data.append(current_game_data)
 
@@ -212,7 +230,7 @@ def save_game_data():
         try:
             with open("scraped_steam_game_data.csv", "w", encoding="utf-8-sig", newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                writer.writerow(["game_no", "game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres", "steam_url"])
+                writer.writerow(["game_no", "game_title", "game_description", "game_release_date", "game_developer", "game_publisher", "game_user_tags", "game_price", "game_features", "game_languages", "genres", "type", "steam_url"])
                 game_no = str(len(game_data))
                 counter = 1
                 for game in game_data:
