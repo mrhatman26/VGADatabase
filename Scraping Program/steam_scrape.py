@@ -340,6 +340,6 @@ print("(Actual time was " + str(actual_final_time) + " seconds)")
 #Save the time it took the program to the scrape_time.txt file.
 time_file = open("scrape_time.txt", "w")
 time_file.write("Scraping took " + str(time.time() - start_time) + " seconds")
-time_file.write("\n(" + str(final_time[0]) + " hours, " + str(final_time[1]) + " minutes and " + str(final_time[2]) + " seconds")
+time_file.write("\n(" + str(final_time[0]) + " hours, " + str(final_time[1]) + " minutes and " + str(final_time[2]) + " seconds)")
 time_file.close()
 #END OF LINE

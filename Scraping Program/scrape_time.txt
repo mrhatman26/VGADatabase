@@ -1,2 +1,2 @@
 Scraping took 5651.02890920639 seconds
-(1 hours, 34 minutes and 11 seconds
+(1 hours, 34 minutes and 11 seconds)
