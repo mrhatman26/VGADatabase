@@ -1,0 +1,8 @@
+The initial research expectation for your project is to use secondary data collection—specifically, to scrape publicly available data from the internet in a structured and
+justifiable way. This involves identifying reliable data sources, clearly defining what data you’re collecting and why, and ensuring the process is systematic and replicable.
+
+You should also ensure that any web scraping follows legal and platform-specific terms of use, and that you document your data sources and methods carefully for transparency. 
+ 
+You need to address all the concerns with ad hoc data:
+Ad hoc data collection (e.g., grabbing data from random or unverified sources without a plan) can result in bias, lack of consistency, and ethical issues
+It may not be suitable for the type of analysis or modelling you're aiming to do, so on this point you may try different ways of scrapping data and which one is most suitable for the purpose of your project. 

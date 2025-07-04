@@ -1,0 +1,13 @@
+9:43: I have finished anaylsing the data. Excel was a complete pain to work
+with, but I got the job done. I analysed the data in two ways:
+-1: Through pivot tables which allowed me to analyse the price per year, per
+month and per day and also the number of games per year.
+-2: Through additional tables which involved splitting the tags, genres,
+developers and publishers from Python lists into multiple rows. This was the
+part where Excel started to not behave, but, luckily, Notepad++ had my back
+with its search and replace tool to remove the bracks and commas. Funny
+though, I am praising Notepad++ while writing this in Vim, lol.
+
+Anyway, my next plan of action, before writing the report which I still have
+yet to do -_-, is to write a program that splits those Python lists into
+additional collumns for me. This will help later on I think.
