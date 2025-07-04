@@ -11,3 +11,14 @@ though, I am praising Notepad++ while writing this in Vim, lol.
 Anyway, my next plan of action, before writing the report which I still have
 yet to do -_-, is to write a program that splits those Python lists into
 additional collumns for me. This will help later on I think.
+
+21:59: Created a program to clean the data up a bit and remove rows that
+aren't games. I did not implement the additional collumns thing because there
+are a lot of tags, developers and publishers which would make for an absurdly
+wide table. I considered making the program convert them to binary instead
+with each bit representing a single developer for example, but I will only do
+that if I am told I MUST do some sort of machine learning. Machine learning is
+not part of this project though. I also expirmented with git branches which is
+something I've never done before. Currently, the git is on the
+"scrape-cleaner" branch and after writing this I hope to merge it back to the
+main branch... Somehome...
