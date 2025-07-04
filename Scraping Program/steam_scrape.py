@@ -1,6 +1,5 @@
 import requests, csv, time, pyperclip, json
 from bs4 import BeautifulSoup as bs
-from custom_print import cprint
 
 infite_url = "https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=_ASC&supportedlang=english&snr=1_7_7_230_7&infinite=1"
 request_url = infite_url
@@ -13,7 +12,6 @@ while True:
         print("Please enter a valid number")
         time.sleep(3)
 current_game_no = 0
-sprint = False #sprint = Surpress Print
 auto_retry = True #If set to True, the program will automatically try requesting the game page again without asking the user.
 dev_row = []
 is_developer = False
@@ -40,7 +38,7 @@ start_time = time.time() #Get the time of when the program (roughly) began
 def get_page_data(page_url, title, price):
     #This function gets each game's data from the URL provided.
     #However, the price and title of each game are provided from the main page as it is easier to get them on the main page than the game page.
-    cprint("Scraping game page of " + title, surpress=sprint)
+    print("Scraping game page of " + title)
     current_game_data = [None] * 12
     #Create a list of ten empty items. This list will hold the game data about to be collected.
     game_page = requests.get(page_url, allow_redirects=True)
@@ -234,7 +232,7 @@ def save_game_data():
                 game_no = str(len(game_data))
                 counter = 1
                 for game in game_data:
-                    cprint("Saving " + str(counter) + " of " + game_no + " games...", surpress=sprint)
+                    print("Saving " + str(counter) + " of " + game_no + " games...")
                     game.insert(0, counter - 1)
                     writer.writerow(game)
                     counter += 1
