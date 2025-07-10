@@ -1,4 +1,5 @@
 import pandas as pd
+import ast
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -10,5 +11,41 @@ for column in original_dataset:
 modified_data = original_dataset[original_dataset["type"] == "Game"] #Drop all rows that do not have "Game" as their type.
 modified_data.reset_index() #Reset the index to match the different rows.
 modified_data = modified_data.drop(columns={"type", "game_no"}, index=1) #Drop the type column as it is no longer needed.
+modified_data["interface_languages"] = ""
+modified_data["audio_langauges"] = ""
+modified_data["subtitle_langauges"] = ""
+row_counter = 0
+length = str(len(modified_data["game_languages"]))
+for language in modified_data["game_languages"]:
+    print("Cleaning " + str(row_counter + 1) + " of " + length + " language rows")
+    audio_list = []
+    interface_list = []
+    subtitle_list = []
+    try:
+        language = ast.literal_eval(language)
+        for lang_key, lang_val in language.items():
+            for lang_feature in lang_val:
+                for feat_key in lang_feature:
+                    if feat_key.upper() == "INTERFACE":
+                        if lang_feature[feat_key] is True:
+                            interface_list.append(lang_key)
+                    if feat_key.upper() == "FULL AUDIO":
+                        if lang_feature[feat_key] is True:
+                            audio_list.append(lang_key)
+                    if feat_key.upper() == "SUBTITLES":
+                        if lang_feature[feat_key] is True:
+                            subtitle_list.append(lang_key)
+        modified_data.loc[row_counter, "interface_languages"] = str(interface_list)
+        modified_data.loc[row_counter, "audio_langauges"] = str(audio_list)
+        modified_data.loc[row_counter, "subtitle_langauges"] = str(subtitle_list)
+        modified_data = modified_data.reset_index(drop=True)
+    except Exception as e:
+        print(str(e))
+        modified_data.loc[row_counter, "interface_languages"] = "[]"
+        modified_data.loc[row_counter, "audio_langauges"] = "[]"
+        modified_data.loc[row_counter, "subtitle_langauges"] = "[]"
+        modified_data = modified_data.reset_index(drop=True)
+    row_counter += 1
+modified_data = modified_data.drop(columns={"game_languages"}, index=1)
 #Save back to CSV
 modified_data.to_csv("cleaned_steam_data.csv", index=False, encoding="utf-8-sig")
