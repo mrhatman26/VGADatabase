@@ -62,6 +62,23 @@ for publisher in modified_data["game_publisher"]:
     except:
         modified_data.loc[row_counter, "game_publisher"] = "N/A"
     row_counter += 1
+print("Done\nConverting user tags list to string...", end="")
+row_counter = 0
+for user_tags in modified_data["game_user_tags"]:
+    try:
+        user_tags = list_string_to_string(user_tags)
+        modified_data.loc[row_counter, "game_user_tags"] = user_tags
+    except:
+        modified_data.loc[row_counter, "game_user_tags"] = "N/A"
+    row_counter += 1
+print("Done\nConverting game features list to string...", end="")
+for features in modified_data["game_features"]:
+    try:
+        features = list_string_to_string(features)
+        modified_data.loc[row_counter, "game_features"] = features
+    except:
+        modified_data.loc[row_counter, "game_features"] = "N/A"
+    row_counter += 1
 print("Done\nConverting language dicts to strings...", end="")
 row_counter = 0
 length = str(len(modified_data["game_languages"]))
@@ -82,7 +99,16 @@ for language in modified_data["game_languages"]:
         modified_data.loc[row_counter, "game_languages"] = "[]"
         modified_data = modified_data.reset_index(drop=True)
     row_counter += 1
-print("Done")
+print("Done\nConverting genres list to string", end="")
+row_counter = 0
+for genres in modified_data["genres"]:
+    try:
+        genres = list_string_to_string(genres)
+        modified_data.loc[row_counter, "genres"] = genres
+    except:
+        modified_data.loc[row_counter, "genres"] = "N/A"
+    row_counter += 1
+print("Done\nNormalisation complete.")
 #modified_data = modified_data.drop(columns={"game_languages"}, index=1)
 #Save back to CSV
 modified_data.to_csv("cleaned_steam_data.csv", index=False, encoding="utf-8-sig")
