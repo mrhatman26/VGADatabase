@@ -3,6 +3,16 @@ import ast
 
 months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
+def list_string_to_string(list_val):
+    list_val = list_val.replace("[", "").replace("]", "")
+    list_val = list_val.replace("', ", "¬ ")
+    list_val = list_val.replace('"', '')
+    list_val = list_val.replace(",", "")
+    list_val = list_val.replace("¬ ", ", ")
+    list_val = list_val.replace("'", "")
+    return list_val
+
+
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 original_dataset = pd.read_csv("scraped_steam_game_data.csv") #Load the CSV
@@ -33,6 +43,24 @@ for date in modified_data["game_release_date"]:
         modified_data.loc[row_counter, "release_year"] = "-1"
         modified_data.loc[row_counter, "release_month"] = "-1"
         modified_data.loc[row_counter, "release_day"] = "-1"
+    row_counter += 1
+print("Done\nConverting developers list to string...", end="")
+row_counter = 0
+for developer in modified_data["game_developer"]:
+    try:
+        developer = list_string_to_string(developer)
+        modified_data.loc[row_counter, "game_developer"] = developer
+    except:
+        modified_data.loc[row_counter, "game_developer"] = "N/A"
+    row_counter += 1
+print("Done\nConverting publishers list to string...", end="")
+row_counter = 0
+for publisher in modified_data["game_publisher"]:
+    try:
+        publisher = list_string_to_string(publisher)
+        modified_data.loc[row_counter, "game_publisher"] = publisher
+    except:
+        modified_data.loc[row_counter, "game_publisher"] = "N/A"
     row_counter += 1
 print("Done\nConverting language dicts to strings...", end="")
 row_counter = 0
