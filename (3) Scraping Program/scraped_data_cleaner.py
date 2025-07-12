@@ -28,9 +28,7 @@ for language in modified_data["game_languages"]:
         modified_data = modified_data.reset_index(drop=True)
     except Exception as e:
         print(str(e))
-        modified_data.loc[row_counter, "interface_languages"] = "[]"
-        modified_data.loc[row_counter, "audio_langauges"] = "[]"
-        modified_data.loc[row_counter, "subtitle_langauges"] = "[]"
+        modified_data.loc[row_counter, "game_languages"] = "[]"
         modified_data = modified_data.reset_index(drop=True)
     row_counter += 1
 #modified_data = modified_data.drop(columns={"game_languages"}, index=1)
