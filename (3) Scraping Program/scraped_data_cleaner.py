@@ -3,9 +3,12 @@ import ast
 
 months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
 
-def list_string_to_string(list_val):
+def list_string_to_string(list_val, no_apostrophe=False):
     list_val = list_val.replace("[", "").replace("]", "")
-    list_val = list_val.replace("', ", "¬ ")
+    if no_apostrophe is False:
+        list_val = list_val.replace("', ", "¬ ")
+    else:
+        list_val = list_val.replace(", ", "¬ ")
     list_val = list_val.replace('"', '')
     list_val = list_val.replace(",", "")
     list_val = list_val.replace("¬ ", ", ")
@@ -37,14 +40,16 @@ for date in modified_data["game_release_date"]:
         date = date.replace(",", "").split(" ")
         date[1] = date[1].upper()
         modified_data.loc[row_counter, "release_year"] = str(date[2])
-        modified_data.loc[row_counter, "release_month"] = str(months.index(date[1]))
+        modified_data.loc[row_counter, "release_month"] = str(months.index(date[1]) + 1)
         modified_data.loc[row_counter, "release_day"] = str(date[0])
     except:
         modified_data.loc[row_counter, "release_year"] = "-1"
         modified_data.loc[row_counter, "release_month"] = "-1"
         modified_data.loc[row_counter, "release_day"] = "-1"
     row_counter += 1
+modified_data = modified_data.drop(columns={"game_release_date"}, index=1)
 print("Done\nConverting developers list to string...", end="")
+modified_data = modified_data.reset_index(drop=True)
 row_counter = 0
 for developer in modified_data["game_developer"]:
     try:
@@ -54,6 +59,7 @@ for developer in modified_data["game_developer"]:
         modified_data.loc[row_counter, "game_developer"] = "N/A"
     row_counter += 1
 print("Done\nConverting publishers list to string...", end="")
+modified_data = modified_data.reset_index(drop=True)
 row_counter = 0
 for publisher in modified_data["game_publisher"]:
     try:
@@ -63,6 +69,7 @@ for publisher in modified_data["game_publisher"]:
         modified_data.loc[row_counter, "game_publisher"] = "N/A"
     row_counter += 1
 print("Done\nConverting user tags list to string...", end="")
+modified_data = modified_data.reset_index(drop=True)
 row_counter = 0
 for user_tags in modified_data["game_user_tags"]:
     try:
@@ -72,6 +79,8 @@ for user_tags in modified_data["game_user_tags"]:
         modified_data.loc[row_counter, "game_user_tags"] = "N/A"
     row_counter += 1
 print("Done\nConverting game features list to string...", end="")
+modified_data = modified_data.reset_index(drop=True)
+row_counter = 0
 for features in modified_data["game_features"]:
     try:
         features = list_string_to_string(features)
@@ -80,6 +89,7 @@ for features in modified_data["game_features"]:
         modified_data.loc[row_counter, "game_features"] = "N/A"
     row_counter += 1
 print("Done\nConverting language dicts to strings...", end="")
+modified_data = modified_data.reset_index(drop=True)
 row_counter = 0
 length = str(len(modified_data["game_languages"]))
 for language in modified_data["game_languages"]:
@@ -92,18 +102,19 @@ for language in modified_data["game_languages"]:
                     if lang_feature[feat_key] is True:
                         if lang_key not in lang_list:
                             lang_list.append(lang_key)
-        modified_data.loc[row_counter, "game_languages"] = str(lang_list).strip()
+        modified_data.loc[row_counter, "game_languages"] = list_string_to_string(str(lang_list))
         modified_data = modified_data.reset_index(drop=True)
     except Exception as e:
         #print(str(e))
         modified_data.loc[row_counter, "game_languages"] = "[]"
         modified_data = modified_data.reset_index(drop=True)
     row_counter += 1
-print("Done\nConverting genres list to string", end="")
+print("Done\nConverting genres list to string...", end="")
+modified_data = modified_data.reset_index(drop=True)
 row_counter = 0
 for genres in modified_data["genres"]:
     try:
-        genres = list_string_to_string(genres)
+        genres = list_string_to_string(genres, no_apostrophe=True)
         modified_data.loc[row_counter, "genres"] = genres
     except:
         modified_data.loc[row_counter, "genres"] = "N/A"
