@@ -1,5 +1,5 @@
 import csv, ast
-from db_handler import add_scraped_data
+from db_handler import admin_add_scraped_data
 from file_paths import scraped_file_dir
 
 def convert_to_list(data):
@@ -31,7 +31,7 @@ def read_scraped_data():
                     "game_release_month": row[11],
                     "game_release_day": row[12]
                 }
-                add_scraped_data(game_dict)
+                admin_add_scraped_data(game_dict)
             row_counter += 1
             print(str(row_counter + 1) + "/" + str(row_length) + " rows loaded from scraped_steam_gamescraped_steam_game_data.csv", flush=True, end="\r")
     scraped_data.close()

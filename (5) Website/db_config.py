@@ -5,7 +5,7 @@ def get_db_config(deployed):
             'user': 'root',
             'password': 'boundingthroughtime',
             'host': 'db',
-            'database': 'VGDB'
+            'database': 'vgadatabase'
         }
     else:
         db_config = {
@@ -13,6 +13,6 @@ def get_db_config(deployed):
             'password': 'boundingthroughtime',
             'host': 'localhost',
             'port': 1234,
-            'database': 'VGDB'
+            'database': 'vgadatabase'
         }
     return db_config
