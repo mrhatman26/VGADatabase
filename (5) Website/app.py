@@ -1,16 +1,29 @@
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
+from action_logger import *
+from version_handler import *
 #from user import User
 
 '''Server Vars'''
+version = update_version()
+print(version, flush=True)
 app = Flask(__name__) #Create the flask application
 deployed = False
+
+def get_user():
+    #TBD5
+    '''if hasattr(current_user, 'username'):
+        return current_user.username
+    else:
+        return "Annonymous"'''
+    return "Annonymous"
 
 '''General Routes'''
 #Home/Index
 @app.route('/')
 def home():
-    return render_template('home.html', page_name="Home")
+    access_log(request.remote_addr, get_user(), "/ (Home)")
+    return render_template('home.html', page_name="Home", c_version=version)
 
 #Error Pages
 #These pages are only shown when the website encounters an error.
