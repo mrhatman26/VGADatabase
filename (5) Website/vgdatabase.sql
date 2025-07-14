@@ -12,6 +12,7 @@ CREATE TABLE table_games(
     game_desc TEXT,
     game_rdate TEXT,
     game_rstate TEXT, /*Describes the game's release state. E.G: Early Access*/
+    game_url TEXT,
     PRIMARY KEY(game_id)
 );
 

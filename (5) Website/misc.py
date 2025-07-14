@@ -1,0 +1,5 @@
+def pause(message=None):
+    if message is None:
+        input("(Press ENTER to continue)")
+    else:
+        input(message)
