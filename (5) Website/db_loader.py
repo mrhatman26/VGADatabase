@@ -19,7 +19,7 @@ def read_scraped_data():
                 game_dict = {
                     "game_title": row[0],
                     "game_description": row[1],
-                    "game_dvelopers": convert_to_list(row[2]),
+                    "game_developers": convert_to_list(row[2]),
                     "game_publishers": convert_to_list(row[3]),
                     "game_user_tags": convert_to_list(row[4]),
                     "game_features": convert_to_list(row[6]),

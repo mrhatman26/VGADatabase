@@ -11,6 +11,9 @@ def admin_add_scraped_data(game_dict):
     game_id = get_new_table_id(cursor, "table_games")
     release_date = game_dict["game_release_year"] + "/" + game_dict["game_release_month"] + "/" + game_dict["game_release_day"]
     cursor.execute("INSERT INTO table_games VALUES(%s, %s, %s, %s, %s, %s, %s)", (str(game_id), game_dict["game_title"], None, game_dict["game_description"], release_date, None, game_dict["game_url"]))
-    database.commit()
+    #database.commit()
+    #Add developer to database
+    print(str(game_dict["game_developers"]) + "\n" + str(type(game_dict["game_developers"])))
+    pause()
     cursor.close()
     database.close()
