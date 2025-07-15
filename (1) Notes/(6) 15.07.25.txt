@@ -20,3 +20,12 @@ with either the tags or the genres, but for now, they will go unused...
 11:01: Okay, I'm going to put the db_handler back in the main directory
 because it can no longer access db_config.py even though they're in the same
 directory...
+
+11:38: Okay, so games can be loaded. But they do not have links. That is what
+I spent the past hour or so implementing, but now I have run into a wall:
+Because of they way I have written the database, links require users to exist
+in order to show who made those links. So, I will, after a break and then
+lunch, implement users and then move back to this.
+
+This is going to be one hell of a development process. Can I do it?
+IF YES, I GET A RED VELVET CAKE, if no... Then I get nothing I guess...

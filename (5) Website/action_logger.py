@@ -1,8 +1,5 @@
 import datetime as dt
-
-def get_time():
-    current_time = dt.datetime.now()
-    return str("\n[" + current_time.strftime("%Y.%m.%d at %H:%M:%S") + "]")
+from misc import get_time
 
 #Access and errors
 def access_log(ip, username, wwAccessed, failed=False, admin=False):

@@ -1,5 +1,5 @@
 import csv, ast
-from db_handlers.db_handler_admin import admin_add_scraped_data
+from db_handler_admin import admin_add_scraped_data
 from file_paths import scraped_file_dir
 
 def convert_to_list(data):
