@@ -36,3 +36,8 @@ back to the stuff from earlier...)
 
 16:59: Started admin pages with the user management page. It currently shows
 all users and not much else.
+
+21:02: After a long break, I added the ability to apply and revoke admin
+status to users as an admin. I also thought of an idea: Set the creator of the
+developers and etc. to the admin user running the function to load the CSV!
+That will have to wait until tomorrow though as I am quite tired...

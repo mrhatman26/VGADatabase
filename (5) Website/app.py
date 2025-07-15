@@ -2,6 +2,7 @@ import ast
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
 from db_handler_users import *
+from db_handler_admin import *
 from action_logger import *
 from version_handler import *
 from user import User
@@ -64,6 +65,7 @@ def user_login_validate():
             if user_check_exists(userdata["user_name"]):
                 if user_login_passcheck(userdata):
                     admin_stat = user_check_admin(userdata["user_name"])
+                    print(user_get_id(userdata["user_name"]), flush=True)
                     login_user(User(user_get_id(userdata["user_name"]), userdata["user_name"], admin_stat[0], admin_stat[1]))
                     login_log(request.remote_addr, userdata["user_name"])
                     return "success"
@@ -156,6 +158,37 @@ def admin_user_management():
             abort(404)
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True)
+        abort(404)
+#Swap Admin Status
+@app.route("/admin/management/users/swap_admin/user_id=<user_id>")
+def admin_swap_admin_status(user_id=None):
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True)
+            admin_swap_stat(user_id)
+            if str(current_user.id) != user_id:
+                return redirect("/admin/management/users/")
+            else:
+                return redirect("/")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
+        abort(404)
+#Swap Mod Status
+@app.route("/admin/management/users/swap_mod/user_id=<user_id>")
+def admin_swap_mod_status(user_id=None):
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True)
+            admin_swap_stat(user_id, swap_mod=True)
+            return redirect("/admin/management/users/")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
         abort(404)
 
 #Error Pages

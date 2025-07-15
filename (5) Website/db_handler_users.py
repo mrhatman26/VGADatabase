@@ -75,10 +75,25 @@ def user_get_id(username):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
-        fetch = cursor.fetchall()[0]
+        fetch = cursor.fetchall()[0][0]
         cursor.close()
         database.close()
         return fetch
+    except:
+        return None
+    
+def user_get_username(user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_name FROM table_users WHERE user_id = %s", (str(user_id),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
     except:
         return None
     
