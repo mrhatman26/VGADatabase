@@ -11,3 +11,8 @@ CSV file.
 10:31: Through experimentation, I can import things from subdirectories, but I
 cannot import things from parent directories. Well, you can with the os or sys
 libraries, but they're insecure.
+
+10:52: Writing a bunch of functions for handling the database and, oh boy is
+this database handler going to be HUGE... Anyway, just making a note here that
+I am unsure what to do with the features for now. I think I might combine them
+with either the tags or the genres, but for now, they will go unused...

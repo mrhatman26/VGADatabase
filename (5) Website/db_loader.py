@@ -22,7 +22,6 @@ def read_scraped_data():
                     "game_dvelopers": convert_to_list(row[2]),
                     "game_publishers": convert_to_list(row[3]),
                     "game_user_tags": convert_to_list(row[4]),
-                    "game_price": row[5],
                     "game_features": convert_to_list(row[6]),
                     "game_languages": convert_to_list(row[7]),
                     "game_genres": convert_to_list(row[8]),
@@ -30,7 +29,7 @@ def read_scraped_data():
                     "game_release_year": row[10],
                     "game_release_month": row[11],
                     "game_release_day": row[12]
-                }
+                }#Price is not included here because this website is a database of games, not a storefront.
                 admin_add_scraped_data(game_dict)
             row_counter += 1
             print(str(row_counter + 1) + "/" + str(row_length) + " rows loaded from scraped_steam_gamescraped_steam_game_data.csv", flush=True, end="\r")
