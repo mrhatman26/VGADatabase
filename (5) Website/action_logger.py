@@ -1,4 +1,3 @@
-import datetime as dt
 from misc import get_time
 
 #Access and errors

@@ -1,22 +1,38 @@
+import ast
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
+from db_handler_users import *
 from action_logger import *
 from version_handler import *
+from user import User
 #from user import User
 
 '''Server Vars'''
 version = update_version()
 print(version, flush=True)
 app = Flask(__name__) #Create the flask application
+app.secret_key = "SeeThatMountain?YouCanClimbItJERSAIKGYHJIOERHGJ"
 deployed = False
 
-def get_user():
-    #TBD5
-    '''if hasattr(current_user, 'username'):
-        return current_user.username
+'''Login Manager'''
+login_manager = LoginManager()
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_fuser(id):
+    user_check = user_check_reconfirm(id)
+    if len(user_check) <= 0:
+        return None
     else:
-        return "Annonymous"'''
-    return "Annonymous"
+        return User(user_check[0], user_check[1], user_check[2], user_check[3])
+
+def get_user():
+    try:
+        if hasattr(current_user, 'username'):
+            return current_user.username
+        else:
+            return "Annonymous"
+    except:
+        return "Annonymous"
 
 '''General Routes'''
 #Home/Index
@@ -24,6 +40,47 @@ def get_user():
 def home():
     access_log(request.remote_addr, get_user(), "/ (Home)")
     return render_template('home.html', page_name="Home", c_version=version)
+
+'''User Routes'''
+#Login
+#TBD
+
+#Signup
+@app.route("/users/signup/")
+def user_signup():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/signup/ (Signup)", failed=True)
+        return redirect("/")
+    else:
+        access_log(request.remote_addr, get_user(), "/users/signup/ (Signup)")
+        return render_template("users/signup.html", page_name="Signup", c_version=version)
+@app.route("/users/signup/validate/", methods=["POST"])
+def user_signup_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/signup/validate/ (Signup Validation)", failed=True)
+        return redirect("/")
+    else:
+        access_log(request.remote_addr, get_user(), "/users/signup/validate/ (Signup Validation)")
+        userdata = request.get_data()
+        userdata = userdata.decode()
+        try:
+            userdata = ast.literal_eval(userdata)
+            if user_check_exists(userdata["user_name"]) is False:
+                if user_add_new(userdata) is True:
+                    new_user_log(request.remote_addr, userdata["user_name"])
+                    return "success"
+                else:
+                    new_user_log(request.remote_addr, userdata["user_name"], failed=True)
+                    error_log(request.remote_addr, userdata["user_name"], "user_add_new failed to create a new user")
+                    return "servererror"
+            else:
+                new_user_log(request.remote_addr, userdata["user_name"], failed=True)
+                error_log(request.remote_addr, userdata["user_name"], "User already exists")
+                return "userexists"
+        except Exception as e:
+            new_user_log(request.remote_addr, userdata["user_name"], failed=True)
+            error_log(request.remote_addr, userdata["user_name"], "Server error during user creation", e)
+            return "servererror"
 
 #Error Pages
 #These pages are only shown when the website encounters an error.

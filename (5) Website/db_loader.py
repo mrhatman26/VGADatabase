@@ -1,6 +1,7 @@
 import csv, ast
 from db_handler_admin import admin_add_scraped_data
 from file_paths import scraped_file_dir
+from misc import get_new_table_id
 
 def convert_to_list(data):
     try:
