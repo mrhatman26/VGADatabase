@@ -1,0 +1,13 @@
+10:16: I forgot to make notes yesterday about starting the website, but, in
+short, I wrote a logger and started writing the code to add CSV data to the
+database. I had already written the database a month before starting my
+project as I didn't intend it to be my project at the time.
+Anyway, I am currently experimenting with putting code in subdirectories and
+calling it from code in the parent directory to keep my file structure tidy.
+After that, I will continue with adding developers to the database from the
+CSV file.
+(The idea was from https://stackoverflow.com/questions/65419934/access-function-in-other-python-file-within-a-subfolder)
+
+10:31: Through experimentation, I can import things from subdirectories, but I
+cannot import things from parent directories. Well, you can with the os or sys
+libraries, but they're insecure.

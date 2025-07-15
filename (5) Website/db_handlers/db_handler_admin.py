@@ -4,7 +4,6 @@ from misc import pause, get_new_table_id
 
 deployed = False
 
-#ADMIN FUNCTIONS
 def admin_add_scraped_data(game_dict):
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
