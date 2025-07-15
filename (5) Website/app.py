@@ -128,6 +128,35 @@ def user_logout():
     else:
         access_log(request.remote_addr, get_user(), "/users/logout/ (Logout)", failed=True)
         return redirect("/")
+    
+'''Admin Routes'''
+#Main
+@app.route("/admin/")
+def admin_main():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", admin=True)
+            return render_template("admin/admin_main.html", page_name="Admin: Main", c_version=version)
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True)
+        abort(404)
+
+#User Management
+@app.route("/admin/management/users/")
+def admin_user_management():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", admin=True)
+            return render_template("admin/admin_user_management.html", page_name="Admin: User Management", c_version=version, userdata=user_get_all())
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True)
+        abort(404)
 
 #Error Pages
 #These pages are only shown when the website encounters an error.

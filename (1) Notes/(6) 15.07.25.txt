@@ -33,3 +33,6 @@ IF YES, I GET A RED VELVET CAKE, if no... Then I get nothing I guess...
 16:28: It took far longer than I expected, but new users can now be created
 and users can also log in. Time to build an admin page! (And then I'll get
 back to the stuff from earlier...)
+
+16:59: Started admin pages with the user management page. It currently shows
+all users and not much else.

@@ -15,6 +15,9 @@
             <ul>
                 <a href="{{ url_for('home') }}" class="nav_link"><li>About</li></a>
                 {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
+                        <a href="{{ url_for('admin_main') }}" class="nav_link"><li>Admin</li></a>
+                    {% endif %}
                     <a href="{{ url_for('user_logout') }}" class="nav_link"><li>Logout</li></a>
                 {% else %}
                     <a href="{{ url_for('user_login') }}" class="nav_link"><li>Login</li></a>

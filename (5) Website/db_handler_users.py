@@ -10,19 +10,7 @@ def string_hash(text):
     hash.update(text)
     return hash.hexdigest()
 
-#Checks/Login
-def user_get_id(username):
-    try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-        cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
-        fetch = cursor.fetchall()[0]
-        cursor.close()
-        database.close()
-        return fetch
-    except:
-        return None
-    
+#Checks/Login    
 def user_check_exists(username):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
@@ -80,6 +68,39 @@ def user_check_admin(username):
         return (bool(fetch[0]), bool(fetch[1]))
     except:
         return (False, False)
+    
+#Get
+def user_get_id(username):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
+        fetch = cursor.fetchall()[0]
+        cursor.close()
+        database.close()
+        return fetch
+    except:
+        return None
+    
+def user_get_all():
+    try:
+        user_list = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_id, user_name, user_email, user_isAdmin, user_isMod FROM table_users")
+        for item in cursor.fetchall():
+            user_list.append({
+                "user_id": item[0],
+                "user_name": item[1],
+                "user_email": item[2],
+                "user_isAdmin": item[3],
+                "user_isMod": item[4]
+            })
+        cursor.close()
+        database.close()
+        return user_list
+    except:
+        return []
     
 #Add/Modify
 def user_add_new(new_userdata, set_mod=False, set_admin=False):
