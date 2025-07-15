@@ -14,8 +14,8 @@ function oldErrorCheck(){
 function submitLogin(event){
     event.preventDefault();
     var loginData = {
-        "username": loginForm[0].value,
-        "password": loginForm[1].value
+        "user_name": loginForm[0].value,
+        "user_password": loginForm[1].value
     };
     $.ajax({
         type: "POST",
@@ -41,7 +41,7 @@ function submitLogin(event){
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "An server error occured";
+                    errorMessage.innerHTML = "A server error occured";
                     mainBody.appendChild(errorMessage);
                 }
             }

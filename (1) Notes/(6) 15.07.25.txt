@@ -29,3 +29,7 @@ lunch, implement users and then move back to this.
 
 This is going to be one hell of a development process. Can I do it?
 IF YES, I GET A RED VELVET CAKE, if no... Then I get nothing I guess...
+
+16:28: It took far longer than I expected, but new users can now be created
+and users can also log in. Time to build an admin page! (And then I'll get
+back to the stuff from earlier...)

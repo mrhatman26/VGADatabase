@@ -43,7 +43,42 @@ def home():
 
 '''User Routes'''
 #Login
-#TBD
+@app.route("/users/login/")
+def user_login():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/login/ (Login)", failed=True)
+        return redirect("/")
+    else:
+        access_log(request.remote_addr, get_user(), "/users/login/ (Login)")
+        return render_template("users/login.html", page_name="Login", c_version=version)
+@app.route("/users/login/validate/", methods=["POST"])
+def user_login_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/login/validate/ (Login Validation)", failed=True)
+        return redirect("/")
+    else:
+        userdata = request.get_data()
+        userdata = userdata.decode()
+        try:
+            userdata = ast.literal_eval(userdata)
+            if user_check_exists(userdata["user_name"]):
+                if user_login_passcheck(userdata):
+                    admin_stat = user_check_admin(userdata["user_name"])
+                    login_user(User(user_get_id(userdata["user_name"]), userdata["user_name"], admin_stat[0], admin_stat[1]))
+                    login_log(request.remote_addr, userdata["user_name"])
+                    return "success"
+                else:
+                    login_log(request.remote_addr, userdata["user_name"], failed=True)
+                    error_log(request.remote_addr, userdata["user_name"], "user_login_validate failed to validate login")
+                    return "usernotexist"
+            else:
+                login_log(request.remote_addr, userdata["user_name"], failed=True)
+                error_log(request.remote_addr, userdata["user_name"], "User does not exist")
+                return "usernotexist"
+        except Exception as e:
+            login_log(request.remote_addr, userdata["user_name"], failed=True)
+            error_log(request.remote_addr, userdata["user_name"], "Server error during login", e)
+            return "servererror"
 
 #Signup
 @app.route("/users/signup/")
@@ -81,6 +116,18 @@ def user_signup_validate():
             new_user_log(request.remote_addr, userdata["user_name"], failed=True)
             error_log(request.remote_addr, userdata["user_name"], "Server error during user creation", e)
             return "servererror"
+        
+#Logout
+@app.route("/users/logout/")
+def user_logout():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/logout/ (Logout)")
+        login_log(request.remote_addr, get_user(), logout=True)
+        logout_user()
+        return redirect("/")
+    else:
+        access_log(request.remote_addr, get_user(), "/users/logout/ (Logout)", failed=True)
+        return redirect("/")
 
 #Error Pages
 #These pages are only shown when the website encounters an error.

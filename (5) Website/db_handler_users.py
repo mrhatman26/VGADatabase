@@ -10,7 +10,19 @@ def string_hash(text):
     hash.update(text)
     return hash.hexdigest()
 
-#Checks
+#Checks/Login
+def user_get_id(username):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
+        fetch = cursor.fetchall()[0]
+        cursor.close()
+        database.close()
+        return fetch
+    except:
+        return None
+    
 def user_check_exists(username):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
@@ -23,9 +35,10 @@ def user_check_exists(username):
             return True
         else:
             return False
-    except:
+    except Exception as e:
+        print(e, flush=True)
         return False
-
+    
 def user_check_reconfirm(user_id):
     user = []
     database = mysql.connector.connect(**get_db_config(deployed))
@@ -39,6 +52,34 @@ def user_check_reconfirm(user_id):
     cursor.close()
     database.close()
     return user
+
+def user_login_passcheck(userdata):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_pass FROM table_users WHERE user_name = %s", (str(userdata["user_name"]),))
+        fetch = cursor.fetchall()[0][0]
+        print(fetch, flush=True)
+        cursor.close()
+        database.close()
+        if string_hash(userdata["user_password"]) == fetch:
+            return True
+        else:
+            return False
+    except:
+        return False
+    
+def user_check_admin(username):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_isMod, user_isAdmin FROM table_users WHERE user_name = %s", (str(username),))
+        fetch = cursor.fetchall()[0]
+        cursor.close()
+        database.close()
+        return (bool(fetch[0]), bool(fetch[1]))
+    except:
+        return (False, False)
     
 #Add/Modify
 def user_add_new(new_userdata, set_mod=False, set_admin=False):

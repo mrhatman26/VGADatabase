@@ -38,3 +38,98 @@ Exception:
 [2025.07.15 at 15:05:14]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
 [2025.07.15 at 15:05:28]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
 [2025.07.15 at 15:05:28]: 127.0.0.1 successfully created a new account with the username of TestUser
+[2025.07.15 at 15:11:53]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.15 at 15:11:54]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 15:11:56]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.15 at 15:11:57]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 15:12:04]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.15 at 15:12:05]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 15:12:06]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.15 at 16:04:50]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.15 at 16:04:50]: 127.0.0.1 successfully created a new account with the username of jsmith55
+[2025.07.15 at 16:04:50]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:05:54]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:06:48]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:06:53]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:06:53]: 127.0.0.1 (User: jsmith55) encountered the following error: Server error during login
+Exception:
+user_login_validate() takes 0 positional arguments but 1 was given
+[2025.07.15 at 16:08:40]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:08:47]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:08:47]: 127.0.0.1 (User: jsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:09:12]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.15 at 16:09:44]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.15 at 16:09:44]: 127.0.0.1 successfully created a new account with the username of jonsmith55
+[2025.07.15 at 16:09:44]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:13:48]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:13:49]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:16:58]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:16:58]: 127.0.0.1 (User: jsmith55) encountered the following error: User does not exist
+No exception information available.
+[2025.07.15 at 16:18:47]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:18:51]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:18:51]: 127.0.0.1 (User: jsmith55) encountered the following error: User does not exist
+No exception information available.
+[2025.07.15 at 16:20:05]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:20:09]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:20:09]: 127.0.0.1 (User: jsmith55) encountered the following error: User does not exist
+No exception information available.
+[2025.07.15 at 16:21:29]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:21:33]: 127.0.0.1 FAILED to log in as jsmith55
+[2025.07.15 at 16:21:33]: 127.0.0.1 (User: jsmith55) encountered the following error: User does not exist
+No exception information available.
+[2025.07.15 at 16:23:04]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:23:04]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:23:05]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:23:05]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:23:06]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:23:06]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:23:18]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:23:18]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:23:21]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:23:29]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:23:29]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:23:47]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.15 at 16:24:09]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.15 at 16:24:09]: 127.0.0.1 successfully created a new account with the username of jonsmith55
+[2025.07.15 at 16:24:09]: 127.0.0.1 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.15 at 16:24:13]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:24:13]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:24:51]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:24:51]: 127.0.0.1 (User: jonsmith55) encountered the following error: user_login_validate failed to validate login
+No exception information available.
+[2025.07.15 at 16:25:05]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:25:05]: 127.0.0.1 (User: jonsmith55) encountered the following error: Server error during login
+Exception:
+'username'
+[2025.07.15 at 16:25:42]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:25:42]: 127.0.0.1 (User: jonsmith55) encountered the following error: Server error during login
+Exception:
+'username'
+[2025.07.15 at 16:25:44]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:25:44]: 127.0.0.1 (User: jonsmith55) encountered the following error: Server error during login
+Exception:
+'username'
+[2025.07.15 at 16:26:07]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:26:07]: 127.0.0.1 (User: jonsmith55) encountered the following error: Server error during login
+Exception:
+User.__init__() missing 3 required positional arguments: 'username', 'is_mod', and 'is_admin'
+[2025.07.15 at 16:26:09]: 127.0.0.1 FAILED to log in as jonsmith55
+[2025.07.15 at 16:26:09]: 127.0.0.1 (User: jonsmith55) encountered the following error: Server error during login
+Exception:
+User.__init__() missing 3 required positional arguments: 'username', 'is_mod', and 'is_admin'
+[2025.07.15 at 16:27:22]: 127.0.0.1 successfully logged in as jonsmith55
+[2025.07.15 at 16:27:22]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.15 at 16:27:33]: 127.0.0.1 (User: jonsmith55) successfully accessed /users/logout/ (Logout)
+[2025.07.15 at 16:27:33]: 127.0.0.1 (User: jonsmith55) successfully logged out of their account
+[2025.07.15 at 16:28:05]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.15 at 16:28:06]: 127.0.0.1 (User: jonsmith55) successfully accessed /users/logout/ (Logout)
+[2025.07.15 at 16:28:06]: 127.0.0.1 (User: jonsmith55) successfully logged out of their account
+[2025.07.15 at 16:28:06]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
