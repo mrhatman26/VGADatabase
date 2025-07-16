@@ -15,3 +15,11 @@ actually finished yet...
 20:24: Okay, so admins can now load scraped data from the CSV from the website
 itself without using the console... Now to allow developers to be added... Oh
 boy...
+
+20:52: I accidentally implemented the saving of developers to the database.
+Why accidentally? Well, there was an error with the code, I added a print to
+check what was wrong and nothing changed. I then removed that print and now it
+works? w h a t.
+Anyway, developers can now be loaded into the database. Next step is to link
+the developers to their games and to the admin user who launched this
+functions.

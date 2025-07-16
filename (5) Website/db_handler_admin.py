@@ -19,8 +19,8 @@ def admin_add_scraped_data(game_dict):
         for developer in game_dict["game_developers"]:
             developer_id = None
             if developer_check_exists(developer) is False:
-                developer_get_id = get_new_table_id(cursor, "table_developers")
-                cursor.execute("INSERT INTO table_developers VALUES(%s, %s, %s, %s, %s, %s, %s", (str(developer_id), str(developer), None, get_time(no_brackets=True), None, None, False,))
+                developer_id = get_new_table_id(cursor, "table_developers")
+                cursor.execute("INSERT INTO table_developers VALUES(%s, %s, %s, %s, %s, %s, %s)", (str(developer_id), str(developer), None, None, None, None, False,))
                 database.commit()
             else:
                 developer_id = developer_get_id(developer)
