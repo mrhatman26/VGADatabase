@@ -94,6 +94,22 @@ def modify_user_log(ip, username, failed=False, admin=False):
     log_file.write(text)
     log_file.close()
 
+def admin_swap_log(ip, username, failed=False, isMod=False, swappedTo=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if isMod is False:
+        if failed is False:
+            text = text + " (ADMIN): " + ip + " (User: " + username + " successfully swapped admin status to " + swappedTo
+        else:
+            text = text + " (ADMIN): " + ip + " (User: " + username + " FAILED to swap admin status"
+    else:
+        if failed is False:
+            text = text + " (ADMIN): " + ip + " (User: " + username + " successfully swapped moderator status to " + swappedTo
+        else:
+            text = text + " (ADMIN): " + ip + " (User: " + username + " FAILED to swap moderator status"
+    log_file.write(text)
+    log_file.close()
+
 def delete_user_log(ip, username, failed=False, admin=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
