@@ -7,3 +7,7 @@ will be automatically logged out. Added a new variable to login_log to reflect
 that. The next change I will make is to hide this functionallity from the
 admin on the webpage. That won't stop them from going to the URL to do it, but
 eh.
+
+11:57: Had to get a shower. I was only able to add a confirmation page to
+confirm if the admin is sure if they want to load the CSV, though that isn't
+actually finished yet...

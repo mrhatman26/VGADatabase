@@ -210,10 +210,37 @@ def admin_user_delete(user_id):
             else:
                 return redirect("/admin/management/users/")
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/useer_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/users/delete/useer_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+        abort(404)
+
+#Database Management
+@app.route("/admin/management/databasae/")
+def admin_database_manage():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True)
+            return render_template("admin/admin_database_management.html", page_name="Admin: Database Management", c_version=version)
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True)
+        abort(404)
+#Load Data From CSV
+@app.route("/admin/management/database/load_csv/")
+def admin_load_csv():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True)
+            return render_template("confirmation.html", ) #Finish this
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
         abort(404)
 
 #Error Pages

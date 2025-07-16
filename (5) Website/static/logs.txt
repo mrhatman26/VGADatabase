@@ -6,3 +6,7 @@
 [2025.07.16 at 09:34:37]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
 [2025.07.16 at 09:34:38]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
 [2025.07.16 at 09:35:52]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.16 at 11:45:57] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.16 at 11:45:58] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.16 at 11:46:38] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.16 at 11:53:20] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
