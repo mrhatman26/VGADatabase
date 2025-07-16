@@ -11,3 +11,7 @@ eh.
 11:57: Had to get a shower. I was only able to add a confirmation page to
 confirm if the admin is sure if they want to load the CSV, though that isn't
 actually finished yet...
+
+20:24: Okay, so admins can now load scraped data from the CSV from the website
+itself without using the console... Now to allow developers to be added... Oh
+boy...

@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
 from db_handler_users import *
 from db_handler_admin import *
+from db_loader import *
 from action_logger import *
 from version_handler import *
 from user import User
@@ -235,13 +236,28 @@ def admin_load_csv():
     if current_user.is_authenticated:
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True)
-            return render_template("confirmation.html", ) #Finish this
+            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management") #Finish this
         else:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
             abort(404)
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
         abort(404)
+#Confirmed
+@app.route("/admin/management/database/load_csv/confirmed/")
+def admin_load_csv_confirmed():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True)
+            read_scraped_data(current_user.id)
+            return redirect("/admin/")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True)
+        abort(404)
+            
 
 #Error Pages
 #These pages are only shown when the website encounters an error.

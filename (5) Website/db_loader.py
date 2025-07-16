@@ -9,7 +9,7 @@ def convert_to_list(data):
     except:
         return data
 
-def read_scraped_data():
+def read_scraped_data(user_id):
     with open(scraped_file_dir, "r", encoding="utf-8-sig") as scraped_data:
         reader = csv.reader(scraped_data)
         data = list(reader)
@@ -29,11 +29,10 @@ def read_scraped_data():
                     "game_url": row[9],
                     "game_release_year": row[10],
                     "game_release_month": row[11],
-                    "game_release_day": row[12]
+                    "game_release_day": row[12],
+                    "link_user_id": user_id
                 }#Price is not included here because this website is a database of games, not a storefront.
                 admin_add_scraped_data(game_dict)
             row_counter += 1
             print(str(row_counter + 1) + "/" + str(row_length) + " rows loaded from scraped_steam_gamescraped_steam_game_data.csv", flush=True, end="\r")
     scraped_data.close()
-            
-read_scraped_data()

@@ -1,12 +1,5 @@
 
-[2025.07.16 at 09:34:06]: 127.0.0.1 successfully logged in as appleaide353
-[2025.07.16 at 09:34:06]: 127.0.0.1 (User: appleaide353) successfully accessed / (Home)
-[2025.07.16 at 09:34:34] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/users/delete/user_id=2 (Admin: User Delete)
-[2025.07.16 at 09:34:34] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
-[2025.07.16 at 09:34:37]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
-[2025.07.16 at 09:34:38]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
-[2025.07.16 at 09:35:52]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
-[2025.07.16 at 11:45:57] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
-[2025.07.16 at 11:45:58] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
-[2025.07.16 at 11:46:38] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
-[2025.07.16 at 11:53:20] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.16 at 20:13:06] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.16 at 20:13:07] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.16 at 20:14:28] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.16 at 20:17:41] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
