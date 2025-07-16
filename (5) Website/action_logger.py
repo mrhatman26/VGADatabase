@@ -50,7 +50,7 @@ def new_user_log(ip, newUser, failed=False, admin=False):
     log_file.write(text)
     log_file.close()
 
-def login_log(ip, username, failed=False, logout=False, admin=False):
+def login_log(ip, username, failed=False, logout=False, admin=False, auto=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
     if admin is False:
@@ -69,7 +69,10 @@ def login_log(ip, username, failed=False, logout=False, admin=False):
             if logout is False:
                 text = text + " (ADMIN): " + ip + " successfully logged in as " + username
             else:
-                text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully logged out of their account"
+                if auto is True:
+                    text = text + " (ADMIN): " + ip + " (User: " + username + ") was automatically logged out of their account"
+                else:
+                    text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully logged out of their account"
         else:
             if logout is False:
                 text = text + " (ADMIN): " + ip + " FAILED to log in as " + username
@@ -99,14 +102,14 @@ def admin_swap_log(ip, username, failed=False, isMod=False, swappedTo=False):
     text = get_time()
     if isMod is False:
         if failed is False:
-            text = text + " (ADMIN): " + ip + " (User: " + username + " successfully swapped admin status to " + swappedTo
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully swapped admin status to " + str(swappedTo)
         else:
-            text = text + " (ADMIN): " + ip + " (User: " + username + " FAILED to swap admin status"
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to swap admin status"
     else:
         if failed is False:
-            text = text + " (ADMIN): " + ip + " (User: " + username + " successfully swapped moderator status to " + swappedTo
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully swapped moderator status to " + str(swappedTo)
         else:
-            text = text + " (ADMIN): " + ip + " (User: " + username + " FAILED to swap moderator status"
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to swap moderator status"
     log_file.write(text)
     log_file.close()
 
@@ -123,3 +126,5 @@ def delete_user_log(ip, username, failed=False, admin=False):
             text = text + " (ADMIN): " + ip + " successfully deleted the account of " + username
         else:
             text = text + " (ADMIN): " + ip + " FAILED to delete the account of " + username
+    log_file.write(text)
+    log_file.close()

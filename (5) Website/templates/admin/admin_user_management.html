@@ -35,7 +35,7 @@
                                         <td>No</td>
                                         <td style="border: 0px;"><a href="{{ url_for('admin_swap_mod_status', user_id=user.user_id) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">Apply</p></a></td>
                                     {% endif %}                                   
-                                    <td style="border: 0px;"><a href="{{ url_for('home', user_id=user.user_id) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">X</p></a></td>
+                                    <td style="border: 0px;"><a href="{{ url_for('admin_user_delete', user_id=user.user_id) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">X</p></a></td>
                                 </tr>
                             {% endfor %}
                         </table>

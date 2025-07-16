@@ -40,9 +40,7 @@ def admin_swap_stat(user_id, swap_mod=False):
         admin_status = user_check_admin(user_get_username(user_id))
         if swap_mod is False:
             admin_status = not(admin_status[1])
-            cursor.execute("UPDATE table_users SET user_isAdmin = %s WHERE user_id = %s", (admin_status, str(user_id),))
-            database.commit()
-            cursor.execute("UPDATE table_users SET user_isMod = 1 WHERE user_id = %s", (str(user_id),))
+            cursor.execute("UPDATE table_users SET user_isAdmin = %s, user_isMod = 1 WHERE user_id = %s", (admin_status, str(user_id),))
         else:
             admin_status = not(admin_status[0])
             cursor.execute("UPDATE table_users SET user_isMod = %s WHERE user_id = %s", (admin_status, str(user_id),))

@@ -1,0 +1,9 @@
+8:55: Added a new log type that logs that admin or mod status was modified.
+Not really important, but it's to get the programming train off to a
+start.
+
+9:37: Admins can now delete users and, if the admin deletes themself, they
+will be automatically logged out. Added a new variable to login_log to reflect
+that. The next change I will make is to hide this functionallity from the
+admin on the webpage. That won't stop them from going to the URL to do it, but
+eh.

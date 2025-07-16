@@ -166,6 +166,7 @@ def admin_swap_admin_status(user_id=None):
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True)
             admin_swap_stat(user_id)
+            admin_swap_log(request.remote_addr, get_user(), swappedTo=user_check_admin(get_user())[1])
             if str(current_user.id) != user_id:
                 return redirect("/admin/management/users/")
             else:
@@ -173,8 +174,10 @@ def admin_swap_admin_status(user_id=None):
         else:
             access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
             abort(404)
+            admin_swap_log(request.remote_addr, get_user(), failed=True)
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
+        admin_swap_log(request.remote_addr, get_user(), failed=True)
         abort(404)
 #Swap Mod Status
 @app.route("/admin/management/users/swap_mod/user_id=<user_id>")
@@ -183,12 +186,34 @@ def admin_swap_mod_status(user_id=None):
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True)
             admin_swap_stat(user_id, swap_mod=True)
+            admin_swap_log(request.remote_addr, get_user(), swappedTo=user_check_admin(get_user())[0], isMod=True)
             return redirect("/admin/management/users/")
         else:
             access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
+            admin_swap_log(request.remote_addr, get_user(), failed=True, isMod=True)
             abort(404)
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
+        admin_swap_log(request.remote_addr, get_user(), failed=True, isMod=True)
+        abort(404)
+#Delete User
+@app.route("/admin/management/users/delete/user_id=<user_id>")
+def admin_user_delete(user_id):
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+            user_delete(user_id)
+            if user_id == current_user.id:
+                login_log(request.remote_addr, get_user(), logout=True, admin=True, auto=True)
+                logout_user()
+                return redirect("/")
+            else:
+                return redirect("/admin/management/users/")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/useer_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/users/delete/useer_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
         abort(404)
 
 #Error Pages

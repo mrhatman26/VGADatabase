@@ -134,3 +134,16 @@ def user_add_new(new_userdata, set_mod=False, set_admin=False):
     except Exception as e:
         print(str(e), flush=True)
         return False
+    
+def user_delete(user_id):
+    #This will need expanding later to include deletion of links user has.
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("DELETE FROM table_users WHERE user_id = %s", (str(user_id),))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
