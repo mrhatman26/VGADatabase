@@ -6,10 +6,11 @@ from misc import pause, get_new_table_id, get_time
 
 deployed = False
 
-def admin_add_scraped_data(game_dict):
+def admin_add_scraped_data(game_dict, user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
+        meh = ""
         #Add game data to database
         game_id = get_new_table_id(cursor, "table_games")
         release_date = game_dict["game_release_year"] + "/" + game_dict["game_release_month"] + "/" + game_dict["game_release_day"]
@@ -24,12 +25,16 @@ def admin_add_scraped_data(game_dict):
                 database.commit()
             else:
                 developer_id = developer_get_id(developer)
-            if developer_id is not None:
-                pass
+            if developer_id is not None: #Add link between developer and game (and user)
+                link_id = get_new_table_id(cursor, "link_game_developer")
+                cursor.execute("INSERT INTO link_game_developer VALUES(%s, %s, %s, %s, %s, %s, %s, %s)", (str(link_id), str(developer_id), str(game_id), str(user_id), True, str(get_time(no_brackets=True)).strip(), True, str(get_time(no_brackets=True)).strip(),))
+                database.commit()
         cursor.close()
         database.close()
         return True
-    except:
+    except Exception as e:
+        print(e)
+        pause()
         return False
     
 #Users

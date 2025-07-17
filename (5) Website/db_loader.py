@@ -32,7 +32,7 @@ def read_scraped_data(user_id):
                     "game_release_day": row[12],
                     "link_user_id": user_id
                 }#Price is not included here because this website is a database of games, not a storefront.
-                admin_add_scraped_data(game_dict)
+                admin_add_scraped_data(game_dict, user_id)
             row_counter += 1
             print(str(row_counter + 1) + "/" + str(row_length) + " rows loaded from scraped_steam_gamescraped_steam_game_data.csv", flush=True, end="\r")
     scraped_data.close()

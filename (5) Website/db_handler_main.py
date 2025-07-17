@@ -100,12 +100,12 @@ def developer_check_exists(developer):
 def developer_get_id(developer):
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
-    cursor.execute("SELECT developer_id FROM table_aliases WHERE developer_name = %s AND developer_isPub = 0", (str(developer),))
+    cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = 0", (str(developer),))
     fetch = cursor.fetchall()
     cursor.close()
     database.close()
     if len(fetch) > 0:
-        return fetch[0]
+        return fetch[0][0]
     else:
         return None
     
@@ -122,7 +122,7 @@ def publisher_check_exists(publisher):
     else:
         return False
     
-def developer_get_id(publisher):
+def publisher_get_id(publisher):
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
     cursor.execute("SELECT developer_id FROM table_aliases WHERE developer_name = %s AND developer_isPub = 1", (str(publisher),))
