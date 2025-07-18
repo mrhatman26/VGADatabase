@@ -5,31 +5,42 @@ from global_vars import deployed
 
 #Games 
 def game_get_id(game, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT game_id FROM table_games WHERE game_title = %s", (str(game),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return fetch[0][0]
-    else:
+    try:
+        if cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+        cursor.execute("SELECT game_id FROM table_games WHERE game_title = %s", (str(game),))
+        fetch = cursor.fetchall()
+        if cursor is None:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
         return None
     
 def game_get_all(gid=None):
+    games = []
     if gid is None:
         gid = 0
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
-    cursor.execute("SELECT game_title, game_aka, game_desc, game_rdate, game_rstate, game_url FROM table_games ORDER BY game_id DESC LIMIT %s, 11" (str(gid),))
+    cursor.execute("SELECT * FROM table_games ORDER BY game_id DESC LIMIT %s, 11", (gid,))
     for game in cursor.fetchall():
-        print(game)
-        print(type(game))
-        pause()
+        games.append({
+            "game_id": game[0],
+            "game_title": game[1],
+            "game_aka": game[2],
+            "game_desc": game[3],
+            "game_rdate": game[4],
+            "game_rstate": game[5],
+            "game_url": game[6]
+        })
     cursor.close()
     database.close()
+    return games
 
 #Tags
 def tag_check_exists(tag, cursor=None):

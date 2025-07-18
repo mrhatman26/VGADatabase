@@ -39,7 +39,7 @@ def get_user():
 
 '''General Routes'''
 #Home/Index
-@app.route('/')
+@app.route("/")
 def home():
     access_log(request.remote_addr, get_user(), "/ (Home)")
     return render_template('home.html', page_name="Home", c_version=version)
@@ -49,8 +49,8 @@ def home():
 @app.route("/games/gid=<gid>")
 def game_list(gid=None):
     games = game_get_all()
-    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", games_list=games)
-    return redirect("/")
+    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games)
 
 '''User Routes'''
 #Login

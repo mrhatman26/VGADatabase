@@ -15,6 +15,7 @@
         <nav>
             <ul>
                 <a href="{{ url_for('home') }}" class="nav_link"><li>About</li></a>
+                <a href="{{ url_for('game_list') }}" class="nav_link"><li>Games</li></a>
                 {% if current_user.is_authenticated %}
                     {% if current_user.is_admin %}
                         <a href="{{ url_for('admin_main') }}" class="nav_link"><li>Admin</li></a>

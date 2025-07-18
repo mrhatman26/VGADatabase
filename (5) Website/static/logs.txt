@@ -160,3 +160,7 @@ No exception information available.
 [2025.07.18 at 15:02:16] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
 [2025.07.18 at 15:02:17] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
 [2025.07.18 at 15:20:43] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.18 at 16:49:59]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.18 at 16:59:13]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.18 at 16:59:14]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=None (Games List)
+[2025.07.18 at 17:01:00]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=None (Games List)

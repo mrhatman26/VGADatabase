@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                <h3 id="page_header">Welcome!</h3>
+                <div id="home_image">
+                        <img src="{{ url_for('static', filename='construction.jpg') }}">                        
+                </div>
+                <div id="page_mainbody_home">
+                        {% for game in game_list %}
+                                <div>
+                                        <p>Title: {{ game.game_title }}</p>
+                                        <p>Alternate Titles: {{ game.game_aka }}</p>
+                                        <p>Description: {{ game.game_desc }}</p>
+                                        <p>Release Date: {{ game.game_rdate }}</p>
+                                        <p>Release State: {{ game.game_rstate }}</p>
+                                        <p>Steam URL: <a href="{{ game.game_url }}">{{ game.game_url }}</a></p>
+                                </div>
+                                <br>
+                        {% endfor %}
+                </div>
+        </div>
+</div>
+{% endblock %}

@@ -54,3 +54,14 @@ little time this saves, eh?
 15:21: Took well over an hour to implement that. But it works. Games are now
 loaded a lot faster. Still takes a while, but it's better than it was. Going
 to have an hour long break now.
+
+17:04: Added a new page that shows all of the games... Sort of. I want to have
+it so that each page only shows a few games at once so as to not overload the
+server. Turns out, sorting like that is easy... For now. Sorting by game_id
+gives the most recently added game. I want the option to sort by other stuff
+so I am experimenting with that and I found that MySQL has a DATE command
+which tries to convert the given data or columns to dates which can then be
+sorted. However, it shows all of the unreleased games in my data as the most
+recent so I will need a way to filter those. Anyway, got some people coming to
+visit our house so I won't be doing much for the next hour. I guess I'll take
+an undeserved break?
