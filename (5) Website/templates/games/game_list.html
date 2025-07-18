@@ -7,17 +7,26 @@
                         <img src="{{ url_for('static', filename='construction.jpg') }}">                        
                 </div>
                 <div id="page_mainbody_home">
-                        {% for game in game_list %}
-                                <div>
-                                        <p>Title: {{ game.game_title }}</p>
-                                        <p>Alternate Titles: {{ game.game_aka }}</p>
-                                        <p>Description: {{ game.game_desc }}</p>
-                                        <p>Release Date: {{ game.game_rdate }}</p>
-                                        <p>Release State: {{ game.game_rstate }}</p>
-                                        <p>Steam URL: <a href="{{ game.game_url }}">{{ game.game_url }}</a></p>
-                                </div>
-                                <br>
-                        {% endfor %}
+                        {% if game_list|length > 0 %}
+                                {% for game in game_list %}
+                                        <div class="game_box">
+                                                <p>ID: {{ game.game_id }}</p>
+                                                <p>Title: {{ game.game_title }}</p>
+                                                <p>Alternate Titles: {{ game.game_aka }}</p>
+                                                <p>Description: {{ game.game_desc }}</p>
+                                                <p>Release Date: {{ game.game_rdate }}</p>
+                                                <p>Release State: {{ game.game_rstate }}</p>
+                                                <p>Steam URL: <a href="{{ game.game_url }}">{{ game.game_url }}</a></p>
+                                        </div>
+                                        <br>
+                                {% endfor %}
+                                {% for no in range(no_pages) %}
+                                        {% set new_gid = no * no_results %}
+                                        <p style="display: inline;"><a href="{{ url_for('game_list', gid=new_gid) }}">{{ no + 1 }}</a></p>
+                                {% endfor %}
+                        {% else %}
+                                <p>No games match your search!</p>
+                        {% endif %}
                 </div>
         </div>
 </div>

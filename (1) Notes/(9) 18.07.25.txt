@@ -65,3 +65,11 @@ sorted. However, it shows all of the unreleased games in my data as the most
 recent so I will need a way to filter those. Anyway, got some people coming to
 visit our house so I won't be doing much for the next hour. I guess I'll take
 an undeserved break?
+
+21:18: Okay, those viewings took far longer than I thought they would...
+Anyway, I managed to write code to implement pagination to the games list
+page. It's so complicated it needed regex. Regex sucks and the creator of it
+should be ashamed. Only half joking there. Anyway, I am going to try and
+make the pagination look better because it sucks; though it does work. I'm
+thinking of having it show something like... < Previous (5/945) Next >
+Yeah, something like that.

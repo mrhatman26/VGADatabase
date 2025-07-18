@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector, re
 from db_config import *
 from misc import get_new_table_id, pause
 from global_vars import deployed
@@ -21,7 +21,7 @@ def game_get_id(game, cursor=None):
     except:
         return None
     
-def game_get_all(gid=None):
+def game_get_all(gid=None, no_pages=10):
     games = []
     if gid is None:
         gid = 0
@@ -38,9 +38,25 @@ def game_get_all(gid=None):
             "game_rstate": game[5],
             "game_url": game[6]
         })
+    no_pages = get_no_game_pages(cursor.statement, cursor, gid, no_pages)
     cursor.close()
     database.close()
-    return games
+    return (games, no_pages)
+
+def get_no_game_pages(command, cursor, gid, no_pages=10):
+    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+    command = command.replace(str(gid) + ", ", "0 ,")
+    cursor.execute(command)
+    fetch = cursor.fetchall()[0][0]
+    no_pages =  round(fetch / no_pages)
+    remander = fetch % no_pages
+    if remander > 0:
+        while True:
+            remander -= 10
+            no_pages += 1
+            if remander < 1:
+                break
+    return no_pages
 
 #Tags
 def tag_check_exists(tag, cursor=None):

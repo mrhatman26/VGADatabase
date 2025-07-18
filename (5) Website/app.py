@@ -47,10 +47,16 @@ def home():
 #Game List
 @app.route("/games/")
 @app.route("/games/gid=<gid>")
-def game_list(gid=None):
-    games = game_get_all()
-    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
-    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games)
+def game_list(gid=0):
+    #try:
+        games = game_get_all(int(gid))
+        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
+        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=10)
+    #except Exception as e:
+    #    print(e, flush=True)
+    #    games = game_get_all(0)
+    #    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
+    #    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=10)
 
 '''User Routes'''
 #Login
