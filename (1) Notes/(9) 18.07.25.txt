@@ -73,3 +73,12 @@ should be ashamed. Only half joking there. Anyway, I am going to try and
 make the pagination look better because it sucks; though it does work. I'm
 thinking of having it show something like... < Previous (5/945) Next >
 Yeah, something like that.
+
+22:33: I changed it to follow that and it took a lot longer than I thought. It
+has now gone dark. It's only July and yet it feels like summer is already
+ending :(
+Anyway, it took so long because I suck at maths. I substituted the maths for a
+while loop in misc.py in the function called "get_current_page". Mathematics,
+why not make things more simple? Is it because you don't want 'plebians'
+getting in on your thing? Anyway, that's all for today, I think I'm at that
+point of being tired where I'm kind of happy drunk, hahaha...

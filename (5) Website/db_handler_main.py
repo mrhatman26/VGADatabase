@@ -28,7 +28,8 @@ def game_get_all(gid=None, no_pages=10):
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
     cursor.execute("SELECT * FROM table_games ORDER BY game_id DESC LIMIT %s, 11", (gid,))
-    for game in cursor.fetchall():
+    fetch = cursor.fetchall()
+    for game in fetch:
         games.append({
             "game_id": game[0],
             "game_title": game[1],
@@ -38,10 +39,12 @@ def game_get_all(gid=None, no_pages=10):
             "game_rstate": game[5],
             "game_url": game[6]
         })
-    no_pages = get_no_game_pages(cursor.statement, cursor, gid, no_pages)
+    statement = cursor.statement
+    no_pages = get_no_game_pages(statement, cursor, gid, no_pages)
+    total_games = get_total_games(cursor.statement, cursor)
     cursor.close()
     database.close()
-    return (games, no_pages)
+    return (games, no_pages, total_games)
 
 def get_no_game_pages(command, cursor, gid, no_pages=10):
     command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
@@ -57,6 +60,12 @@ def get_no_game_pages(command, cursor, gid, no_pages=10):
             if remander < 1:
                 break
     return no_pages
+
+def get_total_games(command, cursor):
+    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+    command = command.split(" ORDER")[0]
+    cursor.execute(command)
+    return cursor.fetchall()[0][0]
 
 #Tags
 def tag_check_exists(tag, cursor=None):

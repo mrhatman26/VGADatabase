@@ -20,10 +20,21 @@
                                         </div>
                                         <br>
                                 {% endfor %}
-                                {% for no in range(no_pages) %}
-                                        {% set new_gid = no * no_results %}
-                                        <p style="display: inline;"><a href="{{ url_for('game_list', gid=new_gid) }}">{{ no + 1 }}</a></p>
-                                {% endfor %}
+                                {% set previous_gid = gid - no_results %}
+                                {% if previous_gid < 0 %}
+                                        {% set previous_gid = 0 %}
+                                {% endif %}
+                                {% set next_gid = gid + no_results %}
+                                {% if next_gid > total_results - 1 %}
+                                        {% set next_gid = total_results - 1 %}
+                                {% endif %}
+                                {% if previous_gid > 0 and next_gid < total_results - 1 %}
+                                        <p><a href="{{ url_for('game_list', gid=0) }}"><< First</a> <a href="{{ url_for('game_list', gid=previous_gid) }}">< Previous</a> ({{ current_page + 1 }}/{{ no_pages }}) <a href="{{ url_for('game_list', gid=next_gid) }}">Next ></a> <a href="{{ url_for('game_list', gid=total_results - 10) }}">Last >></a></p>
+                                {% elif previous_gid == 0 %}
+                                        <p>({{ current_page + 1 }}/{{ no_pages }}) <a href="{{ url_for('game_list', gid=next_gid) }}">Next ></a> <a href="{{ url_for('game_list', gid=total_results - 10) }}">Last >></p>
+                                {% else %}
+                                        <p><a href="{{ url_for('game_list', gid=0) }}"><< First</a> <a href="{{ url_for('game_list', gid=previous_gid) }}">< Previous</a> ({{ current_page + 1 }}/{{ no_pages }})</p>
+                                {% endif %}
                         {% else %}
                                 <p>No games match your search!</p>
                         {% endif %}

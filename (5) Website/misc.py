@@ -16,3 +16,17 @@ def get_time(no_brackets=False):
         return str("\n[" + current_time.strftime("%Y.%m.%d at %H:%M:%S") + "]")
     else:
         return str(current_time.strftime("%Y.%m.%d at %H:%M:%S"))
+    
+def get_current_page(gid, no_results=10):
+    current_page = 0
+    while True:
+        if gid > 0:
+            if gid >= no_results:
+                current_page += 1
+                gid -= 10
+            else:
+                current_page += 1
+                break
+        else:
+            return 0
+    return current_page
