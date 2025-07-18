@@ -124,9 +124,8 @@ def user_add_new(new_userdata, set_mod=False, set_admin=False):
             set_mod = True
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        new_userdata["id"] = get_new_table_id(cursor, "table_users")
         new_userdata["user_password"] = string_hash(new_userdata["user_password"])
-        cursor.execute("INSERT INTO table_users VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (str(new_userdata["id"]), new_userdata["user_name"], new_userdata["user_password"], new_userdata["user_email"], None, None, set_admin, set_mod,))
+        cursor.execute("INSERT INTO table_users (user_name, user_pass, user_email, user_desc, user_pfp, user_isAdmin, user_isMod) VALUES (%s, %s, %s, %s, %s, %s, %s)", (new_userdata["user_name"], new_userdata["user_password"], new_userdata["user_email"], None, None, set_admin, set_mod,))
         database.commit()
         cursor.close()
         database.close()

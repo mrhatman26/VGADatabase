@@ -1,0 +1,56 @@
+10:08: Tried changing the code when loading developers and publishers to NOT
+use dictionaries and to use lists instead... It's SLOWER! How!
+I think I'll put it back to how it used to be where the developers and
+publishers were their own thing and to load them seperately... But the code
+will look terrible, yay.
+
+10:22: Changed it back and... It's just as slow... I'm going to put it back to
+the list thing because that makes the code more readable.
+
+11:07: While writing code to load user tags, I realised that one value in most
+of the link tables is entirely pointless. It's the one that goes
+"link_created" and is a boolean. Why I added it, I don't know since the link
+existing makes this pointless? So I've removed it from all the link tables.
+Let's see what errors happen now that I've done that, eh?
+
+11:24: Okay, implemented code to load user tags. And now I'm pretty sure it'll
+take an hour to run. YAY. I'll see you all when that happens or, more likely,
+when there's an error.
+
+11:58: Stopped it at 11:45 and it had only done 1500 games... Oh boy. So, I
+added the final thing to load which is genres. I'm going to have it load that
+and go make some lunch. When I get back, it probably won't be done or will
+have an error. Yay.
+
+12:38: I added a limiter for testing purposes. If it is not None, then the
+code will only load the requested number of games from the CSV to save me
+time. I'm probably going to have to let the full code run through the night...
+
+12:53: Made some small changes to try and increase the speed of loading. The
+database connection (and cursor) aren't closed until the loading is finished
+and the "game_dict" is created before the first for loop so that it doesn't
+have to be recreated every loop. 
+
+13:11: I found a new library called "py-spy". This library runs the code and
+measures how much time is spent on each task/line. Using this, it turned out
+all of the database connections I was making through functions like
+"developer_get_id" was taking the most time. So, I changed those so that, if
+they are provided with a database cursor, they use that instead of creating a
+new one. This has sped up the loading a lot, but it still is taking about two
+to three minutes to load 1000 games. So I will see what else is taking up the
+time and try to reduce that.
+
+13:19: Unfortunately, it would seem that this is as fast as I can make the
+loader. The thing that is taking the most time is mysql.connector's own
+"get_rows" function/method... And I kind of need that for essential things
+like getting new column IDs...
+
+13:53: I might have found a way to reduce the amount of time spent on getting
+data from the database. The majority of the data requests are for getting new
+IDs. But! MySQL has an auto increment feature so I don't have to do that. It
+does make insert commands slightly different, but that's fine. Let's see how
+little time this saves, eh?
+
+15:21: Took well over an hour to implement that. But it works. Games are now
+loaded a lot faster. Still takes a while, but it's better than it was. Going
+to have an hour long break now.

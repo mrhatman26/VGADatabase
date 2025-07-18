@@ -3,3 +3,8 @@ Forgot to write notes about developing it, lol. Anyway, now for publishers.
 
 21:07: Oh wait, I forgot that users need to be linked to all of these things
 too. Oops...
+
+22:22: Okay, I got it to add the publishers by combining them with the
+developers, but a concern arises: Nearly ten thousand games, it already takes
+a long time to load them... It's probably going to get worse with more code...
+:/

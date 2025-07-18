@@ -7,14 +7,15 @@ from db_loader import *
 from action_logger import *
 from version_handler import *
 from user import User
+from global_vars import deployed
 #from user import User
 
 '''Server Vars'''
 version = update_version()
-print(version, flush=True)
+print("Version is now:", version, flush=True)
+admin_reset_increment()
 app = Flask(__name__) #Create the flask application
 app.secret_key = "SeeThatMountain?YouCanClimbItJERSAIKGYHJIOERHGJ"
-deployed = False
 
 '''Login Manager'''
 login_manager = LoginManager()
@@ -42,6 +43,14 @@ def get_user():
 def home():
     access_log(request.remote_addr, get_user(), "/ (Home)")
     return render_template('home.html', page_name="Home", c_version=version)
+
+#Game List
+@app.route("/games/")
+@app.route("/games/gid=<gid>")
+def game_list(gid=None):
+    games = game_get_all()
+    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", games_list=games)
+    return redirect("/")
 
 '''User Routes'''
 #Login
@@ -236,7 +245,7 @@ def admin_load_csv():
     if current_user.is_authenticated:
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True)
-            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management") #Finish this
+            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management", c_version=version) #Finish this
         else:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
             abort(404)
