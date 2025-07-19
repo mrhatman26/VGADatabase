@@ -46,6 +46,32 @@ def game_get_all(gid=None, no_pages=10):
     database.close()
     return (games, no_pages, total_games)
 
+def game_get_single(game_id=0):
+    #try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT * FROM table_games WHERE game_id = %s", (game_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            fetch = fetch[0]
+            game_data = {
+                "game_id": fetch[0],
+                "game_title": fetch[1],
+                "game_aka": fetch[2],
+                "game_desc": fetch[3],
+                "game_rdate": fetch[4],
+                "game_rstate": fetch[5],
+                "game_url": fetch[6]
+            }
+            return game_data
+        else:
+            return None
+    #except:
+    #    print("oh")
+    #    return None
+
 def get_no_game_pages(command, cursor, gid, no_pages=10):
     command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
     command = command.replace(str(gid) + ", ", "0 ,")

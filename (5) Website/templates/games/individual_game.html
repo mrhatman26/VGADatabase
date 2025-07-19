@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                {% if game_data is not none %}   
+                    <h3 id="page_header">{{ game_data.game_title }}</h3>
+                {% else %}
+                    <h3 id="page_header">Dinner's Ready!</h3>
+                {% endif %}
+                <div id="page_mainbody_home">
+                        {% if game_data is not none %}                                
+                            <p>ID: {{ game_data.game_id }}</p>
+                            <p>Alternate Titles: {{ game_data.game_aka }}</p>
+                            <p>Description: {{ game_data.game_desc }}</p>
+                            <p>Release Date: {{ game_data.game_rdate }}</p>
+                            <p>Release State: {{ game_data.game_rstate }}</p>
+                            <p>Steam URL: <a href="{{ game_data.game_url }}">{{ game_data.game_url }}</a></p>
+                        {% else %}
+                            <p>No game data available! Someone should fire the guys that built those robots and build better ones!</p>
+                            <p>(What relation does no game data and robots have in common? If I think of something, I'll be sure to write it here!</p>
+                        {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}

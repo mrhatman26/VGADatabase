@@ -19,15 +19,17 @@
                                         <p><a href="{{ url_for('game_list', gid=0) }}"><< First</a> <a href="{{ url_for('game_list', gid=previous_gid) }}">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                                 {% for game in game_list %}
-                                        <div class="game_box">
-                                                <p>ID: {{ game.game_id }}</p>
-                                                <p>Title: {{ game.game_title }}</p>
-                                                <p>Alternate Titles: {{ game.game_aka }}</p>
-                                                <p>Description: {{ game.game_desc }}</p>
-                                                <p>Release Date: {{ game.game_rdate }}</p>
-                                                <p>Release State: {{ game.game_rstate }}</p>
-                                                <p>Steam URL: <a href="{{ game.game_url }}">{{ game.game_url }}</a></p>
-                                        </div>
+                                        <a href="{{ url_for('game_page', game_id=game.game_id) }}">
+                                                <div class="game_box">                                                
+                                                        {#<p>ID: {{ game.game_id }}</p>#}
+                                                        <p>Title: {{ game.game_title }}</p>
+                                                        {#<p>Alternate Titles: {{ game.game_aka }}</p>#}
+                                                        {#<p>Description: {{ game.game_desc }}</p>#}
+                                                        <p>Release Date: {{ game.game_rdate }}</p>
+                                                        {#<p>Release State: {{ game.game_rstate }}</p>#}
+                                                        {#<p>Steam URL: <a href="{{ game.game_url }}">{{ game.game_url }}</a></p>#}
+                                                </div>
+                                        </a>
                                         <br>
                                 {% endfor %}
                                 {% if previous_gid > 0 and next_gid < total_results - 1 %}

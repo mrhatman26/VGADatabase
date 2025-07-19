@@ -7,3 +7,8 @@ BEFORE the while loop and now it works yay.
 It is going to be a busy day today, a bunch of stuff happening this morning
 and then I've got work. So this will probably be the only change I make before
 I get home from work...
+
+22:11: So, things were busier than I thought they'd be and I didn't get a
+chace to start working on this again until about 8pm... I implemented a game's
+individual page, but for now it just shows the basic stuff. I need to get it
+to show tags and such.

@@ -3,6 +3,7 @@ from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
 from db_handler_users import *
 from db_handler_admin import *
+from db_handler_main import *
 from db_loader import *
 from action_logger import *
 from version_handler import *
@@ -45,6 +46,7 @@ def home():
     access_log(request.remote_addr, get_user(), "/ (Home)")
     return render_template('home.html', page_name="Home", c_version=version)
 
+#Games
 #Game List
 @app.route("/games/")
 @app.route("/games/gid=<gid>")
@@ -52,14 +54,31 @@ def game_list(gid=0, no_results=10):
     try:
         gid = int(gid)
         games = game_get_all(gid)
-        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
         current_page = get_current_page(gid, no_results)
+        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
     except Exception as e:
         games = game_get_all(0)
         access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", failed=True, default=True)
         current_page = get_current_page(gid, no_results)
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
+    
+#Individual Game Page
+@app.route("/games/game_id=<game_id>")
+def game_page(game_id=0):
+    #try:
+        game_data = game_get_single(game_id)
+        game_title = "No Game?"
+        if game_data is not None:
+            game_title = game_data["game_title"]
+        access_log(request.remote_addr, get_user(), "games/game_id=" + str(game_id))
+        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data)
+    #except Exception as e:
+    #    print(e, flush=True)
+    #    access_log(request.remote_addr, get_user(), "games/game_id=" + str(game_id), failed=True)
+    #    abort(404)
+
+
 
 '''User Routes'''
 #Login
