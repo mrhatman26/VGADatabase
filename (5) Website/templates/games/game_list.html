@@ -6,17 +6,14 @@
                 <div id="page_mainbody_home">
                         {% if game_list|length > 0 %}
                                 {% set previous_gid = gid - no_results %}
-                                {% if previous_gid < 0 %}
-                                        {% set previous_gid = 0 %}
-                                {% endif %}
                                 {% set next_gid = gid + no_results %}
                                 {% if next_gid > total_results - 1 %}
                                         {% set next_gid = total_results - 1 %}
                                 {% endif %}
                                 {% set current_page = current_page + 1 %}
-                                {% if previous_gid > 0 and next_gid < total_results - 1 %}
+                                {% if previous_gid >= 0 and next_gid < total_results - 1 %}
                                         <p><a href="{{ url_for('game_list', gid=0) }}"><< First</a> <a href="{{ url_for('game_list', gid=previous_gid) }}">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', gid=next_gid) }}">Next ></a> <a href="{{ url_for('game_list', gid=total_results - 10) }}">Last >></a></p>
-                                {% elif previous_gid == 0 %}
+                                {% elif previous_gid < 0 %}
                                         <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', gid=next_gid) }}">Next ></a> <a href="{{ url_for('game_list', gid=total_results - 10) }}">Last >></a></p>
                                 {% else %}
                                         <p><a href="{{ url_for('game_list', gid=0) }}"><< First</a> <a href="{{ url_for('game_list', gid=previous_gid) }}">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
