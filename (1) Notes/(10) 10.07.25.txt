@@ -1,0 +1,9 @@
+8:47: Wsa going to add a page to add new games, but I got sidetracked by
+noticing that the new pagination was still broken. The current page was stuck
+at showing 1. Turns out, my code to determine the current page in misc.py was
+subtracting the GID as it was supposed to, then noticing that it was below
+zero and returning 0 instead of the current page number. I put that part
+BEFORE the while loop and now it works yay. 
+It is going to be a busy day today, a bunch of stuff happening this morning
+and then I've got work. So this will probably be the only change I make before
+I get home from work...

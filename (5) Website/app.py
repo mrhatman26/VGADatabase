@@ -49,17 +49,17 @@ def home():
 @app.route("/games/")
 @app.route("/games/gid=<gid>")
 def game_list(gid=0, no_results=10):
-    #try:
+    try:
         gid = int(gid)
         games = game_get_all(gid)
         access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
         current_page = get_current_page(gid, no_results)
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
-    #except Exception as e:
-    #    print(e, flush=True)
-    #    games = game_get_all(0)
-    #    access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
-    #    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=10, gid=gid)
+    except Exception as e:
+        games = game_get_all(0)
+        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", failed=True, default=True)
+        current_page = get_current_page(gid, no_results)
+        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
 
 '''User Routes'''
 #Login

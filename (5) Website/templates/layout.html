@@ -9,7 +9,6 @@
     <body>
         <div id="title">
             <h1>VGDatabase</h1>
-            <h1>{{ current_user.username }}</h1>
             <h6>Version: {{ c_version }}</h6>
         </div>
         <nav>
@@ -17,6 +16,8 @@
                 <a href="{{ url_for('home') }}" class="nav_link"><li>About</li></a>
                 <a href="{{ url_for('game_list') }}" class="nav_link"><li>Games</li></a>
                 {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('home') }}" class="nav_link"><li>Add Game</li></a>
+                    <a href="{{ url_for('home') }}" class="nav_link"><li>{{ current_user.username }}</li></a>
                     {% if current_user.is_admin %}
                         <a href="{{ url_for('admin_main') }}" class="nav_link"><li>Admin</li></a>
                     {% endif %}

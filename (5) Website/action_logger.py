@@ -1,19 +1,25 @@
 from misc import get_time
 
 #Access and errors
-def access_log(ip, username, wwAccessed, failed=False, admin=False):
+def access_log(ip, username, wwAccessed, failed=False, admin=False, default=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
     if admin is False:
         if failed is False:
             text = text + ": " + ip + " (User: " + username + ") successfully accessed " + wwAccessed
         else:
-            text = text + ": " + ip + " (User: " + username + ") FAILED to accessed " + wwAccessed
+            if default is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to accessed " + wwAccessed
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to accessed " + wwAccessed + " (The default page was returned instead)"
     else:
         if failed is False:
             text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully accessed admin resource " + wwAccessed
         else:
-            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to accessed admin resource" + wwAccessed
+            if default is False:
+                text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to accessed admin resource" + wwAccessed
+            else:
+                text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to accessed admin resource" + wwAccessed + " (The default page was returned instead)"
     log_file.write(text)
     log_file.close()
 

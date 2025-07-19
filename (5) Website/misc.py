@@ -19,14 +19,15 @@ def get_time(no_brackets=False):
     
 def get_current_page(gid, no_results=10):
     current_page = 0
-    while True:
-        if gid > 0:
+    if gid <= 0:
+        return 0
+    else:
+        while True:
             if gid >= no_results:
                 current_page += 1
                 gid -= 10
             else:
-                current_page += 1
+                if gid > 0:
+                    current_page += 1
                 break
-        else:
-            return 0
-    return current_page
+        return current_page
