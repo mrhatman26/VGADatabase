@@ -2,3 +2,6 @@
 or game release state is set to None. Not sure why I did that, but I'm going
 to make it so that if the game games' release date is today or before today,
 then rstate will "Released", else it'll be "unreleased".
+
+11:17: Implemented that. Had to wait for the game data to be reloaded, but it
+worked. Now for a break since it's Sunday.

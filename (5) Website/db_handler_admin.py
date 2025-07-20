@@ -4,12 +4,19 @@ from db_config import *
 from db_handler_main import *
 from db_handler_users import user_check_admin, user_get_username
 from misc import pause, get_new_table_id, get_time
+from datetime import datetime as dt
 
 def admin_add_scraped_data(game_dict, user_id, database, cursor):
     #try:
         #Add game data to database
         release_date = game_dict["game_release_year"] + "/" + game_dict["game_release_month"] + "/" + game_dict["game_release_day"]
-        cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES(%s, %s, %s, %s, %s, %s)", (game_dict["game_title"], None, game_dict["game_description"], release_date, None, game_dict["game_url"]))
+        released = "Unreleased"
+        if game_dict["game_release_year"] != "-1":
+            if dt.strptime(release_date, "%Y/%m/%d")< dt.now():
+                released = "Released"
+        else:
+            released = "Unknown"
+        cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES(%s, %s, %s, %s, %s, %s)", (game_dict["game_title"], None, game_dict["game_description"], release_date, released, game_dict["game_url"]))
         database.commit()
         game_id = game_get_id(game_dict["game_title"])
         #print(game_id)
