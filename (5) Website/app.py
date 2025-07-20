@@ -51,20 +51,20 @@ def home():
 @app.route("/games/")
 @app.route("/games/gid=<gid>")
 def game_list(gid=0, no_results=10):
-    try:
+    #try:
         gid = int(gid)
         games = game_get_all(gid)
         current_page = get_current_page(gid, no_results)
         access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
-    except Exception as e:
-        try:
-            games = game_get_all(0)
-            access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", failed=True, default=True)
-            current_page = get_current_page(gid, no_results)
-            return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
-        except:
-            return render_template("games/game_list.html", page_name="All Games", c_version=version)
+    #except Exception as e:
+    #    try:
+    #        games = game_get_all(0)
+    #        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", failed=True, default=True)
+    #        current_page = get_current_page(gid, no_results)
+    #        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
+    #    except:
+    #        return render_template("games/game_list.html", page_name="All Games", c_version=version)
     
 #Individual Game Page
 @app.route("/games/game_id=<game_id>")
@@ -95,8 +95,28 @@ def game_add_new():
 def game_add_new_validate():
     if current_user.is_authenticated:
         access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)")
+        game_data = request.get_data()
+        game_data = game_data.decode()
+        game_data = ast.literal_eval(game_data)
+        try:
+            if game_check_exists(game_data["game_title"]) is False:
+                if game_create_new(game_data) is True:
+                    new_game_log(request.remote_addr, get_user(), game_data["game_title"])
+                    return "success"
+                else:
+                    new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
+                    return "servererror"
+            else:
+                new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
+                return "gameexists"
+        except Exception as e:
+            new_game_log(request.remote_addr, get_user(), new_game_name=game_data["game_title"], failed=True)
+            error_log(request.remote_addr, get_user(), "There was an error while trying to add a new game", theException=e)
+            return "servererror"
     else:
         access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True, no_auth=True)
+        new_game_log(request.remote_addr, get_user(), failed=True)
+        return "servererror"
 
 '''User Routes'''
 #Login
@@ -156,8 +176,8 @@ def user_signup_validate():
         access_log(request.remote_addr, get_user(), "/users/signup/validate/ (Signup Validation)")
         userdata = request.get_data()
         userdata = userdata.decode()
+        userdata = ast.literal_eval(userdata)
         try:
-            userdata = ast.literal_eval(userdata)
             if user_check_exists(userdata["user_name"]) is False:
                 if user_add_new(userdata) is True:
                     new_user_log(request.remote_addr, userdata["user_name"])

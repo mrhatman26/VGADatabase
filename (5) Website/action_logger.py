@@ -52,13 +52,16 @@ def error_log(ip, username, wFailed, theException=None, admin=False):
     log_file.close()
 
 #Games
-def new_game_log(ip, username, new_game_name, failed=False):
+def new_game_log(ip, username, new_game_name=None, failed=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
     if failed is False:
         text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully added a new game titled '" + new_game_name + "'"
     else:
-        text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game titled '" + new_game_name + "'"
+        if new_game_name is not None:
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game titled '" + new_game_name + "'"
+        else:
+            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game with an unknown title"
     log_file.write(text)
     log_file.close()
 

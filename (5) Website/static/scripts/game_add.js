@@ -25,23 +25,23 @@ function submitGame(event){
     };
     $.ajax({
         type: "POST",
-        url: "/users/signup/validate",
+        url: "/games/add/validate",
         data: JSON.stringify(signupData),
         success: function(response){
             if (response === "success"){
-                window.location.replace("/users/login");
+                window.location.replace("/games/");
             }
-            else if (response === "userexists"){
+            else if (response === "gameexists"){
                 if (oldErrorCheck() === false){
                     var mainBody = document.getElementById("page_mainbody_home");
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "Game already in use";
+                    errorMessage.innerHTML = "Game already exists";
                     mainBody.appendChild(errorMessage);
                 }
                 else{
-                    errorMessage.innerHTML = "Username already in use";
+                    errorMessage.innerHTML = "Game already exists";
                 }
             }
             else{
@@ -58,6 +58,7 @@ function submitGame(event){
                 }
             }
         }
+    });
 }
 
 gameForm.addEventListener("submit", submitGame);

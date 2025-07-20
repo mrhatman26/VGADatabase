@@ -47,7 +47,7 @@ def game_get_all(gid=None, no_pages=10):
     return (games, no_pages, total_games)
 
 def game_get_single(game_id=0):
-    #try:
+    try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("SELECT * FROM table_games WHERE game_id = %s", (game_id,))
@@ -68,9 +68,32 @@ def game_get_single(game_id=0):
             return game_data
         else:
             return None
-    #except:
-    #    print("oh")
-    #    return None
+    except:
+        return None
+    
+def game_check_exists(game):
+    database = mysql.connector.connect(**get_db_config(deployed))
+    cursor = database.cursor()
+    cursor.execute("SELECT * FROM table_games WHERE game_title = %s", (game,))
+    fetch = cursor.fetchall()
+    cursor.close()
+    database.close()
+    if len(fetch) > 0:
+        return True
+    else:
+        return False
+    
+def game_create_new(game_data):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], None, None))
+        database.commit()
+        return True
+    except Exception as e:
+        print(e)
+        pause()
+        return False
 
 def get_no_game_pages(command, cursor, gid, no_pages=10):
     command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)

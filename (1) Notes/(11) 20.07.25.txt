@@ -20,3 +20,7 @@ the website shows "Unnannounced/Unknown" instead of a release date.
 15:09: Did that, but got a bit distracted finding a way to dump database data
 quickly. I found one, but it only dumps the database's structure in an SQL
 file... Which I already have because I wrote that...
+
+16:01: New games can now be added! But, when there's only one game (because I
+forgot to load the others), the all games page doesn't work. Investigating
+that now...
