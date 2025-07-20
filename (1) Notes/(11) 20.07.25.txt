@@ -24,3 +24,6 @@ file... Which I already have because I wrote that...
 16:01: New games can now be added! But, when there's only one game (because I
 forgot to load the others), the all games page doesn't work. Investigating
 that now...
+
+16:08: Fixed it. But now the pagination is bugging out again. Will fix that
+later, but now I'm having another break.

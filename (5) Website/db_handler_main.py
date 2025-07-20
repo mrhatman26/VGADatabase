@@ -90,9 +90,7 @@ def game_create_new(game_data):
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], None, None))
         database.commit()
         return True
-    except Exception as e:
-        print(e)
-        pause()
+    except:
         return False
 
 def get_no_game_pages(command, cursor, gid, no_pages=10):
@@ -101,7 +99,10 @@ def get_no_game_pages(command, cursor, gid, no_pages=10):
     cursor.execute(command)
     fetch = cursor.fetchall()[0][0]
     no_pages =  round(fetch / no_pages)
-    remander = fetch % no_pages
+    if no_pages < 1 and fetch > 0:
+        remander = fetch
+    else:
+        remander = fetch % no_pages
     if remander > 0:
         while True:
             remander -= 10
