@@ -88,7 +88,7 @@ def game_add_new():
         access_log(request.remote_addr, get_user(), "/games/add/ (Add New Game)")
         return render_template("games/game_add.html", page_name="Add New Game", c_version=version)
     else:
-        access_log(request.remote_addr, get_user(), "/games/add/", failed=True)
+        access_log(request.remote_addr, get_user(), "/games/add/ (Add New Game)", failed=True, no_auth=True)
         return redirect("/users/login/")
 #Validate new game
 @app.route("/games/add/validate", methods=["POST"])
@@ -96,8 +96,7 @@ def game_add_new_validate():
     if current_user.is_authenticated:
         access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)")
     else:
-        access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True)
-
+        access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True, no_auth=True)
 
 '''User Routes'''
 #Login
@@ -197,10 +196,10 @@ def admin_main():
             access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", admin=True)
             return render_template("admin/admin_main.html", page_name="Admin: Main", c_version=version)
         else:
-            access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True)
+            access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True)
+        access_log(request.remote_addr, get_user(), "/admin/ (Admin: Main)", failed=True, admin=True, no_auth=True)
         abort(404)
 
 #User Management
@@ -211,10 +210,10 @@ def admin_user_management():
             access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", admin=True)
             return render_template("admin/admin_user_management.html", page_name="Admin: User Management", c_version=version, userdata=user_get_all())
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/users/ (Admin: User Management)", failed=True, admin=True, no_auth=True)
         abort(404)
 #Swap Admin Status
 @app.route("/admin/management/users/swap_admin/user_id=<user_id>")
@@ -229,11 +228,11 @@ def admin_swap_admin_status(user_id=None):
             else:
                 return redirect("/")
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True, no_auth=True)
             abort(404)
             admin_swap_log(request.remote_addr, get_user(), failed=True)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_admin/user_id=" + user_id + " (Admin: Swap Admin Status)", admin=True, failed=True, no_auth=True)
         admin_swap_log(request.remote_addr, get_user(), failed=True)
         abort(404)
 #Swap Mod Status
@@ -246,11 +245,11 @@ def admin_swap_mod_status(user_id=None):
             admin_swap_log(request.remote_addr, get_user(), swappedTo=user_check_admin(get_user())[0], isMod=True)
             return redirect("/admin/management/users/")
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True, no_auth=True)
             admin_swap_log(request.remote_addr, get_user(), failed=True, isMod=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/users/swap_mod/user_id=" + user_id + " (Admin: Swap Mod Status)", admin=True, failed=True, no_auth=True)
         admin_swap_log(request.remote_addr, get_user(), failed=True, isMod=True)
         abort(404)
 #Delete User
@@ -267,10 +266,10 @@ def admin_user_delete(user_id):
             else:
                 return redirect("/admin/management/users/")
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True, failed=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True, failed=True, no_auth=True)
         abort(404)
 
 #Database Management
@@ -281,10 +280,10 @@ def admin_database_manage():
             access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True)
             return render_template("admin/admin_database_management.html", page_name="Admin: Database Management", c_version=version)
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True, no_auth=True)
         abort(404)
 #Load Data From CSV
 @app.route("/admin/management/database/load_csv/")
@@ -294,10 +293,10 @@ def admin_load_csv():
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True)
             return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management", c_version=version) #Finish this
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True, no_auth=True)
         abort(404)
 #Confirmed
 @app.route("/admin/management/database/load_csv/confirmed/")
@@ -308,10 +307,10 @@ def admin_load_csv_confirmed():
             read_scraped_data(current_user.id)
             return redirect("/admin/")
         else:
-            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True)
+            access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True, no_auth=True)
             abort(404)
     else:
-        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True)
+        access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True, no_auth=True)
         abort(404)
             
 
