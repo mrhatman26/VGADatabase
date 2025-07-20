@@ -18,7 +18,6 @@ a.button_link{
 .button{
     text-decoration: none;
     background-color: white;
-    display: block;
     border: 10px solid white;
     border-radius: 8px;
     cursor: pointer;

@@ -5,3 +5,18 @@ then rstate will "Released", else it'll be "unreleased".
 
 11:17: Implemented that. Had to wait for the game data to be reloaded, but it
 worked. Now for a break since it's Sunday.
+
+14:15: Added the page that allows you to add new games. Though, you need to be
+logged in to access it. Not as admin, but just logged in. Before finishing the
+JavaScript file for it, I am going to redo the database again to make the
+release dates optional because a company might announce a game, but not
+specify when it releases.
+
+14:19: Oh wait, the release date was already optional... Huh.
+Well, I'm going to change the code so that games with the release date of
+"-1/-1/-1" are set to None and change it so that the release date section on
+the website shows "Unnannounced/Unknown" instead of a release date.
+
+15:09: Did that, but got a bit distracted finding a way to dump database data
+quickly. I found one, but it only dumps the database's structure in an SQL
+file... Which I already have because I wrote that...

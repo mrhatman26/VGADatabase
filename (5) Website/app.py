@@ -69,18 +69,34 @@ def game_list(gid=0, no_results=10):
 #Individual Game Page
 @app.route("/games/game_id=<game_id>")
 def game_page(game_id=0):
-    #try:
+    try:
         game_data = game_get_single(game_id)
         game_title = "No Game?"
         if game_data is not None:
             game_title = game_data["game_title"]
-        access_log(request.remote_addr, get_user(), "games/game_id=" + str(game_id))
+        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id))
         return render_template("games/individual_game.html", page_name=game_title, game_data=game_data)
-    #except Exception as e:
-    #    print(e, flush=True)
-    #    access_log(request.remote_addr, get_user(), "games/game_id=" + str(game_id), failed=True)
-    #    abort(404)
+    except Exception as e:
+        print(e, flush=True)
+        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id), failed=True)
+        abort(404)
 
+#Add Game Page
+@app.route("/games/add/")
+def game_add_new():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/games/add/ (Add New Game)")
+        return render_template("games/game_add.html", page_name="Add New Game", c_version=version)
+    else:
+        access_log(request.remote_addr, get_user(), "/games/add/", failed=True)
+        return redirect("/users/login/")
+#Validate new game
+@app.route("/games/add/validate", methods=["POST"])
+def game_add_new_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)")
+    else:
+        access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True)
 
 
 '''User Routes'''

@@ -12,15 +12,16 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         release_date = game_dict["game_release_year"] + "/" + game_dict["game_release_month"] + "/" + game_dict["game_release_day"]
         released = "Unreleased"
         if game_dict["game_release_year"] != "-1":
-            if dt.strptime(release_date, "%Y/%m/%d")< dt.now():
+            if dt.strptime(release_date, "%Y/%m/%d") < dt.now():
                 released = "Released"
+            else:
+                released = "Unreleased"
         else:
-            released = "Unknown"
+            released = None
+            release_date = None
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES(%s, %s, %s, %s, %s, %s)", (game_dict["game_title"], None, game_dict["game_description"], release_date, released, game_dict["game_url"]))
         database.commit()
         game_id = game_get_id(game_dict["game_title"])
-        #print(game_id)
-        #pause()
         database.commit()
         current_time = str(get_time(no_brackets=True))
         #Add developer to database and link to game
