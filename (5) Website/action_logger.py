@@ -51,6 +51,17 @@ def error_log(ip, username, wFailed, theException=None, admin=False):
     log_file.write(text)
     log_file.close()
 
+#Games
+def new_game_log(ip, username, new_game_name, failed=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if failed is False:
+        text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully added a new game titled '" + new_game_name + "'"
+    else:
+        text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game titled '" + new_game_name + "'"
+    log_file.write(text)
+    log_file.close()
+
 #Users
 def new_user_log(ip, newUser, failed=False, admin=False):
     log_file = open("static/logs.txt", "at")
