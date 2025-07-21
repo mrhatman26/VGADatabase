@@ -13,3 +13,18 @@ surprisingly worked first time. I should be happy about that, but as with all
 things that work first time, I am instead suspicious. Why did it work first
 time? I can't have gotten it right; there must be an error that I am somehow
 not seeing. Anyway, that's all for now. Got work AGAIN.
+
+21:54: Oops. I forgot to note what I was doing. Anyway, games can now be
+approved by moderators. The moderators have access to a page similar to admins
+in which they can see what needs to be approved. In the list for each type
+(game, developer, etc.), they can click the link to the item (remember, games
+do not appear in the games list if they have not been approved) and on that
+page, they will be given the option to approve or deny. The approve button
+works, but the deny button currently doesn't. I added three new values to a
+lot of tables which are "denied", "dDate" and "dDesc". The moderator must give
+a reason for their denial is my point here.
+So far, the deny button replaces the approve and deny buttons with a text box
+in which the moderator will give the reason for the denial and two buttons.
+One of those buttons will deny the game while the other currently hides the
+textbox and buttons and goes back to the approve and deny buttons. That's all
+for today.

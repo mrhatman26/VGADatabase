@@ -16,10 +16,12 @@
                             <p>Release State: {{ game_data.game_rstate }}</p>
                             <p>Steam URL: <a href="{{ game_data.game_url }}">{{ game_data.game_url }}</a></p>
                             {% if is_approved == false %}
-                                <p>This game is awaiting approval.</p>
+                                <p id="needs_approval">This game is awaiting approval.</p>
                                 {% if current_user.is_mod %}
-                                    <a href="{{ url_for('mod_approval_games_validate', game_id=game_data.game_id) }}" class="button">Approve</a>
-                                    <a class="button">Deny</a>
+                                    <a href="{{ url_for('mod_approval_games_validate', game_id=game_data.game_id) }}" class="button" id="approve_button">Approve</a>
+                                    <a class="button" id="deny_button">Deny</a>
+                                    <script src="http://code.jquery.com/jquery.min.js"></script>
+                                    <script src=" {{ url_for('static', filename='scripts/game_denial.js') }}"></script>
                                 {% endif %}
                             {% endif %}
                         {% else %}

@@ -148,3 +148,31 @@
 [2025.07.21 at 21:08:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
 [2025.07.21 at 21:08:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
 [2025.07.21 at 21:08:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:23:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.21 at 21:24:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.21 at 21:25:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.21 at 21:25:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.21 at 21:33:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 21:34:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:34:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.21 at 21:35:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.21 at 21:35:22] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully added a new game titled 'Lawn Mower Sim 5000'
+[2025.07.21 at 21:35:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 21:35:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.21 at 21:35:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 21:35:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.21 at 21:36:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.21 at 21:38:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.21 at 21:46:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:46:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:47:06]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:47:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:48:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:48:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:48:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:48:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:48:57]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:51:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:52:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:53:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.21 at 21:53:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
