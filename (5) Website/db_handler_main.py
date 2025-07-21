@@ -98,6 +98,27 @@ def game_create_new(game_data, user_id):
         return True
     except:
         return False
+    
+def game_get_unapproved():
+    try:
+        games = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_games.game_id, table_games.game_title, table_games.game_rdate FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 0")
+        fetch = cursor.fetchall()
+        for game in fetch:
+            games.append({
+                "game_id": game[0],
+                "game_title": game[1],
+                "game_rdate": game[2],
+            })
+        cursor.close()
+        database.close()
+        return games
+    except Exception as e:
+        print(e)
+        pause()
+        return None
 
 def get_no_game_pages(command, cursor, gid, no_pages=10):
     command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)

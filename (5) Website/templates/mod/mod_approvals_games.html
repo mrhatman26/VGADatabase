@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                <h3 id="page_header">Admin: User Management</h3>
+                <div id="page_mainbody_home">
+                    {% if game_data is not none and game_data|length > 0 %}
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Release Date</th>
+                                <th>Link</th>
+                            </tr>
+                            {% for game in game_data %}
+                                <tr>
+                                    <td>{{ game.game_id }}</td>
+                                    <td>{{ game.game_title }}</td>
+                                    <td>{{ game.game_rdate }}</td>
+                                    <td style="border: 0px;"><a href="{{ url_for('game_page', game_id=game.game_id) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">→</p></a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Release Date</th>
+                                <th>Approvals</th>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}

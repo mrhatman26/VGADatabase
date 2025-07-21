@@ -79,3 +79,11 @@
 [2025.07.21 at 18:37:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
 [2025.07.21 at 18:37:54]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
 [2025.07.21 at 18:37:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.21 at 19:00:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.21 at 19:00:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:01:15]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:02:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:02:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:03:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:03:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.21 at 19:03:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445

@@ -221,6 +221,20 @@ def mod_main():
     else:
         access_log(request.remote_addr, get_user(), "/mod/ (Mod: Main)", failed=True)
         abort(404)
+
+#Game Approvals
+@app.route("/mod/approvals/games/")
+def mod_approval_games():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            games = game_get_unapproved()
+            access_log(request.remote_addr, get_user(), "/mod/approvals/games/ (Mod: Game Approvals)")
+            return render_template("mod/mod_approvals_games.html", page_name="Mod: Game Approvals", c_version=version, game_data=games)
+        else:
+            abort(404)
+    else:
+        abort(40)
+
     
 '''Admin Routes'''
 #Main
