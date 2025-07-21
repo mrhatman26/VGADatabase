@@ -22,7 +22,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         current_time = str(get_time(no_brackets=True))
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES(%s, %s, %s, %s, %s, %s)", (game_dict["game_title"], None, game_dict["game_description"], release_date, released, game_dict["game_url"]))
         database.commit()
-        cursor.execute("INSERT INTO link_game_user (game_id, user_id, game_cDate, game_link_approved, game_aDate) VALUES (%s, %s, %s, %s, %s)", (game_get_id(game_dict["game_title"]), user_id, current_time, True, current_time,))
+        cursor.execute("INSERT INTO link_game_user (game_id, user_id, game_cDate, game_link_approved, game_aDate, game_denied) VALUES (%s, %s, %s, %s, %s, %s)", (game_get_id(game_dict["game_title"]), user_id, current_time, True, current_time, False,))
         database.commit()
         game_id = game_get_id(game_dict["game_title"])
         database.commit()

@@ -4,6 +4,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user
 from db_handler_users import *
 from db_handler_admin import *
 from db_handler_main import *
+from db_handler_links import *
 from db_loader import *
 from action_logger import *
 from version_handler import *
@@ -75,7 +76,8 @@ def game_page(game_id=0):
         if game_data is not None:
             game_title = game_data["game_title"]
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id))
-        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data)
+        approval=game_get_approved(game_id)
+        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval)
     except Exception as e:
         print(e, flush=True)
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id), failed=True)
@@ -234,6 +236,17 @@ def mod_approval_games():
             abort(404)
     else:
         abort(40)
+#Validate
+@app.route("/mod/approvals/games/game_id=<game_id>")
+def mod_approval_games_validate(game_id=0):
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            game_approve_user_link(game_id)
+            return redirect("/games/game_id=" + str(game_id))
+        else:
+            abort(404)
+    else:
+        abort(404)
 
     
 '''Admin Routes'''

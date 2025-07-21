@@ -15,6 +15,13 @@
                             <p>Release Date: {{ game_data.game_rdate }}</p>
                             <p>Release State: {{ game_data.game_rstate }}</p>
                             <p>Steam URL: <a href="{{ game_data.game_url }}">{{ game_data.game_url }}</a></p>
+                            {% if is_approved == false %}
+                                <p>This game is awaiting approval.</p>
+                                {% if current_user.is_mod %}
+                                    <a href="{{ url_for('mod_approval_games_validate', game_id=game_data.game_id) }}" class="button">Approve</a>
+                                    <a class="button">Deny</a>
+                                {% endif %}
+                            {% endif %}
                         {% else %}
                             <p>No game data available! Someone should fire the guys that built those robots and build better ones!</p>
                             <p>(What relation does no game data and robots have in common? If I think of something, I'll be sure to write it here!</p>
