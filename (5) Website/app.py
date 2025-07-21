@@ -100,7 +100,7 @@ def game_add_new_validate():
         game_data = ast.literal_eval(game_data)
         try:
             if game_check_exists(game_data["game_title"]) is False:
-                if game_create_new(game_data) is True:
+                if game_create_new(game_data, current_user.id) is True:
                     new_game_log(request.remote_addr, get_user(), game_data["game_title"])
                     return "success"
                 else:

@@ -2,3 +2,8 @@
 So added that now and I will need to update the loading program to implement
 it. Then, make it so that a new game will NOT be shown until it is approved.
 Might have to relearn inner joining SQL... Fun times ahead... /s
+
+10:33: Had to reload the database, but that worked. I also added it for when a
+new game is created as said and tried it with a second user and it works. Now
+I just need to make it so that unapproved games don't appear in the games
+list.

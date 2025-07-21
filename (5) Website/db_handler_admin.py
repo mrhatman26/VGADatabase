@@ -19,11 +19,13 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         else:
             released = None
             release_date = None
+        current_time = str(get_time(no_brackets=True))
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES(%s, %s, %s, %s, %s, %s)", (game_dict["game_title"], None, game_dict["game_description"], release_date, released, game_dict["game_url"]))
+        database.commit()
+        cursor.execute("INSERT INTO link_game_user (game_id, user_id, game_cDate, game_link_approved, game_aDate) VALUES (%s, %s, %s, %s, %s)", (game_get_id(game_dict["game_title"]), user_id, current_time, True, current_time,))
         database.commit()
         game_id = game_get_id(game_dict["game_title"])
         database.commit()
-        current_time = str(get_time(no_brackets=True))
         #Add developer to database and link to game
         for developer in game_dict["game_developers"]:
             if developer_check_exists(developer, cursor) is False:
@@ -31,9 +33,9 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                 database.commit()
             developer_id = developer_get_id(developer, cursor)
             if developer_id is not None: #Add link between developer and game (and user)
-                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer_id), str(game_id), str(user_id), current_time.strip(), True, current_time.strip(),))
+                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer_id), str(game_id), str(user_id), current_time, True, current_time,))
                 database.commit()
-                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(developer_id), str(user_id), current_time.strip(), True, current_time.strip()))
+                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(developer_id), str(user_id), current_time, True, current_time))
                 database.commit()
         #Add publishers to database
         for publisher in game_dict["game_developers"]:
@@ -42,9 +44,9 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                 database.commit()
             publisher_id = developer_get_id(publisher, cursor)
             if publisher_id is not None: #Add link between developer and game (and user)
-                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher_id), str(game_id), str(user_id), current_time.strip(), True, current_time.strip(),))
+                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher_id), str(game_id), str(user_id), current_time, True, current_time,))
                 database.commit()
-                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(publisher_id), str(user_id), current_time.strip(), True, current_time.strip()))
+                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(publisher_id), str(user_id), current_time, True, current_time))
                 database.commit()
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:

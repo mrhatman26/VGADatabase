@@ -1,17 +1,20 @@
 import mysql.connector, re
 from db_config import *
+from db_handler_links import *
 from misc import get_new_table_id, pause
 from global_vars import deployed
 
 #Games 
 def game_get_id(game, cursor=None):
     try:
+        no_cursor = False
         if cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
+            no_cursor = True
         cursor.execute("SELECT game_id FROM table_games WHERE game_title = %s", (str(game),))
         fetch = cursor.fetchall()
-        if cursor is None:
+        if no_cursor is None:
             cursor.close()
             database.close()
         if len(fetch) > 0:
@@ -83,12 +86,15 @@ def game_check_exists(game):
     else:
         return False
     
-def game_create_new(game_data):
+def game_create_new(game_data, user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], None, None))
         database.commit()
+        game_add_user_link(game_get_id(game_data["game_title"]), user_id, database, cursor)
+        cursor.close()
+        database.close()
         return True
     except:
         return False
