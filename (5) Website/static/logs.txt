@@ -36,3 +36,14 @@
 [2025.07.20 at 16:07:57]: 192.168.1.99 (User: jonsmith22) FAILED to access /games/gid=-9 (Games List) (The default page was returned instead)
 [2025.07.20 at 16:07:57]: 192.168.1.99 (User: jonsmith22) FAILED to access /games/gid=-9 (Games List) (The default page was returned instead)
 [2025.07.20 at 16:07:58]: 192.168.1.99 (User: jonsmith22) FAILED to access /games/gid=-9 (Games List) (The default page was returned instead)
+[2025.07.21 at 09:26:34]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.21 at 09:26:41]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.21 at 09:26:57]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.21 at 09:26:57]: 192.168.1.99 successfully created a new account with the username of jonsmith22
+[2025.07.21 at 09:26:57]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.21 at 09:28:21]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.21 at 09:29:49]: 192.168.1.99 successfully logged in as jonsmith22
+[2025.07.21 at 09:29:49]: 192.168.1.99 (User: jonsmith22) successfully accessed / (Home)
+[2025.07.21 at 09:29:54] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.21 at 09:29:56] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.21 at 09:29:57] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)

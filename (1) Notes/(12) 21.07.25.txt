@@ -1,0 +1,4 @@
+9:39: Realised that there was no approval link for a user creating a new game.
+So added that now and I will need to update the loading program to implement
+it. Then, make it so that a new game will NOT be shown until it is approved.
+Might have to relearn inner joining SQL... Fun times ahead... /s

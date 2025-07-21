@@ -263,6 +263,19 @@ CREATE TABLE link_game_user(
     link_id INT NOT NULL AUTO_INCREMENT,
     game_id INT NOT NULL,
     user_id INT NOT NULL,
+    game_cDate TEXT,
+    game_link_approved BOOLEAN NOT NULL,
+    game_aDate TEXT,
+    PRIMARY KEY(link_id),
+    FOREIGN KEY(game_id) REFERENCES table_games(game_id),
+    FOREIGN KEY(user_id) REFERENCES table_users(user_id)
+);
+
+DROP TABLE IF EXISTS link_game_favourite;
+CREATE TABLE link_game_favourite(
+    link_id INT NOT NULL AUTO_INCREMENT,
+    game_id INT NOT NULL,
+    user_id INT NOT NULL,
     fave_datetime TEXT,
     PRIMARY KEY(link_id),
     FOREIGN KEY(game_id) REFERENCES table_games(game_id),
