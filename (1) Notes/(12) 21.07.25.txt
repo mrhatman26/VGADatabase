@@ -7,3 +7,9 @@ Might have to relearn inner joining SQL... Fun times ahead... /s
 new game is created as said and tried it with a second user and it works. Now
 I just need to make it so that unapproved games don't appear in the games
 list.
+
+11:58: Had to get a shower, but I implemented that inner join command and it,
+surprisingly worked first time. I should be happy about that, but as with all
+things that work first time, I am instead suspicious. Why did it work first
+time? I can't have gotten it right; there must be an error that I am somehow
+not seeing. Anyway, that's all for now. Got work AGAIN.

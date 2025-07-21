@@ -70,3 +70,12 @@
 [2025.07.21 at 10:32:28]: 192.168.1.99 (User: cammick456) successfully accessed /games/add/validate/ (New Game Validation)
 [2025.07.21 at 10:32:28] (ADMIN): 192.168.1.99 (User: cammick456) successfully added a new game titled 'Apple Sauce'
 [2025.07.21 at 10:32:29]: 192.168.1.99 (User: cammick456) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 11:56:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 11:56:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 11:58:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 18:33:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 18:36:15]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 18:37:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.21 at 18:37:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.21 at 18:37:54]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.21 at 18:37:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)

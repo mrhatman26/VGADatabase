@@ -30,7 +30,7 @@ def game_get_all(gid=None, no_pages=10):
         gid = 0
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
-    cursor.execute("SELECT * FROM table_games ORDER BY game_id DESC LIMIT %s, 11", (gid,))
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, 11", (gid,))
     fetch = cursor.fetchall()
     for game in fetch:
         games.append({

@@ -207,6 +207,21 @@ def user_logout():
         access_log(request.remote_addr, get_user(), "/users/logout/ (Logout)", failed=True)
         return redirect("/")
     
+'''Mod Routes'''
+#Main
+@app.route("/mod/")
+def mod_main():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "/mod/ (Mod: Main)")
+            return render_template("mod/mod_main.html", page_name="Mod: Main", c_version=version)
+        else:
+            access_log(request.remote_addr, get_user(), "/mod/ (Mod: Main)", failed=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/mod/ (Mod: Main)", failed=True)
+        abort(404)
+    
 '''Admin Routes'''
 #Main
 @app.route("/admin/")
