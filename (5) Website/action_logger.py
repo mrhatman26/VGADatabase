@@ -65,6 +65,28 @@ def new_game_log(ip, username, new_game_name=None, failed=False):
     log_file.write(text)
     log_file.close()
 
+def game_approve_log(ip, username, game_name, denied=False, failed=False, already_approved=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if denied is False:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully approved the game titled" + game_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the game titled" + game_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the game titled" + game_name + " as it was already approved"
+    else:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully denied the game titled" + game_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the game titled" + game_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the game titled" + game_name + " as it was already denied"        
+    log_file.write(text)
+    log_file.close()
+
 #Users
 def new_user_log(ip, newUser, failed=False, admin=False):
     log_file = open("static/logs.txt", "at")

@@ -77,7 +77,9 @@ def game_page(game_id=0):
             game_title = game_data["game_title"]
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id))
         approval=game_get_approved(game_id)
-        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval)
+        denial=game_get_denied(game_id)
+        denial_reason = game_get_denial_reason(game_id)
+        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
     except Exception as e:
         print(e, flush=True)
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id), failed=True)
@@ -241,11 +243,50 @@ def mod_approval_games():
 def mod_approval_games_validate(game_id=0):
     if current_user.is_authenticated:
         if current_user.is_mod:
-            game_approve_user_link(game_id)
+            access_log(request.remote_addr, get_user(), "/mod/approvals/games/game_id=" + str(game_id) + " (Mod: Game Approvals Validate)")
+            if game_get_approved(game_id) is False:
+                if game_approve_user_link(game_id) is True:
+                    game_approve_log(request.remote_addr, get_user(), game_get_name(game_id))
+                else:
+                    game_approve_log(request.remote_addr, get_user(), game_get_name(game_id), failed=True)
+            else:
+                game_approve_log(request.remote_addr, get_user(), game_get_name(game_id), failed=True, already_approved=True)
             return redirect("/games/game_id=" + str(game_id))
         else:
+            access_log(request.remote_addr, get_user(), "/mod/approvals/games/game_id=" + str(game_id) + " (Mod: Game Approvals Validate)", failed=True, no_auth=True)
             abort(404)
     else:
+        access_log(request.remote_addr, get_user(), "/mod/approvals/games/game_id=" + str(game_id) + " (Mod: Game Approvals Validate)", failed=True, no_auth=True)
+        abort(404)
+#Deny
+@app.route("/mod/approvals/games/deny/", methods=["POST"])
+def mod_approval_games_deny():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "mod/approvals/games/deny/ (Mod: Game Approvals Deny)")
+            deny_data = request.get_data()
+            deny_data = deny_data.decode()
+            deny_data = ast.literal_eval(deny_data)
+            deny_data["denial_game_title"] = game_get_name(deny_data["denial_game_id"])
+            try:
+                if game_get_denied(deny_data["denial_game_id"]) is False:
+                    if game_deny_user_link(deny_data) is True:
+                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], denied=True)
+                        return "success"
+                    else:
+                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], denied=True, failed=True)
+                        return "servererror"
+                else:
+                    game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], failed=True, already_approved=True, denied=True)
+                    return "alreadydenied"
+            except:
+                game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], failed=True, denied=True)
+                return "servererror"
+        else:
+            access_log(request.remote_addr, get_user(), "mod/approvals/games/deny/ (Mod: Game Approvals Deny)", failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "mod/approvals/games/deny/ (Mod: Game Approvals Deny)", failed=True, no_auth=True)
         abort(404)
 
     

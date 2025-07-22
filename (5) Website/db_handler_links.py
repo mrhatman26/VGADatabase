@@ -33,6 +33,18 @@ def game_approve_user_link(game_id):
         return True
     except:
         return False
+    
+def game_deny_user_link(deny_data):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_game_user SET game_denied = 1, game_dDate = %s, game_dDes = %s WHERE game_id = %s", (get_time(no_brackets=True), deny_data["denial_text"], deny_data["denial_game_id"],))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
 
 #Get
 def game_get_approved(game_id):
@@ -49,3 +61,33 @@ def game_get_approved(game_id):
             return False
     except:
         return False
+    
+def game_get_denied(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT game_id FROM link_game_user WHERE game_id = %s AND game_denied = 1", (str(game_id),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
+        return False
+    
+def game_get_denial_reason(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT game_dDes FROM link_game_user WHERE game_id = %s AND game_denied = 1", (str(game_id),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None

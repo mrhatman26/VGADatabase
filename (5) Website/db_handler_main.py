@@ -24,6 +24,20 @@ def game_get_id(game, cursor=None):
     except:
         return None
     
+def game_get_name(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        print(game_id)
+        cursor.execute("SELECT game_title FROM table_games WHERE game_id = %s", (game_id,))
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+    
 def game_get_all(gid=None, no_pages=10):
     games = []
     if gid is None:
