@@ -49,3 +49,34 @@
 [2025.07.22 at 14:36:54]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
 [2025.07.22 at 14:37:41]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
 [2025.07.22 at 14:38:33]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 14:49:19]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 14:49:19]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/game_id=9446
+[2025.07.22 at 14:49:52]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 14:50:51]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 14:50:53]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9445
+[2025.07.22 at 14:51:02]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 14:51:04]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9443
+[2025.07.22 at 14:51:43]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 15:01:22]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.22 at 15:01:42]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.22 at 15:01:42] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully added a new game titled 'Banana Boy Rides Again'
+[2025.07.22 at 15:01:42]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 15:01:44]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.22 at 15:01:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.22 at 15:01:48]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9447
+[2025.07.22 at 15:12:24]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9447
+[2025.07.22 at 15:23:59]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=9447 (Mod: Game Approvals Validate)
+[2025.07.22 at 15:23:59]: 127.0.0.1 (User: jonsmith55) successfully approved the game titledBanana Boy Rides Again
+[2025.07.22 at 15:23:59]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9447
+[2025.07.22 at 15:24:07]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.22 at 15:25:25]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.22 at 15:25:25] (ADMIN): 127.0.0.1 (User: jonsmith55) successfully added a new game titled 'This Game's Title'
+[2025.07.22 at 15:25:25]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 15:25:29]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.22 at 15:25:30]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.22 at 15:25:42]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9448
+[2025.07.22 at 15:25:52]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 15:25:54]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9447
+[2025.07.22 at 15:26:00]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
+[2025.07.22 at 15:26:11]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 15:28:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446

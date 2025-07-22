@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                <h3 id="page_header">Add a new developer/publisher</h3>
+                <div id="page_mainbody_home">
+                        <form id="devpub_add_form">
+                                <p>Name:</p>
+                                <input class="textbox" type="text" id="devpub_name" name="txt_devpub_name" required placeholder="Description's Title">
+                                <br>
+                                <p>Description:</p>
+                                <textarea class="textbox" type="text" id="devpub_desc" name="txt_devpub_desc" placeholder="The gods of these worlds" style="resize: none;"></textarea>
+                                <br>
+                                <p>Founding Date:</p>
+                                <input class="textbox" type="text" id="devpub_foundDate" name="txt_devpub_foundDate" placeholder="2025/07/22" pattern="\d\d\d\d/\d\d/\d\d">
+                                <p>Date must be YYYY/MM/DD</p>
+                                <br>
+                                <p>Defunct Date:</p>
+                                <input class="textbox" type="text" id="devpub_foundDate" name="txt_devpub_foundDate" placeholder="2025/07/22" pattern="\d\d\d\d/\d\d/\d\d">
+                                <p>Date must be YYYY/MM/DD</p>
+                                <br>
+                                <p>Is this a publisher?:</p>
+                                <select class="TBD" id="devpub_isPub" name="select_devpub_isPub" required>
+                                    <option value="isPub" selected>Yes, this is a publisher</option>
+                                    <option value="isDev" selected>No, this is NOT a publisher</option>
+                                </select>
+                                <input type="submit" value="Submit" class="submit_button">
+                        </form>
+                </div>
+        </div>
+</div>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src=" {{ url_for('static', filename='scripts/devpub_add.js') }}"></script>
+{% endblock %}

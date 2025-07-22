@@ -16,7 +16,7 @@ function oldErrorCheck(){
 function submitGame(event){
     event.preventDefault();
     //Make sure password does not contain text from the other boxes
-    console.log(gameForm[0].value + "\n" + gameForm[1].value + "\n" + gameForm[2].value + "\n" + gameForm[3].value);
+    //https://stackoverflow.com/questions/2031085/how-can-i-check-if-string-contains-characters-whitespace-not-just-whitespace
     var signupData = {
         "game_title": gameForm[0].value,
         "game_aka": gameForm[1].value,
@@ -42,6 +42,19 @@ function submitGame(event){
                 }
                 else{
                     errorMessage.innerHTML = "Game already exists";
+                }
+            }
+            else if (response === "invaliddate"){
+                if (oldErrorCheck() === false){
+                    var mainBody = document.getElementById("page_mainbody_home");
+                    errorMessage = document.createElement("p");
+                    errorMessage.id = "errorMessage";
+                    errorMessage.style.color = "red";
+                    errorMessage.innerHTML = "Invalid releaase date";
+                    mainBody.appendChild(errorMessage);
+                }
+                else{
+                    errorMessage.innerHTML = "Invalid releaase date";
                 }
             }
             else{

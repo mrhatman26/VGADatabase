@@ -10,8 +10,16 @@
                 <div id="page_mainbody_home">
                         {% if game_data is not none %}                                
                             <p style="display: none;" id="game_id">ID: {{ game_data.game_id }}</p>
-                            <p>Alternate Titles: {{ game_data.game_aka }}</p>
-                            <p>Description: {{ game_data.game_desc }}</p>
+                            {% if game_data.game_aka is not none %}
+                                <p>Alternate Titles: {{ game_data.game_aka }}</p>
+                            {% else %}
+                                <p>Alternate Titles: This game has no alternate titles</p>
+                            {% endif %}
+                            {% if game_data.game_desc is not none %}
+                                <p>Description: {{ game_data.game_desc }}</p>
+                            {% else %}
+                                <p>Description: This game has no description</p>
+                            {% endif %}
                             <p>Release Date: {{ game_data.game_rdate }}</p>
                             <p>Release State: {{ game_data.game_rstate }}</p>
                             <p>Steam URL: <a href="{{ game_data.game_url }}">{{ game_data.game_url }}</a></p>

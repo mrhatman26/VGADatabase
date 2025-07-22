@@ -1,4 +1,5 @@
 import mysql.connector, re
+from datetime import datetime
 from db_config import *
 from db_handler_links import *
 from misc import get_new_table_id, pause
@@ -104,7 +105,15 @@ def game_create_new(game_data, user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], None, None))
+        if game_data["game_aka"].isspace() or game_data["game_aka"] == "":
+            game_data["game_aka"] = None
+        if game_data["game_desc"].isspace() or game_data["game_desc"] == "":
+            game_data["game_desc"] = None
+        if dt.strptime(game_data["game_rdate"], "%Y/%m/%d") < dt.now():
+            game_data["game_rstate"] = "Released"
+        else:
+            game_data["game_rstate"] = "Unreleased"
+        cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], game_data["game_rstate"], None))
         database.commit()
         game_add_user_link(game_get_id(game_data["game_title"]), user_id, database, cursor)
         cursor.close()

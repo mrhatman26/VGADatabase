@@ -1,6 +1,7 @@
 import ast
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
+from datetime import datetime as dt
 from db_handler_users import *
 from db_handler_admin import *
 from db_handler_main import *
@@ -10,7 +11,7 @@ from action_logger import *
 from version_handler import *
 from user import User
 from global_vars import deployed
-from misc import get_current_page
+from misc import get_current_page, test_datetime
 #from user import User
 
 '''Server Vars'''
@@ -103,16 +104,20 @@ def game_add_new_validate():
         game_data = game_data.decode()
         game_data = ast.literal_eval(game_data)
         try:
-            if game_check_exists(game_data["game_title"]) is False:
-                if game_create_new(game_data, current_user.id) is True:
-                    new_game_log(request.remote_addr, get_user(), game_data["game_title"])
-                    return "success"
+            if test_datetime(game_data["game_rdate"]) is True:
+                if game_check_exists(game_data["game_title"]) is False:
+                    if game_create_new(game_data, current_user.id) is True:
+                        new_game_log(request.remote_addr, get_user(), game_data["game_title"])
+                        return "success"
+                    else:
+                        new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
+                        return "servererror"
                 else:
                     new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
-                    return "servererror"
+                    return "gameexists"
             else:
                 new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
-                return "gameexists"
+                return "invaliddate"
         except Exception as e:
             new_game_log(request.remote_addr, get_user(), new_game_name=game_data["game_title"], failed=True)
             error_log(request.remote_addr, get_user(), "There was an error while trying to add a new game", theException=e)
@@ -121,6 +126,20 @@ def game_add_new_validate():
         access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True, no_auth=True)
         new_game_log(request.remote_addr, get_user(), failed=True)
         return "servererror"
+    
+#Developers & Publishers
+#Main (TBD)
+#@app.route("/devpubs/")
+
+#Add Devpub
+@app.route("/devpubs/add/")
+def devpub_add():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/devpubs/add/ (Add Devpub)")
+        return render_template("devpubs/devpub_add.html", page_name="Add New Developer/Publisher", c_version=version)
+    else:
+        access_log(request.remote_addr, get_user(), "/devpubs/add/ (Add Devpub)", no_auth=True, failed=True)
+        return redirect("/users/login/")
 
 '''User Routes'''
 #Login

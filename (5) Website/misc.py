@@ -31,3 +31,10 @@ def get_current_page(gid, no_results=10):
                     current_page += 1
                 break
         return current_page
+    
+def test_datetime(date):
+    try:
+        dt.datetime.strptime(date, "%Y/%m/%d")
+        return True
+    except:
+        return False
