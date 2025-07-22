@@ -140,6 +140,14 @@ def devpub_add():
     else:
         access_log(request.remote_addr, get_user(), "/devpubs/add/ (Add Devpub)", no_auth=True, failed=True)
         return redirect("/users/login/")
+#Devpub Validate
+@app.route("/devpubs/add/validate/")
+def debpub_add_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/devpubs/add/validate/ (Add Devpub Validate)")
+    else:
+        access_log(request.remote_addr, get_user(), "/devpubs/add/validate/ (Add Devpub Validate)", failed=True, no_auth=True)
+        return redirect("/users/login/")
 
 '''User Routes'''
 #Login

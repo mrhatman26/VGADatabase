@@ -80,3 +80,6 @@
 [2025.07.22 at 15:26:00]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/gid=0 (Games List)
 [2025.07.22 at 15:26:11]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
 [2025.07.22 at 15:28:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 15:54:27]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.22 at 15:54:29]: 127.0.0.1 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 15:55:02]: 127.0.0.1 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)

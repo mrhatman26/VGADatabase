@@ -1,5 +1,6 @@
+console.log("develope_add.js loaded");
 console.log("game_add.js loaded");
-let gameForm = document.getElementById("game_add_form");
+let devpubForm = document.getElementById("devpub_add_form");
 let mainBody = document.getElementById("page_mainbody_home");
 let errorMessage = null;
 
@@ -16,10 +17,10 @@ function oldErrorCheck(){
 function submitGame(event){
     event.preventDefault();
     var signupData = {
-        "game_title": gameForm[0].value,
-        "game_aka": gameForm[1].value,
-        "game_desc": gameForm[2].value,
-        "game_rdate": gameForm[3].value
+        "game_title": devpubForm[0].value,
+        "game_aka": devpubForm[1].value,
+        "game_desc": devpubForm[2].value,
+        "game_rdate": devpubForm[3].value
     };
     $.ajax({
         type: "POST",
@@ -72,4 +73,4 @@ function submitGame(event){
     });
 }
 
-gameForm.addEventListener("submit", submitGame);
+devpubForm.addEventListener("submit", submitGame);
