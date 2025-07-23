@@ -1,11 +1,12 @@
 
-[2025.07.23 at 09:41:08]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 09:41:08]: 192.168.1.99 (User: jonsmith22) FAILED to access /devpubs/pid=0 (Devpubs List) (The default page was returned instead)
-[2025.07.23 at 09:41:08]: 192.168.1.99 (User: jonsmith22) encountered the following error: An error occurred while trying to show the selected devpub page
+[2025.07.23 at 21:05:02]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.23 at 21:05:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.23 at 21:05:05]: 192.168.1.99 (User: jonsmith55) FAILED to access /developers/pid=0 (Developers List) (The default page was returned instead)
+[2025.07.23 at 21:05:05]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected developer page
 Exception:
 Traceback (most recent call last):
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 146, in devpub_list
-    return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 146, in developer_list
+    return render_template("devpubs/devpub_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 131, in _render
@@ -18,20 +19,31 @@ Traceback (most recent call last):
   File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 1, in top-level template code
     {% extends "layout.html" %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 37, in top-level template code
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 36, in top-level template code
     {% block content %}
     ^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 11, in block 'content'
-    {% set previous_gid = gid - no_results %}
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 24, in block 'content'
+    <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
     
-jinja2.exceptions.UndefinedError: 'gid' is undefined
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'devpub_list' with values ['pid']. Did you mean 'developer_list' instead?
 
-[2025.07.23 at 09:41:08]: 192.168.1.99 (User: jonsmith22) FAILED to access /devpubs/pid=0 (Devpubs List) (The default page was returned instead)
-[2025.07.23 at 09:41:08]: 192.168.1.99 (User: jonsmith22) encountered the following error: An error occurred while trying to show the default devpub page. Are there no devpubs?
+[2025.07.23 at 21:05:05]: 192.168.1.99 (User: jonsmith55) FAILED to access /developers/pid=0 (Developers List) (The default page was returned instead)
+[2025.07.23 at 21:05:05]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default developer page. Are there no developers?
 Exception:
 Traceback (most recent call last):
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 146, in devpub_list
-    return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 146, in developer_list
+    return render_template("devpubs/devpub_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 131, in _render
@@ -44,19 +56,30 @@ Traceback (most recent call last):
   File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 1, in top-level template code
     {% extends "layout.html" %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 37, in top-level template code
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 36, in top-level template code
     {% block content %}
     ^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 11, in block 'content'
-    {% set previous_gid = gid - no_results %}
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 24, in block 'content'
+    <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
     
-jinja2.exceptions.UndefinedError: 'gid' is undefined
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'devpub_list' with values ['pid']. Did you mean 'developer_list' instead?
 
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 153, in devpub_list
-    return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 153, in developer_list
+    return render_template("devpubs/devpub_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\templating.py", line 131, in _render
@@ -69,89 +92,31 @@ Traceback (most recent call last):
   File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 1, in top-level template code
     {% extends "layout.html" %}
     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 37, in top-level template code
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\layout.html", line 36, in top-level template code
     {% block content %}
     ^^^^^^^^^^^^^
-  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 11, in block 'content'
-    {% set previous_gid = gid - no_results %}
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\templates\devpubs\devpub_list.html", line 24, in block 'content'
+    <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
     
-jinja2.exceptions.UndefinedError: 'gid' is undefined
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1121, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\flask\app.py", line 1110, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+        endpoint,
+    ...<3 lines>...
+        force_external=_external,
+    )
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'devpub_list' with values ['pid']. Did you mean 'developer_list' instead?
 
-[2025.07.23 at 09:41:35]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 09:41:40]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 09:43:13]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 09:45:31]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 09:46:17]: 192.168.1.99 (User: jonsmith22) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 10:03:25]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
-[2025.07.23 at 10:03:25]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
-[2025.07.23 at 10:06:14]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
-[2025.07.23 at 10:06:33]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
-[2025.07.23 at 10:06:33]: 192.168.1.99 successfully created a new account with the username of jonsmith55
-[2025.07.23 at 10:06:33]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
-[2025.07.23 at 10:06:33]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.23 at 10:06:40]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.23 at 10:06:42] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
-[2025.07.23 at 10:06:43] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
-[2025.07.23 at 10:06:43] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
-[2025.07.23 at 10:06:44] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
-[2025.07.23 at 10:07:22] (ADMIN): 192.168.1.99 (User: Annonymous) FAILED to access admin resource/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed) as the user was not logged in.
-[2025.07.23 at 10:07:24]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
-[2025.07.23 at 10:07:39]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
-[2025.07.23 at 10:07:39]: 192.168.1.99 successfully created a new account with the username of jonsmith55
-[2025.07.23 at 10:07:39]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
-[2025.07.23 at 10:07:39]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.23 at 10:07:45]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.23 at 10:07:46] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
-[2025.07.23 at 10:15:57] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
-[2025.07.23 at 10:15:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
-[2025.07.23 at 10:15:59] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
-[2025.07.23 at 10:35:41] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
-[2025.07.23 at 10:40:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 10:40:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9444
-[2025.07.23 at 10:41:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
-[2025.07.23 at 10:41:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 10:43:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 10:43:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 10:43:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 10:43:27]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10128 (Devpubs List)
-[2025.07.23 at 10:44:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 10:44:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 10:44:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 10:44:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10128 (Devpubs List)
-[2025.07.23 at 10:44:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10118 (Devpubs List)
-[2025.07.23 at 10:44:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10108 (Devpubs List)
-[2025.07.23 at 10:44:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10098 (Devpubs List)
-[2025.07.23 at 10:44:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 10:44:57]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 20:28:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:28:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10 (Games List)
-[2025.07.23 at 20:28:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=20 (Games List)
-[2025.07.23 at 20:28:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=30 (Games List)
-[2025.07.23 at 20:28:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=40 (Games List)
-[2025.07.23 at 20:28:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:28:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:28:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:28:39]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:29:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:29:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:29:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:29:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:29:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10 (Devpubs List)
-[2025.07.23 at 20:29:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 20:29:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 20:29:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 20:29:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 20:29:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 20:29:27]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:29:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10 (Devpubs List)
-[2025.07.23 at 20:29:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:29:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=9434 (Games List)
-[2025.07.23 at 20:30:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=9434 (Games List)
-[2025.07.23 at 20:30:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 20:30:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=9434 (Games List)
-[2025.07.23 at 20:30:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
-[2025.07.23 at 20:30:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10148 (Devpubs List)
-[2025.07.23 at 20:30:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10138 (Devpubs List)
-[2025.07.23 at 20:30:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10128 (Devpubs List)
-[2025.07.23 at 20:30:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=10118 (Devpubs List)
-[2025.07.23 at 20:30:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/pid=0 (Devpubs List)
+[2025.07.23 at 21:06:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.23 at 21:06:58]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=5069 (Developers List)
+[2025.07.23 at 21:09:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.23 at 21:09:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.23 at 21:09:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.23 at 21:09:27]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.23 at 21:09:27]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.23 at 21:09:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.23 at 21:09:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)

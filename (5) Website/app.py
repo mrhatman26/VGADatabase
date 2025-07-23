@@ -133,28 +133,50 @@ def game_add_new_validate():
         new_game_log(request.remote_addr, get_user(), failed=True)
         return "servererror"
     
-#Developers & Publishers
-#Main (TBD)
-@app.route("/devpubs/")
-@app.route("/devpubs/pid=<pid>")
-def devpub_list(pid=0, no_results=10):
+#Developers & Publishers (Devpubs)
+#Developer List 
+@app.route("/developers/")
+@app.route("/developers/pid=<pid>")
+def developer_list(pid=0, no_results=10):
     try:
         pid = int(pid)
         devpubs = devpub_get_selection(pid)
         current_page = get_current_page(pid, no_results)
-        access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)")
-        return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+        access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + " (Developers List)")
+        return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
     except Exception as e:
         try:
             devpubs = devpub_get_selection(0)
-            access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)", failed=True, default=True)
-            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected devpub page", theException=traceback.format_exc())
+            access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + " (Developers List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected developer page", theException=traceback.format_exc())
             current_page = get_current_page(pid, no_results)
-            return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+            return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
         except:
-            access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)", failed=True, default=True)
-            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default devpub page. Are there no devpubs?", theException=traceback.format_exc())
-            return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version)
+            access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + " (Developers List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default developer page. Are there no developers?", theException=traceback.format_exc())
+            return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version)
+        
+#Developer List 
+@app.route("/publishers/")
+@app.route("/publishers/pid=<pid>")
+def publisher_list(pid=0, no_results=10):
+    try:
+        pid = int(pid)
+        devpubs = devpub_get_selection(pid, is_pub=True)
+        current_page = get_current_page(pid, no_results)
+        access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)")
+        return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+    except Exception as e:
+        try:
+            devpubs = devpub_get_selection(pid, is_pub=True)
+            access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected publishers page", theException=traceback.format_exc())
+            current_page = get_current_page(pid, no_results)
+            return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+        except:
+            access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default publishers page. Are there no publishers?", theException=traceback.format_exc())
+            return render_template("devpubs/publisher_list.html", page_name="All Developers", c_version=version)
 
 #Add Devpub
 @app.route("/devpubs/add/")

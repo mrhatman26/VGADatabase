@@ -15,11 +15,11 @@
                                 {% endif %}
                                 {% set current_page = current_page + 1 %}
                                 {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('devpub_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('devpub_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        <p><a href="{{ url_for('developer_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('developer_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('developer_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('developer_list', pid=total_results - 10) }}" class="button">Last >></a></p>
                                 {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('developer_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('developer_list', pid=total_results - 10) }}" class="button">Last >></a></p>
                                 {% else %}
-                                        <p><a href="{{ url_for('devpub_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('devpub_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        <p><a href="{{ url_for('developer_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('developer_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                                 {% for developer in devpub_list %}
                                         <a href="{{ url_for('game_page', game_id=developer.game_id) }}">
@@ -31,14 +31,14 @@
                                         <br>
                                 {% endfor %}
                                 {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('devpub_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('devpub_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        <p><a href="{{ url_for('developer_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('developer_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('developer_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('developer_list', pid=total_results - 10) }}" class="button">Last >></a></p>
                                 {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('devpub_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('devpub_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('developer_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('developer_list', pid=total_results - 10) }}" class="button">Last >></a></p>
                                 {% else %}
-                                        <p><a href="{{ url_for('devpub_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('devpub_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        <p><a href="{{ url_for('developer_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('developer_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                         {% else %}
-                                <p>No games match your search!</p>
+                                <p>No developers match your search!</p>
                         {% endif %}
                 </div>
         </div>

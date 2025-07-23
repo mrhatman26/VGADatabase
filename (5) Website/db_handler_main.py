@@ -301,13 +301,13 @@ def devpub_add_new(devpub_data, user_id):
         pause()
         return False
 
-def devpub_get_selection(pid=None, no_results=10):
+def devpub_get_selection(pid=None, no_results=10, is_pub=False):
     devpubs = []
     if pid is None:
         pid = 0
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
-    cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (pid, no_results + 1))
+    cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 AND table_developers.developer_isPub = %s ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (is_pub, pid, no_results + 1))
     fetch = cursor.fetchall()
     import pyperclip
     pyperclip.copy(str(cursor.statement))
