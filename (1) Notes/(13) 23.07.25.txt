@@ -17,3 +17,14 @@ Anyway, I've implemented the page to show developers, but it turns out that,
 for some reason, during the loading, they were added twice. So, I'm going to
 need to fix that which will mean sitting around waiting for the data to be
 loaded again...
+
+10:16: Tried some code on the loader to check that the developer (and
+publisher) does not exist before creating it and its links. Considering the
+fact that the loader is now going quicker, I am assuming that this broke the
+loader...
+
+10:45: It worked apparently. I will need to check a bunch of stuff to make
+sure it's all still working such as adding a new game or adding a new
+developer, but I should also modify the developer list page to hide publishers
+if they arre already on the page as developers... Or maybe, just make a whole
+other page specifically for publishers? IDK.

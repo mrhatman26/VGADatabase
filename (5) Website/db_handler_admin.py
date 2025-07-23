@@ -28,26 +28,32 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         database.commit()
         #Add developer to database and link to game
         for developer in game_dict["game_developers"]:
-            if developer_check_exists(developer, cursor) is False:
+            developer_exists = devpub_check_exists(developer, False, database, cursor)
+            if developer_exists is False:
                 cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer), None, None, None, None, False,))
                 database.commit()
-            developer_id = developer_get_id(developer, cursor)
+            developer_id = devpub_get_id(developer, False, database, cursor)
             if developer_id is not None: #Add link between developer and game (and user)
-                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer_id), str(game_id), str(user_id), current_time, True, current_time,))
-                database.commit()
-                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(developer_id), str(user_id), current_time, True, current_time))
-                database.commit()
+                if devpub_check_game_link_exists(developer_id, game_id, database, cursor) is False:
+                    cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer_id), str(game_id), str(user_id), current_time, True, current_time,))
+                    database.commit()
+                if developer_exists is False:
+                    cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(developer_id), str(user_id), current_time, True, current_time))
+                    database.commit()
         #Add publishers to database
         for publisher in game_dict["game_developers"]:
-            if publisher_check_exists(publisher, cursor) is False:
+            publisher_exists = devpub_check_exists(publisher, True, database, cursor)
+            if publisher_exists is False:
                 cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher), None, None, None, None, True,))
                 database.commit()
-            publisher_id = developer_get_id(publisher, cursor)
+            publisher_id = devpub_get_id(publisher, True, database, cursor)
             if publisher_id is not None: #Add link between developer and game (and user)
-                cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher_id), str(game_id), str(user_id), current_time, True, current_time,))
-                database.commit()
-                cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(publisher_id), str(user_id), current_time, True, current_time))
-                database.commit()
+                if devpub_check_game_link_exists(publisher_id, game_id, database, cursor) is False:
+                    cursor.execute("INSERT INTO link_game_developer (developer_id, game_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher_id), str(game_id), str(user_id), current_time, True, current_time,))
+                    database.commit()
+                if publisher_exists is False:
+                    cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate, developer_link_approved, developer_aDate) VALUES(%s, %s, %s, %s, %s)", (str(publisher_id), str(user_id), current_time, True, current_time))
+                    database.commit()
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:
             if tag_check_exists(tag, cursor) is False:

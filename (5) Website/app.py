@@ -177,11 +177,7 @@ def debpub_add_validate():
         try:
             if test_datetime(devpub_data["developer_foundDate"]) is False or test_datetime(devpub_data["developer_defunctDate"]) is False:
                 return "invaliddate"
-            if devpub_data["developer_isPub"] is True:
-                func_to_use = developer_check_exists
-            else:
-                func_to_use = publisher_check_exists
-            if func_to_use(devpub_data["developer_name"]) is False:
+            if devpub_check_exists(devpub_data["developer_name"], devpub_data["developer_isPub"]) is False:
                 if devpub_add_new(devpub_data, current_user.id) is True:
                     new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"])
                     return "success"

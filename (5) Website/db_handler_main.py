@@ -226,67 +226,46 @@ def genre_get_id(genre, cursor=None):
         return fetch[0][0]
     else:
         return None
-
-#Developers
-def developer_check_exists(developer, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = 0", (str(developer),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return True
-    else:
-        return False
     
-def developer_get_id(developer, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = 0", (str(developer),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return fetch[0][0]
-    else:
-        return None
-    
-#Publisher (Note: Publishers are developers in the database, but with developer_isPub set to True)
-def publisher_check_exists(publisher, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = 1", (str(publisher),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return True
-    else:
-        return False
-    
-def publisher_get_id(publisher):
+#Devpub (Developers AND Publishers()
+def devpub_get_id(devpub, is_pub=False, database=None, cursor=None):
     try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-        cursor.execute("SELECT developer_id FROM table_aliases WHERE developer_name = %s AND developer_isPub = 1", (str(publisher),))
+        no_cursor = False
+        if cursor is None or database is None:
+            no_cursor = True
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+        cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = %s", (devpub, is_pub,))
         fetch = cursor.fetchall()
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         if len(fetch) > 0:
-            return fetch[0]
+            return fetch[0][0]
         else:
             return None
     except:
         return None
-    
-#Devpub (Developers AND Publishers()
+
+def devpub_check_exists(devpub, is_pub=False, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if cursor is None or database is None:
+            no_cursor = True
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+        cursor.execute("SELECT developer_id FROM table_developers WHERE developer_name = %s AND developer_isPub = %s", (devpub, is_pub,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
+        return False
+
 def devpub_add_new(devpub_data, user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
@@ -311,10 +290,7 @@ def devpub_add_new(devpub_data, user_id):
                 devpub_data["developer_status"] = "Defunct"
         cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES (%s, %s, %s, %s, %s, %s)", (devpub_data["developer_name"], devpub_data["developer_desc"], devpub_data["developer_foundDate"], devpub_data["developer_status"], devpub_data["developer_defunctDate"], devpub_data["developer_isPub"],))
         database.commit()
-        if devpub_data["developer_isPub"] is True:
-            devpub_data["developer_id"] = developer_get_id(devpub_data["developer_name"])
-        else:
-            devpub_data["developer_id"] = publisher_get_id(devpub_data["developer_name"])
+        devpub_data["developer_id"] = devpub_get_id(devpub_data["developer_name"], devpub_data["developer_isPub"])
         devpub_add_user_link(devpub_data["developer_id"], user_id, database=database, cursor=cursor)
         database.commit()
         cursor.close()

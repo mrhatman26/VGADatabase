@@ -93,6 +93,25 @@ def game_get_denial_reason(game_id):
         return None
     
 '''DEVPUBS'''
+def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("SELECET * FROM link_game_developer WHERE developer_id = %s AND game_id = %s", (developer_id, game_id))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
+        return False
+
 def devpub_add_user_link(developer_id, user_id, database=None, cursor=None):
     try:
         no_cursor = False
