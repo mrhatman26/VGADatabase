@@ -1,4 +1,4 @@
-import mysql.connector, re
+import mysql.connector, re, traceback
 from datetime import datetime
 from db_config import *
 from db_handler_links import *
@@ -295,26 +295,71 @@ def publisher_check_exists(publisher, cursor=None):
         return False
     
 def publisher_get_id(publisher):
-    database = mysql.connector.connect(**get_db_config(deployed))
-    cursor = database.cursor()
-    cursor.execute("SELECT developer_id FROM table_aliases WHERE developer_name = %s AND developer_isPub = 1", (str(publisher),))
-    fetch = cursor.fetchall()
-    cursor.close()
-    database.close()
-    if len(fetch) > 0:
-        return fetch[0]
-    else:
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT developer_id FROM table_aliases WHERE developer_name = %s AND developer_isPub = 1", (str(publisher),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0]
+        else:
+            return None
+    except:
         return None
+    
+#Devpub (Developers AND Publishers()
+def devpub_add_new(devpub_data, user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        devpub_data["developer_status"] = "Unknown"
+        devpub_data["developer_isPub"] = bool(devpub_data["developer_isPub"])
+        #Check description
+        if devpub_data["developer_desc"].isspace() is True or devpub_data["developer_desc"] == "":
+            devpub_data["developer_desc"] = None
+        #Check founding date
+        if devpub_data["developer_foundDate"].isspace() is True or devpub_data["developer_foundDate"] == "":
+            devpub_data["developer_foundDate"] = None
+            devpub_data["developer_status"] = "Unknown"
+        else:
+            if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") > dt.now():
+                devpub_data["developer_status"] = "Open for Business"
+        #Check defunct date
+        if devpub_data["developer_defunctDate"].isspace() is True or devpub_data["developer_defunctDate"] == "":
+            devpub_data["developer_defunctDate"] = None
+        else:
+            if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") > dt.now():
+                devpub_data["developer_status"] = "Defunct"
+        cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES (%s, %s, %s, %s, %s, %s)", (devpub_data["developer_name"], devpub_data["developer_desc"], devpub_data["developer_foundDate"], devpub_data["developer_status"], devpub_data["developer_defunctDate"], devpub_data["developer_isPub"],))
+        database.commit()
+        if devpub_data["developer_isPub"] is True:
+            devpub_data["developer_id"] = developer_get_id(devpub_data["developer_name"])
+        else:
+            devpub_data["developer_id"] = publisher_get_id(devpub_data["developer_name"])
+        devpub_add_user_link(devpub_data["developer_id"], user_id, database=database, cursor=cursor)
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except Exception as e:
+        print(traceback.format_exc())
+        pause()
+        return False
 
 #Languages
 def language_check_exists(language):
-    database = mysql.connector.connect(**get_db_config(deployed))
-    cursor = database.cursor()
-    cursor.execute("SELECT lang_id FROM table_languages WHERE lang_name = %s", (str(language),))
-    fetch = cursor.fetchall()
-    cursor.close()
-    database.close()
-    if len(fetch) > 0:
-        return True
-    else:
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT lang_id FROM table_languages WHERE lang_name = %s", (str(language),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
         return False

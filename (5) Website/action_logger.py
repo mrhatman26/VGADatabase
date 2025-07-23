@@ -56,12 +56,12 @@ def new_game_log(ip, username, new_game_name=None, failed=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
     if failed is False:
-        text = text + " (ADMIN): " + ip + " (User: " + username + ") successfully added a new game titled '" + new_game_name + "'"
+        text = text + ip + " (User: " + username + ") successfully added a new game titled '" + new_game_name + "'"
     else:
         if new_game_name is not None:
-            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game titled '" + new_game_name + "'"
+            text = text + ip + " (User: " + username + ") FAILED to add a new game titled '" + new_game_name + "'"
         else:
-            text = text + " (ADMIN): " + ip + " (User: " + username + ") FAILED to add a new game with an unknown title"
+            text = text + ip + " (User: " + username + ") FAILED to add a new game with an unknown title"
     log_file.write(text)
     log_file.close()
 
@@ -180,5 +180,19 @@ def delete_user_log(ip, username, failed=False, admin=False):
             text = text + " (ADMIN): " + ip + " successfully deleted the account of " + username
         else:
             text = text + " (ADMIN): " + ip + " FAILED to delete the account of " + username
+    log_file.write(text)
+    log_file.close()
+
+#Developers
+def new_developer_log(ip, username, new_developer_name=None, failed=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if failed is False:
+        text = text + ip + " (User: " + username + ") successfully added a new developer named '" + new_developer_name + "'"
+    else:
+        if new_developer_name is not None:
+            text = text + ip + " (User: " + username + ") FAILED to add a new developer named '" + new_developer_name + "'"
+        else:
+            text = text + ip + " (User: " + username + ") FAILED to add a new developer with an unknown name"
     log_file.write(text)
     log_file.close()

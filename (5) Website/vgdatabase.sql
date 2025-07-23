@@ -25,7 +25,7 @@ CREATE TABLE table_developers(
     developer_foundDate TEXT,
     developer_status TEXT,
     developer_defunctDate TEXT,
-    developer_isPub BOOLEAN NOT NULL,
+    developer_isPub BOOLEAN DEFAULT 0,
     PRIMARY KEY(developer_id)
 );
 
@@ -46,7 +46,7 @@ CREATE TABLE table_tags(
     tag_name TEXT NOT NULL,
     tag_desc TEXT,
     tag_type TEXT,
-    tag_isNSFW BOOLEAN NOT NULL,
+    tag_isNSFW BOOLEAN DEFAULT 0,
     PRIMARY KEY(tag_id)
 );
 
@@ -65,8 +65,8 @@ CREATE TABLE table_users(
     user_email TEXT,
     user_desc TEXT,
     user_pfp TEXT,
-    user_isAdmin BOOLEAN NOT NULL,
-    user_isMod BOOLEAN NOT NULL,
+    user_isAdmin BOOLEAN DEFAULT 0,
+    user_isMod BOOLEAN DEFAULT 0,
     PRIMARY KEY(user_id)
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE table_genres(
     genre_id INT NOT NULL AUTO_INCREMENT,
     genre_name TEXT NOT NULL,
     genre_desc TEXT,
-    genre_isNSFW BOOLEAN NOT NULL,
+    genre_isNSFW BOOLEAN DEFAULT 0,
     PRIMARY KEY(genre_id)
 );
 
@@ -103,14 +103,14 @@ CREATE TABLE table_characters(
     char_type TEXT, /*Describes the species of the character. If left null, it will default to human.*/
     char_gender TEXT, /*The contraversial one.*/
     char_age INT,
-    char_playable BOOLEAN NOT NULL,
+    char_playable BOOLEAN DEFAULT 0,
     PRIMARY KEY(char_id)
 );
 
 DROP TABLE IF EXISTS table_screenshots;
 CREATE TABLE table_screenshots(
     sshot_id INT NOT NULL AUTO_INCREMENT,
-    sshot_isCover BOOLEAN NOT NULL, /*Determines where the image will be shown. THERE CAN ONLY BE ONE COVER!!!!*/
+    sshot_isCover BOOLEAN DEFAULT 0, /*Determines where the image will be shown. THERE CAN ONLY BE ONE COVER!!!!*/
     sshot_url TEXT,
     PRIMARY KEY(sshot_id)
 );
@@ -137,7 +137,7 @@ CREATE TABLE link_developer_user(
     developer_id INT NOT NULL,
     user_id INT NOT NULL,
     developer_cDate TEXT,
-    developer_link_approved BOOLEAN NOT NULL,
+    developer_link_approved BOOLEAN DEFAULT 0,
     developer_aDate TEXT,
     developer_denied BOOLEAN DEFAULT 0,
     developer_dDate TEXT,
@@ -153,7 +153,7 @@ CREATE TABLE link_platform_user(
     platform_id INT NOT NULL,
     user_id INT NOT NULL,
     platform_cDate TEXT,
-    platform_link_approved BOOLEAN NOT NULL,
+    platform_link_approved BOOLEAN DEFAULT 0,
     platform_aDate TEXT,
     platform_denied BOOLEAN DEFAULT 0,
     platform_dDate TEXT,
@@ -170,7 +170,7 @@ CREATE TABLE link_tags_aliases(
     alias_id INT NOT NULL,
     user_id INT NOT NULL,
     tag_cDate TEXT,
-    tag_link_approved BOOLEAN NOT NULL,
+    tag_link_approved BOOLEAN DEFAULT 0,
     tag_aDate TEXT,
     PRIMARY KEY(link_id),
     FOREIGN KEY(tag_id) REFERENCES table_tags(tag_id),
@@ -185,7 +185,7 @@ CREATE TABLE link_game_developer(
     game_id INT NOT NULL,
     user_id INT NOT NULL,
     developer_cDate TEXT,
-    developer_link_approved BOOLEAN NOT NULL,
+    developer_link_approved BOOLEAN DEFAULT 0,
     developer_aDate TEXT,
     developer_denied BOOLEAN DEFAULT 0,
     developer_dDate TEXT,
@@ -203,7 +203,7 @@ CREATE TABLE link_game_platform(
     game_id INT NOT NULL,
     user_id INT NOT NULL,
     platform_cDate TEXT,
-    platform_link_approved BOOLEAN NOT NULL,
+    platform_link_approved BOOLEAN DEFAULT 0,
     platform_aDate TEXT,
     platform_denied BOOLEAN DEFAULT 0,
     platform_dDate TEXT,
@@ -221,7 +221,7 @@ CREATE TABLE link_game_tag(
     tag_id INT NOT NULL,
     user_id INT NOT NULL,
     tag_cDate TEXT,
-    tag_link_approved BOOLEAN NOT NULL,
+    tag_link_approved BOOLEAN DEFAULT 0,
     tag_aDate TEXT,
     tag_denied BOOLEAN DEFAULT 0,
     tag_dDate TEXT,
@@ -238,7 +238,7 @@ CREATE TABLE link_tag_user(
     tag_id INT NOT NULL,
     user_id INT NOT NULL,
     tag_cDate TEXT,
-    tag_link_approved BOOLEAN NOT NULL,
+    tag_link_approved BOOLEAN DEFAULT 0,
     tag_aDate TEXT,
     tag_denied BOOLEAN DEFAULT 0,
     tag_dDate TEXT,
@@ -254,7 +254,7 @@ CREATE TABLE link_alias_user(
     alias_id INT NOT NULL,
     user_id INT NOT NULL,
     alias_cDate TEXT,
-    alias_link_approved BOOLEAN NOT NULL,
+    alias_link_approved BOOLEAN DEFAULT 0,
     alias_aDate TEXT,
     PRIMARY KEY(link_id),
     FOREIGN KEY(alias_id) REFERENCES table_aliases(alias_id),
@@ -267,10 +267,10 @@ CREATE TABLE link_games(
     parent_game_id INT NOT NULL,
     child_game_id INT NOT NULL,
     user_id INT NOT NULL,
-    game_isSequel BOOLEAN NOT NULL,
-    game_isDLC BOOLEAN NOT NULL,
+    game_isSequel BOOLEAN DEFAULT 0,
+    game_isDLC BOOLEAN DEFAULT 0,
     game_cDate TEXT,
-    game_link_approved BOOLEAN NOT NULL,
+    game_link_approved BOOLEAN DEFAULT 0,
     game_aDate TEXT,
     game_denied BOOLEAN DEFAULT 0,
     game_dDate TEXT,
@@ -287,7 +287,7 @@ CREATE TABLE link_game_user(
     game_id INT NOT NULL,
     user_id INT NOT NULL,
     game_cDate TEXT,
-    game_link_approved BOOLEAN NOT NULL,
+    game_link_approved BOOLEAN DEFAULT 0,
     game_aDate TEXT,
     game_denied BOOLEAN DEFAULT 0,
     game_dDate TEXT,
@@ -315,7 +315,7 @@ CREATE TABLE link_game_age_rating(
     age_id INT NOT NULL,
     user_id INT NOT NULL,
     age_cDate TEXT,
-    age_link_approved BOOLEAN NOT NULL,
+    age_link_approved BOOLEAN DEFAULT 0,
     age_aDate TEXT,
     age_denied BOOLEAN DEFAULT 0,
     age_dDate TEXT,
@@ -333,7 +333,7 @@ CREATE TABLE link_game_language(
     lang_id INT NOT NULL,
     user_id INT NOT NULL,
     lang_cDate TEXT,
-    lang_link_approved BOOLEAN NOT NULL,
+    lang_link_approved BOOLEAN DEFAULT 0,
     lang_aDate TEXT,
     lang_denied BOOLEAN DEFAULT 0,
     lang_dDate TEXT,
@@ -351,7 +351,7 @@ CREATE TABLE link_game_character(
     char_id INT NOT NULL,
     user_id INT NOT NULL,
     char_cDate TEXT,
-    char_link_approved BOOLEAN NOT NULL,
+    char_link_approved BOOLEAN DEFAULT 0,
     char_aDate TEXT,
     char_denied BOOLEAN DEFAULT 0,
     char_dDate TEXT,
@@ -369,7 +369,7 @@ CREATE TABLE link_game_screenshot(
     sshot_id INT NOT NULL,
     user_id INT NOT NULL,
     sshot_cDate TEXT,
-    sshot_link_approved BOOLEAN NOT NULL,
+    sshot_link_approved BOOLEAN DEFAULT 0,
     sshot_aDate TEXT,
     sshot_denied BOOLEAN DEFAULT 0,
     sshot_dDate TEXT,
@@ -386,7 +386,7 @@ CREATE TABLE link_game_rating(
     rating_id INT NOT NULL,
     user_id INT NOT NULL,
     rating_cDate TEXT,
-    rating_link_approved BOOLEAN NOT NULL,
+    rating_link_approved BOOLEAN DEFAULT 0,
     rating_aDate TEXT,
     rating_denied BOOLEAN DEFAULT 0,
     rating_dDate TEXT,
@@ -404,7 +404,7 @@ CREATE TABLE link_game_genre(
     genre_id INT NOT NULL,
     user_id INT NOT NULL,
     genre_cDate TEXT,
-    genre_link_approved BOOLEAN NOT NULL,
+    genre_link_approved BOOLEAN DEFAULT 0,
     genre_aDate TEXT,
     genre_denied BOOLEAN DEFAULT 0,
     genre_dDate TEXT,
@@ -421,7 +421,7 @@ CREATE TABLE link_genre_user(
     genre_id INT NOT NULL,
     user_id INT NOT NULL,
     genre_cDate TEXT,
-    genre_link_approved BOOLEAN NOT NULL,
+    genre_link_approved BOOLEAN DEFAULT 0,
     genre_aDate TEXT,
     genre_denied BOOLEAN DEFAULT 0,
     genre_dDate TEXT,
@@ -457,7 +457,7 @@ CREATE TABLE link_character_user(
     char_id INT NOT NULL,
     user_id INT NOT NULL,
     char_cDate TEXT,
-    char_link_approved BOOLEAN NOT NULL,
+    char_link_approved BOOLEAN DEFAULT 0,
     char_aDate TEXT,
     char_denied BOOLEAN DEFAULT 0,
     char_dDate TEXT,

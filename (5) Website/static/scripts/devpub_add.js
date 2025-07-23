@@ -1,5 +1,4 @@
 console.log("develope_add.js loaded");
-console.log("game_add.js loaded");
 let devpubForm = document.getElementById("devpub_add_form");
 let mainBody = document.getElementById("page_mainbody_home");
 let errorMessage = null;
@@ -14,33 +13,34 @@ function oldErrorCheck(){
     }
 }
 
-function submitGame(event){
+function submitDevpub(event){
     event.preventDefault();
-    var signupData = {
-        "game_title": devpubForm[0].value,
-        "game_aka": devpubForm[1].value,
-        "game_desc": devpubForm[2].value,
-        "game_rdate": devpubForm[3].value
+    var devpubData = {
+        "developer_name": devpubForm[0].value,
+        "developer_desc": devpubForm[1].value,
+        "developer_foundDate": devpubForm[2].value,
+        "developer_defunctDate": devpubForm[3].value,
+        "developer_isPub": devpubForm[4].value,
     };
     $.ajax({
         type: "POST",
-        url: "/games/add/validate",
-        data: JSON.stringify(signupData),
+        url: "/devpubs/add/validate/",
+        data: JSON.stringify(devpubData),
         success: function(response){
             if (response === "success"){
                 window.location.replace("/games/");
             }
-            else if (response === "gameexists"){
+            else if (response === "developerexists"){
                 if (oldErrorCheck() === false){
                     var mainBody = document.getElementById("page_mainbody_home");
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "Game already exists";
+                    errorMessage.innerHTML = "Developer already exists";
                     mainBody.appendChild(errorMessage);
                 }
                 else{
-                    errorMessage.innerHTML = "Game already exists";
+                    errorMessage.innerHTML = "Developer already exists";
                 }
             }
             else if (response === "invaliddate"){
@@ -49,11 +49,11 @@ function submitGame(event){
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "Invalid releaase date";
+                    errorMessage.innerHTML = "Invalid Founding or Defunct date";
                     mainBody.appendChild(errorMessage);
                 }
                 else{
-                    errorMessage.innerHTML = "Invalid releaase date";
+                    errorMessage.innerHTML = "Invalid Founding or Defunct date";
                 }
             }
             else{
@@ -73,4 +73,4 @@ function submitGame(event){
     });
 }
 
-devpubForm.addEventListener("submit", submitGame);
+devpubForm.addEventListener("submit", submitDevpub);

@@ -91,3 +91,20 @@ def game_get_denial_reason(game_id):
             return None
     except:
         return None
+    
+'''DEVPUBS'''
+def devpub_add_user_link(developer_id, user_id, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("INSERT INTO link_developer_user (developer_id, user_id, developer_cDate) VALUES(%s, %s, %s)", (developer_id, user_id, get_time(no_brackets=True),))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except:
+        return False

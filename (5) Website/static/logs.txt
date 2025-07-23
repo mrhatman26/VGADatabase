@@ -83,3 +83,75 @@
 [2025.07.22 at 15:54:27]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=9446
 [2025.07.22 at 15:54:29]: 127.0.0.1 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
 [2025.07.22 at 15:55:02]: 127.0.0.1 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 18:46:04]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.22 at 18:46:05]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.22 at 18:46:20]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.22 at 18:46:20]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.22 at 18:46:20]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.22 at 18:46:20]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.22 at 18:46:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 18:46:24]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.22 at 18:46:48]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.22 at 18:46:52] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.22 at 18:46:52] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.22 at 18:46:53] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.22 at 18:46:54] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.22 at 19:08:47] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.22 at 20:23:15]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.07.22 at 20:23:15]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.22 at 20:23:16]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.22 at 20:24:20]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.22 at 20:24:20]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.22 at 20:24:20]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.22 at 20:24:20]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.22 at 20:24:43]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.22 at 20:24:44] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.22 at 20:45:06]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:45:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:45:51]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:46:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:47:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:48:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:49:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:49:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 20:50:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:50:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 20:50:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.22 at 20:50:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 20:50:53]192.168.1.99 (User: jonsmith55) FAILED to add a new developer named 'Apple Games'
+[2025.07.22 at 20:50:53]: 192.168.1.99 (User: jonsmith55) encountered the following error: There was an error while attempting to create a new developer
+Exception:
+'foundDate'
+[2025.07.22 at 20:52:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 20:52:34]192.168.1.99 (User: jonsmith55) FAILED to add a new developer named 'Apple Games'
+[2025.07.22 at 20:52:34]: 192.168.1.99 (User: jonsmith55) encountered the following error: There was an error while attempting to create a new developer
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 153, in debpub_add_validate
+    if test_datetime(devpub_data["foundDate"]) is False or test_datetime(devpub_data["defunctDate"]) is False:
+                     ~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'foundDate'
+
+[2025.07.22 at 21:02:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:02:17]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to add a new developer
+No exception information available.
+[2025.07.22 at 21:02:17]192.168.1.99 (User: jonsmith55) FAILED to add a new developer named 'Apple Games'
+[2025.07.22 at 21:03:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:03:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:04:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:07:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:07:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.22 at 21:07:38]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'Apple Games'
+[2025.07.22 at 21:09:24]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.07.22 at 21:09:24]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.22 at 21:09:25]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.22 at 21:09:39]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.22 at 21:09:39]: 192.168.1.99 successfully created a new account with the username of jonsmith22
+[2025.07.22 at 21:09:39]: 192.168.1.99 (User: jonsmith22) FAILED to access /users/login/ (Login)
+[2025.07.22 at 21:09:39]: 192.168.1.99 (User: jonsmith22) successfully accessed / (Home)
+[2025.07.22 at 21:10:05]: 192.168.1.99 (User: jonsmith22) successfully accessed / (Home)
+[2025.07.22 at 21:10:06] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.22 at 21:10:06] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.22 at 21:10:07] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.22 at 21:10:08] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.22 at 21:30:58] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/ (Admin: Main)

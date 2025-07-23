@@ -1,4 +1,4 @@
-import ast
+import ast, traceback
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
 from datetime import datetime as dt
@@ -110,17 +110,20 @@ def game_add_new_validate():
                         new_game_log(request.remote_addr, get_user(), game_data["game_title"])
                         return "success"
                     else:
+                        error_log(request.remote_addr, get_user(), "An error occurred while trying to create a new game")
                         new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
                         return "servererror"
                 else:
+                    error_log(request.remote_addr, get_user(), "New game already exissts")
                     new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
                     return "gameexists"
             else:
+                error_log(request.remote_addr, get_user(), "Game release date is an invalid date")
                 new_game_log(request.remote_addr, get_user(), game_data["game_title"], failed=True)
                 return "invaliddate"
         except Exception as e:
             new_game_log(request.remote_addr, get_user(), new_game_name=game_data["game_title"], failed=True)
-            error_log(request.remote_addr, get_user(), "There was an error while trying to add a new game", theException=e)
+            error_log(request.remote_addr, get_user(), "There was an error while trying to add a new game", theException=traceback.format_exc())
             return "servererror"
     else:
         access_log(request.remote_addr, get_user(), "/games/add/validate/ (New Game Validation)", failed=True, no_auth=True)
@@ -141,10 +144,37 @@ def devpub_add():
         access_log(request.remote_addr, get_user(), "/devpubs/add/ (Add Devpub)", no_auth=True, failed=True)
         return redirect("/users/login/")
 #Devpub Validate
-@app.route("/devpubs/add/validate/")
+@app.route("/devpubs/add/validate/", methods=["POST"])
 def debpub_add_validate():
     if current_user.is_authenticated:
         access_log(request.remote_addr, get_user(), "/devpubs/add/validate/ (Add Devpub Validate)")
+        devpub_data = request.get_data()
+        devpub_data = devpub_data.decode()
+        devpub_data = ast.literal_eval(devpub_data)
+        func_to_use = None
+        try:
+            if test_datetime(devpub_data["developer_foundDate"]) is False or test_datetime(devpub_data["developer_defunctDate"]) is False:
+                return "invaliddate"
+            if devpub_data["developer_isPub"] is True:
+                func_to_use = developer_check_exists
+            else:
+                func_to_use = publisher_check_exists
+            if func_to_use(devpub_data["developer_name"]) is False:
+                if devpub_add_new(devpub_data, current_user.id) is True:
+                    new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"])
+                    return "success"
+                else:
+                    error_log(request.remote_addr, get_user(), "An error occurred while trying to add a new developer")
+                    new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"], failed=True)
+                    return "servererror"
+            else:
+                error_log(request.remote_addr, get_user(), "The new developer already exists")
+                new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"], failed=True)
+                return "developerexists"
+        except Exception as e:
+            new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"], failed=True)
+            error_log(request.remote_addr, get_user(), "There was an error while attempting to create a new developer", theException=traceback.format_exc())
+            return "servererror"
     else:
         access_log(request.remote_addr, get_user(), "/devpubs/add/validate/ (Add Devpub Validate)", failed=True, no_auth=True)
         return redirect("/users/login/")
@@ -186,7 +216,7 @@ def user_login_validate():
                 return "usernotexist"
         except Exception as e:
             login_log(request.remote_addr, userdata["user_name"], failed=True)
-            error_log(request.remote_addr, userdata["user_name"], "Server error during login", e)
+            error_log(request.remote_addr, userdata["user_name"], "Server error during login", theException=traceback.format_exc())
             return "servererror"
 
 #Signup
@@ -223,7 +253,7 @@ def user_signup_validate():
                 return "userexists"
         except Exception as e:
             new_user_log(request.remote_addr, userdata["user_name"], failed=True)
-            error_log(request.remote_addr, userdata["user_name"], "Server error during user creation", e)
+            error_log(request.remote_addr, userdata["user_name"], "Server error during user creation", theException=traceback.format_exc())
             return "servererror"
         
 #Logout
@@ -275,8 +305,10 @@ def mod_approval_games_validate(game_id=0):
                 if game_approve_user_link(game_id) is True:
                     game_approve_log(request.remote_addr, get_user(), game_get_name(game_id))
                 else:
+                    error_log(request.remote_addr, get_user(), "An error occurred while trying to approve a game")
                     game_approve_log(request.remote_addr, get_user(), game_get_name(game_id), failed=True)
             else:
+                error_log(request.remote_addr, get_user(), "The game is already approved")
                 game_approve_log(request.remote_addr, get_user(), game_get_name(game_id), failed=True, already_approved=True)
             return redirect("/games/game_id=" + str(game_id))
         else:
@@ -301,12 +333,15 @@ def mod_approval_games_deny():
                         game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], denied=True)
                         return "success"
                     else:
+                        error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a game")
                         game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], denied=True, failed=True)
                         return "servererror"
                 else:
+                    error_log(request.remote_addr, get_user(), "The game is already denied")
                     game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], failed=True, already_approved=True, denied=True)
                     return "alreadydenied"
-            except:
+            except Exception as e:
+                error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a game", theException=traceback.format_exc())
                 game_approve_log(request.remote_addr, get_user(), deny_data["denial_game_title"], failed=True, denied=True)
                 return "servererror"
         else:
