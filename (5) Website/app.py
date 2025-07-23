@@ -83,9 +83,12 @@ def game_page(game_id=0):
         approval=game_get_approved(game_id)
         denial=game_get_denied(game_id)
         denial_reason = game_get_denial_reason(game_id)
+        if denial is False:
+            if game_check_release_date(game_id, game_data["game_rdate"]) is True:
+                game_data = game_get_single(game_id)
         return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
     except Exception as e:
-        print(e, flush=True)
+        error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id), failed=True)
         abort(404)
 

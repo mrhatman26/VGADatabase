@@ -139,10 +139,26 @@ def game_get_unapproved():
         cursor.close()
         database.close()
         return games
-    except Exception as e:
-        print(e)
-        pause()
+    except:
         return None
+    
+def game_check_release_date(game_id=None, game_rdate=None):
+    try:
+        if game_id is None or game_rdate is None:
+            return False
+        else:
+            if dt.strptime(game_rdate, "%Y/%m/%d") < dt.now():
+                database = mysql.connector.connect(**get_db_config(deployed))
+                cursor = database.cursor()
+                cursor.execute("UPDATE table_games SET game_rstate = 'Released' WHERE game_id = %s", (game_id,))
+                database.commit()
+                cursor.close()
+                database.close()
+                return True
+            else:
+                return False
+    except:
+        return False
 
 #Tags
 def tag_check_exists(tag, cursor=None):

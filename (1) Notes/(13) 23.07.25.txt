@@ -28,3 +28,8 @@ sure it's all still working such as adding a new game or adding a new
 developer, but I should also modify the developer list page to hide publishers
 if they arre already on the page as developers... Or maybe, just make a whole
 other page specifically for publishers? IDK.
+
+21:12: Unfortuantly, I was busy this evening. Anyway, I split the developers
+and publishers page. I feel like I should have had them in seperate tables to
+begin with, but it's too late for that now... Anyway, it's now time to
+implement tags!
