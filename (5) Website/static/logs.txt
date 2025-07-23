@@ -155,3 +155,7 @@ No exception information available.
 [2025.07.22 at 21:10:07] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
 [2025.07.22 at 21:10:08] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
 [2025.07.22 at 21:30:58] (ADMIN): 192.168.1.99 (User: jonsmith22) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.23 at 08:41:52]: 192.168.1.99 (User: jonsmith22) successfully accessed /games/gid=0 (Games List)
+[2025.07.23 at 08:41:56]: 192.168.1.99 (User: jonsmith22) successfully accessed /games/gid=9434 (Games List)
+[2025.07.23 at 08:41:57]: 192.168.1.99 (User: jonsmith22) successfully accessed /games/gid=9424 (Games List)
+[2025.07.23 at 08:42:00]: 192.168.1.99 (User: jonsmith22) successfully accessed /games/gid=0 (Games List)

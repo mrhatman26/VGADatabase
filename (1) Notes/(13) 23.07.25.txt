@@ -1,0 +1,12 @@
+8:34: Oh no, the big 13... An unlucky day it is going to be.
+Anyway, I was at university yesterday with a classmate to work together. I
+only had my laptop and so I decided to forgo writing notes to save screen
+space. Anyway, it was a slow day, but I was able to implement the adding of
+developers. I'm not quite sure whyt I did this BEFORE being able to view them,
+but that's what I'm doing today.
+Oh, but also, I need to fix the pagination yet again because the bottom one is
+showing the First and Previous buttons where it should show the opposite...
+
+8:42: So, I fixed the pagination. Turns out the bottom one had slightly
+different code where it was checking if a number was equal where it should
+have been checking if it were greater than. Odd.
