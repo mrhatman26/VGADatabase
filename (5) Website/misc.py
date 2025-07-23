@@ -1,4 +1,4 @@
-import datetime as dt
+import datetime as dt, re
 
 def pause(message=None):
     if message is None:
@@ -17,17 +17,17 @@ def get_time(no_brackets=False):
     else:
         return str(current_time.strftime("%Y.%m.%d at %H:%M:%S"))
     
-def get_current_page(gid, no_results=10):
+def get_current_page(pid, no_results=10):
     current_page = 0
-    if gid <= 0:
+    if pid <= 0:
         return 0
     else:
         while True:
-            if gid >= no_results:
+            if pid >= no_results:
                 current_page += 1
-                gid -= 10
+                pid -= no_results
             else:
-                if gid > 0:
+                if pid > 0:
                     current_page += 1
                 break
         return current_page
@@ -38,3 +38,25 @@ def test_datetime(date):
         return True
     except:
         return False
+    
+def get_no_pages(command, cursor, pid, no_results=10):
+    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+    command = command.replace(str(pid) + ", ", "0 ,")
+    cursor.execute(command)
+    fetch = cursor.fetchall()[0][0]
+    no_pages = 1
+    if fetch <= 0:
+        no_pages =  0
+    else:
+        while True:
+            fetch -= no_results
+            no_pages += 1
+            if fetch < 1:
+                break
+    return no_pages
+
+def get_total_items(command, cursor):
+    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+    command = command.split(" ORDER")[0]
+    cursor.execute(command)
+    return cursor.fetchall()[0][0]

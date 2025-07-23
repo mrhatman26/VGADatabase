@@ -2,7 +2,7 @@ import mysql.connector, re, traceback
 from datetime import datetime
 from db_config import *
 from db_handler_links import *
-from misc import get_new_table_id, pause
+from misc import get_new_table_id, pause, get_no_pages, get_total_items
 from global_vars import deployed
 
 #Games 
@@ -39,13 +39,13 @@ def game_get_name(game_id):
     except:
         return None
     
-def game_get_all(gid=None, no_pages=10):
+def game_get_selection(pid=None, no_results=10):
     games = []
-    if gid is None:
-        gid = 0
+    if pid is None:
+        pid = 0
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
-    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, 11", (gid,))
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, %s", (pid, no_results + 1,))
     fetch = cursor.fetchall()
     for game in fetch:
         games.append({
@@ -58,11 +58,12 @@ def game_get_all(gid=None, no_pages=10):
             "game_url": game[6]
         })
     statement = cursor.statement
-    no_pages = get_no_game_pages(statement, cursor, gid, no_pages)
-    total_games = get_total_games(cursor.statement, cursor)
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+    total_games = get_total_items(statement, cursor)
     cursor.close()
     database.close()
     return (games, no_pages, total_games)
+
 
 def game_get_single(game_id=0):
     try:
@@ -127,7 +128,7 @@ def game_get_unapproved():
         games = []
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT table_games.game_id, table_games.game_title, table_games.game_rdate FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 0")
+        cursor.execute("SELECT table_games.game_id, table_games.game_title, table_games.game_rdate FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 0 AND link_game_user.game_denied = 0")
         fetch = cursor.fetchall()
         for game in fetch:
             games.append({
@@ -142,30 +143,6 @@ def game_get_unapproved():
         print(e)
         pause()
         return None
-
-def get_no_game_pages(command, cursor, gid, no_pages=10):
-    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
-    command = command.replace(str(gid) + ", ", "0 ,")
-    cursor.execute(command)
-    fetch = cursor.fetchall()[0][0]
-    no_pages =  round(fetch / no_pages)
-    if no_pages < 1 and fetch > 0:
-        remander = fetch
-    else:
-        remander = fetch % no_pages
-    if remander > 0:
-        while True:
-            remander -= 10
-            no_pages += 1
-            if remander < 1:
-                break
-    return no_pages
-
-def get_total_games(command, cursor):
-    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
-    command = command.split(" ORDER")[0]
-    cursor.execute(command)
-    return cursor.fetchall()[0][0]
 
 #Tags
 def tag_check_exists(tag, cursor=None):
@@ -347,6 +324,33 @@ def devpub_add_new(devpub_data, user_id):
         print(traceback.format_exc())
         pause()
         return False
+
+def devpub_get_selection(pid=None, no_results=10):
+    devpubs = []
+    if pid is None:
+        pid = 0
+    database = mysql.connector.connect(**get_db_config(deployed))
+    cursor = database.cursor()
+    cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (pid, no_results + 1))
+    fetch = cursor.fetchall()
+    import pyperclip
+    pyperclip.copy(str(cursor.statement))
+    for developer in fetch:
+        devpubs.append({
+            "developer_id": developer[0],
+            "developer_name": developer[1],
+            "developer_desc": developer[2],
+            "developer_foundDate": developer[3],
+            "developer_status": developer[4],
+            "developer_defunctDate": developer[5],
+            "developer_isPub": developer[6]
+        })
+    statement = cursor.statement
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+    total_devpubs = get_total_items(statement, cursor)
+    cursor.close()
+    database.close()
+    return (devpubs, no_pages, total_devpubs)
 
 #Languages
 def language_check_exists(language):

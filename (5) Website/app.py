@@ -51,21 +51,24 @@ def home():
 #Games
 #Game List
 @app.route("/games/")
-@app.route("/games/gid=<gid>")
-def game_list(gid=0, no_results=10):
+@app.route("/games/pid=<pid>")
+def game_list(pid=0, no_results=10):
     try:
-        gid = int(gid)
-        games = game_get_all(gid)
-        current_page = get_current_page(gid, no_results)
-        access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)")
-        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
+        pid = int(pid)
+        games = game_get_selection(pid)
+        current_page = get_current_page(pid, no_results)
+        access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)")
+        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
     except Exception as e:
         try:
-            games = game_get_all(0)
-            access_log(request.remote_addr, get_user(), "/games/gid=" + str(gid) + " (Games List)", failed=True, default=True)
-            current_page = get_current_page(gid, no_results)
-            return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, gid=gid, current_page=current_page, total_results=games[2])
+            games = game_get_selection(0)
+            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected game page", theException=traceback.format_exc())
+            current_page = get_current_page(pid, no_results)
+            return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
         except:
+            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default game page. Are there no games?", theException=traceback.format_exc())
             return render_template("games/game_list.html", page_name="All Games", c_version=version)
     
 #Individual Game Page
@@ -132,7 +135,26 @@ def game_add_new_validate():
     
 #Developers & Publishers
 #Main (TBD)
-#@app.route("/devpubs/")
+@app.route("/devpubs/")
+@app.route("/devpubs/pid=<pid>")
+def devpub_list(pid=0, no_results=10):
+    try:
+        pid = int(pid)
+        devpubs = devpub_get_selection(pid)
+        current_page = get_current_page(pid, no_results)
+        access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)")
+        return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+    except Exception as e:
+        try:
+            devpubs = devpub_get_selection(0)
+            access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected devpub page", theException=traceback.format_exc())
+            current_page = get_current_page(pid, no_results)
+            return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+        except:
+            access_log(request.remote_addr, get_user(), "/devpubs/pid=" + str(pid) + " (Devpubs List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default devpub page. Are there no devpubs?", theException=traceback.format_exc())
+            return render_template("devpubs/devpub_list.html", page_name="All Developers/Publishers", c_version=version)
 
 #Add Devpub
 @app.route("/devpubs/add/")

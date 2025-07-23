@@ -10,3 +10,10 @@ showing the First and Previous buttons where it should show the opposite...
 8:42: So, I fixed the pagination. Turns out the bottom one had slightly
 different code where it was checking if a number was equal where it should
 have been checking if it were greater than. Odd.
+
+9:47: I've made a whole bunch of changes because a lot of smaller things
+weren't working as they should. One of those was, yet again, pagination. Yay.
+Anyway, I've implemented the page to show developers, but it turns out that,
+for some reason, during the loading, they were added twice. So, I'm going to
+need to fix that which will mean sitting around waiting for the data to be
+loaded again...
