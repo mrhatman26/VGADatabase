@@ -44,7 +44,7 @@ def get_no_pages(command, cursor, pid, no_results=10):
     command = command.replace(str(pid) + ", ", "0 ,")
     cursor.execute(command)
     fetch = cursor.fetchall()[0][0]
-    no_pages = 1
+    no_pages = 0
     if fetch <= 0:
         no_pages =  0
     else:
