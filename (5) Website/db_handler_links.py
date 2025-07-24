@@ -92,6 +92,21 @@ def game_get_denial_reason(game_id):
     except:
         return None
     
+def game_get_approval_date(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT game_aDate FROM link_game_user WHERE game_id = %s", (game_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+    
 '''DEVPUBS'''
 #Check
 def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=None):
@@ -158,6 +173,21 @@ def devpub_get_denial_reason(developer_id):
             return None
     except:
         return None
+    
+def devpub_get_approval_date(developer_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT developer_aDate FROM link_developer_user WHERE developer_id = %s", (developer_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except Exception as e:
+        return None
 
 #Add
 def devpub_add_user_link(developer_id, user_id, database=None, cursor=None):
@@ -182,6 +212,18 @@ def devpub_approve_user_link(developer_id):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("UPDATE link_developer_user SET developer_link_approved = 1, developer_aDate = %s", (str(get_time(no_brackets=True)),))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
+    
+def devpub_deny_user_link(deny_data):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_developer_user SET developer_denied = 1, developer_dDate = %s, developer_dDes = %s WHERE developer_id = %s", (get_time(no_brackets=True), deny_data["denial_text"], deny_data["denial_developer_id"],))
         database.commit()
         cursor.close()
         database.close()

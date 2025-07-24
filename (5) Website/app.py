@@ -80,13 +80,14 @@ def game_page(game_id=0):
         if game_data is not None:
             game_title = game_data["game_title"]
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id) + " (Individual Game)")
-        approval=game_get_approved(game_id)
-        denial=game_get_denied(game_id)
+        approval = game_get_approved(game_id)
+        approval_date = game_get_approval_date(game_id)
+        denial = game_get_denied(game_id)
         denial_reason = game_get_denial_reason(game_id)
         if denial is False:
             if game_check_release_date(game_id, game_data["game_rdate"]) is True:
                 game_data = game_get_single(game_id)
-        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
+        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id) + " (Individual Game)", failed=True)
@@ -191,9 +192,10 @@ def devpub_page(devpub_id=0):
             developer_name = devpub_data["developer_name"]
         access_log(request.remote_addr, get_user(), "/devpubs/devpub_id=" + str(devpub_id) + " (Individual Devpub)")
         approval = devpub_get_approved(devpub_id)
+        approval_date = devpub_get_approval_date(devpub_id)
         denial = devpub_get_denial(devpub_id)
         denial_reason = devpub_get_denial_reason(devpub_id)
-        return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
+        return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/games/devpubs=" + str(devpub_id) + " (Individual Devpub)", failed=True)
@@ -450,7 +452,39 @@ def mod_approval_devpub_validate(developer_id=0):
     else:
         access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)", failed=True, no_auth=True)
         abort(404)
-
+#Deny
+@app.route("/mod/approvals/devpubs/deny/", methods=["POST"])
+def mod_approval_devpub_deny():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "mod/approvals/devpubs/deny/ (Mod: Devpubs Approvals Deny)")
+            deny_data = request.get_data()
+            deny_data = deny_data.decode()
+            deny_data = ast.literal_eval(deny_data)
+            deny_data["denial_developer_title"] = devpub_get_name(deny_data["denial_developer_id"])
+            try:
+                if devpub_get_denial(deny_data["denial_developer_id"]) is False:
+                    if devpub_deny_user_link(deny_data) is True:
+                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True)
+                        return "success"
+                    else:
+                        error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a devpub")
+                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True, failed=True)
+                        return "servererror"
+                else:
+                    error_log(request.remote_addr, get_user(), "The devpub is already denied")
+                    game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, already_approved=True, denied=True)
+                    return "alreadydenied"
+            except Exception as e:
+                error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a devpub", theException=traceback.format_exc())
+                game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, denied=True)
+                return "servererror"
+        else:
+            access_log(request.remote_addr, get_user(), "mod/approvals/devpubs/deny/ (Mod: Devpubs Approvals Deny)", failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "mod/approvals/devpubs/deny/ (Mod: Devpubs Approvals Deny)", failed=True, no_auth=True)
+        abort(404)
     
 '''Admin Routes'''
 #Main

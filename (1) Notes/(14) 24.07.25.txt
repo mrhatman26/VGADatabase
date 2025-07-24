@@ -3,3 +3,11 @@ ability to approve them. You can't deny them yet though. If I only I had
 another me to program with. We'd easily sort this out in a day or two...
 Except not really, we'd probably argue with each other, yay. Anyway, next is
 to implement denial of developers and then it's on to tags and genres.
+
+10:18: Minor detour: I made it so that you can see when a game was approved;
+same for devpubs. I might do the same for denials... Anyway, onto denying
+devpubs.
+
+10:36: Okay, devpubs can now be denied. One change I will make later is to add
+a page where you can see denied games, developers, etc. This will be open for
+all users to see, not just for mods.

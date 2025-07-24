@@ -314,11 +314,12 @@ def devpub_add_new(devpub_data, user_id):
             if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") < dt.now():
                 devpub_data["developer_status"] = "Open for Business"
         #Check defunct date
-        if devpub_data["developer_defunctDate"].isspace() is True or devpub_data["developer_defunctDate"] == "":
-            devpub_data["developer_defunctDate"] = None
-        else:
-            if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") < dt.now():
-                devpub_data["developer_status"] = "Defunct"
+        if devpub_data["developer_defunctDate"] is not None:
+            if devpub_data["developer_defunctDate"].isspace() is True or devpub_data["developer_defunctDate"] == "":
+                devpub_data["developer_defunctDate"] = None
+            else:
+                if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") < dt.now():
+                    devpub_data["developer_status"] = "Defunct"
         cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES (%s, %s, %s, %s, %s, %s)", (devpub_data["developer_name"], devpub_data["developer_desc"], devpub_data["developer_foundDate"], devpub_data["developer_status"], devpub_data["developer_defunctDate"], devpub_data["developer_isPub"],))
         database.commit()
         devpub_data["developer_id"] = devpub_get_id(devpub_data["developer_name"], devpub_data["developer_isPub"])

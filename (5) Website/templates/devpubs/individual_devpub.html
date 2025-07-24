@@ -9,7 +9,7 @@
                 {% endif %}
                 <div id="page_mainbody_home">
                         {% if devpub_data is not none %}                                
-                            <p style="display: none;" id="game_id">ID: {{ devpub_data.developer_id }}</p>
+                            <p style="display: none;" id="developer_id">ID: {{ devpub_data.developer_id }}</p>
                             {% if devpub_data.developer_desc is not none %}
                                 <p>Description: {{ devpub_data.developer_desc }}</p>
                             {% else %}
@@ -49,6 +49,12 @@
                                 {% else %}
                                     <p>This game has been denied with the following message:</p>
                                     <p>{{ denial_desc }}</p>
+                                {% endif %}
+                            {% else %}
+                                {% if devpub_data.developer_isPub is false %}
+                                    <p>This developer was approved on: {{ aDate }}</p>
+                                {% else %}
+                                    <p>This developer was approved on: {{ aDate }}</p>
                                 {% endif %}
                             {% endif %}
                         {% else %}
