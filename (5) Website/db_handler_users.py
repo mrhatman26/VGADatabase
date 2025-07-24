@@ -139,7 +139,7 @@ def user_delete(user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("DELETE FROM table_users WHERE user_id = %s", (str(user_id),))
+        cursor.execute("UPDATE table_users SET user_name = 'DELETED', user_pass = 'DELETED', user_email = null, user_desc = null, user_pfp = null, user_isAdmin = 0, user_isMod = 0 WHERE user_id = %s", (str(user_id),))
         database.commit()
         cursor.close()
         database.close()

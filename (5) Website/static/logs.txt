@@ -54,3 +54,67 @@
 [2025.07.24 at 10:36:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10157 (Individual Devpub)
 [2025.07.24 at 10:36:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10162 (Individual Devpub)
 [2025.07.24 at 10:37:24]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.24 at 10:41:23]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.24 at 10:41:25]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.24 at 10:41:49]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.24 at 10:41:49]: 192.168.1.99 successfully created a new account with the username of CheeseMan35
+[2025.07.24 at 10:41:49]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.24 at 10:42:01]: 192.168.1.99 successfully logged in as CheeseMan35
+[2025.07.24 at 10:42:01]: 192.168.1.99 (User: CheeseMan35) successfully accessed / (Home)
+[2025.07.24 at 10:42:04] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.24 at 10:42:05] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:42:09] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/swap_admin/user_id=2 (Admin: Swap Admin Status)
+[2025.07.24 at 10:42:09] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully swapped admin status to True
+[2025.07.24 at 10:42:09] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:42:12]: 192.168.1.99 (User: CheeseMan35) successfully accessed /games/pid=0 (Games List)
+[2025.07.24 at 10:42:14]: 192.168.1.99 (User: CheeseMan35) successfully accessed /mod/ (Mod: Main)
+[2025.07.24 at 10:42:15]: 192.168.1.99 (User: CheeseMan35) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.24 at 10:42:17] (ADMIN): 192.168.1.99 (User: CheeseMan35) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.24 at 10:42:19]: 192.168.1.99 (User: CheeseMan35) successfully accessed /mod/ (Mod: Main)
+[2025.07.24 at 10:42:20] (ADMIN): 192.168.1.99 (User: CheeseMan35) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.24 at 10:42:23]: 192.168.1.99 (User: CheeseMan35) successfully accessed /mod/ (Mod: Main)
+[2025.07.24 at 10:42:23] (ADMIN): 192.168.1.99 (User: CheeseMan35) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.24 at 10:42:24] (ADMIN): 192.168.1.99 (User: CheeseMan35) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:42:28] (ADMIN): 192.168.1.99 (User: CheeseMan35) successfully accessed admin resource /admin/management/users/delete/user_id=2 (Admin: User Delete)
+[2025.07.24 at 10:42:28] (ADMIN): 192.168.1.99 (User: DELETED) FAILED to access admin resource/admin/management/users/ (Admin: User Management) as the user was not logged in.
+[2025.07.24 at 10:42:32]: 192.168.1.99 (User: DELETED) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.24 at 10:42:33]: 192.168.1.99 (User: DELETED) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.24 at 10:42:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:43:26]: 192.168.1.99 (User: DELETED) successfully accessed /users/logout/ (Logout)
+[2025.07.24 at 10:43:26]: 192.168.1.99 (User: DELETED) successfully logged out of their account
+[2025.07.24 at 10:43:26]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.24 at 10:43:28]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.24 at 10:43:50]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.24 at 10:43:50]: 192.168.1.99 successfully created a new account with the username of CheeseMan36
+[2025.07.24 at 10:43:50]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.07.24 at 10:44:05]: 192.168.1.99 FAILED to log in as CheeseMan35
+[2025.07.24 at 10:44:05]: 192.168.1.99 (User: CheeseMan35) encountered the following error: User does not exist
+No exception information available.
+[2025.07.24 at 10:44:11]: 192.168.1.99 FAILED to log in as CheeseMan35
+[2025.07.24 at 10:44:11]: 192.168.1.99 (User: CheeseMan35) encountered the following error: User does not exist
+No exception information available.
+[2025.07.24 at 10:44:14] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:44:17]: 192.168.1.99 successfully logged in as CheeseMan36
+[2025.07.24 at 10:44:17]: 192.168.1.99 (User: CheeseMan36) successfully accessed / (Home)
+[2025.07.24 at 10:44:22] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/swap_admin/user_id=3 (Admin: Swap Admin Status)
+[2025.07.24 at 10:44:22] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully swapped admin status to True
+[2025.07.24 at 10:44:22] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:44:24]: 192.168.1.99 (User: CheeseMan36) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.24 at 10:44:25] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.24 at 10:44:26] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:44:48] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:44:51] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:44:51] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:45:33] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:45:34] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:45:34] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:45:59] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:46:11] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:46:11] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:46:37] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:46:37] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:46:38] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:46:38] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.07.24 at 10:47:36] (ADMIN): 192.168.1.99 (User: CheeseMan36) successfully accessed admin resource /admin/management/users/delete/user_id=3 (Admin: User Delete)
+[2025.07.24 at 10:47:36] (ADMIN): 192.168.1.99 (User: CheeseMan36) was automatically logged out of their account
+[2025.07.24 at 10:47:36]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)

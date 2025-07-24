@@ -558,7 +558,7 @@ def admin_user_delete(user_id):
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/users/delete/user_id=" + str(user_id) + " (Admin: User Delete)", admin=True)
             user_delete(user_id)
-            if user_id == current_user.id:
+            if user_id == str(current_user.id):
                 login_log(request.remote_addr, get_user(), logout=True, admin=True, auto=True)
                 logout_user()
                 return redirect("/")
