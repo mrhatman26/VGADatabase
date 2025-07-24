@@ -107,6 +107,87 @@ def game_get_approval_date(game_id):
     except:
         return None
     
+'''Tags'''
+#Check
+def tag_check_game_link_exists(tag_id, game_id, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("SELECET * FROM link_game_tag WHERE tag_id = %s AND game_id = %s", (tag_id, game_id))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
+        return False
+#Get
+def tag_get_approved(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_link_approved FROM link_tag_user WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return bool(fetch[0][0])
+        else:
+            return False
+    except:
+        return False
+    
+def tag_get_approval_date(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_aDate FROM link_tag_user WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except Exception as e:
+        return None
+    
+def tag_get_denial(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_denied FROM link_tag_user WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return bool(fetch[0][0])
+        else:
+            return None
+    except:
+        return None
+    
+def tag_get_denial_reason(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_dDes FROM link_tag_user WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+    
 '''DEVPUBS'''
 #Check
 def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=None):

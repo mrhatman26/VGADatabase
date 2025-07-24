@@ -161,33 +161,87 @@ def game_check_release_date(game_id=None, game_rdate=None):
         return False
 
 #Tags
-def tag_check_exists(tag, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (str(tag),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return True
-    else:
+def tag_check_exists(tag, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if cursor is None or database is None:
+            no_cursor = True
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (tag,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return True
+        else:
+            return False
+    except:
         return False
     
 def tag_get_id(tag, cursor=None):
-    if cursor is None:
+    try:
+        if cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (str(tag),))
+        fetch = cursor.fetchall()
+        if cursor is None:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+    
+def tag_get_selection(pid=None, no_results=10):
+    try:
+        tags = []
+        if pid is None:
+            pid = 0
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-    cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (str(tag),))
-    fetch = cursor.fetchall()
-    if cursor is None:
+        cursor.execute("SELECT * FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 1 ORDER BY table_tags.tag_id DESC LIMIT %s, %s", (pid, no_results + 1,))
+        fetch = cursor.fetchall()
+        for tag in fetch:
+            tags.append({
+                "tag_id": tag[0],
+                "tag_name": tag[1],
+                "tag_decs": tag[2],
+                "tag_type": tag[3],
+                "tag_isNSFW": bool(tag[4])
+            })
+        statement = cursor.statement
+        no_pages = get_no_pages(statement, cursor, pid, no_results)
+        total_tags = get_total_items(statement, cursor)
         cursor.close()
         database.close()
-    if len(fetch) > 0:
-        return fetch[0][0]
-    else:
+        return (tags, no_pages, total_tags)
+    except:
         return None
+
+def tag_get_individual(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT * FROM table_tags WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            fetch = fetch[0]
+            return {
+                    "tag_id": fetch[0],
+                    "tag_name": fetch[1],
+                    "tag_desc": fetch[2],
+                    "tag_type": fetch[3],
+                    "tag_isNSFW": bool(fetch[4])
+                }
+        else:
+            return None
+    except:
+        return None        
     
 #Aliases
 def alias_check_exists(alias):

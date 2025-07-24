@@ -15,6 +15,7 @@
             <ul>
                 <a href="{{ url_for('home') }}" class="nav_link"><li>About</li></a>
                 <a href="{{ url_for('game_list') }}" class="nav_link"><li>Games</li></a>
+                <a href="{{ url_for('tag_list') }}" class="nav_link"><li>Tags</li></a>
                 <a href="{{ url_for('developer_list') }}" class="nav_link"><li>Developers</li></a>
                 <a href="{{ url_for('publisher_list') }}" class="nav_link"><li>Publishers</li></a>
                 {% if current_user.is_authenticated %}

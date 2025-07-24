@@ -7,7 +7,7 @@ from misc import pause, get_new_table_id, get_time
 from datetime import datetime as dt
 
 def admin_add_scraped_data(game_dict, user_id, database, cursor):
-    #try:
+    try:
         #Add game data to database
         release_date = game_dict["game_release_year"] + "/" + game_dict["game_release_month"] + "/" + game_dict["game_release_day"]
         released = "Unreleased"
@@ -56,15 +56,18 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                     database.commit()
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:
-            if tag_check_exists(tag, cursor) is False:
-                cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, None, False,))
+            tag_exists = tag_check_exists(tag, database, cursor)
+            if tag_exists is False:
+                cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, "Normal", False,))
                 database.commit()
             tag_id = tag_get_id(tag, cursor)
             if tag_id is not None:
-                cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(game_id), str(tag_id), str(user_id), current_time, True, current_time,))
-                database.commit()
-                cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s)", (str(tag_id), str(user_id), current_time, True, current_time,))
-                database.commit()
+                if tag_check_game_link_exists(tag_id, game_id, database, cursor) is False:
+                    cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(game_id), str(tag_id), str(user_id), current_time, True, current_time,))
+                    database.commit()
+                if tag_exists is False:
+                    cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s)", (str(tag_id), str(user_id), current_time, True, current_time,))
+                    database.commit()
         #Add genres to database and link to game and user
         for genre in game_dict["game_genres"]:
             genre_id = None
@@ -78,8 +81,8 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                 cursor.execute("INSERT INTO link_genre_user (genre_id, user_id, genre_cDate, genre_link_approved, genre_aDate) VALUES(%s, %s, %s, %s, %s)", (str(genre_id), str(user_id), current_time, True, current_time,))
                 database.commit()
         return True
-    #except Exception as e:
-    #    return False
+    except Exception as e:
+        return False
     
 #Users
 def admin_swap_stat(user_id, swap_mod=False):

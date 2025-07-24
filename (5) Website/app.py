@@ -137,6 +137,47 @@ def game_add_new_validate():
         new_game_log(request.remote_addr, get_user(), failed=True)
         return "servererror"
     
+#Tags
+@app.route("/tags/")
+@app.route("/tags/pid=<pid>")
+def tag_list(pid=0, no_results=10):
+    try:
+        pid = int(pid)
+        tags = tag_get_selection(pid)
+        current_page = get_current_page(pid, no_results)
+        access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)")
+        return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2])
+    except Exception as e:
+        try:
+            tags = tag_get_selection(0)
+            access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected tag page", theException=traceback.format_exc())
+            current_page = get_current_page(pid, no_results)
+            return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, devpub_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2])
+        except:
+            access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)", failed=True, default=True)
+            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default tag page. Are there no tags?", theException=traceback.format_exc())
+            return render_template("tags/tag_list.html", page_name="All Tags", c_version=version)
+        
+#Individual Tag Page
+@app.route("/tags/tag_id=<tag_id>")
+def tag_page(tag_id=0):
+    try:
+        tag_data = tag_get_individual(tag_id)
+        tag_name = "No Tag?"
+        if tag_data is not None:
+            tag_name = tag_data["tag_name"]
+        access_log(request.remote_addr, get_user(), "/tags/tag_id=" + str(tag_id) + " (Individual Tag)")
+        approval = tag_get_approved(tag_id)
+        approval_date = tag_get_approval_date(tag_id)
+        denial = tag_get_denial(tag_id)
+        denial_reason = tag_get_denial_reason(tag_id)
+        return render_template("tags/individual_tag.html", page_name=tag_name, tag_data=tag_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
+    except Exception as e:
+        error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual tag page", traceback.format_exc())
+        access_log(request.remote_addr, get_user(), "/tags/tag_id=" + str(tag_id) + " (Individual Tag)", failed=True)
+        abort(404)
+    
 #Developers & Publishers (Devpubs)
 #Developer List 
 @app.route("/developers/")
@@ -197,8 +238,8 @@ def devpub_page(devpub_id=0):
         denial_reason = devpub_get_denial_reason(devpub_id)
         return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
     except Exception as e:
-        error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
-        access_log(request.remote_addr, get_user(), "/games/devpubs=" + str(devpub_id) + " (Individual Devpub)", failed=True)
+        error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual devpub page", traceback.format_exc())
+        access_log(request.remote_addr, get_user(), "/devpubs/devpubs=" + str(devpub_id) + " (Individual Devpub)", failed=True)
         abort(404)
 
 #Add Devpub
@@ -350,7 +391,7 @@ def mod_main():
         access_log(request.remote_addr, get_user(), "/mod/ (Mod: Main)", failed=True)
         abort(404)
 
-#Game Approvals
+#Developer Approvals
 @app.route("/mod/approvals/games/")
 def mod_approval_games():
     if current_user.is_authenticated:

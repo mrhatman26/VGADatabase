@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                {% if tag_data is not none %}   
+                    <h3 id="page_header">{{ tag_data.tag_name }}</h3>
+                {% else %}
+                    <h3 id="page_header">This is under attagged!</h3>
+                {% endif %}
+                <div id="page_mainbody_home">
+                        {% if tag_data is not none %}                                
+                            <p style="display: none;" id="developer_id">ID: {{ tag_data.tag_id }}</p>
+                            {% if tag_data.tag_desc is not none or tag_data.tag_desc == "" %}
+                                <p>Description: {{ tag_data.tag_desc }}</p>
+                            {% else %}
+                                <p>Description: This tag has no description</p>
+                            {% endif %}
+                            {% if tag_data.tag_type is not none %}
+                                <p>Tag Type: {{ tag_data.tag_type }}</p>
+                            {% else %}
+                                <p>Tag Type: This tag has no type</p>
+                            {% endif %}
+                            {% if tag_data.tag_isNSFW is true %}
+                                <p>This tag is Not Safe For Work (NSFW)</p>
+                            {% endif %}
+                            {% if is_approved == false %}
+                                {% if denied is false %}
+                                    {% if tag_data.developer_isPub is false %}
+                                        <p id="needs_approval">This developer is awaiting approval.</p>
+                                    {% else %}
+                                        <p id="needs_approval">This publisher is awaiting approval.</p>
+                                    {% endif %}
+                                    {% if current_user.is_mod %}
+                                        <a href="{{ url_for('mod_approval_devpub_validate', developer_id=tag_data.developer_id) }}" class="button" id="approve_button">Approve</a>
+                                        <a class="button" id="deny_button">Deny</a>
+                                        <script src="http://code.jquery.com/jquery.min.js"></script>
+                                        <script src=" {{ url_for('static', filename='scripts/devpub_denial.js') }}"></script>
+                                    {% endif %}
+                                {% else %}
+                                    <p>This game has been denied with the following message:</p>
+                                    <p>{{ denial_desc }}</p>
+                                {% endif %}
+                            {% else %}
+                                {% if tag_data.developer_isPub is false %}
+                                    <p>This developer was approved on: {{ aDate }}</p>
+                                {% else %}
+                                    <p>This developer was approved on: {{ aDate }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <p>No tag data available!</p>
+                        {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}
