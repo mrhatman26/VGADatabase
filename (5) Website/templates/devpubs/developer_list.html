@@ -22,7 +22,7 @@
                                         <p><a href="{{ url_for('developer_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('developer_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                                 {% for developer in devpub_list %}
-                                        <a href="{{ url_for('game_page', game_id=developer.game_id) }}">
+                                        <a href="{{ url_for('devpub_page', devpub_id=developer.developer_id) }}">
                                                 <div class="game_box">
                                                         <p>Name: {{ developer.developer_name }}</p>
                                                         <p>{{ developer.developer_isPub }}</p>

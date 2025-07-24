@@ -15,6 +15,10 @@ function oldErrorCheck(){
 
 function submitDevpub(event){
     event.preventDefault();
+    if (/\s/g.test(devpubForm[3].value) || devpubForm[3].value === "" || !devpubForm[3].value){
+        console.log("OMG THE DEVPUB FORM IS EMPTY!");
+        devpubForm[3].value = "NDATE";
+    }
     var devpubData = {
         "developer_name": devpubForm[0].value,
         "developer_desc": devpubForm[1].value,
@@ -27,8 +31,14 @@ function submitDevpub(event){
         url: "/devpubs/add/validate/",
         data: JSON.stringify(devpubData),
         success: function(response){
+            console.log(response);
             if (response === "success"){
-                window.location.replace("/games/");
+                if (devpubData["developer_isPub"] === "false"){
+                    window.location.replace("/developers/");
+                }
+                else{
+                    window.location.replace("/publishers/");
+                }
             }
             else if (response === "developerexists"){
                 if (oldErrorCheck() === false){
@@ -43,17 +53,30 @@ function submitDevpub(event){
                     errorMessage.innerHTML = "Developer already exists";
                 }
             }
-            else if (response === "invaliddate"){
+            else if (response === "invalidfounding"){
                 if (oldErrorCheck() === false){
                     var mainBody = document.getElementById("page_mainbody_home");
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "Invalid Founding or Defunct date";
+                    errorMessage.innerHTML = "Founding date is invalid";
                     mainBody.appendChild(errorMessage);
                 }
                 else{
-                    errorMessage.innerHTML = "Invalid Founding or Defunct date";
+                    errorMessage.innerHTML = "Founding date is invalid";
+                }
+            }
+            else if (response === "invaliddefunct"){
+                if (oldErrorCheck() === false){
+                    var mainBody = document.getElementById("page_mainbody_home");
+                    errorMessage = document.createElement("p");
+                    errorMessage.id = "errorMessage";
+                    errorMessage.style.color = "red";
+                    errorMessage.innerHTML = "Defunct date is invalid";
+                    mainBody.appendChild(errorMessage);
+                }
+                else{
+                    errorMessage.innerHTML = "Defunct date is invalid";
                 }
             }
             else{

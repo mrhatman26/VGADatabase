@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                {% if devpub_data is not none %}   
+                    <h3 id="page_header">{{ devpub_data.developer_name }}</h3>
+                {% else %}
+                    <h3 id="page_header">Boss' Out!</h3>
+                {% endif %}
+                <div id="page_mainbody_home">
+                        {% if devpub_data is not none %}                                
+                            <p style="display: none;" id="game_id">ID: {{ devpub_data.developer_id }}</p>
+                            {% if devpub_data.developer_desc is not none %}
+                                <p>Description: {{ devpub_data.developer_desc }}</p>
+                            {% else %}
+                                <p>Description: This developer has no description</p>
+                            {% endif %}
+                            {% if devpub_data.developer_foundDate is not none %}
+                                <p>Founded On: {{ devpub_data.developer_foundDate }}</p>
+                            {% else %}
+                                <P>Founded On: Unknown</P>
+                            {% endif %}
+                            {% if devpub_data.developer_status is not none %}
+                                <p>Status: {{ devpub_data.developer_status }}</p>
+                            {% else %}
+                                <p>Status: Unknown</p>
+                            {% endif %}
+                            {% if devpub_data.developer_defunctDate is not none %}
+                                <p>Defunct On: {{ devpub_data.developer_defunctDate }}</p>
+                            {% endif %}
+                            {% if devpub_data.developer_isPub is false %}
+                                <p>This is a developer</p>
+                            {% else %}
+                                <p>This is a publisher</p>
+                            {% endif %}
+                            {% if is_approved == false %}
+                                {% if denied is false %}
+                                    {% if devpub_data.developer_isPub is false %}
+                                        <p id="needs_approval">This developer is awaiting approval.</p>
+                                    {% else %}
+                                        <p id="needs_approval">This publisher is awaiting approval.</p>
+                                    {% endif %}
+                                    {% if current_user.is_mod %}
+                                        <a href="{{ url_for('mod_approval_devpub_validate', developer_id=devpub_data.developer_id) }}" class="button" id="approve_button">Approve</a>
+                                        <a class="button" id="deny_button">Deny</a>
+                                        <script src="http://code.jquery.com/jquery.min.js"></script>
+                                        <script src=" {{ url_for('static', filename='scripts/devpub_denial.js') }}"></script>
+                                    {% endif %}
+                                {% else %}
+                                    <p>This game has been denied with the following message:</p>
+                                    <p>{{ denial_desc }}</p>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            <p>No developer/publisher data available! Boss' out I'm afraid!</p>
+                        {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}

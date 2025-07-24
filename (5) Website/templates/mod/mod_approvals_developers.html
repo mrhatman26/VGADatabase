@@ -2,22 +2,22 @@
 {% block content %}
 <div id="page_mainbody">
         <div id="home_paragraph1">
-                <h3 id="page_header">Mod: Game Approvals</h3>
+                <h3 id="page_header">Mod: Developer/Publisher Approvals</h3>
                 <div id="page_mainbody_home">
-                    {% if game_data is not none and game_data|length > 0 %}
+                    {% if devpub_data is not none and devpub_data|length > 0 %}
                         <table>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Release Date</th>
+                                <th>Name</th>
+                                <th>IsPub</th>
                                 <th>Link</th>
                             </tr>
-                            {% for game in game_data %}
+                            {% for developer in devpub_data %}
                                 <tr>
-                                    <td>{{ game.game_id }}</td>
-                                    <td>{{ game.game_title }}</td>
-                                    <td>{{ game.game_rdate }}</td>
-                                    <td style="border: 0px;"><a href="{{ url_for('game_page', game_id=game.game_id) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">→</p></a></td>
+                                    <td>{{ developer.developer_id }}</td>
+                                    <td>{{ developer.developer_name }}</td>
+                                    <td>{{ developer.developer_isPub }}</td>
+                                    <td style="border: 0px;"><a href="{{ url_for('devpub_page', devpub_id=developer.developer_id ) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">→</p></a></td>
                                 </tr>
                             {% endfor %}
                         </table>
@@ -25,9 +25,9 @@
                         <table>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Release Date</th>
-                                <th>Approvals</th>
+                                <th>Name</th>
+                                <th>IsPub</th>
+                                <th>Link</th>
                             </tr>
                             <tr>
                                 <td>-</td>

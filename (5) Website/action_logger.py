@@ -196,3 +196,25 @@ def new_developer_log(ip, username, new_developer_name=None, failed=False):
             text = text + ip + " (User: " + username + ") FAILED to add a new developer with an unknown name"
     log_file.write(text)
     log_file.close()
+
+def developer_approve_log(ip, username, developer_name, denied=False, failed=False, already_approved=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if denied is False:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully approved the developer named" + developer_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the developer named" + developer_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the developer named" + developer_name + " as it was already approved"
+    else:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully denied the developer named" + developer_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the developer named" + developer_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the developer named" + developer_name + " as it was already denied"        
+    log_file.write(text)
+    log_file.close()

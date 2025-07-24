@@ -33,3 +33,6 @@ other page specifically for publishers? IDK.
 and publishers page. I feel like I should have had them in seperate tables to
 begin with, but it's too late for that now... Anyway, it's now time to
 implement tags!
+
+22:00: I'm too tired to do much else. I realised I had forgotten the approvals
+for developers/publishers. I've started that, but I'll continue it tomorrow...

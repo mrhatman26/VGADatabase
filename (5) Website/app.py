@@ -79,7 +79,7 @@ def game_page(game_id=0):
         game_title = "No Game?"
         if game_data is not None:
             game_title = game_data["game_title"]
-        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id))
+        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id) + " (Individual Game)")
         approval=game_get_approved(game_id)
         denial=game_get_denied(game_id)
         denial_reason = game_get_denial_reason(game_id)
@@ -89,7 +89,7 @@ def game_page(game_id=0):
         return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
-        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id), failed=True)
+        access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id) + " (Individual Game)", failed=True)
         abort(404)
 
 #Add Game Page
@@ -159,7 +159,7 @@ def developer_list(pid=0, no_results=10):
             error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default developer page. Are there no developers?", theException=traceback.format_exc())
             return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version)
         
-#Developer List 
+#Publisher List 
 @app.route("/publishers/")
 @app.route("/publishers/pid=<pid>")
 def publisher_list(pid=0, no_results=10):
@@ -181,6 +181,24 @@ def publisher_list(pid=0, no_results=10):
             error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default publishers page. Are there no publishers?", theException=traceback.format_exc())
             return render_template("devpubs/publisher_list.html", page_name="All Developers", c_version=version)
 
+#Individual Devpub
+@app.route("/devpubs/devpub_id=<devpub_id>")
+def devpub_page(devpub_id=0):
+    try:
+        devpub_data = devpub_get_individual(devpub_id)
+        developer_name = "No Developer?"
+        if devpub_data is not None:
+            developer_name = devpub_data["developer_name"]
+        access_log(request.remote_addr, get_user(), "/devpubs/devpub_id=" + str(devpub_id) + " (Individual Devpub)")
+        approval = devpub_get_approved(devpub_id)
+        denial = devpub_get_denial(devpub_id)
+        denial_reason = devpub_get_denial_reason(devpub_id)
+        return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, c_version=version)
+    except Exception as e:
+        error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
+        access_log(request.remote_addr, get_user(), "/games/devpubs=" + str(devpub_id) + " (Individual Devpub)", failed=True)
+        abort(404)
+
 #Add Devpub
 @app.route("/devpubs/add/")
 def devpub_add():
@@ -198,10 +216,14 @@ def debpub_add_validate():
         devpub_data = request.get_data()
         devpub_data = devpub_data.decode()
         devpub_data = ast.literal_eval(devpub_data)
-        func_to_use = None
         try:
-            if test_datetime(devpub_data["developer_foundDate"]) is False or test_datetime(devpub_data["developer_defunctDate"]) is False:
-                return "invaliddate"
+            if test_datetime(devpub_data["developer_foundDate"]) is False:
+                return "invalidfounding"
+            if devpub_data["developer_defunctDate"].isspace() is False and devpub_data["developer_defunctDate"] != "" and devpub_data["developer_defunctDate"] != "NDATE":
+                if test_datetime(devpub_data["developer_defunctDate"]) is False:
+                    return "invaliddefunct"
+            else:
+                devpub_data["developer_defunctDate"] = None
             if devpub_check_exists(devpub_data["developer_name"], devpub_data["developer_isPub"]) is False:
                 if devpub_add_new(devpub_data, current_user.id) is True:
                     new_developer_log(request.remote_addr, get_user(), devpub_data["developer_name"])
@@ -337,7 +359,7 @@ def mod_approval_games():
         else:
             abort(404)
     else:
-        abort(40)
+        abort(404)
 #Validate
 @app.route("/mod/approvals/games/game_id=<game_id>")
 def mod_approval_games_validate(game_id=0):
@@ -392,6 +414,41 @@ def mod_approval_games_deny():
             abort(404)
     else:
         access_log(request.remote_addr, get_user(), "mod/approvals/games/deny/ (Mod: Game Approvals Deny)", failed=True, no_auth=True)
+        abort(404)
+
+#Developer Approvals
+@app.route("/mod/approvals/devpubs/")
+def mod_approval_devpubs():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            devpubs = devpub_get_unapproved()
+            access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/ (Mod: Devpub Approvals)")
+            return render_template("mod/mod_approvals_developers.html", page_name="Mod: Devpub Approvals", c_version=version, devpub_data=devpubs)
+        else:
+            abort(404)
+    else:
+        abort(404)
+#Validate
+@app.route("/mod/approvals/devpubs/developer_id=<developer_id>")
+def mod_approval_devpub_validate(developer_id=0):
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)")
+            if devpub_get_approved(developer_id) is False:
+                if devpub_approve_user_link(developer_id) is True:
+                    game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id))
+                else:
+                    error_log(request.remote_addr, get_user(), "An error occurred while trying to approve a devpub")
+                    game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True)
+            else:
+                error_log(request.remote_addr, get_user(), "The devpub is already approved")
+                game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True, already_approved=True)
+            return redirect("/devpubs/devpub_id=" + str(developer_id))
+        else:
+            access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)", failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)", failed=True, no_auth=True)
         abort(404)
 
     

@@ -1,0 +1,5 @@
+10:00: Spent the last two hours implementing developer's own pages and the
+ability to approve them. You can't deny them yet though. If I only I had
+another me to program with. We'd easily sort this out in a day or two...
+Except not really, we'd probably argue with each other, yay. Anyway, next is
+to implement denial of developers and then it's on to tags and genres.

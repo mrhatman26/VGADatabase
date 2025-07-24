@@ -1,32 +1,25 @@
 
-[2025.07.23 at 21:14:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 21:14:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
-[2025.07.23 at 21:14:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
-[2025.07.23 at 21:14:32]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'Banana Bomb'
-[2025.07.23 at 21:14:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 21:14:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.23 at 21:14:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
-[2025.07.23 at 21:14:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
-[2025.07.23 at 21:14:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=9445 (Mod: Game Approvals Validate)
-[2025.07.23 at 21:14:40]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledBanana Bomb
-[2025.07.23 at 21:14:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445
-[2025.07.23 at 21:23:39]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 21:23:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
-[2025.07.23 at 21:24:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
-[2025.07.23 at 21:24:08]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'The Pirate's Life Ain't For me!'
-[2025.07.23 at 21:24:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
-[2025.07.23 at 21:24:10] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
-[2025.07.23 at 21:24:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.23 at 21:24:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
-[2025.07.23 at 21:24:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.23 at 21:24:18]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.23 at 21:24:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.23 at 21:24:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
-[2025.07.23 at 21:24:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
-[2025.07.23 at 21:24:37]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=9446 (Mod: Game Approvals Validate)
-[2025.07.23 at 21:24:37]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledThe Pirate's Life Ain't For me!
-[2025.07.23 at 21:24:37]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
-[2025.07.23 at 21:25:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
-[2025.07.23 at 21:28:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
-[2025.07.23 at 21:29:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
-[2025.07.23 at 21:30:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446
+[2025.07.24 at 09:31:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.24 at 09:32:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.24 at 09:34:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.24 at 09:34:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.24 at 09:34:32]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'FakeName Studios'
+[2025.07.24 at 09:34:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.24 at 09:34:39]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.24 at 09:34:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.24 at 09:34:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.24 at 09:35:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.24 at 09:35:23]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'SlightyCrazy Bananas'
+[2025.07.24 at 09:35:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.24 at 09:37:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10154 (Individual Devpub)
+[2025.07.24 at 09:38:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10154 (Individual Devpub)
+[2025.07.24 at 09:41:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10161 (Individual Devpub)
+[2025.07.24 at 09:42:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10161 (Individual Devpub)
+[2025.07.24 at 09:43:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10161 (Individual Devpub)
+[2025.07.24 at 09:43:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.24 at 09:43:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/developers/ (Mod: Developer Approvals)
+[2025.07.24 at 09:43:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10160 (Individual Devpub)
+[2025.07.24 at 09:58:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10160 (Individual Devpub)
+[2025.07.24 at 09:59:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/developer_id=10160 (Mod: Devpub Approvals Validate)
+[2025.07.24 at 09:59:03]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledFakeName Studios
+[2025.07.24 at 09:59:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10160 (Individual Devpub)

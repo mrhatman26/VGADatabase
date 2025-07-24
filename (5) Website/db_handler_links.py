@@ -93,6 +93,7 @@ def game_get_denial_reason(game_id):
         return None
     
 '''DEVPUBS'''
+#Check
 def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=None):
     try:
         no_cursor = False
@@ -112,6 +113,53 @@ def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=N
     except:
         return False
 
+#Get
+def devpub_get_approved(developer_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT developer_link_approved FROM link_developer_user WHERE developer_id = %s", (developer_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return bool(fetch[0][0])
+        else:
+            return False
+    except:
+        return False
+    
+def devpub_get_denial(developer_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT developer_denied FROM link_developer_user WHERE developer_id = %s", (developer_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return bool(fetch[0][0])
+        else:
+            return None
+    except:
+        return None
+    
+def devpub_get_denial_reason(developer_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT developer_dDes FROM link_developer_user WHERE developer_id = %s", (developer_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+
+#Add
 def devpub_add_user_link(developer_id, user_id, database=None, cursor=None):
     try:
         no_cursor = False
@@ -124,6 +172,19 @@ def devpub_add_user_link(developer_id, user_id, database=None, cursor=None):
         if no_cursor is True:
             cursor.close()
             database.close()
+        return True
+    except:
+        return False
+    
+#Update
+def devpub_approve_user_link(developer_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_developer_user SET developer_link_approved = 1, developer_aDate = %s", (str(get_time(no_brackets=True)),))
+        database.commit()
+        cursor.close()
+        database.close()
         return True
     except:
         return False
