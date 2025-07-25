@@ -107,6 +107,48 @@ def game_get_approval_date(game_id):
     except:
         return None
     
+def game_get_devpub_links(game_id, is_devpub=False):
+    try:
+        devpubs = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_developers.developer_id, table_developers.developer_name FROM table_developers INNER JOIN link_game_developer ON table_developers.developer_id=link_game_developer.developer_id WHERE table_developers.developer_isPub = %s and link_game_developer.game_id = %s", (is_devpub, game_id,))
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            for devpub in fetch:
+                devpubs.append({
+                    "developer_id": devpub[0],
+                    "developer_name": devpub[1].replace("_", " ").title()
+                })
+            return devpubs
+        else:
+            return None
+    except:
+        return None
+    
+def game_get_tag_links(game_id, tag_type=None):
+    try:
+        tags = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        if tag_type is None:
+            cursor.execute("SELECT table_tags.tag_id, table_tags.tag_name, table_tags.tag_type FROM table_tags INNER JOIN link_game_tag ON table_tags.tag_id=link_game_tag.tag_id WHERE link_game_tag.game_id = %s", (game_id,))
+        else:
+            cursor.execute("SELECT table_tags.tag_id, table_tags.tag_name, table_tags.tag_type FROM table_tags INNER JOIN link_game_tag ON table_tags.tag_id=link_game_tag.tag_id WHERE link_game_tag.game_id = %s AND table_tags.tag_type = %s", (game_id, tag_type,))
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            for tag in fetch:
+                tags.append({
+                    "tag_id": tag[0],
+                    "tag_name": tag[1].replace("_", " ").title(),
+                    "tag_type": tag[2].title()
+                })
+            return tags
+        else:
+            return None
+    except:
+        return None
+    
 '''Tags'''
 #Check
 def tag_check_game_link_exists(tag_id, game_id, database=None, cursor=None):
@@ -208,11 +250,14 @@ def tag_add_user_link(tag_id, user_id, database=None, cursor=None):
         return False
 
 #Update
-def tag_approve_user_link(tag_id):
+def tag_approve_user_link(tag_id, reset=False):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_tag_user SET tag_link_approved = 1, tag_aDate = %s WHERE tag_id = %s", (str(get_time(no_brackets=True)), tag_id,))
+        if reset is False:
+            cursor.execute("UPDATE link_tag_user SET tag_link_approved = 1, tag_aDate = %s WHERE tag_id = %s", (str(get_time(no_brackets=True)), tag_id,))
+        else:
+            cursor.execute("UPDATE link_tag_user SET tag_link_approved = 0, tag_aDate = null WHERE tag_id = %s", (tag_id,))
         database.commit()
         cursor.close()
         database.close()

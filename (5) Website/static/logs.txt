@@ -1,82 +1,11 @@
 
-[2025.07.25 at 13:34:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 13:34:37]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:34:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:34:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
-[2025.07.25 at 13:36:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
-[2025.07.25 at 13:36:08]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'No Hud'
-[2025.07.25 at 13:36:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:36:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 13:36:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:36:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:36:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:38:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:38:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:40:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:40:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
-[2025.07.25 at 13:41:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
-[2025.07.25 at 13:41:04]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Infinite Resources'
-[2025.07.25 at 13:41:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:41:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 13:41:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:42:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:42:27]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
-[2025.07.25 at 13:43:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
-[2025.07.25 at 13:43:42]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Gun Skins'
-[2025.07.25 at 13:43:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:45:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:45:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
-[2025.07.25 at 13:46:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
-[2025.07.25 at 13:46:02]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Magical_Girl'
-[2025.07.25 at 13:46:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 13:46:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 13:46:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 13:46:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 13:57:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 13:57:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=734 (Mod: Tag Approvals Validate)
-[2025.07.25 at 14:01:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=734 (Mod: Tag Approvals Validate)
-[2025.07.25 at 14:01:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=734 (Mod: Tag Approvals Validate)
-[2025.07.25 at 14:01:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=734 (Mod: Tag Approvals Validate)
-[2025.07.25 at 14:01:34]: 192.168.1.99 (User: jonsmith55) encountered the following error: The tag is already approved
-No exception information available.
-[2025.07.25 at 14:01:34]: 192.168.1.99 (User: jonsmith55) FAILED to approve the tag namedMagical_Girl as it was already approved
-[2025.07.25 at 14:01:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 14:02:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 14:03:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 14:03:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 14:03:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=734 (Mod: Tag Approvals Validate)
-[2025.07.25 at 14:03:12]: 192.168.1.99 (User: jonsmith55) successfully approved the tag namedMagical_Girl
-[2025.07.25 at 14:03:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 14:03:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:03:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=730 (Individual Tag)
-[2025.07.25 at 14:03:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:03:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 14:33:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:33:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
-[2025.07.25 at 14:33:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
-[2025.07.25 at 14:33:09]192.168.1.99 (User: jonsmith55) successfully added a new tag named '4t6esdzk'
-[2025.07.25 at 14:33:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:33:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 14:33:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
-[2025.07.25 at 14:33:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
-[2025.07.25 at 14:34:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
-[2025.07.25 at 14:35:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
-[2025.07.25 at 14:35:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
-[2025.07.25 at 14:35:53]: 192.168.1.99 (User: jonsmith55) successfully accessed mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)
-[2025.07.25 at 14:35:53]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to deny a tag
-No exception information available.
-[2025.07.25 at 14:35:53]: 192.168.1.99 (User: jonsmith55) FAILED to deny the tag named4t6esdzk
-[2025.07.25 at 14:39:32]: 192.168.1.99 (User: jonsmith55) successfully accessed mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)
-[2025.07.25 at 14:39:32]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to deny a tag
-No exception information available.
-[2025.07.25 at 14:39:32]: 192.168.1.99 (User: jonsmith55) FAILED to deny the tag named4t6esdzk
-[2025.07.25 at 14:40:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
-[2025.07.25 at 14:40:28]: 192.168.1.99 (User: jonsmith55) successfully accessed mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)
-[2025.07.25 at 14:40:28]: 192.168.1.99 (User: jonsmith55) successfully denied the tag named4t6esdzk
-[2025.07.25 at 14:40:28]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
-[2025.07.25 at 14:40:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 14:40:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:40:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
-[2025.07.25 at 14:40:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
-[2025.07.25 at 14:40:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=734 (Individual Tag)
-[2025.07.25 at 14:40:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=735 (Individual Tag)
+[2025.07.25 at 19:38:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/type/change/ (Change Tag Type)
+[2025.07.25 at 19:38:07]: 192.168.1.99 (User: jonsmith55) successfully changed the tag type of photo_editing to normal
+[2025.07.25 at 19:38:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=570 (Individual Tag)
+[2025.07.25 at 19:41:06]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.25 at 19:41:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=721 (Individual Tag)
+[2025.07.25 at 19:41:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/type/change/ (Change Tag Type)
+[2025.07.25 at 19:41:21]: 192.168.1.99 (User: jonsmith55) successfully changed the tag type of 8-bit_music to feature
+[2025.07.25 at 19:41:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=721 (Individual Tag)
+[2025.07.25 at 19:41:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.25 at 19:41:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)

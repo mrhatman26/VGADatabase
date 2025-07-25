@@ -87,7 +87,11 @@ def game_page(game_id=0):
         if denial is False:
             if game_check_release_date(game_id, game_data["game_rdate"]) is True:
                 game_data = game_get_single(game_id)
-        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
+        developer_links = game_get_devpub_links(game_id)
+        publisher_links = game_get_devpub_links(game_id, is_devpub=True)
+        tag_links = game_get_tag_links(game_id)
+        print(tag_links, flush=True)
+        return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, developers=developer_links, publishers=publisher_links, tags=tag_links, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/games/game_id=" + str(game_id) + " (Individual Game)", failed=True)
@@ -216,6 +220,25 @@ def tag_add_validate():
     else:
         access_log(request.remote_addr, get_user(), "/tags/add/validate/ (Add Tag Validate)", failed=True, no_auth=True)
         return redirect("/users/login/")
+
+#Change Tag Type
+@app.route("/tags/type/change/", methods=["POST"])
+def tag_change_type():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/tags/type/change/ (Change Tag Type)")
+        type_data = request.get_data()
+        type_data = type_data.decode()
+        type_data = ast.literal_eval(type_data)
+        type_data["type_tag_name"] = tag_get_name(type_data["type_tag_id"])
+        if tag_type_change(type_data) is True:
+            tag_type_change_log(request.remote_addr, get_user(), type_data["type_tag_name"], type_data["type_newtype"])
+            return "success"
+        else:
+            tag_type_change_log(request.remote_addr, get_user(), type_data["type_tag_name"], type_data["type_newtype"], failed=True)
+            return "servererror"
+    else:
+        access_log(request.remote_addr, get_user(), "/tags/type/change/ (Change Tag Type)", failed=True, no_auth=True)
+        return redirect("/login/")
     
 #Developers & Publishers (Devpubs)
 #Developer List 

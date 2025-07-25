@@ -254,3 +254,13 @@ def tag_approve_log(ip, username, tag_name, denied=False, failed=False, already_
                 text = text + ": " + ip + " (User: " + username + ") FAILED to deny the tag named" + tag_name + " as it was already denied"        
     log_file.write(text)
     log_file.close()
+
+def tag_type_change_log(ip, username, tag_name, new_type, failed=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if failed is False:
+        text = text + ": " + ip + " (User: " + username + ") successfully changed the tag type of " + tag_name + " to " + new_type
+    else:
+        text = text + ": " + ip + " (User: " + username + ") FAILED to change the tag type of " + tag_name + " to " + new_type
+    log_file.write(text)
+    log_file.close()

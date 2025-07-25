@@ -300,6 +300,19 @@ def tag_get_unapproved():
     except:
         return None
     
+def tag_type_change(type_data):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE table_tags SET tag_type = %s WHERE tag_id = %s", (type_data["type_newtype"], type_data["type_tag_id"],))
+        tag_approve_user_link(type_data["type_tag_id"], reset=True)
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
+    
 #Aliases
 def alias_check_exists(alias):
     database = mysql.connector.connect(**get_db_config(deployed))

@@ -21,3 +21,12 @@ adding, approving and denying again.
 are tags now. table_genres and its associated link tables are gone. Now to do
 the tag denials and then I can move onto allowing users to see what tags and
 developers a game has.
+
+16:12: Tag denials done and now the developersand publishers can be seen on
+individual game pages. Awkwardly, a lot of games on Steam are published by the
+developers so a lot of the data is the same, haha. Anyway, the tags are
+recieved as well, but they aren't viewable because I haven't added the HTML
+for them yet... So I should get to that...
+
+19:38: Not really sure why I made this change, but there is now a button to
+allow users to change a tag's type.

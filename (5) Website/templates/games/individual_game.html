@@ -39,6 +39,51 @@
                             {% else %}
                                 <p>This game was approved on: {{ aDate }}</p>
                             {% endif %}
+                            {% if developers is not none %}
+                                <p>Developers:</p>
+                                {% for developer in developers %}
+                                    <a href="{{ url_for('devpub_page', devpub_id=developer.developer_id) }}">
+                                        <div class="game_box">
+                                            <p>{{ developer.developer_name }}</p>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <p>Developers:</p>
+                                <div class="game_box">
+                                    <p>This game has no known developers</p>
+                                </div>
+                            {% endif %}
+                            {% if publishers is not none %}
+                                <p>Publishers:</p>
+                                {% for publisher in publishers %}
+                                    <a href="{{ url_for('devpub_page', devpub_id=publisher.developer_id) }}">
+                                        <div class="game_box">
+                                            <p>{{ publisher.developer_name }}</p>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <p>Publishers:</p>
+                                <div class="game_box">
+                                    <p>This game has no known publishers</p>
+                                </div>
+                            {% endif %}
+                            {% if tags is not none %}
+                                <p>Tags:</p>
+                                {% for tag in tags %}
+                                    <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
+                                        <div class="game_box">
+                                            <p>{{ tag.tag_name }}</p>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% else %}
+                                <p>Tags:</p>
+                                <div class="game_box">
+                                    <p>This game has no tags yet</p>
+                                </div>
+                            {% endif %}
                         {% else %}
                             <p>No game data available! Someone should fire the guys that built those robots and build better ones!</p>
                             <p>(What relation does no game data and robots have in common? If I think of something, I'll be sure to write it here!</p>

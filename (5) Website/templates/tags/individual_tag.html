@@ -16,10 +16,14 @@
                                 <p>Description: This tag has no description</p>
                             {% endif %}
                             {% if tag_data.tag_type is not none %}
-                                <p>Tag Type: {{ tag_data.tag_type }}</p>
+                                <p id="tag_type">Tag Type: {{ tag_data.tag_type }}</p>
+                                <a class="button" id="change_button">Change Type</a>
                             {% else %}
-                                <p>Tag Type: This tag has no type</p>
+                                <p id="tag_type">Tag Type: This tag has no type</p>
+                                <a class="button" id="change_button">Set Type</a>
                             {% endif %}
+                            <script src="http://code.jquery.com/jquery.min.js"></script>
+                            <script src=" {{ url_for('static', filename='scripts/change_tag_type.js') }}"></script>
                             {% if tag_data.tag_isNSFW is true %}
                                 <p>This tag is Not Safe For Work (NSFW)</p>
                             {% endif %}
