@@ -2,10 +2,24 @@ body{
     font-family: Roboto, Helvetica, Arial;
     background-color: black;
 }
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 100%;
+}
+a:hover{
+    text-decoration: none;
+    color: blue;
+    font-size: 100%;
+}
 a.nav_link{
     text-decoration: none;
     color: black;
     font-size: 20px;
+}
+a.nav_link:hover{
+    text-decoration: none;
+    color: blue;
 }
 a.button_link{
     text-decoration: none;
@@ -14,6 +28,10 @@ a.button_link{
     display: block;
     margin: auto;
     width: 50%;
+}
+a.button_link:hover{
+    text-decoration: none;
+    color: blue;
 }
 .button{
     text-decoration: none;
@@ -24,6 +42,10 @@ a.button_link{
     color: black;
     margin: auto;
     margin-bottom: 2%;
+}
+.button:hover{
+    text-decoration: none;
+    color: blue;
 }
 nav{
     text-align: center;
@@ -204,6 +226,12 @@ select{
     margin: auto;
     margin-top: 2.5%;
     font-size: 75%;
+}
+.tag_type_genre{
+    color: purple;
+}
+.tag_type_genre:hover{
+    color: blue;
 }
 
 input::-webkit-outer-spin-button,

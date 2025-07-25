@@ -71,13 +71,18 @@
                             {% endif %}
                             {% if tags is not none %}
                                 <p>Tags:</p>
-                                {% for tag in tags %}
-                                    <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
-                                        <div class="game_box">
-                                            <p>{{ tag.tag_name }}</p>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                                <div class="game_box">
+                                    {% for tag in tags %}
+                                        <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
+                                            
+                                            {% if tag.tag_type == "Normal" %}
+                                                <p>{{ tag.tag_name }}</p>
+                                            {% elif tag.tag_type == "Genre" %}
+                                                <p class="tag_type_genre">{{ tag.tag_name }}</p>
+                                            {% endif %}
+                                        </a>
+                                    {% endfor %}
+                                </div>
                             {% else %}
                                 <p>Tags:</p>
                                 <div class="game_box">
