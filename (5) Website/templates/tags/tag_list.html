@@ -5,7 +5,7 @@
                 <h3 id="page_header">All Tags</h3>
                 <div id="page_mainbody_home">
                         {% if current_user.is_authenticated %}
-                                <a href="{{ url_for('devpub_add') }}" class="button">Add New Tag</a>
+                                <a href="{{ url_for('tag_add') }}" class="button">Add New Tag</a>
                         {% endif %}
                         {% if tags_list|length > 0 %}
                                 {% set previous_pid = pid - no_results %}
@@ -24,7 +24,6 @@
                                 {% for tag in tags_list %}
                                         <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
                                                 <div class="game_box">
-                                                        <p>ID: {{ tag.tag_id }}</p>
                                                         <p>Name: {{ tag.tag_name }}</p>
                                                         <p>{{ tag.tag_type }}</p>
                                                 </div>

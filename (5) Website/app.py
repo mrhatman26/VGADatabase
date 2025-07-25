@@ -177,6 +177,45 @@ def tag_page(tag_id=0):
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual tag page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/tags/tag_id=" + str(tag_id) + " (Individual Tag)", failed=True)
         abort(404)
+
+#Add Tag
+@app.route("/tags/add/")
+def tag_add():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/tags/add/ (Add Tag)")
+        return render_template("tags/tag_add.html", page_name="Add New Tag", c_version=version)
+    else:
+        access_log(request.remote_addr, get_user(), "/tags/add/ (Add Tag)", no_auth=True, failed=True)
+        return redirect("/users/login/")
+    
+#Tag Validate
+@app.route("/tags/add/validate/", methods=["POST"])
+def tag_add_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/tags/add/validate/ (Add Tag Validate)")
+        tag_data = request.get_data()
+        tag_data = tag_data.decode()
+        tag_data = ast.literal_eval(tag_data)
+        try:
+            if tag_check_exists(tag_data["tag_name"]) is False:
+                if tag_add_new(tag_data, current_user.id) is True:
+                    new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"])
+                    return "success"
+                else:
+                    error_log(request.remote_addr, get_user(), "An error occurred while trying to add a new tag")
+                    new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"], failed=True)
+                    return "servererror"
+            else:
+                error_log(request.remote_addr, get_user(), "The new tag already exists")
+                new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"], failed=True)
+                return "tagexists"
+        except Exception as e:
+            new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"], failed=True)
+            error_log(request.remote_addr, get_user(), "There was an error while attempting to create a new tag", theException=traceback.format_exc())
+            return "servererror"
+    else:
+        access_log(request.remote_addr, get_user(), "/tags/add/validate/ (Add Tag Validate)", failed=True, no_auth=True)
+        return redirect("/users/login/")
     
 #Developers & Publishers (Devpubs)
 #Developer List 

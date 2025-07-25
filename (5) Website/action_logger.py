@@ -218,3 +218,17 @@ def developer_approve_log(ip, username, developer_name, denied=False, failed=Fal
                 text = text + ": " + ip + " (User: " + username + ") FAILED to deny the developer named" + developer_name + " as it was already denied"        
     log_file.write(text)
     log_file.close()
+
+#Tags
+def new_tag_log(ip, username, new_tag_name=None, failed=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if failed is False:
+        text = text + ip + " (User: " + username + ") successfully added a new tag named '" + new_tag_name + "'"
+    else:
+        if new_tag_name is not None:
+            text = text + ip + " (User: " + username + ") FAILED to add a new tag named '" + new_tag_name + "'"
+        else:
+            text = text + ip + " (User: " + username + ") FAILED to add a new tag with an unknown name"
+    log_file.write(text)
+    log_file.close()

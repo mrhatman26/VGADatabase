@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                <h3 id="page_header">Add a new tag</h3>
+                <div id="page_mainbody_home">
+                        <form id="tag_add_form">
+                                <p>Name:</p>
+                                <input class="textbox" type="text" id="tag_name" name="txt_tag_name" required placeholder="Tag Name">
+                                <br>
+                                <p>Description:</p>
+                                <textarea class="textbox" type="text" id="tag_desc" name="txt_tag_desc" required placeholder="We don't mean tagging walls" style="resize: none;"></textarea>
+                                <br>
+                                <p>Tag Type:</p>
+                                <select class="dropdown" id="tag_type" name="select_tag_type" required>
+                                    <option value="normal" selected>Normal</option>
+                                    <option value="genre">Genre</option>
+                                    <option value="feature">Feature</option>
+                                </select>
+                                <br>
+                                <p>Is this tag NSFW (Not Safe For Work)?:</p>
+                                <select class="dropdown" id="tag_isNSFW" name="select_tag_isNSFW" required>
+                                    <option value="1">Yes</option>
+                                    <option value="0" selected>No</option>
+                                </select>
+                                <br>
+                                <input type="submit" value="Submit" class="submit_button">
+                                <p>Note: New tags will not appear until they have been approved.</p>
+                        </form>
+                </div>
+        </div>
+</div>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<script src=" {{ url_for('static', filename='scripts/tag_add.js') }}"></script>
+{% endblock %}

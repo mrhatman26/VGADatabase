@@ -11,3 +11,11 @@ devpubs.
 10:36: Okay, devpubs can now be denied. One change I will make later is to add
 a page where you can see denied games, developers, etc. This will be open for
 all users to see, not just for mods.
+
+21:01: I spent the time after work adding the same pages for tags. I've got
+the tags list and individual tags pages done, I just need to do the other
+stuff like approvals. I had to fix the loading program again though. That's
+the reason it took so long. I thought I had fixed it, but I had actually
+broken it and so it took an hour and 20 minutes to finish. I found the problem
+was due to me missing ONE COMMA and adding that and running it again cut the
+time running down to about twenty minutes. Damn...

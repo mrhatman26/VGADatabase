@@ -2,7 +2,7 @@ import mysql.connector, re, traceback
 from datetime import datetime
 from db_config import *
 from db_handler_links import *
-from misc import get_new_table_id, pause, get_no_pages, get_total_items
+from misc import get_new_table_id, pause, get_no_pages, get_total_items, to_bool
 from global_vars import deployed
 
 #Games 
@@ -29,7 +29,6 @@ def game_get_name(game_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        print(game_id)
         cursor.execute("SELECT game_title FROM table_games WHERE game_id = %s", (game_id,))
         fetch = cursor.fetchall()
         if len(fetch) > 0:
@@ -50,7 +49,7 @@ def game_get_selection(pid=None, no_results=10):
     for game in fetch:
         games.append({
             "game_id": game[0],
-            "game_title": game[1],
+            "game_title": game[1].replace("_", " ").title(),
             "game_aka": game[2],
             "game_desc": game[3],
             "game_rdate": game[4],
@@ -77,7 +76,7 @@ def game_get_single(game_id=0):
             fetch = fetch[0]
             game_data = {
                 "game_id": fetch[0],
-                "game_title": fetch[1],
+                "game_title": fetch[1].replace("_", " ").title(),
                 "game_aka": fetch[2],
                 "game_desc": fetch[3],
                 "game_rdate": fetch[4],
@@ -114,6 +113,7 @@ def game_create_new(game_data, user_id):
             game_data["game_rstate"] = "Released"
         else:
             game_data["game_rstate"] = "Unreleased"
+        game_data["game_title"] = game_data["game_title"].replace(" ", "_").lower()
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], game_data["game_rstate"], None))
         database.commit()
         game_add_user_link(game_get_id(game_data["game_title"]), user_id, database, cursor)
@@ -133,7 +133,7 @@ def game_get_unapproved():
         for game in fetch:
             games.append({
                 "game_id": game[0],
-                "game_title": game[1],
+                "game_title": game[1].replace("_", " ").title(),
                 "game_rdate": game[2],
             })
         cursor.close()
@@ -209,7 +209,7 @@ def tag_get_selection(pid=None, no_results=10):
         for tag in fetch:
             tags.append({
                 "tag_id": tag[0],
-                "tag_name": tag[1],
+                "tag_name": tag[1].replace("_", " ").title(),
                 "tag_decs": tag[2],
                 "tag_type": tag[3],
                 "tag_isNSFW": bool(tag[4])
@@ -233,7 +233,7 @@ def tag_get_individual(tag_id):
             fetch = fetch[0]
             return {
                     "tag_id": fetch[0],
-                    "tag_name": fetch[1],
+                    "tag_name": fetch[1].replace("_", " ").title(),
                     "tag_desc": fetch[2],
                     "tag_type": fetch[3],
                     "tag_isNSFW": bool(fetch[4])
@@ -241,7 +241,23 @@ def tag_get_individual(tag_id):
         else:
             return None
     except:
-        return None        
+        return None
+
+def tag_add_new(tag_data, user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        if tag_data["tag_desc"].isspace() or tag_data["tag_desc"] == "":
+            tag_data["tag_desc"] = None
+        cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES (%s, %s, %s, %s)", (tag_data["tag_name"], tag_data["tag_desc"], tag_data["tag_type"], tag_data["tag_isNSFW"],))
+        database.commit()
+        tag_data["tag_id"] = tag_get_id(tag_data["tag_name"])
+        tag_add_user_link(tag_data["tag_id"], user_id, database=database, cursor=cursor)
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
     
 #Aliases
 def alias_check_exists(alias):
@@ -356,7 +372,7 @@ def devpub_add_new(devpub_data, user_id):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         devpub_data["developer_status"] = "Unknown"
-        devpub_data["developer_isPub"] = bool(devpub_data["developer_isPub"])
+        devpub_data["developer_isPub"] = to_bool(devpub_data["developer_isPub"])
         #Check description
         if devpub_data["developer_desc"].isspace() is True or devpub_data["developer_desc"] == "":
             devpub_data["developer_desc"] = None
@@ -374,6 +390,7 @@ def devpub_add_new(devpub_data, user_id):
             else:
                 if dt.strptime(devpub_data["developer_foundDate"], "%Y/%m/%d") < dt.now():
                     devpub_data["developer_status"] = "Defunct"
+        devpub_data["developer_name"] = devpub_data["developer_name"].replace(" ", "_").lower()
         cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES (%s, %s, %s, %s, %s, %s)", (devpub_data["developer_name"], devpub_data["developer_desc"], devpub_data["developer_foundDate"], devpub_data["developer_status"], devpub_data["developer_defunctDate"], devpub_data["developer_isPub"],))
         database.commit()
         devpub_data["developer_id"] = devpub_get_id(devpub_data["developer_name"], devpub_data["developer_isPub"])
@@ -382,9 +399,7 @@ def devpub_add_new(devpub_data, user_id):
         cursor.close()
         database.close()
         return True
-    except Exception as e:
-        print(traceback.format_exc())
-        pause()
+    except:
         return False
 
 def devpub_get_selection(pid=None, no_results=10, is_pub=False):
@@ -399,7 +414,7 @@ def devpub_get_selection(pid=None, no_results=10, is_pub=False):
         for developer in fetch:
             devpubs.append({
                 "developer_id": developer[0],
-                "developer_name": developer[1],
+                "developer_name": developer[1].replace("_", " ").title(),
                 "developer_desc": developer[2],
                 "developer_foundDate": developer[3],
                 "developer_status": developer[4],
@@ -427,7 +442,7 @@ def devpub_get_individual(developer_id):
             fetch = fetch[0]
             return {
                 "developer_id": fetch[0],
-                "developer_name": fetch[1],
+                "developer_name": fetch[1].replace("_", " ").title(),
                 "developer_desc": fetch[2],
                 "developer_foundDate": fetch[3],
                 "developer_status": fetch[4],
@@ -452,7 +467,7 @@ def devpub_get_unapproved():
             for devpub in fetch:
                 devpubs.append({
                     "developer_id": devpub[0],
-                    "developer_name": devpub[1],
+                    "developer_name": devpub[1].replace("_", " ").title(),
                     "developer_isPub": bool(devpub[2]),
                 })
             return devpubs

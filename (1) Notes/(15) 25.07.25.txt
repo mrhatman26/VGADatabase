@@ -1,0 +1,18 @@
+9:59: Made changes to the database so that all names (Apart from users) have
+spaces replaced by underscores. This will help with making the searching
+function later hopefully. When shown on the website however, the underscores
+are replaced with spaces so they are still easily readable.
+
+10:42: Fixed some devpub stuff. Specifically, Python wasn't converting the
+boolean values of isPub to the correct values, it was making them always be
+True? So I made my own function called "to_bool" which actually converts them
+to bools. It also turned out that, when mods accept developers, all of the
+developers are approved. Which is bad so I fixed it.
+
+11:33: Okay, so new tags can now be added. Lovely, I took a bit too long on
+that. Great. Anyway, I have decided that I am going to combine tags and genres
+into one thing. Genres will now be tags with the type of "genre". This will be
+the same for features if I can be bothered with them. This does mean another
+long and pointless reloading of the data, yay. But it does save me some time
+in not having to go through this whole process of list page, individual page,
+adding, approving and denying again.

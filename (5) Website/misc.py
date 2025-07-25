@@ -62,3 +62,9 @@ def get_total_items(command, cursor):
     command = command.split(" ORDER")[0]
     cursor.execute(command)
     return cursor.fetchall()[0][0]
+
+def to_bool(value, is_no=True):
+    if is_no is False:
+        return (value == "true" or value is True)
+    else:
+        return (value == "1" or value == 1)

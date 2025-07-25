@@ -1,3 +1,86 @@
 
-[2025.07.24 at 20:57:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=710 (Individual Tag)
-[2025.07.24 at 20:57:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=710 (Individual Tag)
+[2025.07.25 at 10:36:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:36:23]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to add a new developer
+No exception information available.
+[2025.07.25 at 10:36:23]192.168.1.99 (User: jonsmith55) FAILED to add a new developer named '457457'
+[2025.07.25 at 10:36:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:36:49]192.168.1.99 (User: jonsmith55) successfully added a new developer named '457457'
+[2025.07.25 at 10:36:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:37:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:37:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:37:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:37:19]192.168.1.99 (User: jonsmith55) successfully added a new developer named '57446'
+[2025.07.25 at 10:37:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:37:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:37:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:37:41]192.168.1.99 (User: jonsmith55) successfully added a new developer named '5467567'
+[2025.07.25 at 10:37:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:38:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:38:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:38:19]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'banan_bomb_games'
+[2025.07.25 at 10:38:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:39:14]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:40:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:40:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:40:13]192.168.1.99 (User: jonsmith55) successfully added a new developer named '007_studios'
+[2025.07.25 at 10:40:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.25 at 10:40:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.25 at 10:40:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.25 at 10:40:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10161 (Individual Devpub)
+[2025.07.25 at 10:40:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/developer_id=10161 (Mod: Devpub Approvals Validate)
+[2025.07.25 at 10:40:22]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledbanan_bomb_games
+[2025.07.25 at 10:40:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10161 (Individual Devpub)
+[2025.07.25 at 10:40:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.25 at 10:40:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.25 at 10:41:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.25 at 10:41:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:41:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:41:45]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'silent_piano_games'
+[2025.07.25 at 10:41:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /developers/pid=0 (Developers List)
+[2025.07.25 at 10:41:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/ (Add Devpub)
+[2025.07.25 at 10:42:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 10:42:07]192.168.1.99 (User: jonsmith55) successfully added a new developer named 'iii_games'
+[2025.07.25 at 10:42:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /publishers/pid=0 (publishers List)
+[2025.07.25 at 10:42:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.25 at 10:42:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.25 at 10:42:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10163 (Individual Devpub)
+[2025.07.25 at 10:42:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/developer_id=10163 (Mod: Devpub Approvals Validate)
+[2025.07.25 at 10:42:13]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledsilent_piano_games
+[2025.07.25 at 10:42:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10163 (Individual Devpub)
+[2025.07.25 at 10:42:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.25 at 10:42:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10164 (Individual Devpub)
+[2025.07.25 at 10:42:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/developer_id=10164 (Mod: Devpub Approvals Validate)
+[2025.07.25 at 10:42:19]: 192.168.1.99 (User: jonsmith55) successfully approved the game titlediii_games
+[2025.07.25 at 10:42:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/devpub_id=10164 (Individual Devpub)
+[2025.07.25 at 10:44:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
+[2025.07.25 at 10:45:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.25 at 10:45:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.25 at 10:45:22]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'apple_sauce_adventure'
+[2025.07.25 at 10:45:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
+[2025.07.25 at 10:45:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.25 at 10:46:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.25 at 10:46:08]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'innit_bruv_london_simulator'
+[2025.07.25 at 10:46:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
+[2025.07.25 at 10:46:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.25 at 10:46:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.25 at 10:46:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445 (Individual Game)
+[2025.07.25 at 10:46:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=9445 (Mod: Game Approvals Validate)
+[2025.07.25 at 10:46:25]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledapple_sauce_adventure
+[2025.07.25 at 10:46:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9445 (Individual Game)
+[2025.07.25 at 10:46:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.25 at 10:46:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446 (Individual Game)
+[2025.07.25 at 10:46:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=9446 (Mod: Game Approvals Validate)
+[2025.07.25 at 10:46:31]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledinnit_bruv_london_simulator
+[2025.07.25 at 10:46:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9446 (Individual Game)
+[2025.07.25 at 10:46:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=710 (Individual Tag)
+[2025.07.25 at 10:48:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0 (Games List)
+[2025.07.25 at 11:27:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.25 at 11:27:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.25 at 11:28:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.25 at 11:29:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.25 at 11:29:21]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.25 at 11:30:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /devpubs/add/validate/ (Add Devpub Validate)
+[2025.07.25 at 11:32:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.25 at 11:32:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.25 at 11:32:34]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Construction Simulation'
+[2025.07.25 at 11:32:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)

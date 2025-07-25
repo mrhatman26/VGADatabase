@@ -28,6 +28,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         database.commit()
         #Add developer to database and link to game
         for developer in game_dict["game_developers"]:
+            developer = developer.replace(" ", "_").lower()
             developer_exists = devpub_check_exists(developer, False, database, cursor)
             if developer_exists is False:
                 cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES(%s, %s, %s, %s, %s, %s)", (str(developer), None, None, None, None, False,))
@@ -42,6 +43,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                     database.commit()
         #Add publishers to database
         for publisher in game_dict["game_developers"]:
+            publisher = publisher.replace(" ", "_").lower()
             publisher_exists = devpub_check_exists(publisher, True, database, cursor)
             if publisher_exists is False:
                 cursor.execute("INSERT INTO table_developers (developer_name, developer_desc, developer_foundDate, developer_status, developer_defunctDate, developer_isPub) VALUES(%s, %s, %s, %s, %s, %s)", (str(publisher), None, None, None, None, True,))
@@ -56,6 +58,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                     database.commit()
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:
+            tag = tag.replace(" ", "_").lower()
             tag_exists = tag_check_exists(tag, database, cursor)
             if tag_exists is False:
                 cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, "Normal", False,))
@@ -70,6 +73,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                     database.commit()
         #Add genres to database and link to game and user
         for genre in game_dict["game_genres"]:
+            genre = genre.replace(" ", "_").lower()
             genre_id = None
             if genre_check_eixsts(genre, cursor) is False:
                 cursor.execute("INSERT INTO table_genres (genre_name, genre_desc, genre_isNSFW) VALUES(%s, %s, %s)", (genre, None, False,))

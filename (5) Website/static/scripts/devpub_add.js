@@ -1,6 +1,7 @@
 console.log("develope_add.js loaded");
 let devpubForm = document.getElementById("devpub_add_form");
 let mainBody = document.getElementById("page_mainbody_home");
+let defunctDate = "";
 let errorMessage = null;
 
 function oldErrorCheck(){
@@ -16,14 +17,16 @@ function oldErrorCheck(){
 function submitDevpub(event){
     event.preventDefault();
     if (/\s/g.test(devpubForm[3].value) || devpubForm[3].value === "" || !devpubForm[3].value){
-        console.log("OMG THE DEVPUB FORM IS EMPTY!");
-        devpubForm[3].value = "NDATE";
+        defunctDate = "NDATE";
+    }
+    else{
+        defunctDate = devpubForm[3].value;
     }
     var devpubData = {
         "developer_name": devpubForm[0].value,
         "developer_desc": devpubForm[1].value,
         "developer_foundDate": devpubForm[2].value,
-        "developer_defunctDate": devpubForm[3].value,
+        "developer_defunctDate": defunctDate,
         "developer_isPub": devpubForm[4].value,
     };
     $.ajax({
@@ -33,7 +36,7 @@ function submitDevpub(event){
         success: function(response){
             console.log(response);
             if (response === "success"){
-                if (devpubData["developer_isPub"] === "false"){
+                if (devpubData["developer_isPub"] === "0"){
                     window.location.replace("/developers/");
                 }
                 else{

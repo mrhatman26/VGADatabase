@@ -26,7 +26,7 @@ def game_approve_user_link(game_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_game_user SET game_link_approved = 1, game_aDate = %s", (get_time(no_brackets=True),))
+        cursor.execute("UPDATE link_game_user SET game_link_approved = 1, game_aDate = %s WHERE game_id = %s", (get_time(no_brackets=True), game_id))
         database.commit()
         cursor.close()
         database.close()
@@ -188,6 +188,23 @@ def tag_get_denial_reason(tag_id):
     except:
         return None
     
+#Add
+def tag_add_user_link(tag_id, user_id, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("INSERT INTO link_tag_user (tagid, user_id, tag_cDate) VALUES(%s, %s, %s)", (tag_id, user_id, get_time(no_brackets=True),))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except:
+        return False
+    
 '''DEVPUBS'''
 #Check
 def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=None):
@@ -292,7 +309,7 @@ def devpub_approve_user_link(developer_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_developer_user SET developer_link_approved = 1, developer_aDate = %s", (str(get_time(no_brackets=True)),))
+        cursor.execute("UPDATE link_developer_user SET developer_link_approved = 1, developer_aDate = %s WHERE developer_id = %s", (str(get_time(no_brackets=True)), developer_id,))
         database.commit()
         cursor.close()
         database.close()
