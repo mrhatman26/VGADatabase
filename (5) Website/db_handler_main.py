@@ -161,14 +161,14 @@ def game_check_release_date(game_id=None, game_rdate=None):
         return False
 
 #Tags
-def tag_check_exists(tag, database=None, cursor=None):
+def tag_check_exists(tag, tag_type, database=None, cursor=None):
     try:
         no_cursor = False
         if cursor is None or database is None:
             no_cursor = True
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
-        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (tag,))
+        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (tag, tag_type,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
@@ -180,12 +180,12 @@ def tag_check_exists(tag, database=None, cursor=None):
     except:
         return False
     
-def tag_get_id(tag, cursor=None):
+def tag_get_id(tag, tag_type, cursor=None):
     try:
         if cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
-        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (str(tag),))
+        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (str(tag), tag_type,))
         fetch = cursor.fetchall()
         if cursor is None:
             cursor.close()
@@ -195,6 +195,21 @@ def tag_get_id(tag, cursor=None):
         else:
             return None
     except:
+        return None
+    
+def tag_get_name(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_name FROM table_tags WHERE tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except Exception as e:
         return None
     
 def tag_get_selection(pid=None, no_results=10):
@@ -211,7 +226,7 @@ def tag_get_selection(pid=None, no_results=10):
                 "tag_id": tag[0],
                 "tag_name": tag[1].replace("_", " ").title(),
                 "tag_decs": tag[2],
-                "tag_type": tag[3],
+                "tag_type": tag[3].title(),
                 "tag_isNSFW": bool(tag[4])
             })
         statement = cursor.statement
@@ -235,12 +250,12 @@ def tag_get_individual(tag_id):
                     "tag_id": fetch[0],
                     "tag_name": fetch[1].replace("_", " ").title(),
                     "tag_desc": fetch[2],
-                    "tag_type": fetch[3],
+                    "tag_type": fetch[3].title(),
                     "tag_isNSFW": bool(fetch[4])
                 }
         else:
             return None
-    except:
+    except Exception as e:
         return None
 
 def tag_add_new(tag_data, user_id):
@@ -249,15 +264,41 @@ def tag_add_new(tag_data, user_id):
         cursor = database.cursor()
         if tag_data["tag_desc"].isspace() or tag_data["tag_desc"] == "":
             tag_data["tag_desc"] = None
+        tag_data["tag_name"] = tag_data["tag_name"].replace(" ", "_")
         cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES (%s, %s, %s, %s)", (tag_data["tag_name"], tag_data["tag_desc"], tag_data["tag_type"], tag_data["tag_isNSFW"],))
         database.commit()
-        tag_data["tag_id"] = tag_get_id(tag_data["tag_name"])
+        tag_data["tag_id"] = tag_get_id(tag_data["tag_name"], tag_data["tag_type"])
         tag_add_user_link(tag_data["tag_id"], user_id, database=database, cursor=cursor)
         cursor.close()
         database.close()
         return True
     except:
         return False
+
+def tag_get_unapproved():
+    try:
+        tags = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_tags.tag_id, table_tags.tag_name, table_tags.tag_type, table_tags.tag_isNSFW FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 0 AND link_tag_user.tag_denied = 0")
+        fetch = cursor.fetchall()
+        import pyperclip
+        pyperclip.copy(cursor.statement)
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            for tag in fetch:
+                tags.append({
+                    "tag_id": tag[0],
+                    "tag_name": tag[1].replace("_", " ").title(),
+                    "tag_type": tag[2].title(),
+                    "tag_isNSFW": tag[3]
+                })
+            return tags
+        else:
+            return None
+    except:
+        return None
     
 #Aliases
 def alias_check_exists(alias):
@@ -281,35 +322,6 @@ def alias_get_id(alias):
     database.close()
     if len(fetch) > 0:
         return fetch[0]
-    else:
-        return None
-    
-#Genres
-def genre_check_eixsts(genre, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT genre_id FROM table_genres WHERE genre_name = %s", (str(genre),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return True
-    else:
-        return False
-
-def genre_get_id(genre, cursor=None):
-    if cursor is None:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-    cursor.execute("SELECT genre_id FROM table_genres WHERE genre_name = %s", (str(genre),))
-    fetch = cursor.fetchall()
-    if cursor is None:
-        cursor.close()
-        database.close()
-    if len(fetch) > 0:
-        return fetch[0][0]
     else:
         return None
     

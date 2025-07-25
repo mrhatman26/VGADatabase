@@ -59,11 +59,11 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:
             tag = tag.replace(" ", "_").lower()
-            tag_exists = tag_check_exists(tag, database, cursor)
+            tag_exists = tag_check_exists(tag, "normal", database, cursor)
             if tag_exists is False:
-                cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, "Normal", False,))
+                cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, "normal", False,))
                 database.commit()
-            tag_id = tag_get_id(tag, cursor)
+            tag_id = tag_get_id(tag, "normal", cursor)
             if tag_id is not None:
                 if tag_check_game_link_exists(tag_id, game_id, database, cursor) is False:
                     cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(game_id), str(tag_id), str(user_id), current_time, True, current_time,))
@@ -71,19 +71,22 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                 if tag_exists is False:
                     cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s)", (str(tag_id), str(user_id), current_time, True, current_time,))
                     database.commit()
-        #Add genres to database and link to game and user
+        #Add genres to database and link to game and user (These are considered Tags though)
         for genre in game_dict["game_genres"]:
-            genre = genre.replace(" ", "_").lower()
-            genre_id = None
-            if genre_check_eixsts(genre, cursor) is False:
-                cursor.execute("INSERT INTO table_genres (genre_name, genre_desc, genre_isNSFW) VALUES(%s, %s, %s)", (genre, None, False,))
-                database.commit()
-            genre_id = genre_get_id(genre, cursor)
-            if genre_id is not None:
-                cursor.execute("INSERT INTO link_game_genre (game_id, genre_id, user_id, genre_cDate, genre_link_approved, genre_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(game_id), str(genre_id), str(user_id), current_time, True, current_time,))
-                database.commit()
-                cursor.execute("INSERT INTO link_genre_user (genre_id, user_id, genre_cDate, genre_link_approved, genre_aDate) VALUES(%s, %s, %s, %s, %s)", (str(genre_id), str(user_id), current_time, True, current_time,))
-                database.commit()
+            if genre != "nan":
+                genre = genre.replace(" ", "_").lower()
+                genre_exists = tag_check_exists(genre, "genre", database, cursor)
+                if genre_exists is False:
+                    cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (genre, None, "genre", False,))
+                    database.commit()
+                genre_id = tag_get_id(genre, "genre", cursor)
+                if genre_id is not None:
+                    if tag_check_game_link_exists(genre_id, game_id, database, cursor) is False:
+                        cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s, %s)", (str(game_id), str(genre_id), str(user_id), current_time, True, current_time,))
+                        database.commit()
+                    if genre_exists is False:
+                        cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s)", (str(genre_id), str(user_id), current_time, True, current_time,))
+                        database.commit()
         return True
     except Exception as e:
         return False

@@ -70,15 +70,6 @@ CREATE TABLE table_users(
     PRIMARY KEY(user_id)
 );
 
-DROP TABLE IF EXISTS table_genres;
-CREATE TABLE table_genres(
-    genre_id INT NOT NULL AUTO_INCREMENT,
-    genre_name TEXT NOT NULL,
-    genre_desc TEXT,
-    genre_isNSFW BOOLEAN DEFAULT 0,
-    PRIMARY KEY(genre_id)
-);
-
 DROP TABLE IF EXISTS table_age_ratings;
 CREATE TABLE table_age_ratings(
     age_id INT NOT NULL AUTO_INCREMENT,
@@ -394,40 +385,6 @@ CREATE TABLE link_game_rating(
     PRIMARY KEY(link_id),
     FOREIGN KEY(game_id) REFERENCES table_games(game_id),
     FOREIGN KEY(rating_id) REFERENCES table_ratings(rating_id),
-    FOREIGN KEY(user_id) REFERENCES table_users(user_id)
-);
-
-DROP TABLE IF EXISTS link_game_genre;
-CREATE TABLE link_game_genre(
-    link_id INT NOT NULL AUTO_INCREMENT,
-    game_id INT NOT NULL,
-    genre_id INT NOT NULL,
-    user_id INT NOT NULL,
-    genre_cDate TEXT,
-    genre_link_approved BOOLEAN DEFAULT 0,
-    genre_aDate TEXT,
-    genre_denied BOOLEAN DEFAULT 0,
-    genre_dDate TEXT,
-	genre_dDes TEXT,
-    PRIMARY KEY(link_id),
-    FOREIGN KEY(game_id) REFERENCES table_games(game_id),
-    FOREIGN KEY(genre_id) REFERENCES table_genres(genre_id),
-    FOREIGN KEY(user_id) REFERENCES table_users(user_id)
-);
-
-DROP TABLE IF EXISTS link_genre_user;
-CREATE TABLE link_genre_user(
-    link_id INT NOT NULL AUTO_INCREMENT,
-    genre_id INT NOT NULL,
-    user_id INT NOT NULL,
-    genre_cDate TEXT,
-    genre_link_approved BOOLEAN DEFAULT 0,
-    genre_aDate TEXT,
-    genre_denied BOOLEAN DEFAULT 0,
-    genre_dDate TEXT,
-	genre_dDes TEXT,
-    PRIMARY KEY(link_id),
-    FOREIGN KEY(genre_id) REFERENCES table_genres(genre_id),
     FOREIGN KEY(user_id) REFERENCES table_users(user_id)
 );
 

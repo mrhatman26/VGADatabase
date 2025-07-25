@@ -5,7 +5,7 @@ let denyText = null;
 let submitButton = null;
 let approvalText = document.getElementById("needs_approval");
 let backButton = null;
-let devpubID = document.getElementById("developer_id");
+let tagID = document.getElementById("tag_id");
 
 function oldErrorCheck(){
     var oldErrorMessage = document.getElementById("errorMessage");
@@ -20,11 +20,11 @@ function oldErrorCheck(){
 function submitReason(){
     denialData = {
         "denial_text": denyText.value,
-        "denial_developer_id": devpubID.innerHTML.split(": ")[1]
+        "denial_tag_id": tagID.innerHTML.split(": ")[1]
     }
     $.ajax({
         type: "POST",
-        url: "/mod/approvals/devpubs/deny/",
+        url: "/mod/approvals/tags/deny/",
         data: JSON.stringify(denialData),
         success: function(response){
             if (response === "success"){
@@ -36,7 +36,7 @@ function submitReason(){
                     errorMessage = document.createElement("p");
                     errorMessage.id = "errorMessage";
                     errorMessage.style.color = "red";
-                    errorMessage.innerHTML = "This devpub has already been denied";
+                    errorMessage.innerHTML = "This tag has already been denied";
                     mainBody.appendChild(errorMessage);
                 }
             }

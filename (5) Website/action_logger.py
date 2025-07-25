@@ -232,3 +232,25 @@ def new_tag_log(ip, username, new_tag_name=None, failed=False):
             text = text + ip + " (User: " + username + ") FAILED to add a new tag with an unknown name"
     log_file.write(text)
     log_file.close()
+
+def tag_approve_log(ip, username, tag_name, denied=False, failed=False, already_approved=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if denied is False:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully approved the tag named" + tag_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the tag named" + tag_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to approve the tag named" + tag_name + " as it was already approved"
+    else:
+        if failed is False:
+            text = text + ": " + ip + " (User: " + username + ") successfully denied the tag named" + tag_name
+        else:
+            if already_approved is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the tag named" + tag_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to deny the tag named" + tag_name + " as it was already denied"        
+    log_file.write(text)
+    log_file.close()

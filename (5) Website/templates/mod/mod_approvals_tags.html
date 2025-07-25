@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="page_mainbody">
+        <div id="home_paragraph1">
+                <h3 id="page_header">Mod: Tag Approvals</h3>
+                <div id="page_mainbody_home">
+                    {% if tag_data is not none and tag_data|length > 0 %}
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Is NSFW</th>
+                                <th>Link</th>
+                            </tr>
+                            {% for tag in tag_data %}
+                                <tr>
+                                    <td>{{ tag.tag_id }}</td>
+                                    <td>{{ tag.tag_name }}</td>
+                                    <td>{{ tag.tag_type }}</td>
+                                    <td>{{ tag.tag_isNSFW }}</td>
+                                    <td style="border: 0px;"><a href="{{ url_for('tag_page', tag_id=tag.tag_id ) }}" class="button_link"><p class="button" style="margin-bottom: 2%;">→</p></a></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <table>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Is NSFW</th>
+                                <th>Link</th>
+                            </tr>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </table>
+                    {% endif %}
+                </div>
+        </div>
+</div>
+{% endblock %}

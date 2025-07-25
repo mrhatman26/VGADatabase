@@ -196,11 +196,38 @@ def tag_add_user_link(tag_id, user_id, database=None, cursor=None):
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("INSERT INTO link_tag_user (tagid, user_id, tag_cDate) VALUES(%s, %s, %s)", (tag_id, user_id, get_time(no_brackets=True),))
+        cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate) VALUES(%s, %s, %s)", (tag_id, user_id, get_time(no_brackets=True),))
         database.commit()
         if no_cursor is True:
             cursor.close()
             database.close()
+        return True
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc(), flush=True)
+        return False
+
+#Update
+def tag_approve_user_link(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_tag_user SET tag_link_approved = 1, tag_aDate = %s WHERE tag_id = %s", (str(get_time(no_brackets=True)), tag_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
+    
+def tag_deny_user_link(denial_data):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_tag_user SET tag_denied = 1, tag_dDate = %s, tag_dDes = %s", (str(get_time(no_brackets=True)), denial_data["denial_text"],))
+        database.commit()
+        cursor.close()
+        database.close()
         return True
     except:
         return False

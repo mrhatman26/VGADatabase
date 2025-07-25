@@ -197,7 +197,7 @@ def tag_add_validate():
         tag_data = tag_data.decode()
         tag_data = ast.literal_eval(tag_data)
         try:
-            if tag_check_exists(tag_data["tag_name"]) is False:
+            if tag_check_exists(tag_data["tag_name"], tag_data["tag_type"]) is False:
                 if tag_add_new(tag_data, current_user.id) is True:
                     new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"])
                     return "success"
@@ -518,13 +518,13 @@ def mod_approval_devpub_validate(developer_id=0):
             access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)")
             if devpub_get_approved(developer_id) is False:
                 if devpub_approve_user_link(developer_id) is True:
-                    game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id))
+                    developer_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id))
                 else:
                     error_log(request.remote_addr, get_user(), "An error occurred while trying to approve a devpub")
-                    game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True)
+                    developer_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True)
             else:
                 error_log(request.remote_addr, get_user(), "The devpub is already approved")
-                game_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True, already_approved=True)
+                developer_approve_log(request.remote_addr, get_user(), devpub_get_name(developer_id), failed=True, already_approved=True)
             return redirect("/devpubs/devpub_id=" + str(developer_id))
         else:
             access_log(request.remote_addr, get_user(), "/mod/approvals/devpubs/developer_id=" + str(developer_id) + " (Mod: Devpub Approvals Validate)", failed=True, no_auth=True)
@@ -545,25 +545,93 @@ def mod_approval_devpub_deny():
             try:
                 if devpub_get_denial(deny_data["denial_developer_id"]) is False:
                     if devpub_deny_user_link(deny_data) is True:
-                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True)
+                        developer_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True)
                         return "success"
                     else:
                         error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a devpub")
-                        game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True, failed=True)
+                        developer_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], denied=True, failed=True)
                         return "servererror"
                 else:
                     error_log(request.remote_addr, get_user(), "The devpub is already denied")
-                    game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, already_approved=True, denied=True)
+                    developer_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, already_approved=True, denied=True)
                     return "alreadydenied"
             except Exception as e:
                 error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a devpub", theException=traceback.format_exc())
-                game_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, denied=True)
+                developer_approve_log(request.remote_addr, get_user(), deny_data["denial_developer_title"], failed=True, denied=True)
                 return "servererror"
         else:
             access_log(request.remote_addr, get_user(), "mod/approvals/devpubs/deny/ (Mod: Devpubs Approvals Deny)", failed=True, no_auth=True)
             abort(404)
     else:
         access_log(request.remote_addr, get_user(), "mod/approvals/devpubs/deny/ (Mod: Devpubs Approvals Deny)", failed=True, no_auth=True)
+        abort(404)
+
+#Tag Approvals
+@app.route("/mod/approvals/tags/")
+def mod_approval_tags():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            tags = tag_get_unapproved()
+            access_log(request.remote_addr, get_user(), "/mod/approvals/tags/ (Mod: Tag Approvals)")
+            return render_template("mod/mod_approvals_tags.html", page_name="Mod: Tag Approvals", c_version=version, tag_data=tags)
+        else:
+            abort(404)
+    else:
+        abort(404)
+#Validate
+@app.route("/mod/approvals/tags/tag_id=<tag_id>")
+def mod_approval_tag_validate(tag_id=0):
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "/mod/approvals/tags/tag_id=" + str(tag_id) + " (Mod: Tag Approvals Validate)")
+            if tag_get_approved(tag_id) is False:
+                if tag_approve_user_link(tag_id) is True:
+                    tag_approve_log(request.remote_addr, get_user(), tag_get_name(tag_id))
+                else:
+                    error_log(request.remote_addr, get_user(), "An error occurred while trying to approve a tag")
+                    tag_approve_log(request.remote_addr, get_user(), tag_get_name(tag_id), failed=True)
+            else:
+                error_log(request.remote_addr, get_user(), "The tag is already approved")
+                tag_approve_log(request.remote_addr, get_user(), tag_get_name(tag_id), failed=True, already_approved=True)
+            return redirect("/tags/tag_id=" + str(tag_id))
+        else:
+            access_log(request.remote_addr, get_user(), "/mod/approvals/tags/developer_id=" + str(tag_id) + " (Mod: Tag Approvals Validate)", failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/mod/approvals/tags/developer_id=" + str(tag_id) + " (Mod: Tag Approvals Validate)", failed=True, no_auth=True)
+        abort(404)
+#Deny
+@app.route("/mod/approvals/tags/deny/", methods=["POST"])
+def mod_approval_tag_deny():
+    if current_user.is_authenticated:
+        if current_user.is_mod:
+            access_log(request.remote_addr, get_user(), "mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)")
+            tag_data = request.get_data()
+            tag_data = tag_data.decode()
+            tag_data = ast.literal_eval(tag_data)
+            tag_data["denial_tag_name"] = tag_get_name(tag_data["denial_tag_id"])
+            try:
+                if tag_get_denial(tag_data["denial_tag_id"]) is False:
+                    if tag_deny_user_link(tag_data) is True:
+                        tag_approve_log(request.remote_addr, get_user(), tag_data["denial_tag_name"], denied=True)
+                        return "success"
+                    else:
+                        error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a tag")
+                        tag_approve_log(request.remote_addr, get_user(), tag_data["denial_tag_name"], denied=True, failed=True)
+                        return "servererror"
+                else:
+                    error_log(request.remote_addr, get_user(), "The tag is already denied")
+                    tag_approve_log(request.remote_addr, get_user(), tag_data["denial_tag_name"], failed=True, already_approved=True, denied=True)
+                    return "alreadydenied"
+            except Exception as e:
+                error_log(request.remote_addr, get_user(), "An error occurred while trying to deny a tag", theException=traceback.format_exc())
+                tag_approve_log(request.remote_addr, get_user(), tag_data["denial_tag_name"], failed=True, denied=True)
+                return "servererror"
+        else:
+            access_log(request.remote_addr, get_user(), "mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)", failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)", failed=True, no_auth=True)
         abort(404)
     
 '''Admin Routes'''

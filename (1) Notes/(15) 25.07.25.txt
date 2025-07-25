@@ -16,3 +16,8 @@ the same for features if I can be bothered with them. This does mean another
 long and pointless reloading of the data, yay. But it does save me some time
 in not having to go through this whole process of list page, individual page,
 adding, approving and denying again.
+
+14:04: After a lot of faffing about, tags can now be approved. Oh and genres
+are tags now. table_genres and its associated link tables are gone. Now to do
+the tag denials and then I can move onto allowing users to see what tags and
+developers a game has.

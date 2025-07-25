@@ -9,7 +9,7 @@
                 {% endif %}
                 <div id="page_mainbody_home">
                         {% if tag_data is not none %}                                
-                            <p style="display: none;" id="developer_id">ID: {{ tag_data.tag_id }}</p>
+                            <p style="display: none;" id="tag_id">ID: {{ tag_data.tag_id }}</p>
                             {% if tag_data.tag_desc is not none or tag_data.tag_desc == "" %}
                                 <p>Description: {{ tag_data.tag_desc }}</p>
                             {% else %}
@@ -27,10 +27,10 @@
                                 {% if denied is false %}
                                     <p id="needs_approval">This tag is awaiting approval.</p>
                                     {% if current_user.is_mod %}
-                                        <a href="{{ url_for('mod_approval_devpub_validate', developer_id=tag_data.developer_id) }}" class="button" id="approve_button">Approve</a>
+                                        <a href="{{ url_for('mod_approval_tag_validate', tag_id=tag_data.tag_id) }}" class="button" id="approve_button">Approve</a>
                                         <a class="button" id="deny_button">Deny</a>
                                         <script src="http://code.jquery.com/jquery.min.js"></script>
-                                        <script src=" {{ url_for('static', filename='scripts/devpub_denial.js') }}"></script>
+                                        <script src=" {{ url_for('static', filename='scripts/tag_denial.js') }}"></script>
                                     {% endif %}
                                 {% else %}
                                     <p>This tag has been denied with the following message:</p>
