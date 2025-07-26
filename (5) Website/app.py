@@ -140,6 +140,36 @@ def game_add_new_validate():
         new_game_log(request.remote_addr, get_user(), failed=True)
         return "servererror"
     
+#Validate Changing of Game Tags
+@app.route("/games/tags/change/", methods=["POST"])
+def game_change_tags():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/games/tags/change/ (Change Game Tag)")
+        tag_data = request.get_data()
+        tag_data = tag_data.decode()
+        tag_data = ast.literal_eval(tag_data)
+        noexistent_tags = ""
+        for tag in tag_data["change_new_tags"]:
+            tag = tag.replace(" ", "")
+            if tag_check_exists(tag) is False:
+                if len(noexistent_tags) < 1:
+                    noexistent_tags = tag
+                else:
+                    noexistent_tags = noexistent_tags + "+" + tag
+        if len(noexistent_tags) > 0: #Todo: Check why database has so many duplicate tags. Then, make it possible for a user to REMOVE tags...
+            tag_update_game_log(request.remote_addr, get_user(), game_get_name(tag_data["change_game_id"]), failed=True, tag_not_exist=True)
+            return "tagnotexist|" + noexistent_tags
+        else:
+            if game_update_tags(tag_data["change_new_tags"], tag_data["change_game_id"], current_user.id, tag_get_id_function=tag_get_id) is True:
+                tag_update_game_log(request.remote_addr, get_user(), game_get_name(tag_data["change_game_id"]))
+                return "success"
+            else:
+                tag_update_game_log(request.remote_addr, get_user(), game_get_name(tag_data["change_game_id"]), failed=True)
+                return "servererror"
+    else:
+        access_log(request.remote_addr, get_user(), "/games/tags/change/ (Change Game Tag)", failed=True, no_auth=True)
+        return redirect("/login/")
+    
 #Tags
 @app.route("/tags/")
 @app.route("/tags/pid=<pid>")

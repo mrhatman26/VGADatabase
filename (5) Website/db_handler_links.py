@@ -21,6 +21,23 @@ def game_add_user_link(game_id, user_id, database=None, cursor=None):
         return True
     except:
         return False
+
+def game_add_tag_link(game_id, tag_id, user_id, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id) VALUES (%s, %s, %s)", (game_id, tag_id, user_id,))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except:
+        return False
+
 #Update    
 def game_approve_user_link(game_id):
     try:
@@ -44,6 +61,22 @@ def game_deny_user_link(deny_data):
         database.close()
         return True
     except:
+        return False
+    
+def game_update_tags(tag_data, game_id, user_id, tag_get_id_function):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        for tag in tag_data:
+            tag_id = tag_get_id_function(tag, cursor=cursor)
+            if tag_check_game_link_exists(tag_id, game_id, database=database, cursor=cursor) is False:
+                game_add_tag_link(game_id, tag_id, user_id, database=database, cursor=cursor)
+        cursor.close()
+        database.close()
+        return True
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc(), flush=True)
         return False
 
 #Get

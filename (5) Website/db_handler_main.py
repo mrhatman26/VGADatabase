@@ -161,14 +161,17 @@ def game_check_release_date(game_id=None, game_rdate=None):
         return False
 
 #Tags
-def tag_check_exists(tag, tag_type, database=None, cursor=None):
+def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
     try:
         no_cursor = False
         if cursor is None or database is None:
             no_cursor = True
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
-        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (tag, tag_type,))
+        if tag_type is not None:
+            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (tag, tag_type,))
+        else:
+            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (tag,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
@@ -180,12 +183,15 @@ def tag_check_exists(tag, tag_type, database=None, cursor=None):
     except:
         return False
     
-def tag_get_id(tag, tag_type, cursor=None):
+def tag_get_id(tag, tag_type=None, cursor=None):
     try:
         if cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
-        cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (str(tag), tag_type,))
+        if tag_type is not None:
+            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s AND tag_type = %s", (str(tag), tag_type,))
+        else:
+            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (str(tag),))
         fetch = cursor.fetchall()
         if cursor is None:
             cursor.close()

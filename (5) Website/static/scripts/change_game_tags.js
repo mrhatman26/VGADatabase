@@ -6,6 +6,7 @@ let tagTextBox = null;
 let submitButton = null;
 let backButton = null;
 let gameID = document.getElementById("game_id");
+let tagList = null;
 let currentTagsText = null;
 let extraSpace = null;
 
@@ -19,19 +20,34 @@ function oldErrorCheck(){
     }
 }
 
-function submitNewType(){
-    typeData = {
-        "type_newtype": typeSelect.value,
-        "type_tag_id": tagID.innerHTML.split(": ")[1]
+function submitNewTags(){
+    tagData = {
+        "change_game_id": gameID.innerHTML.split(": ")[1],
+        "change_new_tags": tagList
     }
-    console.log(typeData);
+    console.log(tagData);
     $.ajax({
         type: "POST",
-        url: "/tags/type/change/",
-        data: JSON.stringify(typeData),
+        url: "/games/tags/change/",
+        data: JSON.stringify(tagData),
         success: function(response){
+            console.log(response);
             if (response === "success"){
-                window.location.replace("/tags/tag_id=" + typeData["type_tag_id"]);
+                //window.location.replace("/tags/tag_id=" + typeData["type_tag_id"]);
+                console.log("Finished");
+            }
+            else if (response.includes("tagnotexist")){
+                if (oldErrorCheck() === false){
+                    var mainBody = document.getElementById("page_mainbody_home");
+                    errorMessage = document.createElement("p");
+                    errorMessage.id = "errorMessage";
+                    errorMessage.style.color = "red";
+                    errorMessage.innerHTML = "The following tags do not exist:\n" + response.split("|")[1].replaceAll("+", ", ");
+                    mainBody.appendChild(errorMessage);
+                }
+                else{
+                    errorMessage.innerHTML = "The following tags do not exist:\n" + response.split("|")[1].replaceAll("+", ", ");
+                }
             }
             else{
                 var mainBody = document.getElementById("page_mainbody_home");
@@ -47,31 +63,57 @@ function submitNewType(){
     });
 }
 
+function getNewTags(){
+    console.log("huh");
+    var tagTextBoxValue = tagTextBox.value;
+    tagTextBoxValue = tagTextBoxValue.toLowerCase().replaceAll("_,_", ",").replaceAll("_,", ",").replaceAll(",_", ",").replaceAll(", ", ",");
+    tagList = tagTextBoxValue.split(",");
+    for (var i = 0; i < tagList.length; i++){
+        console.log("'" + tagList[i] + "'");
+        if (tagList[i].includes(" ")){
+            if (oldErrorCheck() === false){
+                console.log("omg");
+                var mainBody = document.getElementById("page_mainbody_home");
+                errorMessage = document.createElement("p");
+                errorMessage.id = "errorMessage";
+                errorMessage.style.color = "red";
+                errorMessage.innerHTML = "Tags cannot contain spaces";
+                mainBody.appendChild(errorMessage);
+            }
+            else{
+                console.log("omg");
+                errorMessage.innerHTML = "Tags cannot contain spaces";
+            }
+            tagList = null;
+            return;
+        }
+    }
+    submitNewTags();
+}
+
 function goBack(){ //Finish this
     tagTextBox.style.display = "none";
     submitButton.style.display = "none";
     backButton.style.display = "none";
     changeButton.style.display = "inline";
+    tagDict = null;
     currentTagsText = null;
     submitButton = null;
     backButton = null;
 }
 
 function getCurrentTags(){
-    var tagDict = {}
+    tagList = []
     var currentTagsChildren = currentTags.children;
     for (var i = 0; i < currentTagsChildren.length; i++){
-        var tagName = currentTagsChildren[i].children[0].innerHTML;
-        var tagType = currentTagsChildren[i].children[0].className;
-        tagDict[tagName] = tagType;
+        tagList.push(currentTagsChildren[i].children[0].innerHTML.replaceAll(" ", "_").toLowerCase());
     }
-    var tagDictKeys = Object.keys(tagDict)
-    for (var i = 0; i < tagDictKeys.length; i++){
+    for (var i = 0; i < tagList.length; i++){
         if (currentTagsText === null){
-            currentTagsText = String(tagDictKeys[i]);
+            currentTagsText = String(tagList[i]);
         }
         else{
-            currentTagsText = currentTagsText + ", " +String(tagDictKeys[i]);
+            currentTagsText = currentTagsText + ", " + String(tagList[i]);
         }
     }
 }
@@ -105,7 +147,7 @@ function addTagBox(){
     backButton.className = "button";
     changeTagDiv.appendChild(backButton);
     backButton.addEventListener("click", goBack);
-    submitButton.addEventListener("click", submitNewType)
+    submitButton.addEventListener("click", getNewTags)
 }
 
 changeButton.addEventListener("click", addTagBox);
