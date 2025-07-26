@@ -90,7 +90,6 @@ def game_page(game_id=0):
         developer_links = game_get_devpub_links(game_id)
         publisher_links = game_get_devpub_links(game_id, is_devpub=True)
         tag_links = game_get_tag_links(game_id)
-        print(tag_links, flush=True)
         return render_template("games/individual_game.html", page_name=game_title, game_data=game_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, developers=developer_links, publishers=publisher_links, tags=tag_links, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual game page", traceback.format_exc())

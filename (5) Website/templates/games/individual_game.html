@@ -8,7 +8,7 @@
                     <h3 id="page_header">Dinner's Ready!</h3>
                 {% endif %}
                 <div id="page_mainbody_home">
-                        {% if game_data is not none %}                                
+                        {% if game_data is not none %}
                             <p style="display: none;" id="game_id">ID: {{ game_data.game_id }}</p>
                             {% if game_data.game_aka is not none %}
                                 <p>Alternate Titles: {{ game_data.game_aka }}</p>
@@ -71,18 +71,27 @@
                             {% endif %}
                             {% if tags is not none %}
                                 <p>Tags:</p>
-                                <div class="game_box">
+                                <div class="game_box" id="tag_box">
                                     {% for tag in tags %}
-                                        <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
-                                            
+                                        <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">                                            
                                             {% if tag.tag_type == "Normal" %}
-                                                <p>{{ tag.tag_name }}</p>
+                                                <p class="tag_type_normal">{{ tag.tag_name }}</p>
                                             {% elif tag.tag_type == "Genre" %}
                                                 <p class="tag_type_genre">{{ tag.tag_name }}</p>
+                                            {% elif tag.tag_type == "Feature" %}
+                                                <p class="tag_type_feature">{{ tag.tag_name }}</p>
                                             {% endif %}
                                         </a>
                                     {% endfor %}
                                 </div>
+                                {% if is_approved == true %}
+                                    <div id="change_tag_box">
+                                        <p></p>
+                                        <a class="button" id="change_button">Change Tags</a>
+                                        <script src="http://code.jquery.com/jquery.min.js"></script>
+                                        <script src=" {{ url_for('static', filename='scripts/change_game_tags.js') }}"></script>
+                                    </div>
+                                {% endif %}
                             {% else %}
                                 <p>Tags:</p>
                                 <div class="game_box">
