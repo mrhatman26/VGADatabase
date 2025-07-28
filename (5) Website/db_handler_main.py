@@ -92,6 +92,7 @@ def game_get_single(game_id=0):
 def game_check_exists(game):
     database = mysql.connector.connect(**get_db_config(deployed))
     cursor = database.cursor()
+    game = game.replace("&", "and")
     cursor.execute("SELECT * FROM table_games WHERE game_title = %s", (game,))
     fetch = cursor.fetchall()
     cursor.close()
@@ -113,10 +114,12 @@ def game_create_new(game_data, user_id):
             game_data["game_rstate"] = "Released"
         else:
             game_data["game_rstate"] = "Unreleased"
-        game_data["game_title"] = game_data["game_title"].replace(" ", "_").lower()
+        game_data["game_title"] = game_data["game_title"].replace(" ", "_").replace("&", "and").lower()
         cursor.execute("INSERT INTO table_games (game_title, game_aka, game_desc, game_rdate, game_rstate, game_url) VALUES (%s, %s, %s, %s, %s, %s)", (game_data["game_title"], game_data["game_aka"], game_data["game_desc"], game_data["game_rdate"], game_data["game_rstate"], None))
         database.commit()
         game_add_user_link(game_get_id(game_data["game_title"]), user_id, database, cursor)
+        update_create(game_data["game_title"], database=database, cursor=cursor)
+        update_add_game_link(game_get_id(game_data["game_title"]), update_get_id(game_data["game_title"]), user_id, database=database, cursor=cursor)
         cursor.close()
         database.close()
         return True
@@ -186,6 +189,7 @@ def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
             no_cursor = True
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
+        tag = tag.replace("&", "and")
         if tag_type is not None:
             cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s AND tag_type = %s", (tag, tag_type,))
         else:
@@ -288,7 +292,7 @@ def tag_add_new(tag_data, user_id):
         cursor = database.cursor()
         if tag_data["tag_desc"].isspace() or tag_data["tag_desc"] == "":
             tag_data["tag_desc"] = None
-        tag_data["tag_name"] = tag_data["tag_name"].replace(" ", "_")
+        tag_data["tag_name"] = tag_data["tag_name"].replace(" ", "_").replace("&", "and")
         cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES (%s, %s, %s, %s)", (tag_data["tag_name"], tag_data["tag_desc"], tag_data["tag_type"], tag_data["tag_isNSFW"],))
         database.commit()
         tag_data["tag_id"] = tag_get_id(tag_data["tag_name"], tag_data["tag_type"])
@@ -538,3 +542,84 @@ def language_check_exists(language):
             return False
     except:
         return False
+    
+#Update History
+def update_get_id(name, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("SELECT update_id FROM table_update_history WHERE update_name = %s", (name,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return fetch[-1][0]
+        else:
+            return None
+    except:
+        return None
+    
+def update_create(name, database=None, cursor=None, changed=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        if changed is None:
+            cursor.execute("INSERT INTO table_update_history (update_name) VALUES(%s)", (name,))
+        else:
+            next_version = update_get_previous_version(name, database=database, cursor=cursor) + 1
+            added = ""
+            removed = ""
+            if len(changed[0]) > 0:
+                for item in changed[0]:
+                    if added == "":
+                        added = item
+                    else:
+                        added = added + ", " + item
+            else:
+                added = None
+            if len(changed[1]) > 0:
+                for item in changed[1]:
+                    if removed == "":
+                        removed = item
+                    else:
+                        removed = removed + ", " + item
+            else:
+                removed = None
+            cursor.execute("INSERT INTO table_update_history (update_version, update_name, update_added, update_removed) VALUES(%s, %s, %s, %s)", (next_version, name, added, removed,))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
+        return False
+    
+def update_get_previous_version(name, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("SELECT update_version FROM table_update_history WHERE update_name = %s", (name,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return fetch[-1][0]
+        else:
+            return 1
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
+        return 1

@@ -19,3 +19,7 @@ time. But I really need to get on with the tag searching, so. Next, I will
 allow users to see what games developers and tags are connected to and then go
 about the search feature. In the next three weeks after this week, I will need
 to focus more on my report, but I will still be updating the website.
+
+11:09: I have work again, which means showertime... Again. If you want to see
+the other things I had planned for this website, just look at the SQL files
+for the tables I haven't actually used. There is a lot of them.

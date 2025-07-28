@@ -117,7 +117,10 @@ CREATE TABLE table_ratings(
 DROP TABLE IF EXISTS table_update_history;
 CREATE TABLE table_update_history(
     update_id INT NOT NULL AUTO_INCREMENT,
-    update_desc TEXT,
+    update_version INT NOT NULL DEFAULT 1,
+    update_name TEXT NOT NULL,
+    update_added TEXT,
+    update_removed TEXT,
     PRIMARY KEY(update_id)
 );
 
@@ -421,5 +424,18 @@ CREATE TABLE link_character_user(
 	char_dDes TEXT,
     PRIMARY KEY(link_id),
     FOREIGN KEY(char_id) REFERENCES table_characters(char_id),
+    FOREIGN KEY(user_id) REFERENCES table_users(user_id)
+);
+
+DROP TABLE IF EXISTS link_game_update;
+CREATE TABLE link_game_update(
+    link_id INT NOT NULL AUTO_INCREMENT,
+    game_id INT NOT NULL,
+    update_id INT NOT NULL,
+    user_id INT NOT NULL,
+    update_cDate TEXT NOT NULL,
+    PRIMARY KEY(link_id),
+    FOREIGN KEY(game_id) REFERENCES table_games(game_id),
+    FOREIGN KEY(update_id) REFERENCES table_update_history(update_id),
     FOREIGN KEY(user_id) REFERENCES table_users(user_id)
 );

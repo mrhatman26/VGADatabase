@@ -163,7 +163,10 @@ def game_change_tags():
         else:
             update_status = game_update_tags(tag_data, current_user.id, tag_get_id_function=tag_get_id)
             if update_status[2] is True:
-                tag_update_game_log(request.remote_addr, get_user(), game_get_name(tag_data["change_game_id"]), added=update_status[0], removed=update_status[1])
+                game_name = game_get_name(tag_data["change_game_id"])
+                tag_update_game_log(request.remote_addr, get_user(), game_name, added=update_status[0], removed=update_status[1])
+                update_create(game_name, changed=update_status[3])
+                update_add_game_link(tag_data["change_game_id"], update_get_id(game_name), current_user.id)
                 return "success"
             else:
                 tag_update_game_log(request.remote_addr, get_user(), game_get_name(tag_data["change_game_id"]), failed=True, added=update_status[0], removed=update_status[1])

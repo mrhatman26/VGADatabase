@@ -69,7 +69,9 @@ def game_deny_user_link(deny_data):
 def game_update_tags(tag_data, user_id, tag_get_id_function):
     try:
         added = False
+        added_list = []
         removed = False
+        removed_list = []
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         for tag in tag_data["change_new_tags"]: #Add new tags
@@ -77,15 +79,17 @@ def game_update_tags(tag_data, user_id, tag_get_id_function):
             if tag_check_game_link_exists(tag_id, tag_data["change_game_id"], database=database, cursor=cursor) is False:
                 game_add_tag_link(tag_data["change_game_id"], tag_id, user_id, database=database, cursor=cursor)
                 added = True
+                added_list.append(tag)
         for tag in tag_data["change_old_tags"]:
             if tag not in tag_data["change_new_tags"]:
                 game_add_tag_link(tag_data["change_game_id"], tag_get_id_function(tag, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
                 removed = True
+                removed_list.append(tag)
         cursor.close()
         database.close()
-        return (added, removed, True)
+        return (added, removed, True, (added_list, removed_list))
     except:
-        return (added, removed, False)
+        return (added, removed, False, (added_list, removed_list))
 
 #Get
 def game_get_approved(game_id):
@@ -440,4 +444,26 @@ def devpub_deny_user_link(deny_data):
         database.close()
         return True
     except:
+        return False
+    
+'''Updates'''
+def update_add_game_link(game_id, update_id, user_id, time=None, database=None, cursor=None):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        if time is None:
+            time = str(get_time(no_brackets=True))
+        cursor.execute("INSERT INTO link_game_update (game_id, update_id, user_id, update_cDate) VALUES(%s, %s, %s, %s)", (game_id, update_id, user_id, time,))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except Exception as e:
+        import traceback
+        print(traceback.format_exc(), flush=True)
+        pause()
         return False
