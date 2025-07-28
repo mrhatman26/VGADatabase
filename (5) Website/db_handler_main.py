@@ -169,7 +169,7 @@ def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
         if tag_type is not None:
-            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s and tag_type = %s", (tag, tag_type,))
+            cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s AND tag_type = %s", (tag, tag_type,))
         else:
             cursor.execute("SELECT tag_id FROM table_tags WHERE tag_name = %s", (tag,))
         fetch = cursor.fetchall()

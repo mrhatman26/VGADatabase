@@ -64,7 +64,6 @@ function submitNewTags(){
 }
 
 function getNewTags(){
-    console.log("huh");
     var tagTextBoxValue = tagTextBox.value;
     tagTextBoxValue = tagTextBoxValue.toLowerCase().replaceAll("_,_", ",").replaceAll("_,", ",").replaceAll(",_", ",").replaceAll(", ", ",");
     tagList = tagTextBoxValue.split(",");
@@ -72,7 +71,6 @@ function getNewTags(){
         console.log("'" + tagList[i] + "'");
         if (tagList[i].includes(" ")){
             if (oldErrorCheck() === false){
-                console.log("omg");
                 var mainBody = document.getElementById("page_mainbody_home");
                 errorMessage = document.createElement("p");
                 errorMessage.id = "errorMessage";
@@ -81,7 +79,6 @@ function getNewTags(){
                 mainBody.appendChild(errorMessage);
             }
             else{
-                console.log("omg");
                 errorMessage.innerHTML = "Tags cannot contain spaces";
             }
             tagList = null;

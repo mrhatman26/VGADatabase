@@ -233,6 +233,12 @@ select{
 .tag_type_genre:hover{
     color: blue;
 }
+.tag_type_normal{
+    color: green;
+}
+.tag_type_normal:hover{
+    color: blue;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

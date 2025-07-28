@@ -1,0 +1,3 @@
+I didn't write about the stuff I did on the 27th as I was pressed for time,
+but I spent the day adding the ability for users to add new tags to each game.
+It works!

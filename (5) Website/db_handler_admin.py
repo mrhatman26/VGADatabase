@@ -59,7 +59,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         #Add user tags to database and link to game and user
         for tag in game_dict["game_user_tags"]:
             tag = tag.replace(" ", "_").lower()
-            tag_exists = tag_check_exists(tag, database, cursor)
+            tag_exists = tag_check_exists(tag, tag_type=None, database=database, cursor=cursor)
             if tag_exists is False:
                 cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (tag, None, "normal", False,))
                 database.commit()
@@ -75,7 +75,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
         for genre in game_dict["game_genres"]:
             if genre != "nan":
                 genre = genre.replace(" ", "_").lower()
-                genre_exists = tag_check_exists(genre, database, cursor)
+                genre_exists = tag_check_exists(genre, database=database, cursor=cursor)
                 if genre_exists is False:
                     cursor.execute("INSERT INTO table_tags (tag_name, tag_desc, tag_type, tag_isNSFW) VALUES(%s, %s, %s, %s)", (genre, None, "genre", False,))
                     database.commit()
