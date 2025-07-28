@@ -1,3 +1,21 @@
 I didn't write about the stuff I did on the 27th as I was pressed for time,
 but I spent the day adding the ability for users to add new tags to each game.
 It works!
+
+10:03: I fixed the tags being duplicates again. When adding the ability to add
+new tags, I decided to remove the possibility for a tag to have duplicates of
+different types (E.G: Adventure as a normal tag and adventure again as a genre
+tag) and this brought the duplication error back. Turns out that this was
+simply because I was accidentally passing the database as the tag type XD
+I didn't know this sooner because this was happening in a try except block so
+the error would just return False as if the tag was not found.
+
+11:05: Tags can now also be removed! In a real website, allowing users to
+change tags this easily would be problematic. Another website similar to this
+that I have used, adds logs of what was added and removed by what user and
+allows moderators to revert those changes. However, changes to tags doesn't
+need to be approved. I think I would do something like that if I had more
+time. But I really need to get on with the tag searching, so. Next, I will
+allow users to see what games developers and tags are connected to and then go
+about the search feature. In the next three weeks after this week, I will need
+to focus more on my report, but I will still be updating the website.

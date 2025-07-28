@@ -97,6 +97,12 @@
                                 <div class="game_box">
                                     <p>This game has no tags yet</p>
                                 </div>
+                                <div id="change_tag_box">
+                                    <p></p>
+                                    <a class="button" id="change_button">Change Tags</a>
+                                    <script src="http://code.jquery.com/jquery.min.js"></script>
+                                    <script src=" {{ url_for('static', filename='scripts/change_game_tags.js') }}"></script>
+                                </div>
                             {% endif %}
                         {% else %}
                             <p>No game data available! Someone should fire the guys that built those robots and build better ones!</p>

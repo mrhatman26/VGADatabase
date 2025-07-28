@@ -22,14 +22,17 @@ def game_add_user_link(game_id, user_id, database=None, cursor=None):
     except:
         return False
 
-def game_add_tag_link(game_id, tag_id, user_id, database=None, cursor=None):
+def game_add_tag_link(game_id, tag_id, user_id, database=None, cursor=None, remove=False):
     try:
         no_cursor = False
         if database is None or cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id) VALUES (%s, %s, %s)", (game_id, tag_id, user_id,))
+        if remove is False:
+            cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id) VALUES (%s, %s, %s)", (game_id, tag_id, user_id,))
+        else:
+            cursor.execute("DELETE FROM link_game_tag WHERE game_id = %s AND tag_id = %s AND user_id = %s", (game_id, tag_id, user_id,))
         database.commit()
         if no_cursor is True:
             cursor.close()
@@ -63,21 +66,26 @@ def game_deny_user_link(deny_data):
     except:
         return False
     
-def game_update_tags(tag_data, game_id, user_id, tag_get_id_function):
+def game_update_tags(tag_data, user_id, tag_get_id_function):
     try:
+        added = False
+        removed = False
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        for tag in tag_data:
+        for tag in tag_data["change_new_tags"]: #Add new tags
             tag_id = tag_get_id_function(tag, cursor=cursor)
-            if tag_check_game_link_exists(tag_id, game_id, database=database, cursor=cursor) is False:
-                game_add_tag_link(game_id, tag_id, user_id, database=database, cursor=cursor)
+            if tag_check_game_link_exists(tag_id, tag_data["change_game_id"], database=database, cursor=cursor) is False:
+                game_add_tag_link(tag_data["change_game_id"], tag_id, user_id, database=database, cursor=cursor)
+                added = True
+        for tag in tag_data["change_old_tags"]:
+            if tag not in tag_data["change_new_tags"]:
+                game_add_tag_link(tag_data["change_game_id"], tag_get_id_function(tag, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
+                removed = True
         cursor.close()
         database.close()
-        return True
-    except Exception as e:
-        import traceback
-        print(traceback.format_exc(), flush=True)
-        return False
+        return (added, removed, True)
+    except:
+        return (added, removed, False)
 
 #Get
 def game_get_approved(game_id):
@@ -191,7 +199,7 @@ def tag_check_game_link_exists(tag_id, game_id, database=None, cursor=None):
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("SELECET * FROM link_game_tag WHERE tag_id = %s AND game_id = %s", (tag_id, game_id))
+        cursor.execute("SELECT * FROM link_game_tag WHERE tag_id = %s AND game_id = %s", (tag_id, game_id,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()

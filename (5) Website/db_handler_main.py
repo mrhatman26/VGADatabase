@@ -142,6 +142,24 @@ def game_get_unapproved():
     except:
         return None
     
+def game_get_tags(game_id):
+    try:
+        tags = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_tags.tag_name FROM table_tags INNER JOIN link_game_tag ON table_tags.tag_id=link_game_tag.tag_id WHERE link_game_tag.game_id = %s", (game_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            for tag in fetch:
+                tags.append(tag[0])
+            return tags
+        else:
+            return []
+    except:
+        return []
+    
 def game_check_release_date(game_id=None, game_rdate=None):
     try:
         if game_id is None or game_rdate is None:
@@ -288,8 +306,6 @@ def tag_get_unapproved():
         cursor = database.cursor()
         cursor.execute("SELECT table_tags.tag_id, table_tags.tag_name, table_tags.tag_type, table_tags.tag_isNSFW FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 0 AND link_tag_user.tag_denied = 0")
         fetch = cursor.fetchall()
-        import pyperclip
-        pyperclip.copy(cursor.statement)
         cursor.close()
         database.close()
         if len(fetch) > 0:

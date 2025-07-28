@@ -265,14 +265,30 @@ def tag_type_change_log(ip, username, tag_name, new_type, failed=False):
     log_file.write(text)
     log_file.close()
 
-def tag_update_game_log(ip, username, game_name, failed=False, tag_not_exist=False):
+def tag_update_game_log(ip, username, game_name, added=False, removed=False, failed=False, tag_not_exist=False):
     log_file = open("static/logs.txt", "at")
     text = get_time()
     if failed is False:
-        text = text + ": " + ip + " (User: " + username + ") successfully updated the tags of " + game_name
+        if added is False and removed is False:
+            text = text + ": " + ip + " (User: " + username + ") tried to update the tags of " + game_name + " but no changes were made"
+        else:
+            if added is True and removed is False:
+                text = text + ": " + ip + " (User: " + username + ") successfully added tags to " + game_name
+            elif added is False and removed is True:
+                text = text + ": " + ip + " (User: " + username + ") successfully removed tags from " + game_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") successfully added tags to and removed tags from " + game_name
     else:
         if tag_not_exist is False:
-            text = text + ": " + ip + " (User: " + username + ") FAILED to update the tags of " + game_name
+            if added is False and removed is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to update the tags of " + game_name
+            else:
+                if added is True and removed is False:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to add tags to " + game_name
+                elif added is False and removed is True:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to remove tags from " + game_name
+                else:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to add tags to and remove tags from " + game_name
         else:
             text = text + ": " + ip + " (User: " + username + ") FAILED to update the tags of " + game_name + " because one of the tags entered did not exist"
     log_file.write(text)

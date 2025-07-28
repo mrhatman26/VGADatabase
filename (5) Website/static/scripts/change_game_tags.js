@@ -33,8 +33,7 @@ function submitNewTags(){
         success: function(response){
             console.log(response);
             if (response === "success"){
-                //window.location.replace("/tags/tag_id=" + typeData["type_tag_id"]);
-                console.log("Finished");
+                window.location.replace("/games/game_id=" + tagData["change_game_id"]);
             }
             else if (response.includes("tagnotexist")){
                 if (oldErrorCheck() === false){
@@ -101,9 +100,11 @@ function goBack(){ //Finish this
 
 function getCurrentTags(){
     tagList = []
-    var currentTagsChildren = currentTags.children;
-    for (var i = 0; i < currentTagsChildren.length; i++){
-        tagList.push(currentTagsChildren[i].children[0].innerHTML.replaceAll(" ", "_").toLowerCase());
+    if (!(currentTags === null)){
+        var currentTagsChildren = currentTags.children;
+        for (var i = 0; i < currentTagsChildren.length; i++){
+            tagList.push(currentTagsChildren[i].children[0].innerHTML.replaceAll(" ", "_").toLowerCase());
+        }
     }
     for (var i = 0; i < tagList.length; i++){
         if (currentTagsText === null){
@@ -131,6 +132,7 @@ function addTagBox(){
     tagTextBox.type = "text";
     tagTextBox.name = "txt_tag_box";
     tagTextBox.required = true;
+    tagTextBox.placeholder = "Tags";
     changeTagDiv.appendChild(extraSpace);
     changeTagDiv.appendChild(tagTextBox)
     //Change submit button
