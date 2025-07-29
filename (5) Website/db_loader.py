@@ -5,7 +5,7 @@ from global_vars import deployed
 from file_paths import scraped_file_dir
 from misc import get_new_table_id, pause
 
-limit = 50
+limit = None
 
 def convert_to_list(data):
     try:

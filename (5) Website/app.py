@@ -210,7 +210,8 @@ def tag_page(tag_id=0):
         approval_date = tag_get_approval_date(tag_id)
         denial = tag_get_denial(tag_id)
         denial_reason = tag_get_denial_reason(tag_id)
-        return render_template("tags/individual_tag.html", page_name=tag_name, tag_data=tag_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
+        games = tag_get_games(tag_id)
+        return render_template("tags/individual_tag.html", page_name=tag_name, tag_data=tag_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, game_links=games, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual tag page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/tags/tag_id=" + str(tag_id) + " (Individual Tag)", failed=True)
@@ -332,7 +333,8 @@ def devpub_page(devpub_id=0):
         approval_date = devpub_get_approval_date(devpub_id)
         denial = devpub_get_denial(devpub_id)
         denial_reason = devpub_get_denial_reason(devpub_id)
-        return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, c_version=version)
+        games = devpub_get_games(devpub_id)
+        return render_template("devpubs/individual_devpub.html", page_name=developer_name, devpub_data=devpub_data, is_approved=approval, denied=denial, denial_desc=denial_reason, aDate=approval_date, game_links=games, c_version=version)
     except Exception as e:
         error_log(request.remote_addr, get_user(), "An error occurred when trying to load an invididual devpub page", traceback.format_exc())
         access_log(request.remote_addr, get_user(), "/devpubs/devpubs=" + str(devpub_id) + " (Individual Devpub)", failed=True)

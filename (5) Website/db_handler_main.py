@@ -339,6 +339,29 @@ def tag_type_change(type_data):
     except:
         return False
     
+def tag_get_games(tag_id):
+    try:
+        games = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_games.game_id, table_games.game_title FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id WHERE link_game_tag.tag_id = %s", (tag_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            for game in fetch:
+                games.append({
+                    "game_id": game[0],
+                    "game_name": game[1].replace("_", " ").title()
+                })
+            return games
+        else:
+            return None
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
+        return None
+    
 #Aliases
 def alias_check_exists(alias):
     database = mysql.connector.connect(**get_db_config(deployed))
@@ -525,6 +548,29 @@ def devpub_get_unapproved():
         else:
             return None
     except:
+        return None
+    
+def devpub_get_games(devpub_id):
+    try:
+        games = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT table_games.game_id, table_games.game_title FROM table_games INNER JOIN link_game_developer ON table_games.game_id=link_game_developer.game_id WHERE link_game_developer.developer_id = %s", (devpub_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            for game in fetch:
+                games.append({
+                    "game_id": game[0],
+                    "game_name": game[1].replace("_", " ").title()
+                })
+            return games
+        else:
+            return None
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
         return None
 
 #Languages

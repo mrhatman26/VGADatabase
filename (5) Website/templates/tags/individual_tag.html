@@ -43,6 +43,16 @@
                             {% else %}
                                 <p>This tag was approved on: {{ aDate }}</p>
                             {% endif %}
+                            {% if game_links is not none %}
+                                <p>Games with this tag</p>
+                                <div class="game_box">
+                                    {% for game in game_links %}
+                                        <a href="{{ url_for('game_page', game_id=game.game_id) }}">
+                                            <p>{{ game.game_name }}</p>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         {% else %}
                             <p>No tag data available!</p>
                         {% endif %}

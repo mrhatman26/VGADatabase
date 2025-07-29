@@ -57,6 +57,20 @@
                                     <p>This developer was approved on: {{ aDate }}</p>
                                 {% endif %}
                             {% endif %}
+                            {% if game_links is not none %}
+                                {% if devpub_data.developer_isPub is false %}
+                                    <p>Games by this developer</p>
+                                {% else %}
+                                    <p>Games by this publisher</p>
+                                {% endif %}
+                                <div class="game_box">
+                                    {% for game in game_links %}
+                                        <a href="{{ url_for('game_page', game_id=game.game_id) }}">
+                                            <p>{{ game.game_name }}</p>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         {% else %}
                             <p>No developer/publisher data available! Boss' out I'm afraid!</p>
                         {% endif %}
