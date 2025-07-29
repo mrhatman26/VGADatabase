@@ -690,6 +690,21 @@ def mod_approval_tag_deny():
     else:
         access_log(request.remote_addr, get_user(), "mod/approvals/tags/deny/ (Mod: Tag Approvals Deny)", failed=True, no_auth=True)
         abort(404)
+
+#Update Routes
+#Get updates
+@app.route("/updates/get/", methods=["POST"])
+def update_get():
+    try:
+        access_log(request.remote_addr, get_user(), "/updates/get/ (Get Updates)")
+        retrieve_name = request.get_data()
+        retrieve_name = retrieve_name.decode()
+        retrieve_name = ast.literal_eval(retrieve_name)
+        return str(update_get_all_versions(int(retrieve_name["update_id"]), u_type=retrieve_name["update_type"]))
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
+        return "servererror"
     
 '''Admin Routes'''
 #Main

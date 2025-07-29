@@ -544,14 +544,14 @@ def language_check_exists(language):
         return False
     
 #Update History
-def update_get_id(name, database=None, cursor=None):
+def update_get_id(name, database=None, cursor=None, u_type="game"):
     try:
         no_cursor = False
         if database is None or cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("SELECT update_id FROM table_update_history WHERE update_name = %s", (name,))
+        cursor.execute("SELECT update_id FROM table_update_history WHERE update_name = %s AND update_type = %s", (name, u_type,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
@@ -563,7 +563,7 @@ def update_get_id(name, database=None, cursor=None):
     except:
         return None
     
-def update_create(name, database=None, cursor=None, changed=None):
+def update_create(name, database=None, cursor=None, changed=None, u_type="game"):
     try:
         no_cursor = False
         if database is None or cursor is None:
@@ -571,7 +571,7 @@ def update_create(name, database=None, cursor=None, changed=None):
             cursor = database.cursor()
             no_cursor = True
         if changed is None:
-            cursor.execute("INSERT INTO table_update_history (update_name) VALUES(%s)", (name,))
+            cursor.execute("INSERT INTO table_update_history (update_name, update_type) VALUES(%s, %s)", (name, u_type,))
         else:
             next_version = update_get_previous_version(name, database=database, cursor=cursor) + 1
             added = ""
@@ -592,7 +592,7 @@ def update_create(name, database=None, cursor=None, changed=None):
                         removed = removed + ", " + item
             else:
                 removed = None
-            cursor.execute("INSERT INTO table_update_history (update_version, update_name, update_added, update_removed) VALUES(%s, %s, %s, %s)", (next_version, name, added, removed,))
+            cursor.execute("INSERT INTO table_update_history (update_version, update_name, update_type, update_added, update_removed) VALUES(%s, %s, %s, %s, %s)", (next_version, name, u_type, added, removed,))
         database.commit()
         if no_cursor is True:
             cursor.close()
@@ -603,14 +603,14 @@ def update_create(name, database=None, cursor=None, changed=None):
         pause()
         return False
     
-def update_get_previous_version(name, database=None, cursor=None):
+def update_get_previous_version(name, database=None, cursor=None, u_type="game"):
     try:
         no_cursor = False
         if database is None or cursor is None:
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("SELECT update_version FROM table_update_history WHERE update_name = %s", (name,))
+        cursor.execute("SELECT update_version FROM table_update_history WHERE update_name = %s AND update_type = %s", (name, u_type,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
@@ -623,3 +623,29 @@ def update_get_previous_version(name, database=None, cursor=None):
         print(traceback.format_exc(), flush=True)
         pause()
         return 1
+    
+def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
+    import pyperclip
+    try:
+        updates = []
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        if u_type == "game":
+            cursor.execute("SELECT * FROM table_update_history INNER JOIN link_game_update ON table_update_history.update_id=link_game_update.update_id WHERE link_game_update.game_id = %s", (id,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            return fetch
+        else:
+            pyperclip.copy(cursor.statement)
+            return None
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pyperclip.copy(cursor.statement)
+        pause()
+        return None

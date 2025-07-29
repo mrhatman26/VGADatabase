@@ -119,6 +119,7 @@ CREATE TABLE table_update_history(
     update_id INT NOT NULL AUTO_INCREMENT,
     update_version INT NOT NULL DEFAULT 1,
     update_name TEXT NOT NULL,
+    update_type TEXT NOT NULL,
     update_added TEXT,
     update_removed TEXT,
     PRIMARY KEY(update_id)

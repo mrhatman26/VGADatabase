@@ -465,5 +465,6 @@ def update_add_game_link(game_id, update_id, user_id, time=None, database=None, 
     except Exception as e:
         import traceback
         print(traceback.format_exc(), flush=True)
+        print(game_id, update_id, user_id, flush=True)
         pause()
         return False
