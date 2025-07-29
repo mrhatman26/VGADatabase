@@ -38,7 +38,7 @@ def game_get_name(game_id):
     except:
         return None
     
-def game_get_selection(pid=None, no_results=10):
+def game_get_selection(pid=None, search=None, no_results=10):
     games = []
     if pid is None:
         pid = 0

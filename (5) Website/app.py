@@ -52,22 +52,23 @@ def home():
 #Game List
 @app.route("/games/")
 @app.route("/games/pid=<pid>")
-def game_list(pid=0, no_results=10):
+@app.route("/games/pid=<pid>&search=<search>")
+def game_list(pid=0, search=None, no_results=10):
     try:
         pid = int(pid)
         games = game_get_selection(pid)
         current_page = get_current_page(pid, no_results)
-        access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)")
+        access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "&search=" + search + " (Games List)")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
     except Exception as e:
         try:
-            games = game_get_selection(0)
-            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)", failed=True, default=True)
+            games = game_get_selection(0, search)
+            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "&search=" + search + " (Games List)", failed=True, default=True)
             error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected game page", theException=traceback.format_exc())
             current_page = get_current_page(pid, no_results)
             return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
         except:
-            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + " (Games List)", failed=True, default=True)
+            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "&search=" + search + " (Games List)", failed=True, default=True)
             error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default game page. Are there no games?", theException=traceback.format_exc())
             return render_template("games/game_list.html", page_name="All Games", c_version=version)
     
