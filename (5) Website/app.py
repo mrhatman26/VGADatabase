@@ -700,7 +700,17 @@ def update_get():
         retrieve_name = request.get_data()
         retrieve_name = retrieve_name.decode()
         retrieve_name = ast.literal_eval(retrieve_name)
-        return str(update_get_all_versions(int(retrieve_name["update_id"]), u_type=retrieve_name["update_type"]))
+        update_list = []
+        for update in update_get_all_versions(int(retrieve_name["update_id"]), u_type=retrieve_name["update_type"]):
+            update_string = ""
+            for info in update:
+                info = str(info)
+                if update_string == "":
+                    update_string = info
+                else:
+                    update_string = update_string + "+" + info
+            update_list.append(update_string)
+        return str(update_string)
     except Exception as e:
         print(traceback.format_exc(), flush=True)
         pause()

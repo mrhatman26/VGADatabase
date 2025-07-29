@@ -268,3 +268,250 @@
 [2025.07.29 at 10:26:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
 [2025.07.29 at 10:27:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9 (Individual Game)
 [2025.07.29 at 10:27:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:26:12]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.29 at 12:28:01]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.29 at 12:28:38]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.29 at 12:29:07]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.29 at 12:29:07]: 127.0.0.1 successfully created a new account with the username of jonsmith55
+[2025.07.29 at 12:29:07]: 127.0.0.1 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.29 at 12:29:07]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 12:32:53]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 12:33:12]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:33:12]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:33:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.29 at 12:33:47]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.29 at 12:33:47]127.0.0.1 (User: jonsmith55) successfully added a new game titled 'portal_2'
+[2025.07.29 at 12:33:47]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:33:47]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:33:50]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.29 at 12:33:51]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/devpubs/ (Mod: Devpub Approvals)
+[2025.07.29 at 12:33:53]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.29 at 12:33:55]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:34:05]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:34:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=1 (Mod: Game Approvals Validate)
+[2025.07.29 at 12:34:12]: 127.0.0.1 (User: jonsmith55) successfully approved the game titledportal_2
+[2025.07.29 at 12:34:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:40:32]: 127.0.0.1 (User: Annonymous) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:41:12]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 12:41:15]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
+[2025.07.29 at 12:41:17]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.29 at 12:41:30]: 127.0.0.1 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.29 at 12:41:30]: 127.0.0.1 FAILED to created a new account with the username of jonsmith55
+[2025.07.29 at 12:41:30]: 127.0.0.1 (User: jonsmith55) encountered the following error: User already exists
+No exception information available.
+[2025.07.29 at 12:42:04]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:42:32]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:42:32]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:42:35]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.29 at 12:42:36]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.29 at 12:42:40]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:42:40]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:42:43]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.29 at 12:42:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
+[2025.07.29 at 12:42:48]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:42:48]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:42:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:43:01]: 127.0.0.1 (User: jonsmith55) FAILED to access /games/pid=0 (Games List) (The default page was returned instead)
+[2025.07.29 at 12:43:01]: 127.0.0.1 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 58, in game_list
+    games = game_get_selection(pid)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\app.py", line 64, in game_list
+    games = game_get_selection(0)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    no_pages = get_no_pages(statement, cursor, pid, no_results)
+  File "C:\Users\MrHatman26\Desktop\University\VGADatabase\(5) Website\misc.py", line 46, in get_no_pages
+    import pyperclip
+ModuleNotFoundError: No module named 'pyperclip'
+
+[2025.07.29 at 12:43:08]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:43:40]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:43:42]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:45:41]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:45:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:47:15]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:47:16]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:47:47]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:47:49]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:49:06]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:49:09]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:49:35]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:49:37]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:50:01]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:51:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:51:23]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:51:25]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:51:39]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:51:40]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:52:29]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:52:30]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:55:40]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:55:42]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:59:10]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:59:14]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:59:35]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:59:36]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 12:59:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 12:59:58]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:00:43]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:00:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:01:45]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:01:47]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:02:01]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:02:06]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:12:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:13:01]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:13:41]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:13:43]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:14:13]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:14:14]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:15:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:15:14]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:15:39]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:15:40]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:16:53]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:16:55]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:18:20]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:18:21]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:19:19]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:19:21]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)
+[2025.07.29 at 13:20:12]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/tags/change/ (Change Game Tag)
+[2025.07.29 at 13:20:12]: 127.0.0.1 (User: jonsmith55) FAILED to update the tags of portal_2 because one of the tags entered did not exist
+[2025.07.29 at 13:20:19]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 13:20:21]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.29 at 13:21:22]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.29 at 13:21:22]127.0.0.1 (User: jonsmith55) successfully added a new tag named '2d'
+[2025.07.29 at 13:21:22]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 13:21:24]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.29 at 13:21:47]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.29 at 13:21:47]127.0.0.1 (User: jonsmith55) successfully added a new tag named 'Puzzle'
+[2025.07.29 at 13:21:47]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 13:21:50]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.29 at 13:21:51]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
+[2025.07.29 at 13:21:53]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/tag_id=1 (Individual Tag)
+[2025.07.29 at 13:21:54]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/tag_id=2 (Individual Tag)
+[2025.07.29 at 13:21:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=1 (Mod: Tag Approvals Validate)
+[2025.07.29 at 13:21:56]: 127.0.0.1 (User: jonsmith55) successfully approved the tag named2d
+[2025.07.29 at 13:21:56]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/tag_id=1 (Individual Tag)
+[2025.07.29 at 13:21:59]: 127.0.0.1 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=2 (Mod: Tag Approvals Validate)
+[2025.07.29 at 13:21:59]: 127.0.0.1 (User: jonsmith55) successfully approved the tag namedPuzzle
+[2025.07.29 at 13:21:59]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/tag_id=2 (Individual Tag)
+[2025.07.29 at 13:22:04]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/tags/change/ (Change Game Tag)
+[2025.07.29 at 13:22:04]: 127.0.0.1 (User: jonsmith55) successfully added tags to portal_2
+[2025.07.29 at 13:22:05]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 13:22:07]: 127.0.0.1 (User: jonsmith55) successfully accessed /updates/get/ (Get Updates)

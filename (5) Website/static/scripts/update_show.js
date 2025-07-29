@@ -6,8 +6,8 @@ let updateTableHeaders = ["Version", updateName.innerHTML, "Added", "Removed", "
 let headerRow = null;
 let updateTable = null;
 let updateBackButton = null;
-let updateData = null;
 let updateID = document.getElementById("update_id");
+let updateData = null;
 
 function oldErrorCheck(){
     var oldErrorMessage = document.getElementById("errorMessage");
@@ -20,20 +20,22 @@ function oldErrorCheck(){
 }
 
 function getUpdateData(){
-    updateData = {
+    var data = {
         "update_id": updateID.innerHTML.split(": ")[1],
         "update_type": updateName.innerHTML.toLowerCase()
     }
     $.ajax({
         type: "POST",
         url: "/updates/get/",
-        data: JSON.stringify(updateData),
+        data: JSON.stringify(data),
         success: function(response){
             if (!(response === "servererror")){
-                updateData = response;
+                updateData = response.split(", ");
+                for (var i = 0; i < updateData.length; i++){
+                    updateData[i] = updateData[i].split("+");
+                }
                 console.log(updateData);
-                updateData = Array.from(updateData); //Doesn't work
-                console.log(updateData);
+                tableAddRows();
             }
             else{
                 var mainBody = document.getElementById("page_mainbody_home");
@@ -60,7 +62,16 @@ function tableAddColumns(){
 }
 
 function tableAddRows(){
-    getUpdateData();
+    console.log(updateData);
+    for (var i = 0; i < updateData.length; i++){
+        var row = document.createElement("tr");
+        for (var t = 0; t < updateData[i].length; t++){
+            var column = document.createElement("td");
+            column.innerHTML = updateData[i][t];
+            row.appendChild(column);
+        }
+        updateTable.appendChild(row);
+    }
 }
 
 function goBack(){ //Finish this
@@ -80,7 +91,7 @@ function addUpdateBox(){
     updateTable = document.createElement("table");
     //Table
     tableAddColumns();
-    tableAddRows();
+    getUpdateData();
     updateBox.appendChild(updateTable);
     //Back button
     updateBackButton.innerHTML = "Back";
