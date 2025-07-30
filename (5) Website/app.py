@@ -53,14 +53,16 @@ def home():
 @app.route("/games/")
 @app.route("/games/pid=<pid>")
 @app.route("/games/pid=<pid>&search=<search>")
-def game_list(pid=0, search=None, no_results=10):
+def game_list(pid=0, search="action+shooter", no_results=10):
     try:
         pid = int(pid)
-        games = game_get_selection(pid)
+        games = game_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "&search=" + search + " (Games List)")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
     except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
         try:
             games = game_get_selection(0, search)
             access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "&search=" + search + " (Games List)", failed=True, default=True)
@@ -237,6 +239,7 @@ def tag_add_validate():
         tag_data = tag_data.decode()
         tag_data = ast.literal_eval(tag_data)
         try:
+            tag_data["tag_name"] = tag_data["tag_name"].lower()
             if tag_check_exists(tag_data["tag_name"], tag_data["tag_type"]) is False:
                 if tag_add_new(tag_data, current_user.id) is True:
                     new_tag_log(request.remote_addr, get_user(), tag_data["tag_name"])

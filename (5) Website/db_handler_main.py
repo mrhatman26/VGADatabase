@@ -39,30 +39,74 @@ def game_get_name(game_id):
         return None
     
 def game_get_selection(pid=None, search=None, no_results=10):
-    games = []
-    if pid is None:
-        pid = 0
-    database = mysql.connector.connect(**get_db_config(deployed))
-    cursor = database.cursor()
-    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, %s", (pid, no_results + 1,))
-    fetch = cursor.fetchall()
-    for game in fetch:
-        games.append({
-            "game_id": game[0],
-            "game_title": game[1].replace("_", " ").title(),
-            "game_aka": game[2],
-            "game_desc": game[3],
-            "game_rdate": game[4],
-            "game_rstate": game[5],
-            "game_url": game[6]
-        })
-    statement = cursor.statement
-    no_pages = get_no_pages(statement, cursor, pid, no_results)
-    total_games = get_total_items(statement, cursor)
-    cursor.close()
-    database.close()
-    return (games, no_pages, total_games)
-
+    try:
+        games = []
+        if pid is None:
+            pid = 0
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        if search is None:
+            cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, %s", (pid, no_results + 1,))
+            fetch = cursor.fetchall()
+        else:
+            search = search.split("+")
+            search_tags = []
+            command_params = []
+            for tag in search:
+                tag_id = tag_get_id(tag, cursor=cursor)
+                search_tags.append(tag_id)
+                command_params.append(tag_id)
+            command = "SELECT table_games.game_id, table_games.game_title, table_games.game_aka, table_games.game_desc, table_games.game_rdate, table_games.game_rstate, table_games.game_url" #Select
+            command = command + " FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_tags.tag_id" #Inner Join
+            command = command + " WHERE table_tags.tag_id IN (%s" + (", %s" * (len(search) - 1)) + ")" #Where
+            command = command + " GROUP BY table_games.game_id ORDER BY table_games.game_id"
+            command_params = tuple(command_params)
+            cursor.execute(command, command_params)
+            fetch = cursor.fetchall()
+            for game in fetch:
+                tags = game_get_tags(game[0], cursor=cursor)
+                matches = 0
+                for tag in tags:
+                    if tag in search:
+                        matches += 1
+                if matches == len(search):
+                    games.append({
+                        "game_id": game[0],
+                        "game_title": game[1].replace("_", " ").title(),
+                        "game_aka": game[2],
+                        "game_desc": game[3],
+                        "game_rdate": game[4],
+                        "game_rstate": game[5],
+                        "game_url": game[6]
+                    })
+            total_games = len(games)
+            games = games[pid:(pid + no_results)]
+            no_pages = get_no_pages(cursor, pid, no_results, no_items=total_games)
+            return (games, no_pages, total_games)
+        for game in fetch:
+            games.append({
+                "game_id": game[0],
+                "game_title": game[1].replace("_", " ").title(),
+                "game_aka": game[2],
+                "game_desc": game[3],
+                "game_rdate": game[4],
+                "game_rstate": game[5],
+                "game_url": game[6]
+            })
+        statement = cursor.statement
+        no_pages = get_no_pages(cursor, pid, no_results, command=statement)
+        total_games = get_total_items(statement, cursor)
+        cursor.close()
+        database.close()
+        return (games, no_pages, total_games)
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        statement = cursor.statement
+        print(statement, flush=True)
+        import pyperclip
+        pyperclip.copy(command)
+        pause()
+        return None
 
 def game_get_single(game_id=0):
     try:
@@ -145,15 +189,19 @@ def game_get_unapproved():
     except:
         return None
     
-def game_get_tags(game_id):
+def game_get_tags(game_id, cursor=None):
     try:
         tags = []
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
+        no_cursor = False
+        if cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
         cursor.execute("SELECT table_tags.tag_name FROM table_tags INNER JOIN link_game_tag ON table_tags.tag_id=link_game_tag.tag_id WHERE link_game_tag.game_id = %s", (game_id,))
         fetch = cursor.fetchall()
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         if len(fetch) > 0:
             for tag in fetch:
                 tags.append(tag[0])
@@ -202,7 +250,9 @@ def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
             return True
         else:
             return False
-    except:
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        pause()
         return False
     
 def tag_get_id(tag, tag_type=None, cursor=None):
@@ -258,7 +308,7 @@ def tag_get_selection(pid=None, no_results=10):
                 "tag_isNSFW": bool(tag[4])
             })
         statement = cursor.statement
-        no_pages = get_no_pages(statement, cursor, pid, no_results)
+        no_pages = get_no_pages(cursor, pid, no_results, command=statement)
         total_tags = get_total_items(statement, cursor)
         cursor.close()
         database.close()
@@ -496,7 +546,7 @@ def devpub_get_selection(pid=None, no_results=10, is_pub=False):
                 "developer_isPub": developer[6]
             })
         statement = cursor.statement
-        no_pages = get_no_pages(statement, cursor, pid, no_results)
+        no_pages = get_no_pages(cursor, pid, no_results, command=statement)
         total_devpubs = get_total_items(statement, cursor)
         cursor.close()
         database.close()
@@ -695,3 +745,5 @@ def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
         pyperclip.copy(cursor.statement)
         pause()
         return None
+    
+game_get_selection(10, "action+shooter")

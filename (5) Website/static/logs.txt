@@ -592,3 +592,1052 @@ ModuleNotFoundError: No module named 'pyperclip'
 [2025.07.29 at 15:20:35]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/pid=3865 (Games List)
 [2025.07.29 at 15:21:22]: 127.0.0.1 (User: jonsmith55) successfully accessed /tags/tag_id=10 (Individual Tag)
 [2025.07.29 at 15:21:27]: 127.0.0.1 (User: jonsmith55) successfully accessed /games/game_id=3865 (Individual Game)
+[2025.07.29 at 19:28:24]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.07.29 at 19:28:24]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.29 at 19:28:26]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.29 at 19:28:43]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.29 at 19:28:43]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.29 at 19:28:43]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.29 at 19:28:43]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 19:28:51]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 19:28:52] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.29 at 19:28:53] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.29 at 19:28:53] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.29 at 19:28:54] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.29 at 19:47:43] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.29 at 19:53:31]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.29 at 20:36:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 20:36:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1248 (Tag List)
+[2025.07.29 at 20:36:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 20:36:51]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=10 (Tag List)
+[2025.07.29 at 20:36:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=20 (Tag List)
+[2025.07.29 at 20:37:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=30 (Tag List)
+[2025.07.29 at 20:37:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=40 (Tag List)
+[2025.07.29 at 20:37:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=50 (Tag List)
+[2025.07.29 at 20:37:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=60 (Tag List)
+[2025.07.29 at 20:37:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=70 (Tag List)
+[2025.07.29 at 20:37:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=80 (Tag List)
+[2025.07.29 at 20:37:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=90 (Tag List)
+[2025.07.29 at 20:37:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=100 (Tag List)
+[2025.07.29 at 20:37:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=110 (Tag List)
+[2025.07.29 at 20:37:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=120 (Tag List)
+[2025.07.29 at 20:37:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=130 (Tag List)
+[2025.07.29 at 20:37:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=140 (Tag List)
+[2025.07.29 at 20:37:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=150 (Tag List)
+[2025.07.29 at 20:37:37]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=160 (Tag List)
+[2025.07.29 at 20:37:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=170 (Tag List)
+[2025.07.29 at 20:37:39]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=180 (Tag List)
+[2025.07.29 at 20:37:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=170 (Tag List)
+[2025.07.29 at 20:37:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=160 (Tag List)
+[2025.07.29 at 20:37:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=170 (Tag List)
+[2025.07.29 at 20:37:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=180 (Tag List)
+[2025.07.29 at 20:37:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=190 (Tag List)
+[2025.07.29 at 20:37:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=200 (Tag List)
+[2025.07.29 at 20:37:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=210 (Tag List)
+[2025.07.29 at 20:37:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=220 (Tag List)
+[2025.07.29 at 20:37:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=230 (Tag List)
+[2025.07.29 at 20:37:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=240 (Tag List)
+[2025.07.29 at 20:37:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=250 (Tag List)
+[2025.07.29 at 20:37:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=260 (Tag List)
+[2025.07.29 at 20:37:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=270 (Tag List)
+[2025.07.29 at 20:37:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=280 (Tag List)
+[2025.07.29 at 20:37:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=290 (Tag List)
+[2025.07.29 at 20:37:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=300 (Tag List)
+[2025.07.29 at 20:37:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=310 (Tag List)
+[2025.07.29 at 20:37:51]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=320 (Tag List)
+[2025.07.29 at 20:37:51]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=330 (Tag List)
+[2025.07.29 at 20:37:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=340 (Tag List)
+[2025.07.29 at 20:37:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=350 (Tag List)
+[2025.07.29 at 20:37:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=360 (Tag List)
+[2025.07.29 at 20:37:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=370 (Tag List)
+[2025.07.29 at 20:37:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=380 (Tag List)
+[2025.07.29 at 20:37:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=390 (Tag List)
+[2025.07.29 at 20:37:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1248 (Tag List)
+[2025.07.29 at 20:37:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1238 (Tag List)
+[2025.07.29 at 20:37:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1228 (Tag List)
+[2025.07.29 at 20:37:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1218 (Tag List)
+[2025.07.29 at 20:37:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1208 (Tag List)
+[2025.07.29 at 20:37:57]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1198 (Tag List)
+[2025.07.29 at 20:37:57]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1188 (Tag List)
+[2025.07.29 at 20:37:57]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1178 (Tag List)
+[2025.07.29 at 20:37:58]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1168 (Tag List)
+[2025.07.29 at 20:37:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1178 (Tag List)
+[2025.07.29 at 20:37:59]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1188 (Tag List)
+[2025.07.29 at 20:38:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1198 (Tag List)
+[2025.07.29 at 20:38:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1208 (Tag List)
+[2025.07.29 at 20:38:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1218 (Tag List)
+[2025.07.29 at 20:38:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1208 (Tag List)
+[2025.07.29 at 20:38:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=50 (Individual Tag)
+[2025.07.29 at 20:38:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=1198 (Tag List)
+[2025.07.29 at 20:38:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=50 (Individual Tag)
+[2025.07.29 at 20:41:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 20:42:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 20:42:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10&search=action+shooter (Games List)
+[2025.07.29 at 20:42:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 20:42:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 20:44:45]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:44:45]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:45:05]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:45:05]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:45:07]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:45:07]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:46:22]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:46:22]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:46:32]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:46:32]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:46:51]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:46:51]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 68, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:47:09]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:47:09]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 65, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:47:44]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.29 at 20:47:44]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 755, in cmd_query
+    self._cmysql.query(
+    ~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<3 lines>...
+        query_attrs=self.query_attrs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+_mysql_connector.MySQLInterfaceError: Unknown column 'table_games.tag_id' in 'on clause'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 67, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 69, in game_get_selection
+    cursor.execute("SELECT * FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_games.tag_id WHERE table_tags.tag_name = %s", (search[0],))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\cursor_cext.py", line 351, in execute
+    self._connection.cmd_query(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self._stmt_partition["mappable_stmt"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        raw_as_string=self._raw_as_string,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 97, in wrapper
+    return method(cnx, *args, **kwargs)
+  File "C:\Users\MrHatman26\AppData\Local\Programs\Python\Python313\Lib\site-packages\mysql\connector\connection_cext.py", line 763, in cmd_query
+    raise get_mysql_exception(
+        err.errno, msg=err.msg, sqlstate=err.sqlstate
+    ) from err
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'table_games.tag_id' in 'on clause'
+
+[2025.07.29 at 20:51:09]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 20:54:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.29 at 21:10:02]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 21:12:33]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 21:19:00]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 21:21:51]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:21:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:22:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:22:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:23:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:23:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:24:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:25:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:25:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=5272&search=action+shooter (Games List)
+[2025.07.29 at 21:25:38]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:25:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10&search=action+shooter (Games List)
+[2025.07.29 at 21:25:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=20&search=action+shooter (Games List)
+[2025.07.29 at 21:25:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=30&search=action+shooter (Games List)
+[2025.07.29 at 21:25:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=40&search=action+shooter (Games List)
+[2025.07.29 at 21:25:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=50&search=action+shooter (Games List)
+[2025.07.29 at 21:25:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=60&search=action+shooter (Games List)
+[2025.07.29 at 21:29:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:31:11]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10&search=action+shooter (Games List)
+[2025.07.29 at 21:31:15]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 21:31:16]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10&search=action+shooter (Games List)
+[2025.07.29 at 21:31:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=20&search=action+shooter (Games List)
+[2025.07.29 at 21:31:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=30&search=action+shooter (Games List)
+[2025.07.29 at 21:31:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=40&search=action+shooter (Games List)
+[2025.07.29 at 21:31:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=5272&search=action+shooter (Games List)
+[2025.07.29 at 21:44:28]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 22:24:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 22:35:48]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 22:36:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 22:36:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9420 (Individual Game)
+[2025.07.29 at 22:37:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=5272&search=action+shooter (Games List)
+[2025.07.29 at 22:37:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.29 at 22:39:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.29 at 22:39:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=5272&search=action+shooter (Games List)
+[2025.07.29 at 23:15:53]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 23:16:08]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 23:16:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9441 (Individual Game)
+[2025.07.29 at 23:16:42]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.29 at 23:17:40]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9441 (Individual Game)
+[2025.07.30 at 08:34:45]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:34:45]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 59, in game_list
+    games = game_get_selection(pid, search=search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    "game_title": game[1].replace("_", " ").title(),
+                  ~~~~^^^
+IndexError: tuple index out of range
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 67, in game_list
+    games = game_get_selection(0, search)
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\db_handler_main.py", line 60, in game_get_selection
+    "game_title": game[1].replace("_", " ").title(),
+                  ~~~~^^^
+IndexError: tuple index out of range
+
+[2025.07.30 at 08:46:04]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 08:49:17]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 08:49:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9441 (Individual Game)
+[2025.07.30 at 08:51:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:52:58]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.07.30 at 08:52:58]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.30 at 08:52:59]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.30 at 08:53:14]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.30 at 08:53:14]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.30 at 08:53:14]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.30 at 08:53:14]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 08:53:32]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 08:53:35]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.30 at 08:53:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 08:53:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected game page
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 71, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected game page
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:53:50]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 71, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:53:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/ (Add New Game)
+[2025.07.30 at 08:54:04]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.30 at 08:54:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.30 at 08:54:17]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'game_1'
+[2025.07.30 at 08:54:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 08:54:21]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:54:21]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected game page
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:54:21]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:54:21]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 71, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:54:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/add/validate/ (New Game Validation)
+[2025.07.30 at 08:54:34]192.168.1.99 (User: jonsmith55) successfully added a new game titled 'game_2'
+[2025.07.30 at 08:54:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.30 at 08:54:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:54:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=2 (Individual Game)
+[2025.07.30 at 08:54:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=1 (Mod: Game Approvals Validate)
+[2025.07.30 at 08:54:55]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledgame_1
+[2025.07.30 at 08:54:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:54:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/game_id=2 (Mod: Game Approvals Validate)
+[2025.07.30 at 08:54:56]: 192.168.1.99 (User: jonsmith55) successfully approved the game titledgame_2
+[2025.07.30 at 08:54:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=2 (Individual Game)
+[2025.07.30 at 08:55:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.30 at 08:55:05]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 08:55:05]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:55:05]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected game page
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:55:05]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0&search=action+shooter (Games List) (The default page was returned instead)
+[2025.07.30 at 08:55:05]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the default game page. Are there no games?
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 62, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 71, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.30 at 08:55:22]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:55:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:55:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.30 at 08:55:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.30 at 08:55:48]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Action'
+[2025.07.30 at 08:55:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:55:58]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.30 at 08:56:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.30 at 08:56:12]192.168.1.99 (User: jonsmith55) successfully added a new tag named 'Shooter'
+[2025.07.30 at 08:56:12]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:56:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/ (Add Tag)
+[2025.07.30 at 08:56:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/add/validate/ (Add Tag Validate)
+[2025.07.30 at 08:56:24]192.168.1.99 (User: jonsmith55) successfully added a new tag named '2d'
+[2025.07.30 at 08:56:24]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:56:29]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.30 at 08:56:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/games/ (Mod: Game Approvals)
+[2025.07.30 at 08:56:31]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/ (Mod: Main)
+[2025.07.30 at 08:56:32]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
+[2025.07.30 at 08:56:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=1 (Individual Tag)
+[2025.07.30 at 08:56:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=1 (Mod: Tag Approvals Validate)
+[2025.07.30 at 08:56:34]: 192.168.1.99 (User: jonsmith55) successfully approved the tag namedAction
+[2025.07.30 at 08:56:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=1 (Individual Tag)
+[2025.07.30 at 08:56:41]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=2 (Individual Tag)
+[2025.07.30 at 08:56:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=2 (Mod: Tag Approvals Validate)
+[2025.07.30 at 08:56:42]: 192.168.1.99 (User: jonsmith55) successfully approved the tag namedShooter
+[2025.07.30 at 08:56:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=2 (Individual Tag)
+[2025.07.30 at 08:56:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=3 (Individual Tag)
+[2025.07.30 at 08:56:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/tag_id=3 (Mod: Tag Approvals Validate)
+[2025.07.30 at 08:56:45]: 192.168.1.99 (User: jonsmith55) successfully approved the tag named2d
+[2025.07.30 at 08:56:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=3 (Individual Tag)
+[2025.07.30 at 08:56:47]: 192.168.1.99 (User: jonsmith55) successfully accessed /mod/approvals/tags/ (Mod: Tag Approvals)
+[2025.07.30 at 08:56:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:58:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:58:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 08:58:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 08:58:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:58:59]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:59:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/tags/change/ (Change Game Tag)
+[2025.07.30 at 08:59:08]: 192.168.1.99 (User: jonsmith55) successfully added tags to game_1
+[2025.07.30 at 08:59:08]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=1 (Individual Game)
+[2025.07.30 at 08:59:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=2 (Individual Game)
+[2025.07.30 at 08:59:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/tags/change/ (Change Game Tag)
+[2025.07.30 at 08:59:25]: 192.168.1.99 (User: jonsmith55) successfully added tags to game_2
+[2025.07.30 at 08:59:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=2 (Individual Game)
+[2025.07.30 at 09:00:53]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 09:04:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 09:14:13]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=2 (Individual Game)
+[2025.07.30 at 09:20:56]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.07.30 at 09:20:56]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.30 at 09:20:57]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.30 at 09:21:22]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.30 at 09:21:22]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.30 at 09:21:22]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.30 at 09:21:22]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:21:27]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:21:36]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:21:36] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.30 at 09:21:37] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.30 at 09:21:38] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.30 at 09:21:38] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.30 at 09:22:15]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.30 at 09:22:16]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.30 at 09:22:28]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.30 at 09:22:28]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.30 at 09:22:28]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.30 at 09:22:28]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:22:34]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:22:35] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.30 at 09:23:36] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.30 at 09:23:37] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.30 at 09:23:38] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.30 at 09:25:23]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.30 at 09:25:24]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.07.30 at 09:25:46]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.07.30 at 09:25:46]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.07.30 at 09:25:46]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.07.30 at 09:25:46]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:25:53]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:25:54] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.30 at 09:25:55] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.07.30 at 09:25:56] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.07.30 at 09:25:57] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.07.30 at 09:42:57] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.07.30 at 09:44:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=0 (Tag List)
+[2025.07.30 at 09:44:19]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=710 (Individual Tag)
+[2025.07.30 at 09:44:23]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=702 (Individual Tag)
+[2025.07.30 at 09:44:26]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/pid=700 (Tag List)
+[2025.07.30 at 09:44:28]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=1 (Individual Tag)
+[2025.07.30 at 09:44:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /tags/tag_id=5 (Individual Tag)
+[2025.07.30 at 09:53:00]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.30 at 09:57:33]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9438 (Individual Game)
+[2025.07.30 at 09:57:43]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9021 (Individual Game)
+[2025.07.30 at 10:21:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 10:25:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0&search=action+shooter (Games List)
+[2025.07.30 at 10:25:39]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10&search=action+shooter (Games List)
+[2025.07.30 at 10:25:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=20&search=action+shooter (Games List)
+[2025.07.30 at 10:25:44]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=30&search=action+shooter (Games List)
+[2025.07.30 at 10:25:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=40&search=action+shooter (Games List)
+[2025.07.30 at 10:25:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=50&search=action+shooter (Games List)
+[2025.07.30 at 10:25:50]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=1056&search=action+shooter (Games List)
+[2025.07.30 at 10:25:56]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9334 (Individual Game)

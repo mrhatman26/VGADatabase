@@ -39,13 +39,14 @@ def test_datetime(date):
     except:
         return False
     
-def get_no_pages(command, cursor, pid, no_results=10):
-    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
-    command = command.replace(str(pid) + ", ", "0 ,")
-    cursor.execute(command)
-    import pyperclip
-    pyperclip.copy(str(command))
-    fetch = cursor.fetchall()[0][0]
+def get_no_pages(cursor, pid, no_results=10, command=None, no_items=None):
+    if command is not None:
+        command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+        command = command.replace(str(pid) + ", ", "0 ,")
+        cursor.execute(command)
+        fetch = cursor.fetchall()[0][0]
+    else:
+        fetch = no_items
     no_pages = 0
     if fetch <= 0:
         no_pages =  0
