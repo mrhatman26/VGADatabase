@@ -227,6 +227,9 @@ select{
     margin-top: 2.5%;
     font-size: 75%;
 }
+.submit_button:hover{
+    cursor: pointer;
+}
 .tag_type_genre{
     color: purple;
 }
@@ -238,6 +241,13 @@ select{
 }
 .tag_type_normal:hover{
     color: blue;
+}
+#game_search_div{
+    margin: auto;
+    margin-top: -5%;
+}
+#game_search_button{
+    margin-left: 0.5%;
 }
 
 input::-webkit-outer-spin-button,

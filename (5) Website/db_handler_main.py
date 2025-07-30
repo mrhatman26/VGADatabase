@@ -45,7 +45,7 @@ def game_get_selection(pid=None, search=None, no_results=10):
             pid = 0
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        if search is None:
+        if search == "":
             cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, %s", (pid, no_results + 1,))
             fetch = cursor.fetchall()
         else:
@@ -103,8 +103,8 @@ def game_get_selection(pid=None, search=None, no_results=10):
         print(traceback.format_exc(), flush=True)
         statement = cursor.statement
         print(statement, flush=True)
-        import pyperclip
-        pyperclip.copy(command)
+        #import pyperclip
+        #pyperclip.copy(command)
         pause()
         return None
 
