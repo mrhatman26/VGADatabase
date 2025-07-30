@@ -103,8 +103,6 @@ def game_get_selection(pid=None, search=None, no_results=10):
         print(traceback.format_exc(), flush=True)
         statement = cursor.statement
         print(statement, flush=True)
-        #import pyperclip
-        #pyperclip.copy(command)
         pause()
         return None
 

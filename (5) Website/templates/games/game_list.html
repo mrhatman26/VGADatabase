@@ -3,7 +3,7 @@
 <div id="page_mainbody">
         <div id="home_paragraph1">
                 <h3 id="page_header">All Games</h3>
-                <p id="previos_search" style="display: none;">{{ search }}</p>
+                <p id="previos_search" style="display: none;">{{ tag_search }}</p>
                 <div id="page_mainbody_home">
                         <div id="game_search_div">
                                 <p>Search: <input class="textbox" type="text" id="game_search" name="txt_game_search" placeholder="3d fps action"><input type="submit" value="Submit" class="submit_button" id="game_search_button">
@@ -11,6 +11,8 @@
                         {% if current_user.is_authenticated %}
                                 <a href="{{ url_for('game_add_new') }}" class="button">Add New Game</a>
                         {% endif %}
+                        <p>{{ tag_search }}</p>
+                        <p>{% set tag_search = tag_search | replace(" ", "+") %}</p>
                         {% if game_list|length > 0 %}
                                 {% set previous_pid = pid - no_results %}
                                 {% set next_pid = pid + no_results %}
@@ -19,11 +21,23 @@
                                 {% endif %}
                                 {% set current_page = current_page + 1 %}
                                 {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% if tag_search == "" %}
+                                                <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% else %}
+                                                <p><a href="{{ url_for('game_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                        {% endif %}
                                 {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% if tag_search == "" %}
+                                                <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% else %}
+                                                <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                        {% endif %}
                                 {% else %}
-                                        <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% if tag_search == "" %}
+                                                <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% else %} 
+                                                <p><a href="{{ url_for('game_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% endif %}
                                 {% endif %}
                                 {% for game in game_list %}
                                         <a href="{{ url_for('game_page', game_id=game.game_id) }}">
@@ -35,11 +49,23 @@
                                         <br>
                                 {% endfor %}
                                 {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% if tag_search == "" %}
+                                                <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% else %}
+                                                <p><a href="{{ url_for('game_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                        {% endif %}
                                 {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% if tag_search == "" %}
+                                                <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                        {% else %}
+                                                <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('game_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('game_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                        {% endif %}
                                 {% else %}
-                                        <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% if tag_search == "" %}
+                                                <p><a href="{{ url_for('game_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% else %} 
+                                                <p><a href="{{ url_for('game_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('game_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        {% endif %}
                                 {% endif %}
                         {% else %}
                                 <p>No games match your search!</p>

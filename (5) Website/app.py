@@ -54,7 +54,7 @@ def home():
 @app.route("/games/pid=<pid>")
 @app.route("/games/pid=<pid>?search=<search>")
 def game_list(pid=0, search="", no_results=10):
-    try:
+    #try:
         if request.args.get("pid", None) is not None:
             pid = request.args.get("pid", None)
         if request.args.get("search", None) is not None:
@@ -67,20 +67,20 @@ def game_list(pid=0, search="", no_results=10):
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)")
         search = search.replace("+", " ")
-        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], search=search)
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
-        try:
-            games = game_get_selection(0, search)
-            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
-            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected game page", theException=traceback.format_exc())
-            current_page = get_current_page(pid, no_results)
-            return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
-        except:
-            access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
-            error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default game page. Are there no games?", theException=traceback.format_exc())
-            return render_template("games/game_list.html", page_name="All Games", c_version=version)
+        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], tag_search=search)
+    #except Exception as e:
+    #    print(traceback.format_exc(), flush=True)
+    #    pause()
+    #    try:
+    #        games = game_get_selection(0, search)
+    #        access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
+    #        error_log(request.remote_addr, get_user(), "An error occurred while trying to show the selected game page", theException=traceback.format_exc())
+    #        current_page = get_current_page(pid, no_results)
+    #        return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2])
+    #    except:
+    #        access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
+    #        error_log(request.remote_addr, get_user(), "An error occurred while trying to show the default game page. Are there no games?", theException=traceback.format_exc())
+    #        return render_template("games/game_list.html", page_name="All Games", c_version=version)
     
 #Individual Game Page
 @app.route("/games/game_id=<game_id>")
