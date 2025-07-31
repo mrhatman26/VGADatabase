@@ -310,3 +310,27 @@ TypeError: 'NoneType' object is not subscriptable
 [2025.07.31 at 14:19:17]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9397 (Individual Game)
 [2025.07.31 at 14:19:18]: 192.168.1.99 (User: Annonymous) successfully accessed /updates/get/ (Get Updates)
 [2025.07.31 at 14:19:57]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9397 (Individual Game)
+[2025.07.31 at 14:21:36]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 14:21:38]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 14:25:11]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 14:25:19]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:30:54]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:15]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:16]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:17]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:22]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:23]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:25]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 14:33:25]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.07.31 at 15:05:56]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9397 (Individual Game)
+[2025.07.31 at 15:06:30]: 192.168.1.99 (User: Annonymous) successfully accessed /updates/get/ (Get Updates)
+[2025.07.31 at 15:06:46]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 15:08:52]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9397 (Individual Game)
+[2025.07.31 at 15:08:56]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 15:09:25]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9444 (Individual Game)
+[2025.07.31 at 15:09:29]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 15:09:39]: 192.168.1.99 (User: Annonymous) successfully accessed /games/pid=0?search= (Games List)
+[2025.07.31 at 15:09:40]: 192.168.1.99 (User: Annonymous) successfully accessed /games/game_id=9444 (Individual Game)
+[2025.07.31 at 15:09:42]: 192.168.1.99 (User: Annonymous) successfully accessed /updates/get/ (Get Updates)
+[2025.07.31 at 15:10:18]: 192.168.1.99 (User: Annonymous) FAILED to access /games/tags/change/ (Change Game Tag) as the user was not authorised
+[2025.07.31 at 15:10:18]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)

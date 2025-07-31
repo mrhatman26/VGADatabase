@@ -48,6 +48,9 @@ function submitNewTags(){
                     errorMessage.innerHTML = "The following tags do not exist:\n" + response.split("|")[1].replaceAll("+", ", ");
                 }
             }
+            else if (response.includes("nouser")){
+                window.location.replace("/users/login/");
+            }
             else{
                 var mainBody = document.getElementById("page_mainbody_home");
                 if (oldErrorCheck() === false){

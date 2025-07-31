@@ -184,7 +184,7 @@ def game_change_tags():
                 return "servererror"
     else:
         access_log(request.remote_addr, get_user(), "/games/tags/change/ (Change Game Tag)", failed=True, no_auth=True)
-        return redirect("/login/")
+        return "nouser"
     
 #Tags
 @app.route("/tags/")
@@ -855,7 +855,10 @@ def page_invalid(e):
     return render_template('errors/404.html'), 404
 @app.errorhandler(405)
 def page_wrong_method(e):
-    abort(404)
+    return render_template('errors/405.html'), 405
+@app.errorhandler(500)
+def page_server_error(e):
+    return render_template('errors/500.html'), 500
 #For simplicity, if the website encounters a 405 error, it will redirect and show as a 404 instead.
 
 #Favicon
