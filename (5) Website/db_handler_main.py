@@ -59,28 +59,29 @@ def game_get_selection(pid=None, search=None, no_results=10):
             command = "SELECT table_games.game_id, table_games.game_title, table_games.game_aka, table_games.game_desc, table_games.game_rdate, table_games.game_rstate, table_games.game_url" #Select
             command = command + " FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_tags.tag_id" #Inner Join
             command = command + " WHERE table_tags.tag_id IN (%s" + (", %s" * (len(search) - 1)) + ")" #Where
-            command = command + " GROUP BY table_games.game_id ORDER BY table_games.game_id"
+            command = command + " GROUP BY table_games.game_id" #Group
+            command = command + " HAVING count(distinct table_tags.tag_id) = %s" #Having
+            command = command + " ORDER BY table_games.game_id" #Order
+            command = command + " DESC LIMIT %s, %s"
+            command_params.append(len(search))
+            command_params.append(pid)
+            command_params.append(no_results)
             command_params = tuple(command_params)
             cursor.execute(command, command_params)
             fetch = cursor.fetchall()
+            statement = cursor.statement
             for game in fetch:
-                tags = game_get_tags(game[0], cursor=cursor)
-                matches = 0
-                for tag in tags:
-                    if tag in search:
-                        matches += 1
-                if matches == len(search):
                     games.append({
-                        "game_id": game[0],
-                        "game_title": game[1].replace("_", " ").title(),
-                        "game_aka": game[2],
-                        "game_desc": game[3],
-                        "game_rdate": game[4],
-                        "game_rstate": game[5],
-                        "game_url": game[6]
-                    })
-            total_games = len(games)
-            games = games[pid:(pid + no_results)]
+                    "game_id": game[0],
+                    "game_title": game[1].replace("_", " ").title(),
+                    "game_aka": game[2],
+                    "game_desc": game[3],
+                    "game_rdate": game[4],
+                    "game_rstate": game[5],
+                    "game_url": game[6]
+                })
+            #no_pages = get_no_pages(cursor, pid, no_results, command=statement)
+            total_games = get_total_items(statement, cursor)
             no_pages = get_no_pages(cursor, pid, no_results, no_items=total_games)
             return (games, no_pages, total_games)
         for game in fetch:
@@ -101,8 +102,9 @@ def game_get_selection(pid=None, search=None, no_results=10):
         return (games, no_pages, total_games)
     except Exception as e:
         print(traceback.format_exc(), flush=True)
+        import pyperclip
         statement = cursor.statement
-        print(statement, flush=True)
+        pyperclip.copy(statement)
         pause()
         return None
 
@@ -743,5 +745,3 @@ def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
         pyperclip.copy(cursor.statement)
         pause()
         return None
-    
-game_get_selection(10, "action+shooter")

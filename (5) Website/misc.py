@@ -40,29 +40,43 @@ def test_datetime(date):
         return False
     
 def get_no_pages(cursor, pid, no_results=10, command=None, no_items=None):
-    if command is not None:
-        command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
-        command = command.replace(str(pid) + ", ", "0 ,")
-        cursor.execute(command)
-        fetch = cursor.fetchall()[0][0]
-    else:
-        fetch = no_items
-    no_pages = 0
-    if fetch <= 0:
-        no_pages =  0
-    else:
-        while True:
-            fetch -= no_results
-            no_pages += 1
-            if fetch < 1:
-                break
-    return no_pages
+    try:
+        if command is not None:
+            command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+            command = command.replace(str(pid) + ", ", "0 ,")
+            cursor.execute(command)
+            fetch = cursor.fetchall()[0][0]
+        else:
+            fetch = no_items
+        no_pages = 0
+        if fetch <= 0:
+            no_pages =  0
+        else:
+            while True:
+                fetch -= no_results
+                no_pages += 1
+                if fetch < 1:
+                    break
+        return no_pages
+    except:
+        return 0
 
-def get_total_items(command, cursor):
-    command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
-    command = command.split(" ORDER")[0]
-    cursor.execute(command)
-    return cursor.fetchall()[0][0]
+def get_total_items(command, cursor, is_search=False):
+    try:
+        command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
+        command = command.split(" ORDER")[0]
+        command = "SELECT count(*) FROM (" + command + ") AS total"
+        cursor.execute(command)
+        statement = cursor.statement
+        return cursor.fetchall()[0][0]
+    except Exception as e:
+        print(traceback.format_exc(), flush=True)
+        statement = cursor.statement
+        print(statement, flush=True)
+        import pyperclip
+        pyperclip.copy(statement)
+        pause()
+        return 0
 
 def to_bool(value, is_no=True):
     if is_no is False:
