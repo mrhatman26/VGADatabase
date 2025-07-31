@@ -30,11 +30,8 @@ function getUpdateData(){
         data: JSON.stringify(data),
         success: function(response){
             if (!(response === "servererror")){
-                updateData = response.split(", ");
-                for (var i = 0; i < updateData.length; i++){
-                    updateData[i] = updateData[i].split("+");
-                }
-                console.log(updateData);
+                updateData = response.replaceAll("'", '"');
+                updateData = JSON.parse(updateData);
                 tableAddRows();
             }
             else{
@@ -62,27 +59,38 @@ function tableAddColumns(){
 }
 
 function tableAddRows(){
-    console.log(updateData);
-    for (var i = 0; i < updateData.length; i++){
+    for (var i = updateData.length - 1; i >= 0; i--){
         var row = document.createElement("tr");
-        for (var t = 0; t < updateData[i].length; t++){
+        var row_keys = Object.keys(updateData[i]);
+        for (var t = 0; t < row_keys.length; t++){
             var column = document.createElement("td");
-            column.innerHTML = updateData[i][t];
+            column.innerHTML = updateData[i][row_keys[t]];
+            row.appendChild(column);
+        }
+        if (i == 0){
+            var column = document.createElement("td");
+            column.innerHTML = "Game Added";
+            column.id = "update_oldest";
+            row.appendChild(column);
+        }
+        if (i == updateData.length - 1){
+            var column = document.createElement("td");
+            column.innerHTML = "Current Version";
+            column.id = "update_current"
             row.appendChild(column);
         }
         updateTable.appendChild(row);
     }
 }
 
-function goBack(){ //Finish this
-    tagTextBox.style.display = "none";
-    submitButton.style.display = "none";
+function UpdateGoBack(){
     updateBackButton.style.display = "none";
+    updateTable.style.display = "none";
     showButton.style.display = "inline";
-    tagDict = null;
-    currentTagsText = null;
-    submitButton = null;
     updateBackButton = null;
+    updateTable = null;
+    updateBackButton = null;
+    updateData = null;
 }
 
 function addUpdateBox(){
@@ -94,10 +102,11 @@ function addUpdateBox(){
     getUpdateData();
     updateBox.appendChild(updateTable);
     //Back button
+    updateBackButton.addEventListener("click", UpdateGoBack);
     updateBackButton.innerHTML = "Back";
     updateBackButton.className = "button";
+    updateBackButton.id = "update_back_button";
     updateBox.appendChild(updateBackButton);
-    updateBackButton.addEventListener("click", goBack);
 }
 
 showButton.addEventListener("click", addUpdateBox);

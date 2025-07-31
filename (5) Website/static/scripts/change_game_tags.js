@@ -142,10 +142,11 @@ function addTagBox(){
     changeTagDiv.appendChild(extraSpace);
     changeTagDiv.appendChild(submitButton);
     //Back button
+    backButton.addEventListener("click", goBack);
     backButton.innerHTML = "Back";
     backButton.className = "button";
+    backButton.id = "add_tag_back_button";
     changeTagDiv.appendChild(backButton);
-    backButton.addEventListener("click", goBack);
     submitButton.addEventListener("click", getNewTags)
 }
 

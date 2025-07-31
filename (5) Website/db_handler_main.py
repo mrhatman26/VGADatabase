@@ -2,6 +2,7 @@ import mysql.connector, re, traceback
 from datetime import datetime
 from db_config import *
 from db_handler_links import *
+from db_handler_users import user_get_username
 from misc import get_new_table_id, pause, get_no_pages, get_total_items, to_bool, fprint
 from global_vars import deployed
 
@@ -53,7 +54,6 @@ def game_get_selection(pid=None, search=None, no_results=10):
             search = search.split("+")
             search_tags = []
             command_params = []
-            #pause()
             for tag in search:
                 if tag != "" and tag.isspace() is False:
                     tag_id = tag_get_id(tag, cursor=cursor)
@@ -83,7 +83,6 @@ def game_get_selection(pid=None, search=None, no_results=10):
                     "game_rstate": game[5],
                     "game_url": game[6]
                 })
-            #no_pages = get_no_pages(cursor, pid, no_results, command=statement)
             total_games = get_total_items(statement, cursor)
             no_pages = get_no_pages(cursor, pid, no_results, no_items=total_games)
             return (games, no_pages, total_games)
@@ -734,15 +733,23 @@ def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
             cursor = database.cursor()
             no_cursor = True
         if u_type == "game":
-            cursor.execute("SELECT * FROM table_update_history INNER JOIN link_game_update ON table_update_history.update_id=link_game_update.update_id WHERE link_game_update.game_id = %s", (id,))
+            cursor.execute("SELECT table_update_history.update_version, table_update_history.update_name, table_update_history.update_added, table_update_history.update_removed, link_game_update.user_id, link_game_update.update_cDate FROM table_update_history INNER JOIN link_game_update ON table_update_history.update_id=link_game_update.update_id WHERE link_game_update.game_id = %s", (id,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
             database.close()
         if len(fetch) > 0:
-            return fetch
+            for update in fetch:
+                updates.append({
+                    "update_version": str(update[0]),
+                    "update_name": update[1].replace("_", " ").title(),
+                    "update_added": str(update[2]),
+                    "update_removed": str(update[3]),
+                    "update_username": user_get_username(update[4]),
+                    "update_cDate": update[5]
+                })
+            return updates
         else:
-            pyperclip.copy(cursor.statement)
             return None
     except Exception as e:
         print(traceback.format_exc(), flush=True)
