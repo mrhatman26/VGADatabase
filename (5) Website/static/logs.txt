@@ -165,3 +165,33 @@
 [2025.07.31 at 10:51:00]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=1056?search=shooter+action (Games List)
 [2025.07.31 at 10:51:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=24 (Individual Game)
 [2025.07.31 at 10:51:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=19 (Individual Game)
+[2025.07.31 at 10:54:15]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.07.31 at 10:54:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search= (Games List)
+[2025.07.31 at 10:54:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=zombies+shooter (Games List)
+[2025.07.31 at 10:54:25]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9028 (Individual Game)
+[2025.07.31 at 10:54:36]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:54:58]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:55:01]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=10?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:55:02]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=20?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:55:03]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=30?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:55:09]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=40?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:55:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=50?search=action+indie+rpg (Games List)
+[2025.07.31 at 10:57:30]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d (Games List)
+[2025.07.31 at 10:57:34]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d+cake (Games List)
+[2025.07.31 at 10:57:40]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d+ (Games List)
+[2025.07.31 at 10:57:42]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d (Games List)
+[2025.07.31 at 10:57:45]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d+ (Games List)
+[2025.07.31 at 11:01:10]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+2d+ (Games List)
+[2025.07.31 at 11:15:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg++2d (Games List)
+[2025.07.31 at 11:16:16]: 192.168.1.99 (User: jonsmith55) FAILED to access /games/pid=0?search=action indie rpg  2d (Games List) (The default page was returned instead)
+[2025.07.31 at 11:16:16]: 192.168.1.99 (User: jonsmith55) encountered the following error: An error occurred while trying to show the selected game page
+Exception:
+Traceback (most recent call last):
+  File "C:\Users\MrHatman26\Desktop\University\Project\(1) GIT\(5) Website\app.py", line 70, in game_list
+    return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], tag_search=search)
+                                                                                                       ~~~~~^^^
+TypeError: 'NoneType' object is not subscriptable
+
+[2025.07.31 at 11:32:07]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg++2d (Games List)
+[2025.07.31 at 11:32:17]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg+\+2d (Games List)
+[2025.07.31 at 11:32:46]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search=action+indie+rpg++2d (Games List)

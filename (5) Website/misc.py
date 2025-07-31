@@ -83,3 +83,6 @@ def to_bool(value, is_no=True):
         return (value == "true" or value is True)
     else:
         return (value == "1" or value == 1)
+    
+def fprint(value):
+    print(value, flush=True)

@@ -2,7 +2,7 @@ import mysql.connector, re, traceback
 from datetime import datetime
 from db_config import *
 from db_handler_links import *
-from misc import get_new_table_id, pause, get_no_pages, get_total_items, to_bool
+from misc import get_new_table_id, pause, get_no_pages, get_total_items, to_bool, fprint
 from global_vars import deployed
 
 #Games 
@@ -49,21 +49,24 @@ def game_get_selection(pid=None, search=None, no_results=10):
             cursor.execute("SELECT * FROM table_games INNER JOIN link_game_user ON table_games.game_id=link_game_user.game_id WHERE link_game_user.game_link_approved = 1 ORDER BY table_games.game_id DESC LIMIT %s, %s", (pid, no_results + 1,))
             fetch = cursor.fetchall()
         else:
+            search = re.sub(" +", " ", search)
             search = search.split("+")
             search_tags = []
             command_params = []
+            #pause()
             for tag in search:
-                tag_id = tag_get_id(tag, cursor=cursor)
-                search_tags.append(tag_id)
-                command_params.append(tag_id)
+                if tag != "" and tag.isspace() is False:
+                    tag_id = tag_get_id(tag, cursor=cursor)
+                    search_tags.append(tag_id)
+                    command_params.append(tag_id)
             command = "SELECT table_games.game_id, table_games.game_title, table_games.game_aka, table_games.game_desc, table_games.game_rdate, table_games.game_rstate, table_games.game_url" #Select
             command = command + " FROM table_games INNER JOIN link_game_tag ON table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON link_game_tag.tag_id=table_tags.tag_id" #Inner Join
-            command = command + " WHERE table_tags.tag_id IN (%s" + (", %s" * (len(search) - 1)) + ")" #Where
+            command = command + " WHERE table_tags.tag_id IN (%s" + (", %s" * (len(search_tags) - 1)) + ")" #Where
             command = command + " GROUP BY table_games.game_id" #Group
             command = command + " HAVING count(distinct table_tags.tag_id) = %s" #Having
             command = command + " ORDER BY table_games.game_id" #Order
             command = command + " DESC LIMIT %s, %s"
-            command_params.append(len(search))
+            command_params.append(len(search_tags))
             command_params.append(pid)
             command_params.append(no_results)
             command_params = tuple(command_params)
@@ -104,6 +107,7 @@ def game_get_selection(pid=None, search=None, no_results=10):
         print(traceback.format_exc(), flush=True)
         import pyperclip
         statement = cursor.statement
+        print(statement, flush=True)
         pyperclip.copy(statement)
         pause()
         return None
