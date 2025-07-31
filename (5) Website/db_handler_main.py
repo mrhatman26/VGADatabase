@@ -235,6 +235,7 @@ def game_check_release_date(game_id=None, game_rdate=None):
 #Tags
 def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
     try:
+        tag = tag.strip()
         no_cursor = False
         if cursor is None or database is None:
             no_cursor = True

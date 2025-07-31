@@ -75,16 +75,18 @@ def game_update_tags(tag_data, user_id, tag_get_id_function):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         for tag in tag_data["change_new_tags"]: #Add new tags
-            tag_id = tag_get_id_function(tag, cursor=cursor)
-            if tag_check_game_link_exists(tag_id, tag_data["change_game_id"], database=database, cursor=cursor) is False:
-                game_add_tag_link(tag_data["change_game_id"], tag_id, user_id, database=database, cursor=cursor)
-                added = True
-                added_list.append(tag)
+            if tag.isspace() is False and tag != "":
+                tag_id = tag_get_id_function(tag, cursor=cursor)
+                if tag_check_game_link_exists(tag_id, tag_data["change_game_id"], database=database, cursor=cursor) is False:
+                    game_add_tag_link(tag_data["change_game_id"], tag_id, user_id, database=database, cursor=cursor)
+                    added = True
+                    added_list.append(tag)
         for tag in tag_data["change_old_tags"]:
-            if tag not in tag_data["change_new_tags"]:
-                game_add_tag_link(tag_data["change_game_id"], tag_get_id_function(tag, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
-                removed = True
-                removed_list.append(tag)
+            if tag.isspace() is False and tag != "":
+                if tag not in tag_data["change_new_tags"]:
+                    game_add_tag_link(tag_data["change_game_id"], tag_get_id_function(tag, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
+                    removed = True
+                    removed_list.append(tag)
         cursor.close()
         database.close()
         return (added, removed, True, (added_list, removed_list))

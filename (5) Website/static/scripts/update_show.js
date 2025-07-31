@@ -64,6 +64,9 @@ function tableAddRows(){
         var row_keys = Object.keys(updateData[i]);
         for (var t = 0; t < row_keys.length; t++){
             var column = document.createElement("td");
+            if (updateData[i][row_keys[t]] === "None"){
+                updateData[i][row_keys[t]] = "N/A";
+            }
             column.innerHTML = updateData[i][row_keys[t]];
             row.appendChild(column);
         }

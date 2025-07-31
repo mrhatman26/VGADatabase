@@ -60,7 +60,6 @@ def game_list(pid=0, search="", no_results=10):
         if request.args.get("search", None) is not None:
             if request.args.get("search", None) != "":
                 search = request.args.get("search", None).replace(" ", "+")
-                print(search, flush=True)
         if type(pid) == str:
             pid = int(pid)
         games = game_get_selection(pid, search=search)
@@ -69,8 +68,6 @@ def game_list(pid=0, search="", no_results=10):
         search = search.replace("+", " ")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], tag_search=search)
     except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
         try:
             games = game_get_selection(0, search)
             access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
@@ -420,7 +417,6 @@ def user_login_validate():
             if user_check_exists(userdata["user_name"]):
                 if user_login_passcheck(userdata):
                     admin_stat = user_check_admin(userdata["user_name"])
-                    print(user_get_id(userdata["user_name"]), flush=True)
                     login_user(User(user_get_id(userdata["user_name"]), userdata["user_name"], admin_stat[0], admin_stat[1]))
                     login_log(request.remote_addr, userdata["user_name"])
                     return "success"
@@ -716,8 +712,6 @@ def update_get():
         retrieve_name = ast.literal_eval(retrieve_name)
         return str(update_get_all_versions(int(retrieve_name["update_id"]), u_type=retrieve_name["update_type"]))
     except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
         return "servererror"
     
 '''Admin Routes'''
