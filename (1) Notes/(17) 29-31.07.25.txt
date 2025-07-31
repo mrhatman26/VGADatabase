@@ -1,0 +1,46 @@
+I spent the time between the 29th and the 31st implementing three things:
+One: I made it so users can see what games a tag or developer is linked to.
+Two: I added an update system that, for now, shows which tags were added and
+removed an by what user.
+Three: I made it so that users can search for games with the tags in a search
+bar above the list of games. 
+
+The first two things were okay and work fine. The third thing, however, was
+quite tricky because it involved trying to tell MySQL to find games linked to
+tags. At first, my implementation involved selecting the data with three inner
+joins and then having Python go through the data to see which game had the
+searched for tags and only showing them. However, that was too slow because
+Python is A LOT slower than MySQL. 
+
+Eventually, I found out about grouping and "having". Grouping groups the
+requested values into one column and, in this case, that value was game_id.
+Having, apparently, is similar to WHERE, except for "aggregates" (rows with
+multiple values).
+
+In short, the full command goes in this order:
+SELECT
+>FROM
+>WHERE
+>GROUP
+>ORDER BY
+>DESC LIMIT
+Here's a sample:
+SELECT table_games.game_id, table_games.game_title, table_games.game_aka,
+table_games.game_desc, table_games.game_rdate, table_games.game_rstate,
+table_games.game_url FROM table_games INNER JOIN link_game_tag ON
+table_games.game_id=link_game_tag.game_id INNER JOIN table_tags ON
+link_game_tag.tag_id=table_tags.tag_id WHERE table_tags.tag_id IN (4, 1, 37)
+GROUP BY table_games.game_id HAVING count(distinct table_tags.tag_id) = 3
+ORDER BY table_games.game_id DESC LIMIT 0, 10;
+
+It's honestly scary that. And certain parts of it are automatically generated
+at runtime. For example, I don't know how many tags a user will give, so I
+generate the bit after IN at runtime by saying:
+" WHERE table_tags.tag_id IN (%s" + (", %s" * (len(search_tags) - 1)) + ")"
+This works because %s gets replaced by the values I specify when the command
+is executed. It doesn't work in normal Python, just with mysql-connector for
+some reason?
+
+Anyway, I have the next few days off of work, so I'm going to take a really
+long break now. From here on, it's time to start cleaning the website up and
+adding some misc features if I can.

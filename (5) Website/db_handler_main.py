@@ -65,7 +65,7 @@ def game_get_selection(pid=None, search=None, no_results=10):
             command = command + " GROUP BY table_games.game_id" #Group
             command = command + " HAVING count(distinct table_tags.tag_id) = %s" #Having
             command = command + " ORDER BY table_games.game_id" #Order
-            command = command + " DESC LIMIT %s, %s"
+            command = command + " DESC LIMIT %s, %s" #Limit
             command_params.append(len(search_tags))
             command_params.append(pid)
             command_params.append(no_results)
@@ -73,6 +73,8 @@ def game_get_selection(pid=None, search=None, no_results=10):
             cursor.execute(command, command_params)
             fetch = cursor.fetchall()
             statement = cursor.statement
+            import pyperclip
+            pyperclip.copy(statement)
             for game in fetch:
                     games.append({
                     "game_id": game[0],
