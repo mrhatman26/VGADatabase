@@ -7,6 +7,9 @@ function submitSearch(){
     if (/\S/.test(searchBox.value)){
         window.location.replace("/tags/pid=0?search=" + searchBox.value);
     }
+    else{
+        window.location.replace("/tags/pid=0");
+    }
 }
 
 searchButton.addEventListener("click", submitSearch);

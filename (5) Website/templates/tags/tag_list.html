@@ -14,18 +14,34 @@
                                 <a href="{{ url_for('tag_add') }}" class="button">Add New Tag</a>
                         {% endif %}
                         {% if tags_list|length > 0 %}
-                                {% set previous_pid = pid - no_results %}
-                                {% set next_pid = pid + no_results %}
-                                {% if next_pid > total_results - 1 %}
-                                        {% set next_pid = total_results - 1 %}
-                                {% endif %}
                                 {% set current_page = current_page + 1 %}
-                                {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
-                                {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                {% if total_results > 10 %}
+                                        {% set previous_pid = pid - no_results %}
+                                        {% set next_pid = pid + no_results %}
+                                        {% if next_pid > total_results - 1 %}
+                                                {% set next_pid = total_results - 1 %}
+                                        {% endif %}
+                                        {% if previous_pid >= 0 and next_pid < total_results - 1 %}
+                                                {% if tag_search == "" %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                                {% else %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                                {% endif %}
+                                        {% elif previous_pid < 0 %}
+                                                {% if tag_search == "" %}
+                                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                                {% else %}
+                                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                                {% endif %}
+                                        {% else %}
+                                                {% if tag_search == "" %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                                {% else %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                                {% endif %}
+                                        {% endif %}
                                 {% else %}
-                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        <p>({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                                 {% for tag in tags_list %}
                                         <a href="{{ url_for('tag_page', tag_id=tag.tag_id) }}">
@@ -41,12 +57,28 @@
                                         </a>
                                         <br>
                                 {% endfor %}
-                                {% if previous_pid >= 0 and next_pid < total_results - 1 %}
-                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
-                                {% elif previous_pid < 0 %}
-                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                {% if total_results > 10 %}
+                                        {% if previous_pid >= 0 and next_pid < total_results - 1 %}
+                                                {% if tag_search == "" %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                                {% else %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0, search=tag_search) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid, search=tag_search) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                                {% endif %}
+                                        {% elif previous_pid < 0 %}
+                                                {% if tag_search == "" %}
+                                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10) }}" class="button">Last >></a></p>
+                                                {% else %}
+                                                        <p>({{ current_page }}/{{ no_pages }}) <a href="{{ url_for('tag_list', pid=next_pid, search=tag_search) }}" class="button">Next ></a> <a href="{{ url_for('tag_list', pid=total_results - 10, search=tag_search) }}" class="button">Last >></a></p>
+                                                {% endif %}
+                                        {% else %}
+                                                {% if tag_search == "" %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                                {% else %}
+                                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                                {% endif %}
+                                        {% endif %}
                                 {% else %}
-                                        <p><a href="{{ url_for('tag_list', pid=0) }}" class="button"><< First</a> <a href="{{ url_for('tag_list', pid=previous_pid) }}" class="button">< Previous</a> ({{ current_page }}/{{ no_pages }})</p>
+                                        <p>({{ current_page }}/{{ no_pages }})</p>
                                 {% endif %}
                         {% else %}
                                 <p>No tags match your search!</p>

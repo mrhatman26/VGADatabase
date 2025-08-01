@@ -83,7 +83,7 @@ def game_get_selection(pid=None, search=None, no_results=10):
                     "game_rstate": game[5],
                     "game_url": game[6]
                 })
-            total_games = get_total_items(statement, cursor)
+            total_games = get_total_items(statement, cursor, is_search=True)
             no_pages = get_no_pages(cursor, pid, no_results, no_items=total_games)
             return (games, no_pages, total_games)
         for game in fetch:

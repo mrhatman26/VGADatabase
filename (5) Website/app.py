@@ -68,6 +68,7 @@ def game_list(pid=0, search="", no_results=10):
         search = search.replace("+", " ")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], tag_search=search)
     except Exception as e:
+        fprint(traceback.format_exc())
         try:
             games = game_get_selection(0, search)
             access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
@@ -199,7 +200,7 @@ def tag_list(pid=0, no_results=10, search=None):
         tags = tag_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + "?search=" + str(search) + " (Tag List)")
-        return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2])
+        return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2], tag_search=search)
     except Exception as e:
         fprint(traceback.format_exc())
         try:
@@ -297,7 +298,7 @@ def tag_change_type():
 @app.route("/developers/")
 @app.route("/developers/pid=<pid>")
 @app.route("/developers/pid=<pid>?search=<search>")
-def developer_list(pid=0, no_results=10, search=None):
+def developer_list(pid=0, no_results=10, search=""):
     try:
         if request.args.get("pid", None) is not None:
             pid = request.args.get("pid", None)
@@ -309,7 +310,7 @@ def developer_list(pid=0, no_results=10, search=None):
         devpubs = devpub_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + "?search=" + str(search) + " (Developers List)")
-        return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+        return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2], tag_search=search)
     except Exception as e:
         try:
             devpubs = devpub_get_selection(0)
@@ -326,10 +327,12 @@ def developer_list(pid=0, no_results=10, search=None):
 @app.route("/publishers/")
 @app.route("/publishers/pid=<pid>")
 @app.route("/publishers/pid=<pid>?search=<search>")
-def publisher_list(pid=0, no_results=10):
+def publisher_list(pid=0, no_results=10, search=""):
     try:
         if request.args.get("pid", None) is not None:
             pid = request.args.get("pid", None)
+        fprint(request.args.get("search", None))
+        pause()
         if request.args.get("search", None) is not None:
             if request.args.get("search", None) != "" and request.args.get("search", None).isspace() is False:
                 search = request.args.get("search", None)
@@ -338,8 +341,9 @@ def publisher_list(pid=0, no_results=10):
         devpubs = devpub_get_selection(pid, is_pub=True, search=search)
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + "?search=" + str(search) + " (publishers List)")
-        return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
+        return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2], tag_search=search)
     except Exception as e:
+        fprint(traceback.format_exc())
         try:
             devpubs = devpub_get_selection(pid, is_pub=True)
             access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)", failed=True, default=True)

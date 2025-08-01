@@ -16,6 +16,17 @@ function submitSearch(){
             return;
         }
     }
+    else{
+        if (current_loc.includes("developers")){
+            window.location.replace("/developers/pid=0")
+        }
+        else if (current_loc.includes("publishers")){
+            window.location.replace("/publishers/pid=0")
+        }
+        else{
+            return;
+        }
+    }
 }
 
 searchButton.addEventListener("click", submitSearch);

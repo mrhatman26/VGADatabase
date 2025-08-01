@@ -65,9 +65,12 @@ def get_total_items(command, cursor, is_search=False):
     try:
         command = re.sub("SELECT (.*?) FROM", "SELECT count(*) FROM", command)
         command = command.split(" ORDER")[0]
-        command = "SELECT count(*) FROM (" + command + ") AS total"
+        if is_search is True:
+            command = "SELECT count(*) FROM (" + command + ") AS total"
         cursor.execute(command)
         statement = cursor.statement
+        import pyperclip
+        pyperclip.copy(statement)
         return cursor.fetchall()[0][0]
     except Exception as e:
         print(traceback.format_exc(), flush=True)
