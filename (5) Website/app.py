@@ -186,14 +186,22 @@ def game_change_tags():
 #Tags
 @app.route("/tags/")
 @app.route("/tags/pid=<pid>")
-def tag_list(pid=0, no_results=10):
+@app.route("/tags/pid=<pid>?search=<search>")
+def tag_list(pid=0, no_results=10, search=None):
     try:
-        pid = int(pid)
-        tags = tag_get_selection(pid)
+        if request.args.get("pid", None) is not None:
+            pid = request.args.get("pid", None)
+        if request.args.get("search", None) is not None:
+            if request.args.get("search", None) != "" and request.args.get("search", None).isspace() is False:
+                search = request.args.get("search", None)
+        if type(pid) == str:
+            pid = int(pid)
+        tags = tag_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)")
         return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2])
     except Exception as e:
+        fprint(traceback.format_exc())
         try:
             tags = tag_get_selection(0)
             access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)", failed=True, default=True)

@@ -294,14 +294,17 @@ def tag_get_name(tag_id):
     except Exception as e:
         return None
     
-def tag_get_selection(pid=None, no_results=10):
+def tag_get_selection(pid=None, no_results=10, search=None):
     try:
         tags = []
         if pid is None:
             pid = 0
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT * FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 1 ORDER BY table_tags.tag_id DESC LIMIT %s, %s", (pid, no_results + 1,))
+        if search is None:
+            cursor.execute("SELECT * FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 1 ORDER BY table_tags.tag_id DESC LIMIT %s, %s", (pid, no_results + 1,))
+        else:
+            cursor.execute("SELECT * FROM table_tags INNER JOIN link_tag_user ON table_tags.tag_id=link_tag_user.tag_id WHERE link_tag_user.tag_link_approved = 1 AND table_tags.tag_name LIKE %s ORDER BY table_tags.tag_id DESC LIMIT %s, %s", ("%" + search + "%", pid, no_results + 1,))
         fetch = cursor.fetchall()
         for tag in fetch:
             tags.append({
@@ -317,7 +320,10 @@ def tag_get_selection(pid=None, no_results=10):
         cursor.close()
         database.close()
         return (tags, no_pages, total_tags)
-    except:
+    except Exception as e:
+        fprint(traceback.format_exc())
+        fprint(cursor.statement)
+        pause()
         return None
 
 def tag_get_individual(tag_id):
