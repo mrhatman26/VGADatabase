@@ -536,14 +536,17 @@ def devpub_add_new(devpub_data, user_id):
     except:
         return False
 
-def devpub_get_selection(pid=None, no_results=10, is_pub=False):
+def devpub_get_selection(pid=None, no_results=10, is_pub=False, search=None):
     try:
         devpubs = []
         if pid is None:
             pid = 0
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 AND table_developers.developer_isPub = %s ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (is_pub, pid, no_results + 1))
+        if search is None:
+            cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 AND table_developers.developer_isPub = %s ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (is_pub, pid, no_results + 1))
+        else:
+            cursor.execute("SELECT * FROM table_developers INNER JOIN link_developer_user ON table_developers.developer_id=link_developer_user.developer_id WHERE link_developer_user.developer_link_approved = 1 AND table_developers.developer_isPub = %s AND table_developers.developer_name LIKE %s ORDER BY table_developers.developer_id DESC LIMIT %s, %s", (is_pub, "%" + search + "%", pid, no_results + 1))
         fetch = cursor.fetchall()
         for developer in fetch:
             devpubs.append({

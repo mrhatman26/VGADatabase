@@ -198,7 +198,7 @@ def tag_list(pid=0, no_results=10, search=None):
             pid = int(pid)
         tags = tag_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
-        access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)")
+        access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + "?search=" + str(search) + " (Tag List)")
         return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2])
     except Exception as e:
         fprint(traceback.format_exc())
@@ -296,12 +296,19 @@ def tag_change_type():
 #Developer List 
 @app.route("/developers/")
 @app.route("/developers/pid=<pid>")
-def developer_list(pid=0, no_results=10):
+@app.route("/developers/pid=<pid>?search=<search>")
+def developer_list(pid=0, no_results=10, search=None):
     try:
-        pid = int(pid)
-        devpubs = devpub_get_selection(pid)
+        if request.args.get("pid", None) is not None:
+            pid = request.args.get("pid", None)
+        if request.args.get("search", None) is not None:
+            if request.args.get("search", None) != "" and request.args.get("search", None).isspace() is False:
+                search = request.args.get("search", None)
+        if type(pid) == str:
+            pid = int(pid)
+        devpubs = devpub_get_selection(pid, search=search)
         current_page = get_current_page(pid, no_results)
-        access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + " (Developers List)")
+        access_log(request.remote_addr, get_user(), "/developers/pid=" + str(pid) + "?search=" + str(search) + " (Developers List)")
         return render_template("devpubs/developer_list.html", page_name="All Developers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
     except Exception as e:
         try:
@@ -318,12 +325,19 @@ def developer_list(pid=0, no_results=10):
 #Publisher List 
 @app.route("/publishers/")
 @app.route("/publishers/pid=<pid>")
+@app.route("/publishers/pid=<pid>?search=<search>")
 def publisher_list(pid=0, no_results=10):
     try:
-        pid = int(pid)
-        devpubs = devpub_get_selection(pid, is_pub=True)
+        if request.args.get("pid", None) is not None:
+            pid = request.args.get("pid", None)
+        if request.args.get("search", None) is not None:
+            if request.args.get("search", None) != "" and request.args.get("search", None).isspace() is False:
+                search = request.args.get("search", None)
+        if type(pid) == str:
+            pid = int(pid)
+        devpubs = devpub_get_selection(pid, is_pub=True, search=search)
         current_page = get_current_page(pid, no_results)
-        access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)")
+        access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + "?search=" + str(search) + " (publishers List)")
         return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2])
     except Exception as e:
         try:

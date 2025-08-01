@@ -4,6 +4,11 @@
         <div id="home_paragraph1">
                 <h3 id="page_header">All Developers</h3>
                 <div id="page_mainbody_home">
+                        <div id="game_search_div">
+                                <p>Search: <input class="textbox" type="text" id="tag_search" name="txt_tag_search" placeholder="hatman_studios"><input type="submit" value="Submit" class="submit_button" id="game_search_button"></p>
+                                <script src="http://code.jquery.com/jquery.min.js"></script>
+                                <script src=" {{ url_for('static', filename='scripts/devpub_search.js') }}"></script>
+                        </div>
                         {% if current_user.is_authenticated %}
                                 <a href="{{ url_for('devpub_add') }}" class="button">Add New Developer</a>
                         {% endif %}
