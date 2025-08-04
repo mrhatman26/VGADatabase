@@ -422,6 +422,25 @@ def tag_get_games(tag_id):
         pause()
         return None
     
+def tag_get_similar(tag):
+    try:
+        tags = ""
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_name FROM table_tags WHERE tag_name LIKE %s", (tag + "%",))
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            for tag in fetch:
+                if tags == "":
+                    tags = tag[0]
+                else:
+                    tags = tags + "|" + tag[0]
+            return tags
+        else:
+            return None
+    except:
+        return None
+    
 #Aliases
 def alias_check_exists(alias):
     database = mysql.connector.connect(**get_db_config(deployed))

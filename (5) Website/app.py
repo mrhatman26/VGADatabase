@@ -292,7 +292,26 @@ def tag_change_type():
     else:
         access_log(request.remote_addr, get_user(), "/tags/type/change/ (Change Tag Type)", failed=True, no_auth=True)
         return redirect("/login/")
+
+#Get Closest Tag
+@app.route("/tags/search/closest/", methods=["POST"])
+def tag_get_closest():
+    try:
+        if current_user.is_authenticated:
+            access_log(request.remote_addr, get_user(), "/tags/search/closest/ (Get Closest Tag)")
+            tag = request.get_data()
+            tag = tag.decode()
+            closest_tag = tag_get_similar(tag)
+            if closest_tag is not None:
+                return str(closest_tag)
+            else:
+                return "-999notag"
+    except Exception as e:
+        fprint(traceback.format_exc())
+        return "-999notag"
+
     
+
 #Developers & Publishers (Devpubs)
 #Developer List 
 @app.route("/developers/")

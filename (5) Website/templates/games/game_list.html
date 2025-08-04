@@ -6,7 +6,10 @@
                 <p id="previos_search" style="display: none;">{{ tag_search }}</p>
                 <div id="page_mainbody_home">
                         <div id="game_search_div">
-                                <p>Search: <input class="textbox" type="text" id="game_search" name="txt_game_search" placeholder="3d fps action"><input type="submit" value="Submit" class="submit_button" id="game_search_button">
+                                <p>Search: <input class="textbox" type="text" id="game_search" name="txt_game_search" list="tag_list" placeholder="3d fps action"><input type="submit" value="Submit" class="submit_button" id="game_search_button"></p>
+                                <datalist id="tag_list"></datalist>
+                                <script src="http://code.jquery.com/jquery.min.js"></script>
+                                <script src=" {{ url_for('static', filename='scripts/tag_get_closest.js') }}"></script>
                         </div>
                         {% if current_user.is_authenticated %}
                                 <a href="{{ url_for('game_add_new') }}" class="button">Add New Game</a>
