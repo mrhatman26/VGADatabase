@@ -293,6 +293,22 @@ def tag_get_name(tag_id):
             return None
     except Exception as e:
         return None
+
+def tag_get_all():
+    try:
+        tags = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT tag_name FROM table_tags")
+        fetch = cursor.fetchall()
+        if len(fetch) > 0:
+            for tag in fetch:
+                tags.append(tag[0])
+            return tags
+        else:
+            return None
+    except:
+        return None
     
 def tag_get_selection(pid=None, no_results=10, search=None):
     try:

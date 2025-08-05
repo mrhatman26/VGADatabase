@@ -350,8 +350,6 @@ def publisher_list(pid=0, no_results=10, search=""):
     try:
         if request.args.get("pid", None) is not None:
             pid = request.args.get("pid", None)
-        fprint(request.args.get("search", None))
-        pause()
         if request.args.get("search", None) is not None:
             if request.args.get("search", None) != "" and request.args.get("search", None).isspace() is False:
                 search = request.args.get("search", None)
@@ -440,6 +438,18 @@ def debpub_add_validate():
         return redirect("/users/login/")
 
 '''User Routes'''
+#Account PAge
+@app.route("/users/account/")
+def user_account():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/account/ (Account Page)")
+        user_data = user_single_get_all(current_user.id)
+        fprint(user_data)
+        return render_template("users/user_page.html", page_name=get_user(), user_data=user_data, c_version=version)
+    else:
+        access_log(request.remote_addr, get_user(), "/users/account/ (Account Page)", failed=True, no_auth=True)
+        return redirect("/users/login/")
+
 #Login
 @app.route("/users/login/")
 def user_login():

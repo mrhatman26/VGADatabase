@@ -102,11 +102,13 @@ def user_get_all():
         user_list = []
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT user_id, user_name, user_email, user_isAdmin, user_isMod FROM table_users")
+        cursor.execute("SELECT user_id, user_desc, user_email, user_isAdmin, user_isMod FROM table_users")
         for item in cursor.fetchall():
+            if item[1].isspace or item[1] == "":
+                item[1] == None
             user_list.append({
                 "user_id": item[0],
-                "user_name": item[1],
+                "user_desc": item[1],
                 "user_email": item[2],
                 "user_isAdmin": item[3],
                 "user_isMod": item[4]
@@ -116,6 +118,26 @@ def user_get_all():
         return user_list
     except:
         return []
+    
+def user_single_get_all(user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_id, user_email, user_desc FROM table_users WHERE user_id = %s", (user_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            fetch = fetch[0]
+            return {
+                "user_id": fetch[0],
+                "user_email": fetch[1],
+                "user_desc": fetch[2]
+            }
+        else:
+            return None
+    except:
+        return None
     
 #Add/Modify
 def user_add_new(new_userdata, set_mod=False, set_admin=False):

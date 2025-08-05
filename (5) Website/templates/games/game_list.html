@@ -6,8 +6,10 @@
                 <p id="previos_search" style="display: none;">{{ tag_search }}</p>
                 <div id="page_mainbody_home">
                         <div id="game_search_div">
-                                <p>Search: <input class="textbox" type="text" id="game_search" name="txt_game_search" list="tag_list" placeholder="3d fps action"><input type="submit" value="Submit" class="submit_button" id="game_search_button"></p>
-                                <datalist id="tag_list"></datalist>
+                                <p>Search: <input multiple class="textbox" type="text" id="game_search" name="txt_game_search" placeholder="3d fps action"><input type="submit" value="Submit" class="submit_button" id="game_search_button"></p>
+                                <div id="drop_down_container">
+                                        <div id="drop_down_content" class="drop_down_content"></div>
+                                </div>
                                 <script src="http://code.jquery.com/jquery.min.js"></script>
                                 <script src=" {{ url_for('static', filename='scripts/tag_get_closest.js') }}"></script>
                         </div>
