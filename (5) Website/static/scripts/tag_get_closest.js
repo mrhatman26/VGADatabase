@@ -40,7 +40,10 @@ function getClosestTag(tag){
                     tagOption.className = "drop_down_content_item";
                     tagList.appendChild(tagOption);
                 }
-                tagList.style.display = "inline";
+                tagList.style.display = "block"; //https://www.w3schools.com/howto/howto_js_dropdown.asp
+                var searchRect = gameSearchBox.getBoundingClientRect();
+                tagList.style.left = (searchRect.x - 8) + "px";
+                tagList.style.top = ((searchRect.y - 8) + searchRect.height) + "px";
                 for (var i = 0; i < tagList.childNodes.length; i++){
                     tagList.childNodes[i].addEventListener("click", function(e){
                         addTag(e.target.id);
