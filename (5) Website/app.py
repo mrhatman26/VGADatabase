@@ -444,7 +444,6 @@ def user_account():
     if current_user.is_authenticated:
         access_log(request.remote_addr, get_user(), "/users/account/ (Account Page)")
         user_data = user_single_get_all(current_user.id)
-        fprint(user_data)
         return render_template("users/user_page.html", page_name=get_user(), user_data=user_data, c_version=version)
     else:
         access_log(request.remote_addr, get_user(), "/users/account/ (Account Page)", failed=True, no_auth=True)
@@ -524,6 +523,32 @@ def user_signup_validate():
             new_user_log(request.remote_addr, userdata["user_name"], failed=True)
             error_log(request.remote_addr, userdata["user_name"], "Server error during user creation", theException=traceback.format_exc())
             return "servererror"
+        
+#Update Username
+@app.route("/users/modify/username/", methods=["POST"])
+def user_change_username():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/modify/username/ (Modify Username)")
+        new_username = request.get_data()
+        new_username = new_username.decode()
+        new_username = ast.literal_eval(new_username)
+        if current_user.username != new_username["user_name"]:
+            if user_check_exists(new_username["user_name"]) is False:
+                old_username = get_user()
+                if user_modify_username(current_user.id, new_username["user_name"]) is True:
+                    modify_user_log(request.remote_addr, old_username, new_username["user_name"], is_username=True)
+                    return "success"
+                else:
+                    modify_user_log(request.remote_addr, get_user(), new_username["user_name"], is_username=True, failed=True)
+                    return "servererror"
+            else:
+                modify_user_log(request.remote_addr, get_user(), new_username["user_name"], is_username=True, failed=True)
+                return "userexists"
+        else:
+            modify_user_log(request.remote_addr, get_user(), new_username["user_name"], is_username=True, failed=True)
+            return "samename"
+    else:
+        return "servererror"
         
 #Logout
 @app.route("/users/logout/")

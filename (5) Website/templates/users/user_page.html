@@ -4,28 +4,29 @@
         <div id="home_paragraph1">
                 <h3 id="page_header">{{ current_user.username }}</h3>
                 <div id="page_mainbody_home">
-                        <form id="modify_form">
-                                <p>Email: {{ user_data.user_email }}</p>
-                                <a class="button">Modify Email</a>
-                                {% if user_data.user_desc is none %}
-                                    <p>Description: You have no description</p>
-                                    <a class="button">Add Description</a>
-                                {% else %}
-                                    <p>Description: {{ user_data.user_desc }}</p>
-                                    <a class="button">Modify Description</a>
-                                {% endif %}
-                                {% if current_user.is_mod == true %}
-                                    <p>You are a moderator</p>
-                                {% endif %}
-                                {% if current_user.is_admin == true %}
-                                    <p>You are an admin</p>
-                                {% endif %}
-                                <a class="button">Modify Username</a>
-                                <a class="button" style="background-color: red; border-color: red;">Delete Account</a>
-                        </form>
+                        <p>Email: {{ user_data.user_email }}</p>
+                        <a class="button">Modify Email</a>
+                        {% if user_data.user_desc is none %}
+                            <p>Description: You have no description</p>
+                            <a class="button">Add Description</a>
+                        {% else %}
+                            <p>Description: {{ user_data.user_desc }}</p>
+                            <a class="button">Modify Description</a>
+                        {% endif %}
+                        {% if current_user.is_mod == true %}
+                            <p>You are a moderator</p>
+                        {% endif %}
+                        {% if current_user.is_admin == true %}
+                            <p>You are an admin</p>
+                        {% endif %}
+                        <div id="change_name_div">
+                            <a class="button" id="change_name_button">Modify Username</a>
+                        </div>
+                        <p></p>
+                        <a class="button" style="background-color: red; border-color: red;">Delete Account</a>
                 </div>
         </div>
 </div>
 <script src="http://code.jquery.com/jquery.min.js"></script>
-<script src=" {{ url_for('static', filename='scripts/modify.js') }}"></script>
+<script src=" {{ url_for('static', filename='scripts/user_page/user_change_name.js') }}"></script>
 {% endblock %}
