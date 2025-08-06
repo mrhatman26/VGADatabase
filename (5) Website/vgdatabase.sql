@@ -440,3 +440,5 @@ CREATE TABLE link_game_update(
     FOREIGN KEY(update_id) REFERENCES table_update_history(update_id),
     FOREIGN KEY(user_id) REFERENCES table_users(user_id)
 );
+
+INSERT INTO table_users (user_id, user_name, user_pass) VALUES(-1, "DELETED", "NOPASS");

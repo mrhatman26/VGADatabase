@@ -4,6 +4,10 @@ from db_config import *
 from misc import pause, get_new_table_id, get_time
 from datetime import datetime as dt
 
+#Note: Void commands don't delete links. They instead replace the data with other data that represents a deletion.
+#E.G: When a user voids their link to a game, the link still exists, but it no longer links to the user's id, just -1.
+#The reason for this is because if the links are truly deleted, then, in the above example, the games will no longer be shown.
+
 '''Games'''
 #Add
 def game_add_user_link(game_id, user_id, database=None, cursor=None):
@@ -92,6 +96,19 @@ def game_update_tags(tag_data, user_id, tag_get_id_function):
         return (added, removed, True, (added_list, removed_list))
     except:
         return (added, removed, False, (added_list, removed_list))
+    
+#Delete/Void
+def game_void_user_link(game_id, user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_game_user SET user_id = -1 WHERE game_id = %s AND user_id = %s", (game_id, user_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
 
 #Get
 def game_get_approved(game_id):

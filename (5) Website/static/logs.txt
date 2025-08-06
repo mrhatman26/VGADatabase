@@ -986,3 +986,31 @@
 [2025.08.06 at 11:30:49]: 192.168.1.99 (User: jonsmith55) successfully accessed /users/account/ (Account Page)
 [2025.08.06 at 11:30:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /users/modify/username/ (Modify Username)
 [2025.08.06 at 11:30:54]: 192.168.1.99 (User: jonsmith55) FAILED to change their username to jonsmith55
+[2025.08.06 at 11:32:51]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.08.06 at 11:32:53]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.08.06 at 11:33:15]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.08.06 at 11:33:15]: 192.168.1.99 successfully created a new account with the username of tuna55
+[2025.08.06 at 11:33:15]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.08.06 at 11:33:23]: 192.168.1.99 successfully logged in as tuna55
+[2025.08.06 at 11:33:23]: 192.168.1.99 (User: tuna55) successfully accessed / (Home)
+[2025.08.06 at 11:33:25]: 192.168.1.99 (User: tuna55) successfully accessed /users/account/ (Account Page)
+[2025.08.06 at 11:33:45]: 192.168.1.99 (User: tuna55) successfully accessed /users/account/ (Account Page)
+[2025.08.06 at 11:33:48]: 192.168.1.99 (User: jonsmith55) successfully accessed /users/account/ (Account Page)
+[2025.08.06 at 11:33:54]: 192.168.1.99 (User: tuna55) successfully accessed /users/modify/username/ (Modify Username)
+[2025.08.06 at 11:33:54]: 192.168.1.99 (User: tuna55) FAILED to change their username to jonsmith55
+[2025.08.06 at 11:44:28]: 192.168.1.99 (User: Annonymous) FAILED to access /users/logout/ (Logout)
+[2025.08.06 at 11:44:28]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.08.06 at 11:44:30]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.08.06 at 11:44:46]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.08.06 at 11:44:46]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.08.06 at 11:44:46]: 192.168.1.99 (User: jonsmith55) FAILED to access /users/login/ (Login)
+[2025.08.06 at 11:44:46]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.06 at 11:45:46]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.06 at 11:45:46] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.08.06 at 11:45:47] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.08.06 at 11:45:48] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.08.06 at 11:45:49] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.08.06 at 11:45:50] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.08.06 at 11:45:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search= (Games List)
+[2025.08.06 at 11:47:18]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search= (Games List)
+[2025.08.06 at 11:47:20]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=9 (Individual Game)
