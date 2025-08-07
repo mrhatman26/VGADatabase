@@ -42,17 +42,27 @@
                             {% endif %}
                             {% if developers is not none %}
                                 <p>Developers:</p>
-                                {% for developer in developers %}
-                                    <a href="{{ url_for('devpub_page', devpub_id=developer.developer_id) }}">
-                                        <div class="game_box">
+                                <div id="developer_box" class="game_box">
+                                    {% for developer in developers %}
+                                        <a href="{{ url_for('devpub_page', devpub_id=developer.developer_id) }}">
                                             <p>{{ developer.developer_name }}</p>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                                <div id="change_developer_box">
+                                    <p></p>
+                                    <a class="button" id="change_dev_button">Change Developers</a>
+                                    <script src=" {{ url_for('static', filename='scripts/change_game_developers.js') }}"></script>
+                                </div>
                             {% else %}
                                 <p>Developers:</p>
                                 <div class="game_box">
                                     <p>This game has no known developers</p>
+                                </div>
+                                <div id="change_developer_box">
+                                    <p></p>
+                                    <a class="button" id="change_dev_button">Change Developers</a>
+                                    <script src=" {{ url_for('static', filename='scripts/change_game_developers.js') }}"></script>
                                 </div>
                             {% endif %}
                             {% if publishers is not none %}

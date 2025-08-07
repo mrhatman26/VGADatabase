@@ -1,7 +1,7 @@
 import mysql.connector
 from global_vars import deployed
 from db_config import *
-from misc import pause, get_new_table_id, get_time
+from misc import pause, get_new_table_id, get_time, fprint
 from datetime import datetime as dt
 
 #Note: Void commands don't delete links. They instead replace the data with other data that represents a deletion.
@@ -37,6 +37,25 @@ def game_add_tag_link(game_id, tag_id, user_id, database=None, cursor=None, remo
             cursor.execute("INSERT INTO link_game_tag (game_id, tag_id, user_id) VALUES (%s, %s, %s)", (game_id, tag_id, user_id,))
         else:
             cursor.execute("DELETE FROM link_game_tag WHERE game_id = %s AND tag_id = %s AND user_id = %s", (game_id, tag_id, user_id,))
+        database.commit()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        return True
+    except:
+        return False
+    
+def game_add_devpub_link(game_id, devpub_id, user_id, database=None, cursor=None, remove=False):
+    try:
+        no_cursor = False
+        if database is None or cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        if remove is False:
+            cursor.execute("INSERT INTO link_game_developer (game_id, developer_id, user_id) VALUES (%s, %s, %s)", (game_id, devpub_id, user_id,))
+        else:
+            cursor.execute("DELETE FROM link_game_developer WHERE game_id = %s AND developer_id = %s AND user_id = %s", (game_id, devpub_id, user_id,))
         database.commit()
         if no_cursor is True:
             cursor.close()
@@ -91,6 +110,33 @@ def game_update_tags(tag_data, user_id, tag_get_id_function):
                     game_add_tag_link(tag_data["change_game_id"], tag_get_id_function(tag, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
                     removed = True
                     removed_list.append(tag)
+        cursor.close()
+        database.close()
+        return (added, removed, True, (added_list, removed_list))
+    except:
+        return (added, removed, False, (added_list, removed_list))
+    
+def game_update_devpubs(devpub_data, user_id, devpub_get_id_function, is_publisher=False):
+    try:
+        added = False
+        added_list = []
+        removed = False
+        removed_list = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        for developer in devpub_data["change_new_developers"]: #Add new tags
+            if developer.isspace() is False and developer != "":
+                developer_id = devpub_get_id_function(developer, cursor=cursor, is_pub=is_publisher)
+                if devpub_check_game_link_exists(developer_id, int(devpub_data["change_game_id"]), database=database, cursor=cursor) is False:
+                    game_add_devpub_link(devpub_data["change_game_id"], developer_id, user_id, database=database, cursor=cursor)
+                    added = True
+                    added_list.append(developer)
+        for developer in devpub_data["change_old_developers"]:
+            if developer.isspace() is False and developer != "":
+                if developer not in devpub_data["change_new_developers"]:
+                    game_add_devpub_link(devpub_data["change_game_id"], devpub_get_id_function(developer, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
+                    removed = True
+                    removed_list.append(developer)
         cursor.close()
         database.close()
         return (added, removed, True, (added_list, removed_list))
@@ -329,6 +375,19 @@ def tag_approve_user_link(tag_id, reset=False):
     except:
         return False
     
+#Delete/Void
+def tag_void_user_link(user_id, tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_tag_user SET user_id = -1 WHERE tag_id = %s AND user_id = %s", (tag_id, user_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
+    
 def tag_deny_user_link(denial_data):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
@@ -350,7 +409,7 @@ def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=N
             database = mysql.connector.connect(**get_db_config(deployed))
             cursor = database.cursor()
             no_cursor = True
-        cursor.execute("SELECET * FROM link_game_developer WHERE developer_id = %s AND game_id = %s", (developer_id, game_id))
+        cursor.execute("SELECT * FROM link_game_developer WHERE developer_id = %s AND game_id = %s", (developer_id, game_id,))
         fetch = cursor.fetchall()
         if no_cursor is True:
             cursor.close()
@@ -359,7 +418,10 @@ def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=N
             return True
         else:
             return False
-    except:
+    except Exception as e:
+        from misc import fprint
+        import traceback
+        fprint(traceback.format_exc())
         return False
 
 #Get
@@ -458,6 +520,19 @@ def devpub_deny_user_link(deny_data):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("UPDATE link_developer_user SET developer_denied = 1, developer_dDate = %s, developer_dDes = %s WHERE developer_id = %s", (get_time(no_brackets=True), deny_data["denial_text"], deny_data["denial_developer_id"],))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        return False
+    
+#Delete/Void
+def devpub_void_user_link(devpub_id, user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_developer_user SET user_id = -1 WHERE developer_id = %s AND user_id = %s", (devpub_id, user_id,))
         database.commit()
         cursor.close()
         database.close()

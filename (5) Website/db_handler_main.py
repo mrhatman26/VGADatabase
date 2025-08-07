@@ -192,6 +192,29 @@ def game_get_unapproved():
     except:
         return None
     
+def game_get_developers(game_id, is_pub=False, cursor=None):
+    try:
+        developers = []
+        no_cursor = False
+        if cursor is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
+        cursor.execute("SELECT table_developers.developer_name FROM table_developers INNER JOIN link_game_developer ON table_developers.developer_id=link_game_developer.developer_id WHERE link_game_developer.game_id = %s AND table_developers.developer_isPub = %s", (game_id, is_pub,))
+        fetch = cursor.fetchall()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
+        if len(fetch) > 0:
+            for developer in fetch:
+                developers.append(developer[0])
+            return developers
+        else:
+            return []
+    except Exception as e:
+        fprint(traceback.format_exc())
+        return []
+    
 def game_get_tags(game_id, cursor=None):
     try:
         tags = []

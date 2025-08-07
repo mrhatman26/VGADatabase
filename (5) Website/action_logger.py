@@ -223,6 +223,35 @@ def developer_approve_log(ip, username, developer_name, denied=False, failed=Fal
     log_file.write(text)
     log_file.close()
 
+def developer_update_game_log(ip, username, game_name, added=False, removed=False, failed=False, tag_not_exist=False):
+    log_file = open("static/logs.txt", "at")
+    text = get_time()
+    if failed is False:
+        if added is False and removed is False:
+            text = text + ": " + ip + " (User: " + username + ") tried to update the devpubs of " + game_name + " but no changes were made"
+        else:
+            if added is True and removed is False:
+                text = text + ": " + ip + " (User: " + username + ") successfully added devpubs to " + game_name
+            elif added is False and removed is True:
+                text = text + ": " + ip + " (User: " + username + ") successfully removed devpubs from " + game_name
+            else:
+                text = text + ": " + ip + " (User: " + username + ") successfully added devpubs to and removed devpubs from " + game_name
+    else:
+        if tag_not_exist is False:
+            if added is False and removed is False:
+                text = text + ": " + ip + " (User: " + username + ") FAILED to update the devpubs of " + game_name
+            else:
+                if added is True and removed is False:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to add devpubs to " + game_name
+                elif added is False and removed is True:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to remove devpubs from " + game_name
+                else:
+                    text = text + ": " + ip + " (User: " + username + ") FAILED to add devpubs to and remove devpubs from " + game_name
+        else:
+            text = text + ": " + ip + " (User: " + username + ") FAILED to update the devpubs of " + game_name + " because one of the devpubs entered did not exist"
+    log_file.write(text)
+    log_file.close()
+
 #Tags
 def new_tag_log(ip, username, new_tag_name=None, failed=False):
     log_file = open("static/logs.txt", "at")

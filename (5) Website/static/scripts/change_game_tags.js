@@ -125,6 +125,8 @@ function addTagBox(){
     submitButton = document.createElement("a");
     backButton = document.createElement("a")
     extraSpace = document.createElement("p");
+    backButton.addEventListener("click", goBack);
+    submitButton.addEventListener("click", getNewTags);
     //TextBox
     getCurrentTags();
     tagTextBox.value = currentTagsText;
@@ -141,16 +143,15 @@ function addTagBox(){
     //Change submit button
     submitButton.style.marginRight = "1%";
     submitButton.innerHTML = "Change";
-    submitButton.className = "button";
+    submitButton.id = "change_tag_button";
     changeTagDiv.appendChild(extraSpace);
     changeTagDiv.appendChild(submitButton);
-    //Back button
-    backButton.addEventListener("click", goBack);
+    submitButton.className = "button";
+    //Back button    
     backButton.innerHTML = "Back";
-    backButton.className = "button";
     backButton.id = "add_tag_back_button";
     changeTagDiv.appendChild(backButton);
-    submitButton.addEventListener("click", getNewTags)
+    backButton.className = "button";    
 }
 
 changeButton.addEventListener("click", addTagBox);

@@ -149,6 +149,40 @@ def game_add_new_validate():
         new_game_log(request.remote_addr, get_user(), failed=True)
         return "servererror"
     
+#Validate Changing of Game Developers
+@app.route("/games/devpubs/change/", methods=["POST"])
+def game_change_devpubs():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/games/devpubs/change/ (Change Devpubs)")
+        devpub_data = request.get_data()
+        devpub_data = devpub_data.decode()
+        devpub_data = ast.literal_eval(devpub_data)
+        devpub_data["change_isPub"] = to_bool(devpub_data["change_isPub"])
+        devpub_data["change_old_developers"] = game_get_developers(devpub_data["change_game_id"], devpub_data["change_isPub"])
+        noexistent_tags = ""
+        for developer in devpub_data["change_new_developers"]:
+            developer = developer.replace(" ", "")
+            if devpub_check_exists(developer, is_pub=devpub_data["change_isPub"]) is False:
+                if len(noexistent_tags) < 1:
+                    noexistent_tags = developer
+                else:
+                    noexistent_tags = noexistent_tags + "+" + developer
+        if len(noexistent_tags) > 0:
+            developer_update_game_log(request.remote_addr, get_user(), game_get_name(devpub_data["change_game_id"]), failed=True, tag_not_exist=True)
+            return "tagnotexist|" + noexistent_tags
+        else:
+            update_status = game_update_devpubs(devpub_data, current_user.id, devpub_get_id_function=devpub_get_id)
+            if update_status[2] is True:
+                game_name = game_get_name(devpub_data["change_game_id"])
+                developer_update_game_log(request.remote_addr, get_user(), game_name, added=update_status[0], removed=update_status[1])
+                return "success"
+            else:
+                developer_update_game_log(request.remote_addr, get_user(), game_get_name(devpub_data["change_game_id"]), failed=True, added=update_status[0], removed=update_status[1])
+                return "servererror"
+    else:
+        access_log(request.remote_addr, get_user(), "/games/devpubs/change/ (Change Devpubs)", failed=True, no_auth=True)
+        return "nouser"
+    
 #Validate Changing of Game Tags
 @app.route("/games/tags/change/", methods=["POST"])
 def game_change_tags():
@@ -308,9 +342,7 @@ def tag_get_closest():
                 return "-999notag"
     except Exception as e:
         fprint(traceback.format_exc())
-        return "-999notag"
-
-    
+        return "-999notag"    
 
 #Developers & Publishers (Devpubs)
 #Developer List 
