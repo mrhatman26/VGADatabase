@@ -540,6 +540,7 @@ def devpub_void_user_link(user_id):
         cursor.execute("UPDATE link_developer_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
         cursor.execute("UPDATE link_game_developer SET user_id = -1 WHERE user_id = %s", (user_id,))
+        database.commit()
         cursor.close()
         database.close()
         return True
@@ -547,6 +548,7 @@ def devpub_void_user_link(user_id):
         return False
     
 '''Updates'''
+#Add
 def update_add_game_link(game_id, update_id, user_id, time=None, database=None, cursor=None):
     try:
         no_cursor = False
@@ -567,4 +569,16 @@ def update_add_game_link(game_id, update_id, user_id, time=None, database=None, 
         print(traceback.format_exc(), flush=True)
         print(game_id, update_id, user_id, flush=True)
         pause()
+        return False
+    
+#Delete/Void
+def update_void_user_link(user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE link_game_update SET user_id = -1 WHERE user_id = %s", (user_id,))
+        cursor.close()
+        database.close()
+        return True
+    except:
         return False

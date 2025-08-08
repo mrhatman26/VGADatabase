@@ -19,7 +19,7 @@ function oldErrorCheck(){
     }
 }
 
-function getUpdateData(){
+function getUpdateData(){ //Note: Update Names with apostrophes in their name will break this function!
     var data = {
         "update_id": updateID.innerHTML.split(": ")[1],
         "update_type": updateName.innerHTML.toLowerCase()
@@ -30,6 +30,7 @@ function getUpdateData(){
         data: JSON.stringify(data),
         success: function(response){
             if (!(response === "servererror")){
+                console.log(response);
                 updateData = response.replaceAll("'", '"');
                 updateData = JSON.parse(updateData);
                 tableAddRows();

@@ -1,6 +1,6 @@
 import mysql.connector, hashlib
 from db_config import *
-from db_handler_links import tag_void_user_link, game_void_user_link, devpub_void_user_link
+from db_handler_links import tag_void_user_link, game_void_user_link, devpub_void_user_link, update_void_user_link
 from misc import get_new_table_id, fprint, pause
 
 deployed = False
@@ -182,8 +182,11 @@ def user_delete(user_id):
         tag_void_user_link(user_id)
         game_void_user_link(user_id)
         devpub_void_user_link(user_id)
+        update_void_user_link(user_id)
         cursor.close()
         database.close()
         return True
-    except:
+    except Exception as e:
+        import traceback
+        fprint(traceback.format_exc())
         return False

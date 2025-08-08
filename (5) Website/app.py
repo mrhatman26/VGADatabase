@@ -581,6 +581,31 @@ def user_change_username():
             return "samename"
     else:
         return "servererror"
+
+#Delete Account    
+@app.route("/users/modify/delete/")
+def user_delete_validate():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/modify/delete/ (Delete Account Validate)")
+        return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to delete your account?", dir_to_use="user_delete_confirmed", dir_to_return="user_account", yes_message="Yes, DELETE my account", no_message="No, return to my account page", c_version=version)
+    else:
+        access_log(request.remote_addr, get_user(), "/users/modify/delete/ (Delete Account Validate)", failed=True, no_auth=True)
+        abort(404)
+@app.route("/users/modify/delete/confirmed/")
+def user_delete_confirmed():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/modify/delete/confirmed/ (Delete Account Confirmed)")
+        old_user = get_user()
+        logout_user()
+        if user_delete(current_user.id) is True:
+            delete_user_log(request.remote_addr, old_user)
+            return redirect("/")
+        else:
+            delete_user_log(request.remote_addr, old_user, failed=True)
+            abort(500)
+    else:
+        access_log(request.remote_addr, get_user(), "/users/modify/delete/confirmed/ (Delete Account Confirmed)", failed=True, no_auth=True)
+        abort(404)
         
 #Logout
 @app.route("/users/logout/")
