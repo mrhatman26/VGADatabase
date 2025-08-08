@@ -52,34 +52,41 @@
                                 <div id="change_developer_box">
                                     <p></p>
                                     <a class="button" id="change_dev_button">Change Developers</a>
-                                    <script src=" {{ url_for('static', filename='scripts/change_game_developers.js') }}"></script>
                                 </div>
                             {% else %}
                                 <p>Developers:</p>
-                                <div class="game_box">
+                                <div class="game_box" id="developer_box">
                                     <p>This game has no known developers</p>
                                 </div>
                                 <div id="change_developer_box">
                                     <p></p>
                                     <a class="button" id="change_dev_button">Change Developers</a>
-                                    <script src=" {{ url_for('static', filename='scripts/change_game_developers.js') }}"></script>
                                 </div>
                             {% endif %}
                             {% if publishers is not none %}
                                 <p>Publishers:</p>
-                                {% for publisher in publishers %}
-                                    <a href="{{ url_for('devpub_page', devpub_id=publisher.developer_id) }}">
-                                        <div class="game_box">
-                                            <p>{{ publisher.developer_name }}</p>
-                                        </div>
-                                    </a>
-                                {% endfor %}
+                                <div class="game_box" id="publisher_box">
+                                    {% for publisher in publishers %}
+                                            <a href="{{ url_for('devpub_page', devpub_id=publisher.developer_id) }}">
+                                                <p>{{ publisher.developer_name }}</p>
+                                            </a>
+                                    {% endfor %}
+                                </div>
+                                <div id="change_publisher_box">
+                                    <p></p>
+                                    <a class="button" id="change_pub_button">Change Publishers</a>
+                                </div>
                             {% else %}
                                 <p>Publishers:</p>
-                                <div class="game_box">
+                                <div class="game_box" id="publisher_box">
                                     <p>This game has no known publishers</p>
                                 </div>
+                                <div id="change_publisher_box">
+                                    <p></p>
+                                    <a class="button" id="change_pub_button">Change Publishers</a>
+                                </div>
                             {% endif %}
+                            <script src=" {{ url_for('static', filename='scripts/change_game_developers.js') }}"></script>
                             {% if tags is not none %}
                                 <p>Tags:</p>
                                 <div class="game_box" id="tag_box">

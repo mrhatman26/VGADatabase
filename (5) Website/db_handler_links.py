@@ -134,13 +134,16 @@ def game_update_devpubs(devpub_data, user_id, devpub_get_id_function, is_publish
         for developer in devpub_data["change_old_developers"]:
             if developer.isspace() is False and developer != "":
                 if developer not in devpub_data["change_new_developers"]:
-                    game_add_devpub_link(devpub_data["change_game_id"], devpub_get_id_function(developer, cursor=cursor), user_id, database=database, cursor=cursor, remove=True)
+                    game_add_devpub_link(devpub_data["change_game_id"], devpub_get_id_function(developer, cursor=cursor, is_pub=is_publisher), user_id, database=database, cursor=cursor, remove=True)
                     removed = True
                     removed_list.append(developer)
         cursor.close()
         database.close()
         return (added, removed, True, (added_list, removed_list))
-    except:
+    except Exception as e:
+        import traceback
+        fprint(traceback.format_exc())
+        pause()
         return (added, removed, False, (added_list, removed_list))
     
 #Delete/Void
