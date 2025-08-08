@@ -147,11 +147,11 @@ def game_update_devpubs(devpub_data, user_id, devpub_get_id_function, is_publish
         return (added, removed, False, (added_list, removed_list))
     
 #Delete/Void
-def game_void_user_link(game_id, user_id):
+def game_void_user_link(user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_game_user SET user_id = -1 WHERE game_id = %s AND user_id = %s", (game_id, user_id,))
+        cursor.execute("UPDATE link_game_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
         cursor.close()
         database.close()
@@ -379,11 +379,13 @@ def tag_approve_user_link(tag_id, reset=False):
         return False
     
 #Delete/Void
-def tag_void_user_link(user_id, tag_id):
+def tag_void_user_link(user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_tag_user SET user_id = -1 WHERE tag_id = %s AND user_id = %s", (tag_id, user_id,))
+        cursor.execute("UPDATE link_tag_user SET user_id = -1 WHERE user_id = %s", (user_id,))
+        database.commit()
+        cursor.execute("UPDATE link_game_tag SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
         cursor.close()
         database.close()
@@ -531,12 +533,13 @@ def devpub_deny_user_link(deny_data):
         return False
     
 #Delete/Void
-def devpub_void_user_link(devpub_id, user_id):
+def devpub_void_user_link(user_id):
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("UPDATE link_developer_user SET user_id = -1 WHERE developer_id = %s AND user_id = %s", (devpub_id, user_id,))
+        cursor.execute("UPDATE link_developer_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
+        cursor.execute("UPDATE link_game_developer SET user_id = -1 WHERE user_id = %s", (user_id,))
         cursor.close()
         database.close()
         return True

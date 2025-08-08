@@ -129,7 +129,11 @@ function getcurrentDevelopers(){
     developerList = [];
     if (!(currentDevelopers === null)){
         var currentDevelopersChildren = currentDevelopers.children;
+        console.log(currentDevelopersChildren);
         for (var i = 0; i < currentDevelopersChildren.length; i++){
+            if (currentDevelopersChildren[i].innerHTML === "This game has no known developers"){
+                break;
+            }
             developerList.push(currentDevelopersChildren[i].children[0].innerHTML.replaceAll(" ", "_").toLowerCase());
         }
     }
@@ -213,6 +217,9 @@ function getCurrentPublishers(){
     if (!(currentPublishers === null)){
         var currentPublishersChildren = currentPublishers.children;
         for (var i = 0; i < currentPublishersChildren.length; i++){
+            if (currentPublishersChildren[i].innerHTML === "This game has no known publishers"){
+                break;
+            }
             developerList.push(currentPublishersChildren[i].children[0].innerHTML.replaceAll(" ", "_").toLowerCase());
         }
     }

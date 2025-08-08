@@ -150,8 +150,6 @@ def game_add_new_validate():
         return "servererror"
     
 #Validate Changing of Game Developers
-#Todo: Allow users to add/remove publishers
-#Todo after: Continue programming user deletion/voiding
 @app.route("/games/devpubs/change/", methods=["POST"])
 def game_change_devpubs():
     if current_user.is_authenticated:

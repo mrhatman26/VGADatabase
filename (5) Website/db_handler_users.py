@@ -1,5 +1,6 @@
 import mysql.connector, hashlib
 from db_config import *
+from db_handler_links import tag_void_user_link, game_void_user_link, devpub_void_user_link
 from misc import get_new_table_id, fprint, pause
 
 deployed = False
@@ -178,6 +179,9 @@ def user_delete(user_id):
         cursor = database.cursor()
         cursor.execute("UPDATE table_users SET user_name = 'DELETED', user_pass = 'DELETED', user_email = null, user_desc = null, user_pfp = null, user_isAdmin = 0, user_isMod = 0 WHERE user_id = %s", (str(user_id),))
         database.commit()
+        tag_void_user_link(user_id)
+        game_void_user_link(user_id)
+        devpub_void_user_link(user_id)
         cursor.close()
         database.close()
         return True
