@@ -1,3 +1,4 @@
+from global_vars import local_password
 def get_db_config(deployed):
     db_config = {}
     if deployed:
@@ -11,7 +12,7 @@ def get_db_config(deployed):
     else:
         db_config = {
             'user': 'root',
-            'password': 'Apple_my_Sauce8253',
+            'password': local_password,
             'host': 'localhost',
             'port': 3306,
             'database': 'vgadatabase'

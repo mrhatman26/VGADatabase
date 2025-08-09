@@ -1,5 +1,5 @@
 import mysql.connector
-from global_vars import deployed
+from global_vars import deployed, local_password
 from db_config import *
 from db_handler_main import *
 from db_handler_users import user_check_admin, user_get_username
@@ -118,7 +118,7 @@ def admin_swap_stat(user_id, swap_mod=False):
 def admin_dump_database():
     try:
         import os
-        os.system("mysqldump -u root -pApple_my_Sauce8253 vgadatabase > db_backup.dump")
+        os.system("mysqldump -u root -p" + local_password + " vgadatabase > db_backup.dump")
         return (True, None)
     except Exception as e:
         return (False, e)  
