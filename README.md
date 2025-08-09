@@ -11,7 +11,7 @@ For Flask, you need to:<br>
 1. Move to the "(5) Website" directory.<br>
 2. Set the deployed and live variables in "global_vars.py":<br>
     > If deployed is True, the website will attempt to use a MySQL Docker container, else, it will use a local MySQL database instead.<br>
-    (If using a Docker container, certain features such as dumping the database will be unavailable)<br>
+    (If using a Docker container, certain features, such as dumping the database, will be unavailable)<br>
     > If live is True, the website will run with the waitress library, else, it will be run in debug mode.<br>
 3. Run the website with "app.py" or "python app.py".<br>
 <br>

@@ -114,6 +114,14 @@ def admin_swap_stat(user_id, swap_mod=False):
     except:
         return False
     
+#Dump
+def admin_dump_database():
+    try:
+        import os
+        os.system("mysqldump -u root -pApple_my_Sauce8253 vgadatabase > db_backup.dump")
+        return (True, None)
+    except Exception as e:
+        return (False, e)  
 #Misc
 def admin_reset_increment():
     try:

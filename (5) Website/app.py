@@ -949,6 +949,29 @@ def admin_database_manage():
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/databasae/ (Admin: Database Management)", admin=True, failed=True, no_auth=True)
         abort(404)
+#Dump Database
+@app.route("/admin/management/database/dump/")
+def admin_database_dump():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            if deployed is False:
+                access_log(request.remote_addr, get_user(), "/admin/management/database/dump/ (Dump Database Data)", admin=True)
+                dump_status = admin_dump_database()
+                if dump_status[0] is True:
+                    return render_template("notification.html", page_name="Admin: Database Dump", notification_title="Database has been dumped", notification="The database's data has been dumped to db_backup.dump.", return_message="Return to database management", dir_to_use="admin_database_manage")
+                else:
+                    error_log(request.remote_addr, get_user(), "There was an error while trying to dump database data", theException=dump_status[1], admin=True)
+                    return render_template("notification.html", page_name="Admin: Database Dump", notification_title="Database dump failed", notification="The following error occurred while trying to dump database data:\n" + str(dump_status[1]), return_message="Return to database management", dir_to_use="admin_database_manage")
+            else:
+                access_log(request.remote_addr, get_user(), "/admin/management/database/dump/ (Dump Database Data)", admin=True, failed=True, no_auth=True)
+                error_log(request.remote_addr, get_user(), "The database is in a container. Python cannot use mysqldump on a container.", admin=True)
+                return render_template("notification.html", page_name="Admin: Database Dump", notification_title="Database is in a container", notification="The database is in a Docker container. Python cannot run mysqldump on a container. Please run mysqldump in the container's terminal.", return_message="Return to database management", dir_to_use="admin_database_manage")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/dump/ (Dump Database Data)", admin=True, failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/database/dump/ (Dump Database Data)", admin=True, failed=True, no_auth=True)
+        abort(404)
 #Load Data From CSV
 @app.route("/admin/management/database/load_csv/")
 def admin_load_csv():
