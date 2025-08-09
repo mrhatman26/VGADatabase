@@ -10,14 +10,14 @@ from db_loader import *
 from action_logger import *
 from version_handler import *
 from user import User
-from global_vars import deployed
+from global_vars import deployed, live
 from misc import get_current_page, test_datetime
 #from user import User
 
 '''Server Vars'''
 version = update_version()
 print("Version is now:", version, flush=True)
-admin_reset_increment()
+#admin_reset_increment()
 app = Flask(__name__) #Create the flask application
 app.secret_key = "SeeThatMountain?YouCanClimbItJERSAIKGYHJIOERHGJ"
 
@@ -1001,7 +1001,7 @@ def favicon():
 
 #Launch Website
 if __name__ == '__main__':
-    if deployed is True:
+    if live is True:
         from waitress import serve
         serve(app, host="0.0.0.0", port=5000)
     else:

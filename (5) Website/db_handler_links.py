@@ -147,14 +147,18 @@ def game_update_devpubs(devpub_data, user_id, devpub_get_id_function, is_publish
         return (added, removed, False, (added_list, removed_list))
     
 #Delete/Void
-def game_void_user_link(user_id):
+def game_void_user_link(user_id, cursor=None, database=None):
     try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
+        no_cursor = False
+        if cursor is None or database is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
         cursor.execute("UPDATE link_game_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         return True
     except:
         return False
@@ -379,16 +383,20 @@ def tag_approve_user_link(tag_id, reset=False):
         return False
     
 #Delete/Void
-def tag_void_user_link(user_id):
+def tag_void_user_link(user_id, cursor=None, database=None):
     try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
+        no_cursor = False
+        if cursor is None or database is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
         cursor.execute("UPDATE link_tag_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
         cursor.execute("UPDATE link_game_tag SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         return True
     except:
         return False
@@ -533,16 +541,20 @@ def devpub_deny_user_link(deny_data):
         return False
     
 #Delete/Void
-def devpub_void_user_link(user_id):
+def devpub_void_user_link(user_id, cursor=None, database=None):
     try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
+        no_cursor = False
+        if cursor is None or database is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
         cursor.execute("UPDATE link_developer_user SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
         cursor.execute("UPDATE link_game_developer SET user_id = -1 WHERE user_id = %s", (user_id,))
         database.commit()
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         return True
     except:
         return False
@@ -572,13 +584,17 @@ def update_add_game_link(game_id, update_id, user_id, time=None, database=None, 
         return False
     
 #Delete/Void
-def update_void_user_link(user_id):
+def update_void_user_link(user_id, cursor=None, database=None):
     try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
+        no_cursor = False
+        if cursor is None or database is None:
+            database = mysql.connector.connect(**get_db_config(deployed))
+            cursor = database.cursor()
+            no_cursor = True
         cursor.execute("UPDATE link_game_update SET user_id = -1 WHERE user_id = %s", (user_id,))
-        cursor.close()
-        database.close()
+        if no_cursor is True:
+            cursor.close()
+            database.close()
         return True
     except:
         return False

@@ -4,15 +4,16 @@ def get_db_config(deployed):
         db_config = {
             'user': 'root',
             'password': 'boundingthroughtime',
-            'host': 'db',
+            'host': 'localhost',
+            'port': 1234,
             'database': 'vgadatabase'
         }
     else:
         db_config = {
             'user': 'root',
-            'password': 'boundingthroughtime',
+            'password': 'Apple_my_Sauce8253',
             'host': 'localhost',
-            'port': 1234,
+            'port': 3306,
             'database': 'vgadatabase'
         }
     return db_config
