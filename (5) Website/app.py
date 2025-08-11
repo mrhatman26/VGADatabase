@@ -581,6 +581,31 @@ def user_change_username():
             return "samename"
     else:
         return "servererror"
+    
+#Update Email
+@app.route("/users/modify/email/", methods=["POST"])
+def user_change_email():
+    if current_user.is_authenticated:
+        access_log(request.remote_addr, get_user(), "/users/modify/email/ (Modify Email)")
+        new_email = request.get_data()
+        new_email = new_email.decode()
+        new_email = ast.literal_eval(new_email)
+        old_email = user_get_email(current_user.id)
+        fprint(new_email["user_email"])
+        fprint(old_email)
+        fprint(old_email == new_email["user_email"])
+        if old_email != new_email["user_email"]:
+            if user_modify_email(current_user.id, new_email["user_email"]) is True:
+                modify_user_log(request.remote_addr, get_user(), new_email["user_email"], is_email=True)
+                return "success"
+            else:
+                modify_user_log(request.remote_addr, get_user(), new_email["user_email"], is_email=True, failed=True)
+                return "servererror"
+        else:
+            modify_user_log(request.remote_addr, get_user(), new_email["user_email"], is_email=True, failed=True)
+            return "sameemail"
+    else:
+        return "servererror"
 
 #Delete Account    
 @app.route("/users/modify/delete/")
@@ -597,6 +622,7 @@ def user_delete_confirmed():
         access_log(request.remote_addr, get_user(), "/users/modify/delete/confirmed/ (Delete Account Confirmed)")
         old_user = get_user()
         logout_user()
+        login_log(request.remote_addr, old_user, logout=True, auto=True)
         if user_delete(current_user.id) is True:
             delete_user_log(request.remote_addr, old_user)
             return redirect("/")
@@ -978,7 +1004,7 @@ def admin_load_csv():
     if current_user.is_authenticated:
         if current_user.is_admin:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True)
-            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management", c_version=version) #Finish this
+            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to load from CSV? This may take a long time and the server will hang until it is done.", dir_to_use="admin_load_csv_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, load the CSV", no_message="No, return to database management", c_version=version)
         else:
             access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/ (Admin: Load From CSV)", admin=True, failed=True, no_auth=True)
             abort(404)
@@ -999,7 +1025,37 @@ def admin_load_csv_confirmed():
     else:
         access_log(request.remote_addr, get_user(), "/admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)", admin=True, failed=True, no_auth=True)
         abort(404)
-            
+
+#Delete all data
+@app.route("/admin/management/database/reload/")
+def admin_database_reload_validation():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/reload/ (Admin: Reload Database)", admin=True)
+            return render_template("confirmation.html", page_name="Are you sure?", message="Are you sure you want to delete all data from the database?\nNote: The database will be dumped first.", dir_to_use="admin_database_reload_confirmed", dir_to_return="admin_database_manage", yes_message="Yes, delete the data from the database", no_message="No, return to database management", c_version=version)
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/reload/ (Admin: Reload Database)", admin=True, failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/database/reload/ (Admin: Reload Database)", admin=True, failed=True, no_auth=True)
+        abort(404)
+@app.route("/admin/management/database/reload/confirmed/")
+def admin_database_reload_confirmed():
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/reload/confirmed/ (Admin: Reload Database Confirmed)", admin=True)
+            admin_database_dump()
+            admin_database_reload()
+            old_user = get_user()
+            logout_user()
+            login_log(request.remote_addr, old_user, logout=True, auto=True, admin=True)
+            return redirect("/")
+        else:
+            access_log(request.remote_addr, get_user(), "/admin/management/database/reload/confirmed/ (Admin: Reload Database Confirmed)", admin=True, failed=True, no_auth=True)
+            abort(404)
+    else:
+        access_log(request.remote_addr, get_user(), "/admin/management/database/reload/confirmed/ (Admin: Reload Database Confirmed)", admin=True, failed=True, no_auth=True)
+        abort(404)
 
 #Error Pages
 #These pages are only shown when the website encounters an error.

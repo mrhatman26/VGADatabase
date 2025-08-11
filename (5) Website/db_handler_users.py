@@ -139,6 +139,21 @@ def user_single_get_all(user_id):
     except:
         return None
     
+def user_get_email(user_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_email FROM table_users WHERE user_id = %s", (user_id,))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            return fetch[0][0]
+        else:
+            return None
+    except:
+        return None
+    
 #Add/Modify
 def user_add_new(new_userdata, set_mod=False, set_admin=False):
     try:
@@ -161,6 +176,21 @@ def user_modify_username(user_id, new_username):
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
         cursor.execute("UPDATE table_users SET user_name = %s WHERE user_id = %s", (new_username, user_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except Exception as e:
+        import traceback
+        fprint(traceback.format_exc())
+        pause()
+        return False
+    
+def user_modify_email(user_id, new_email):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("UPDATE table_users SET user_email = %s WHERE user_id = %s", (new_email, user_id,))
         database.commit()
         cursor.close()
         database.close()

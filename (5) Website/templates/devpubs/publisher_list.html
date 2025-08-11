@@ -33,8 +33,7 @@
                                 {% for developer in devpub_list %}
                                         <a href="{{ url_for('devpub_page', devpub_id=developer.developer_id) }}">
                                                 <div class="game_box">
-                                                        <p>Name: {{ developer.developer_name }}</p>
-                                                        <p>{{ developer.developer_isPub }}</p>
+                                                        <p>{{ developer.developer_name }}</p>
                                                 </div>
                                         </a>
                                         <br>

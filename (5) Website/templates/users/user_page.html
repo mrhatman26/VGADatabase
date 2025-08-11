@@ -5,14 +5,9 @@
                 <h3 id="page_header">{{ current_user.username }}</h3>
                 <div id="page_mainbody_home">
                         <p>Email: {{ user_data.user_email }}</p>
-                        <a class="button">Modify Email</a>
-                        {% if user_data.user_desc is none %}
-                            <p>Description: You have no description</p>
-                            <a class="button">Add Description</a>
-                        {% else %}
-                            <p>Description: {{ user_data.user_desc }}</p>
-                            <a class="button">Modify Description</a>
-                        {% endif %}
+                        <div id="change_email_div">
+                            <a class="button" id="change_email_button">Modify Email</a>
+                        </div>
                         {% if current_user.is_mod == true %}
                             <p>You are a moderator</p>
                         {% endif %}
@@ -30,4 +25,5 @@
 </div>
 <script src="http://code.jquery.com/jquery.min.js"></script>
 <script src=" {{ url_for('static', filename='scripts/user_page/user_change_name.js') }}"></script>
+<script src=" {{ url_for('static', filename='scripts/user_page/user_change_email.js') }}"></script>
 {% endblock %}
