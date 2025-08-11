@@ -90,9 +90,7 @@ def admin_add_scraped_data(game_dict, user_id, database, cursor):
                     cursor.execute("INSERT INTO link_tag_user (tag_id, user_id, tag_cDate, tag_link_approved, tag_aDate) VALUES(%s, %s, %s, %s, %s)", (str(tag_id), str(user_id), current_time, True, current_time,))
                     database.commit()
         return True
-    except Exception as e:
-        print(traceback.format_exc())
-        pause()
+    except:
         return False
     
 #Users
@@ -121,20 +119,9 @@ def admin_dump_database():
         os.system("mysqldump -u root -p" + local_password + " vgadatabase > db_backup.dump")
         return (True, None)
     except Exception as e:
-        return (False, e)  
-#Misc
-def admin_reset_increment():
-    try:
-        database = mysql.connector.connect(**get_db_config(deployed))
-        cursor = database.cursor()
-        cursor.execute("SHOW TABLES")
-        for table in cursor.fetchall():
-            cursor.execute("ALTER TABLE " + table[0] + " AUTO_INCREMENT = -1")
-            database.commit()
-        return True
-    except:
-        return False
+        return (False, e)
     
+#Misc    
 def admin_database_reload():
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
@@ -205,10 +192,6 @@ def admin_database_reload():
         database.commit()
         cursor.close()
         database.close()
-    except Exception as e:
-        statement = cursor.statement
-        fprint(traceback.format_exc())
-        fprint(statement)
-        import pyperclip
-        pause()
-        pyperclip.copy(statement)
+        return True
+    except:
+        return False

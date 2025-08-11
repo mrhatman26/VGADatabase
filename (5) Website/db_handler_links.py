@@ -140,10 +140,7 @@ def game_update_devpubs(devpub_data, user_id, devpub_get_id_function, is_publish
         cursor.close()
         database.close()
         return (added, removed, True, (added_list, removed_list))
-    except Exception as e:
-        import traceback
-        fprint(traceback.format_exc())
-        pause()
+    except:
         return (added, removed, False, (added_list, removed_list))
     
 #Delete/Void
@@ -361,9 +358,7 @@ def tag_add_user_link(tag_id, user_id, database=None, cursor=None):
             cursor.close()
             database.close()
         return True
-    except Exception as e:
-        import traceback
-        print(traceback.format_exc(), flush=True)
+    except:
         return False
 
 #Update
@@ -431,10 +426,7 @@ def devpub_check_game_link_exists(developer_id, game_id, database=None, cursor=N
             return True
         else:
             return False
-    except Exception as e:
-        from misc import fprint
-        import traceback
-        fprint(traceback.format_exc())
+    except:
         return False
 
 #Get
@@ -576,11 +568,7 @@ def update_add_game_link(game_id, update_id, user_id, time=None, database=None, 
             cursor.close()
             database.close()
         return True
-    except Exception as e:
-        import traceback
-        print(traceback.format_exc(), flush=True)
-        print(game_id, update_id, user_id, flush=True)
-        pause()
+    except:
         return False
     
 #Delete/Void

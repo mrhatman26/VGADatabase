@@ -1,7 +1,7 @@
 import mysql.connector, hashlib
 from db_config import *
 from db_handler_links import tag_void_user_link, game_void_user_link, devpub_void_user_link, update_void_user_link
-from misc import get_new_table_id, fprint, pause
+from misc import fprint, pause
 from global_vars import deployed
 
 def string_hash(text):
@@ -23,8 +23,7 @@ def user_check_exists(username):
             return True
         else:
             return False
-    except Exception as e:
-        print(e, flush=True)
+    except:
         return False
     
 def user_check_reconfirm(user_id):
@@ -47,7 +46,6 @@ def user_login_passcheck(userdata):
         cursor = database.cursor()
         cursor.execute("SELECT user_pass FROM table_users WHERE user_name = %s", (str(userdata["user_name"]),))
         fetch = cursor.fetchall()[0][0]
-        print(fetch, flush=True)
         cursor.close()
         database.close()
         if string_hash(userdata["user_password"]) == fetch:
@@ -167,8 +165,7 @@ def user_add_new(new_userdata, set_mod=False, set_admin=False):
         cursor.close()
         database.close()
         return True
-    except Exception as e:
-        print(str(e), flush=True)
+    except@
         return False
 
 def user_modify_username(user_id, new_username):
@@ -180,10 +177,7 @@ def user_modify_username(user_id, new_username):
         cursor.close()
         database.close()
         return True
-    except Exception as e:
-        import traceback
-        fprint(traceback.format_exc())
-        pause()
+    except:
         return False
     
 def user_modify_email(user_id, new_email):
@@ -195,18 +189,13 @@ def user_modify_email(user_id, new_email):
         cursor.close()
         database.close()
         return True
-    except Exception as e:
-        import traceback
-        fprint(traceback.format_exc())
-        pause()
+    except:
         return False
     
 def user_delete(user_id):
-    #This will need expanding later to include deletion of links user has.
     try:
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        #cursor.execute("UPDATE table_users SET user_name = 'DELETED', user_pass = 'DELETED', user_email = null, user_desc = null, user_pfp = null, user_isAdmin = 0, user_isMod = 0 WHERE user_id = %s", (str(user_id),))
         tag_void_user_link(user_id, cursor=cursor, database=database)
         game_void_user_link(user_id, cursor=cursor, database=database)
         devpub_void_user_link(user_id, cursor=cursor, database=database)
@@ -215,7 +204,5 @@ def user_delete(user_id):
         cursor.close()
         database.close()
         return True
-    except Exception as e:
-        import traceback
-        fprint(traceback.format_exc())
+    except:
         return False

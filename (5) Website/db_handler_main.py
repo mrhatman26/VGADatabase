@@ -102,13 +102,7 @@ def game_get_selection(pid=None, search=None, no_results=10):
         cursor.close()
         database.close()
         return (games, no_pages, total_games)
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        import pyperclip
-        statement = cursor.statement
-        print(statement, flush=True)
-        pyperclip.copy(statement)
-        pause()
+    except:
         return None
 
 def game_get_single(game_id=0):
@@ -211,8 +205,7 @@ def game_get_developers(game_id, is_pub=False, cursor=None):
             return developers
         else:
             return []
-    except Exception as e:
-        fprint(traceback.format_exc())
+    except:
         return []
     
 def game_get_tags(game_id, cursor=None):
@@ -277,9 +270,7 @@ def tag_check_exists(tag, tag_type=None, database=None, cursor=None):
             return True
         else:
             return False
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
+    except:
         return False
     
 def tag_get_id(tag, tag_type=None, cursor=None):
@@ -359,10 +350,7 @@ def tag_get_selection(pid=None, no_results=10, search=None):
         cursor.close()
         database.close()
         return (tags, no_pages, total_tags)
-    except Exception as e:
-        fprint(traceback.format_exc())
-        fprint(cursor.statement)
-        pause()
+    except:
         return None
 
 def tag_get_individual(tag_id):
@@ -456,9 +444,7 @@ def tag_get_games(tag_id):
             return games
         else:
             return None
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
+    except:
         return None
     
 def tag_get_similar(tag):
@@ -689,9 +675,7 @@ def devpub_get_games(devpub_id):
             return games
         else:
             return None
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
+    except:
         return None
 
 #Languages
@@ -765,9 +749,7 @@ def update_create(name, database=None, cursor=None, changed=None, u_type="game")
             cursor.close()
             database.close()
         return True
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
+    except:
         return False
     
 def update_get_previous_version(name, database=None, cursor=None, u_type="game"):
@@ -786,13 +768,10 @@ def update_get_previous_version(name, database=None, cursor=None, u_type="game")
             return fetch[-1][0]
         else:
             return 1
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pause()
+    except:
         return 1
     
 def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
-    import pyperclip
     try:
         updates = []
         no_cursor = False
@@ -819,8 +798,5 @@ def update_get_all_versions(id, database=None, cursor=None, u_type="game"):
             return updates
         else:
             return None
-    except Exception as e:
-        print(traceback.format_exc(), flush=True)
-        pyperclip.copy(cursor.statement)
-        pause()
+    except:
         return None

@@ -1,7 +1,6 @@
 import ast, traceback
 from flask import Flask, render_template, url_for, request, redirect, abort
 from flask_login import LoginManager, current_user, login_user, logout_user
-from datetime import datetime as dt
 from db_handler_users import *
 from db_handler_admin import *
 from db_handler_main import *
@@ -16,8 +15,7 @@ from misc import get_current_page, test_datetime
 
 '''Server Vars'''
 version = update_version()
-print("Version is now:", version, flush=True)
-#admin_reset_increment()
+fprint("Version is now: " + str(version))
 app = Flask(__name__) #Create the flask application
 app.secret_key = "SeeThatMountain?YouCanClimbItJERSAIKGYHJIOERHGJ"
 
@@ -67,8 +65,7 @@ def game_list(pid=0, search="", no_results=10):
         access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)")
         search = search.replace("+", " ")
         return render_template("games/game_list.html", page_name="All Games", c_version=version, game_list=games[0], no_pages=games[1], no_results=no_results, pid=pid, current_page=current_page, total_results=games[2], tag_search=search)
-    except Exception as e:
-        fprint(traceback.format_exc())
+    except:
         try:
             games = game_get_selection(0, search)
             access_log(request.remote_addr, get_user(), "/games/pid=" + str(pid) + "?search=" + search + " (Games List)", failed=True, default=True)
@@ -235,8 +232,7 @@ def tag_list(pid=0, no_results=10, search=None):
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + "?search=" + str(search) + " (Tag List)")
         return render_template("tags/tag_list.html", page_name="All Tags", c_version=version, tags_list=tags[0], no_pages=tags[1], no_results=no_results, pid=pid, current_page=current_page, total_results=tags[2], tag_search=search)
-    except Exception as e:
-        fprint(traceback.format_exc())
+    except:
         try:
             tags = tag_get_selection(0)
             access_log(request.remote_addr, get_user(), "/tags/pid=" + str(pid) + " (Tag List)", failed=True, default=True)
@@ -340,8 +336,7 @@ def tag_get_closest():
                 return str(closest_tag)
             else:
                 return "-999notag"
-    except Exception as e:
-        fprint(traceback.format_exc())
+    except:
         return "-999notag"    
 
 #Developers & Publishers (Devpubs)
@@ -391,8 +386,7 @@ def publisher_list(pid=0, no_results=10, search=""):
         current_page = get_current_page(pid, no_results)
         access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + "?search=" + str(search) + " (publishers List)")
         return render_template("devpubs/publisher_list.html", page_name="All publishers", c_version=version, devpub_list=devpubs[0], no_pages=devpubs[1], no_results=no_results, pid=pid, current_page=current_page, total_results=devpubs[2], tag_search=search)
-    except Exception as e:
-        fprint(traceback.format_exc())
+    except:
         try:
             devpubs = devpub_get_selection(pid, is_pub=True)
             access_log(request.remote_addr, get_user(), "/publishers/pid=" + str(pid) + " (publishers List)", failed=True, default=True)
@@ -591,9 +585,6 @@ def user_change_email():
         new_email = new_email.decode()
         new_email = ast.literal_eval(new_email)
         old_email = user_get_email(current_user.id)
-        fprint(new_email["user_email"])
-        fprint(old_email)
-        fprint(old_email == new_email["user_email"])
         if old_email != new_email["user_email"]:
             if user_modify_email(current_user.id, new_email["user_email"]) is True:
                 modify_user_log(request.remote_addr, get_user(), new_email["user_email"], is_email=True)
