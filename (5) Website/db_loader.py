@@ -51,5 +51,3 @@ def read_scraped_data(user_id):
     scraped_data.close()
     cursor.close()
     database.close()
-
-#read_scraped_data(0)
