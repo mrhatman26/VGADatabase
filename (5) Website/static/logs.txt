@@ -484,3 +484,17 @@ No exception information available.
 [2025.08.12 at 14:10:25]: 127.0.0.1 (User: Annonymous) successfully accessed / (Home)
 [2025.08.12 at 14:11:26]: 127.0.0.1 (User: jonsmith55) FAILED to access /users/login/ (Login)
 [2025.08.12 at 14:11:26]: 127.0.0.1 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.13 at 09:29:57]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.08.13 at 09:29:59]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.08.13 at 09:31:06]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.08.13 at 09:31:06]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.08.13 at 09:31:06]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.08.13 at 09:31:27]: 192.168.1.99 successfully logged in as jonsmith55
+[2025.08.13 at 09:31:27]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.13 at 09:31:39]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.13 at 09:31:56]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.13 at 09:31:57] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.08.13 at 09:31:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.08.13 at 09:32:55] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.08.13 at 09:33:27] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.08.13 at 09:33:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)

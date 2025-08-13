@@ -107,10 +107,11 @@ def user_get_all():
         user_list = []
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT user_id, user_desc, user_email, user_isAdmin, user_isMod FROM table_users")
+        cursor.execute("SELECT user_id, user_desc, user_email, user_isAdmin, user_isMod FROM table_users WHERE user_id >= 0")
         for item in cursor.fetchall():
-            if item[1].isspace or item[1] == "":
-                item[1] == None
+            if item[1] is not None:
+                if item[1].isspace or item[1] == "":
+                    item[1] == None
             user_list.append({
                 "user_id": item[0],
                 "user_desc": item[1],
@@ -121,7 +122,9 @@ def user_get_all():
         cursor.close()
         database.close()
         return user_list
-    except:
+    except Exception as e:
+        import traceback
+        fprint(traceback.format_exc())
         return []
     
 def user_single_get_all(user_id):
