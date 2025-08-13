@@ -27,18 +27,25 @@ def user_check_exists(username):
         return False
     
 def user_check_reconfirm(user_id):
-    user = []
-    database = mysql.connector.connect(**get_db_config(deployed))
-    cursor = database.cursor()
-    cursor.execute("SELECT user_id, user_name, user_isMod, user_isAdmin FROM table_users WHERE user_id = %s", (str(user_id),))
-    for item in cursor.fetchall():
-        user.append(item[0])
-        user.append(item[1])
-        user.append(item[2])
-        user.append(item[3])
-    cursor.close()
-    database.close()
-    return user
+    try:
+        user = []
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("SELECT user_id, user_name, user_isMod, user_isAdmin FROM table_users WHERE user_id = %s", (str(user_id),))
+        fetch = cursor.fetchall()
+        cursor.close()
+        database.close()
+        if len(fetch) > 0:
+            for item in fetch:
+                user.append(item[0])
+                user.append(item[1])
+                user.append(item[2])
+                user.append(item[3])
+            return user
+        else:
+            return []
+    except:
+        return []
 
 def user_login_passcheck(userdata):
     try:
@@ -165,7 +172,7 @@ def user_add_new(new_userdata, set_mod=False, set_admin=False):
         cursor.close()
         database.close()
         return True
-    except@
+    except:
         return False
 
 def user_modify_username(user_id, new_username):
@@ -200,9 +207,11 @@ def user_delete(user_id):
         game_void_user_link(user_id, cursor=cursor, database=database)
         devpub_void_user_link(user_id, cursor=cursor, database=database)
         update_void_user_link(user_id, cursor=cursor, database=database)
-        cursor.execute("DELETE FROM table_users WHERE user_id = %s", (user_id))
+        cursor.execute("DELETE FROM table_users WHERE user_id = %s", (user_id,))
+        database.commit()
         cursor.close()
         database.close()
+        print("no")
         return True
     except:
         return False
