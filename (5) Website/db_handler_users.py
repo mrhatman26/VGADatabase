@@ -17,6 +17,7 @@ def user_check_exists(username):
         cursor = database.cursor()
         cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
         fetch = cursor.fetchall()
+        fetch += 1
         cursor.close()
         database.close()
         if len(fetch) > 0:
@@ -24,6 +25,10 @@ def user_check_exists(username):
         else:
             return False
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
     
 def user_check_reconfirm(user_id):
@@ -45,6 +50,10 @@ def user_check_reconfirm(user_id):
         else:
             return []
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return []
 
 def user_login_passcheck(userdata):
@@ -60,6 +69,10 @@ def user_login_passcheck(userdata):
         else:
             return False
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
     
 def user_check_admin(username):
@@ -72,6 +85,10 @@ def user_check_admin(username):
         database.close()
         return (bool(fetch[0]), bool(fetch[1]))
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return (False, False)
     
 #Get
@@ -85,6 +102,10 @@ def user_get_id(username):
         database.close()
         return fetch
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return None
     
 def user_get_username(user_id):
@@ -100,6 +121,10 @@ def user_get_username(user_id):
         else:
             return None
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return None
     
 def user_get_all():
@@ -122,9 +147,11 @@ def user_get_all():
         cursor.close()
         database.close()
         return user_list
-    except Exception as e:
-        import traceback
-        fprint(traceback.format_exc())
+    except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return []
     
 def user_single_get_all(user_id):
@@ -145,6 +172,10 @@ def user_single_get_all(user_id):
         else:
             return None
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return None
     
 def user_get_email(user_id):
@@ -160,6 +191,10 @@ def user_get_email(user_id):
         else:
             return None
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return None
     
 #Add/Modify
@@ -176,6 +211,10 @@ def user_add_new(new_userdata, set_mod=False, set_admin=False):
         database.close()
         return True
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
 
 def user_modify_username(user_id, new_username):
@@ -188,6 +227,10 @@ def user_modify_username(user_id, new_username):
         database.close()
         return True
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
     
 def user_modify_email(user_id, new_email):
@@ -200,6 +243,10 @@ def user_modify_email(user_id, new_email):
         database.close()
         return True
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
     
 def user_delete(user_id):
@@ -217,4 +264,8 @@ def user_delete(user_id):
         print("no")
         return True
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False

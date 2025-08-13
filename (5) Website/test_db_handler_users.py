@@ -142,3 +142,8 @@ def test_user_modify_username():
     assert user_get_username(temp_user.id) == temp_user.alt_name
     delete_temp_user(temp_user)
     del temp_user
+
+def temp():
+    user_check_exists("blah")
+
+temp()
