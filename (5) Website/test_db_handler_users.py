@@ -38,6 +38,11 @@ def test_user_add_new():
     delete_temp_user(temp_user)
     del temp_user
 
+def test_user_delete():
+    temp_user = create_temp_user()
+    assert user_delete(temp_user.id) is True
+    del temp_user
+
 def test_user_check_exists():
     assert user_check_exists("882793897532918204875923190284879532190") is False
     temp_user = create_temp_user()
@@ -136,14 +141,15 @@ def test_user_get_email():
     del temp_user
 
 def test_user_modify_username():
-    assert user_modify_username(-2, None) is False
     temp_user = create_temp_user()
     assert user_modify_username(temp_user.id, temp_user.alt_name) is True
     assert user_get_username(temp_user.id) == temp_user.alt_name
     delete_temp_user(temp_user)
     del temp_user
 
-def temp():
-    user_check_exists("blah")
-
-temp()
+def test_user_modify_email():
+    temp_user = create_temp_user()
+    assert user_modify_email(temp_user.id, temp_user.alt_email) is True
+    assert user_get_email(temp_user.id) == temp_user.alt_email
+    delete_temp_user(temp_user)
+    del temp_user

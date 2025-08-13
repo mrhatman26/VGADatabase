@@ -17,7 +17,6 @@ def user_check_exists(username):
         cursor = database.cursor()
         cursor.execute("SELECT user_id FROM table_users WHERE user_name = %s", (str(username),))
         fetch = cursor.fetchall()
-        fetch += 1
         cursor.close()
         database.close()
         if len(fetch) > 0:
