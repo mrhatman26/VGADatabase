@@ -24,6 +24,10 @@ def game_get_id(game, cursor=None):
         else:
             return None
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            cursor.close()
         return None
     
 def game_get_name(game_id):
@@ -124,6 +128,8 @@ def game_get_single(game_id=0):
                 "game_rstate": fetch[5],
                 "game_url": fetch[6]
             }
+            for item in game_data:
+                fprint(type(game_data[item]))
             return game_data
         else:
             return None
@@ -246,6 +252,23 @@ def game_check_release_date(game_id=None, game_rdate=None):
             else:
                 return False
     except:
+        return False
+    
+def game_delete(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        game_delete_links(game_id)
+        cursor.execute("DELETE FROM table_games WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
 
 #Tags
@@ -389,6 +412,30 @@ def tag_add_new(tag_data, user_id):
         return True
     except:
         return False
+    
+def tag_delete(tag_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("DELETE FROM link_game_tag WHERE tag_id = %s", (tag_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_tag_user WHERE tag_id = %s", (tag_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_tags_aliases WHERE tag_id = %s", (tag_id,))
+        database.commit()
+        cursor.execute("DELETE FROM table_tags WHERE tag_id = %s", (tag_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True                         
+    except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
+        return False
+    
+#print(tag_delete(61))
 
 def tag_get_unapproved():
     try:

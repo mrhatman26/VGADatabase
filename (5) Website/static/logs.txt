@@ -498,3 +498,18 @@ No exception information available.
 [2025.08.13 at 09:32:55] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
 [2025.08.13 at 09:33:27] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
 [2025.08.13 at 09:33:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.08.14 at 09:24:20]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.08.14 at 09:24:21]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.08.14 at 09:24:38]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.08.14 at 09:24:38]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.08.14 at 09:24:38]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.08.14 at 09:24:45]: 192.168.1.99 successfully logged in as jonsmith55
+[2025.08.14 at 09:24:45]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.08.14 at 09:24:55]: 192.168.1.99 (User: jonsmith55) successfully accessed /users/account/ (Account Page)
+[2025.08.14 at 09:24:58] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.08.14 at 09:24:59] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.08.14 at 09:26:33] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/ (Admin: Load From CSV)
+[2025.08.14 at 09:26:34] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/database/load_csv/confirmed/ (Admin: Load From CSV Confirmed)
+[2025.08.14 at 09:26:45] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.08.14 at 10:20:52]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/pid=0?search= (Games List)
+[2025.08.14 at 10:20:54]: 192.168.1.99 (User: jonsmith55) successfully accessed /games/game_id=99 (Individual Game)

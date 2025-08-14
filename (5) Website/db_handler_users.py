@@ -260,7 +260,6 @@ def user_delete(user_id):
         database.commit()
         cursor.close()
         database.close()
-        print("no")
         return True
     except:
         if cursor is not None:

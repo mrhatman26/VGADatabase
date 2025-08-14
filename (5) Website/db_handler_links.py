@@ -159,6 +159,46 @@ def game_void_user_link(user_id, cursor=None, database=None):
         return True
     except:
         return False
+    
+def game_delete_links(game_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("DELETE FROM link_game_age_rating WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_character WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_developer WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_favourite WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_language WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_platform WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_rating WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_screenshot WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_tag WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_update WHERE game_id = %s", (game_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_user WHERE game_id = %s", (game_id,))
+        database.commit()
+        #cursor.execute("DELETE FROM link_games WHERE game_id = %s", (game_id,))
+        #database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except Exception as e:
+        import traceback
+        fprint(traceback.format_exc())
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            cursor.close()
+        return False
 
 #Get
 def game_get_approved(game_id):
