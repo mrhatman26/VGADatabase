@@ -1,5 +1,5 @@
 from db_handler_main import *
-from db_handler_admin import game_approve_user_link, tag_approve_user_link
+from db_handler_admin import game_approve_user_link, tag_approve_user_link, devpub_approve_user_link
 from test_db_handler_users import TempUser, create_temp_user, delete_temp_user
 
 class TempGame():
@@ -29,7 +29,26 @@ class TempTag():
         self.creation_dict = {"tag_name": self.name, "tag_desc": self.desc, "tag_type": self.type, "tag_isNSFW": self.unused_bool}
         self.modify_dict = {"tag_name": self.alt_name, "tag_desc": self.alt_desc, "tag_type": self.alt_type, "tag_isNSFW": self.unused_bool}
         self.id = None
-        
+
+class TempDevPub():
+    def __init__(self, is_pub=False):
+        if is_pub is False:
+            self.name = "TestDeveloper"
+            self.desc = "This is a test developer"
+            self.fDate = "2001/06/20"
+            self.alt_name = "DeveloperTest"
+            self.alt_desc = "This developer is a test"
+        else:
+            self.name = "TestPublisher"
+            self.desc = "This is a test publisher"
+            self.fDate = "2001/06/20"
+            self.alt_name = "PublisherTest"
+            self.alt_desc = "This publisher is a test"
+        self.status = "Open for Business"
+        self.is_pub = is_pub
+        self.creation_dict = {"developer_name": self.name, "developer_desc": self.desc, "developer_foundDate": self.fDate, "developer_isPub": self.is_pub, "developer_defunctDate": None}
+        self.modify_dict = {"developer_name": self.alt_name, "developer_desc": self.alt_desc, "developer_foundDate": self.fDate, "developer_isPub": self.is_pub, "developer_defunctDate": None}
+        self.id = None
 
 def create_temp_game(temp_user):
     temp_game = TempGame()
@@ -43,6 +62,12 @@ def create_temp_tag(temp_user):
     temp_tag.id = tag_get_id(temp_tag.name)
     return temp_tag
 
+def create_temp_devpub(temp_user, is_pub=False):
+    temp_devpub = TempDevPub(is_pub)
+    devpub_add_new(temp_devpub.creation_dict, temp_user.id)
+    temp_devpub.id = devpub_get_id(temp_devpub.name, is_pub=temp_devpub.is_pub)
+    return temp_devpub
+
 def delete_temp_game(temp_game):
     game_delete(temp_game.id)
     del temp_game
@@ -50,6 +75,10 @@ def delete_temp_game(temp_game):
 def delete_temp_tag(temp_tag):
     tag_delete(temp_tag.id)
     del temp_tag
+
+def delete_temp_devpub(temp_devpub):
+    devpub_delete(temp_devpub.id)
+    del temp_devpub
 
 def test_game_get_id():
     assert game_get_id("3689458943283924") is None
@@ -284,4 +313,180 @@ def test_tag_type_change():
     delete_temp_tag(temp_tag)
     delete_temp_user(temp_user)
     del temp_tag
+    del temp_user
+
+def test_devpub_get_id():
+    assert devpub_get_id("36437347548569") is None
+    assert devpub_get_id("36437347548569", is_pub=True) is None
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    assert devpub_get_id(temp_devpub.name) == temp_devpub.id
+    assert devpub_get_id(temp_devpub.name, is_pub=True) is None
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = create_temp_devpub(temp_user, is_pub=True)
+    assert devpub_get_id(temp_devpub.name) is None
+    assert devpub_get_id(temp_devpub.name, is_pub=True) == temp_devpub.id
+    delete_temp_devpub(temp_devpub)
+    delete_temp_user(temp_user)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_get_name():
+    assert devpub_get_name(-1) is None
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    assert devpub_get_name(temp_devpub.id) == temp_devpub.name.lower()
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = create_temp_devpub(temp_user, is_pub=True)
+    assert devpub_get_name(temp_devpub.id) == temp_devpub.name.lower()
+    delete_temp_user(temp_user)
+    delete_temp_devpub(temp_devpub)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_check_exists():
+    assert devpub_check_exists("9680232859253789") is False
+    assert devpub_check_exists("9680232859253789", is_pub=True) is False
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    assert devpub_check_exists(temp_devpub.name) is True
+    assert devpub_check_exists(temp_devpub.name, is_pub=True) is False
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = create_temp_devpub(temp_user, is_pub=True)
+    assert devpub_check_exists(temp_devpub.name) is False
+    assert devpub_check_exists(temp_devpub.name, is_pub=True) is True
+    delete_temp_devpub(temp_devpub)
+    delete_temp_user(temp_user)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_add_new():
+    assert devpub_add_new({}, -2) is False
+    temp_user = create_temp_user()
+    temp_devpub = TempDevPub()
+    assert devpub_add_new(temp_devpub.creation_dict, temp_user.id) is True
+    temp_devpub.id = devpub_get_id(temp_devpub.name)
+    print(temp_devpub.id)
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = TempDevPub(is_pub=True)
+    assert devpub_add_new(temp_devpub.creation_dict, temp_user.id) is True
+    temp_devpub.id = devpub_get_id(temp_devpub.name, is_pub=True)
+    delete_temp_devpub(temp_devpub)
+    delete_temp_user(temp_user)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_delete():
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    assert devpub_delete(temp_devpub.id) is True
+    delete_temp_user(temp_user)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_get_individual():
+    assert devpub_get_individual(-1) is None
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    devpub_data = devpub_get_individual(temp_devpub.id)
+    assert devpub_data is not None
+    assert len(devpub_data) == 7
+    #ID
+    assert devpub_data["developer_id"] is not None
+    assert type(devpub_data["developer_id"]) == int
+    assert devpub_data["developer_id"] == temp_devpub.id
+    #Name
+    assert devpub_data["developer_name"] is not None
+    assert type(devpub_data["developer_name"]) == str
+    assert devpub_data["developer_name"] == temp_devpub.name.lower().title()
+    #Desc
+    if devpub_data["developer_desc"] is not None:
+        assert type(devpub_data["developer_desc"]) == str
+        assert devpub_data["developer_desc"] == temp_devpub.desc
+    #fDate
+    assert devpub_data["developer_foundDate"] is not None
+    assert type(devpub_data["developer_foundDate"]) == str
+    assert devpub_data["developer_foundDate"] == temp_devpub.fDate
+    #Status
+    assert devpub_data["developer_status"] is not None
+    assert type(devpub_data["developer_status"]) == str
+    assert devpub_data["developer_status"] == temp_devpub.status
+    #dDate
+    assert devpub_data["developer_defunctDate"] is None
+    #isPub
+    assert devpub_data["developer_isPub"] is not None
+    assert type(devpub_data["developer_isPub"]) == bool
+    assert devpub_data["developer_isPub"] == temp_devpub.is_pub
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = create_temp_devpub(temp_user, is_pub=True)
+    devpub_data = devpub_get_individual(temp_devpub.id)
+    assert devpub_data is not None
+    assert len(devpub_data) == 7
+    #ID
+    assert devpub_data["developer_id"] is not None
+    assert type(devpub_data["developer_id"]) == int
+    assert devpub_data["developer_id"] == temp_devpub.id
+    #Name
+    assert devpub_data["developer_name"] is not None
+    assert type(devpub_data["developer_name"]) == str
+    assert devpub_data["developer_name"] == temp_devpub.name.lower().title()
+    #Desc
+    if devpub_data["developer_desc"] is not None:
+        assert type(devpub_data["developer_desc"]) == str
+        assert devpub_data["developer_desc"] == temp_devpub.desc
+    #fDate
+    assert devpub_data["developer_foundDate"] is not None
+    assert type(devpub_data["developer_foundDate"]) == str
+    assert devpub_data["developer_foundDate"] == temp_devpub.fDate
+    #Status
+    assert devpub_data["developer_status"] is not None
+    assert type(devpub_data["developer_status"]) == str
+    assert devpub_data["developer_status"] == temp_devpub.status
+    #dDate
+    assert devpub_data["developer_defunctDate"] is None
+    #isPub
+    assert devpub_data["developer_isPub"] is not None
+    assert type(devpub_data["developer_isPub"]) == bool
+    assert devpub_data["developer_isPub"] == temp_devpub.is_pub
+    delete_temp_devpub(temp_devpub)
+    delete_temp_user(temp_user)
+    del temp_devpub
+    del temp_user
+
+def test_devpub_get_unapproved():
+    temp_user = create_temp_user()
+    temp_devpub = create_temp_devpub(temp_user)
+    devpubs = devpub_get_unapproved()
+    unapproved = False
+    for devpub in devpubs:
+        if devpub["developer_id"] == temp_devpub.id:
+            unapproved = True
+    assert unapproved is True
+    devpub_approve_user_link(temp_devpub.id)
+    devpubs = devpub_get_unapproved()
+    unapproved = False
+    if devpubs is not None:
+        for devpub in devpubs:
+            if devpub["developer_id"] == temp_devpub.id:
+                unapproved = True
+    assert unapproved is False
+    delete_temp_devpub(temp_devpub)
+    temp_devpub = create_temp_devpub(temp_user, is_pub=True)
+    devpubs = devpub_get_unapproved()
+    unapproved = False
+    for devpub in devpubs:
+        if devpub["developer_id"] == temp_devpub.id:
+            unapproved = True
+    assert unapproved is True
+    devpub_approve_user_link(temp_devpub.id)
+    devpubs = devpub_get_unapproved()
+    unapproved = False
+    if devpubs is not None:
+        for devpub in devpubs:
+            if devpub["developer_id"] == temp_devpub.id:
+                unapproved = True
+    assert unapproved is False
+    delete_temp_devpub(temp_devpub)
+    delete_temp_user(temp_user)
+    del temp_devpub
     del temp_user

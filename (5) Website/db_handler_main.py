@@ -434,8 +434,6 @@ def tag_delete(tag_id):
         if database is not None:
             database.close()
         return False
-    
-#print(tag_delete(61))
 
 def tag_get_unapproved():
     try:
@@ -625,6 +623,30 @@ def devpub_add_new(devpub_data, user_id):
         database.close()
         return True
     except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
+        return False
+    
+def devpub_delete(devpub_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("DELETE FROM link_developer_user WHERE developer_id = %s", (devpub_id,))
+        database.commit()
+        cursor.execute("DELETE FROM link_game_developer WHERE developer_id = %s", (devpub_id,))
+        database.commit()
+        cursor.execute("DELETE FROM table_developers WHERE developer_id = %s", (devpub_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
 
 def devpub_get_selection(pid=None, no_results=10, is_pub=False, search=None):
@@ -797,6 +819,24 @@ def update_create(name, database=None, cursor=None, changed=None, u_type="game")
             database.close()
         return True
     except:
+        return False
+    
+def update_delete(update_id):
+    try:
+        database = mysql.connector.connect(**get_db_config(deployed))
+        cursor = database.cursor()
+        cursor.execute("DELETE FROM link_game_update WHERE update_id = %s", (update_id,))
+        database.commit()
+        cursor.execute("DELETE FROM table_update_history WHERE update_id = %s", (update_id,))
+        database.commit()
+        cursor.close()
+        database.close()
+        return True
+    except:
+        if cursor is not None:
+            cursor.close()
+        if database is not None:
+            database.close()
         return False
     
 def update_get_previous_version(name, database=None, cursor=None, u_type="game"):
