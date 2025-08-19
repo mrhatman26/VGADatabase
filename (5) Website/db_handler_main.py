@@ -77,6 +77,8 @@ def game_get_selection(pid=None, search=None, no_results=10):
             cursor.execute(command, command_params)
             fetch = cursor.fetchall()
             statement = cursor.statement
+            import pyperclip
+            pyperclip.copy(statement)
             for game in fetch:
                     games.append({
                     "game_id": game[0],
@@ -128,8 +130,6 @@ def game_get_single(game_id=0):
                 "game_rstate": fetch[5],
                 "game_url": fetch[6]
             }
-            for item in game_data:
-                fprint(type(game_data[item]))
             return game_data
         else:
             return None
