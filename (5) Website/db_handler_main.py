@@ -77,8 +77,6 @@ def game_get_selection(pid=None, search=None, no_results=10):
             cursor.execute(command, command_params)
             fetch = cursor.fetchall()
             statement = cursor.statement
-            import pyperclip
-            pyperclip.copy(statement)
             for game in fetch:
                     games.append({
                     "game_id": game[0],

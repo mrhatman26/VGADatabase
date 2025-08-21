@@ -1,0 +1,1 @@
+cursor.execute("INSERT INTO table_games (game_title, game_desc) VALUES(%s, %s)", (game_dict["game_title"], game_dict["game_description"],))
