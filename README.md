@@ -1,4 +1,15 @@
-Website:<br>
+Scraping Program and Cleaner: In "(3) Scraping Program"<br>
+To run the scraping program, make sure you are connected to the internet, then run "steam_scrape.py" in the command line. <br>
+From there, enter the number of games you would like to scrape from Steam. After this, the program will run automatically.<br>
+Note: The speed of the program is dependant on your machine, but it roughly takes an hour and a half to scrape 10,000 games.<br>
+Once scraping is finished, the data collected will be saved to "scraped_steam_game_data.csv".
+<br>
+After the scraping program is finished, you will want to run "scraped_data_cleaner.py" in the command line to allow the data to be used for<br>
+data analysis or in the website. This cleaning program will run automatically with no input needed. Once done, it will save the cleaned data to<br>
+"cleaned_steam_data.csv".<br>
+To use this data in the website, make sure to copy it to the "(5) Website" directory.<br>
+<br>
+Website: In "(5) Website"<br>
 To run the website you need the following Python libraries to be installed:<br>
 1. Flask: To run the website<br>
 2. Flask Login: To handle users<br>

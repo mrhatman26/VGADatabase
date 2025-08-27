@@ -105,7 +105,6 @@ for language in modified_data["game_languages"]:
         modified_data.loc[row_counter, "game_languages"] = list_string_to_string(str(lang_list))
         modified_data = modified_data.reset_index(drop=True)
     except Exception as e:
-        #print(str(e))
         modified_data.loc[row_counter, "game_languages"] = "[]"
         modified_data = modified_data.reset_index(drop=True)
     row_counter += 1
@@ -120,6 +119,5 @@ for genres in modified_data["genres"]:
         modified_data.loc[row_counter, "genres"] = "N/A"
     row_counter += 1
 print("Done\nNormalisation complete.")
-#modified_data = modified_data.drop(columns={"game_languages"}, index=1)
 #Save back to CSV
 modified_data.to_csv("cleaned_steam_data.csv", index=False, encoding="utf-8-sig")
