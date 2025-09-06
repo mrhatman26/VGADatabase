@@ -131,17 +131,18 @@ def user_get_all():
         user_list = []
         database = mysql.connector.connect(**get_db_config(deployed))
         cursor = database.cursor()
-        cursor.execute("SELECT user_id, user_desc, user_email, user_isAdmin, user_isMod FROM table_users WHERE user_id >= 0")
+        cursor.execute("SELECT user_id, user_name, user_desc, user_email, user_isAdmin, user_isMod FROM table_users WHERE user_id >= 0")
         for item in cursor.fetchall():
             if item[1] is not None:
                 if item[1].isspace or item[1] == "":
                     item[1] == None
             user_list.append({
                 "user_id": item[0],
-                "user_desc": item[1],
-                "user_email": item[2],
-                "user_isAdmin": item[3],
-                "user_isMod": item[4]
+                "user_name": item[1],
+                "user_desc": item[2],
+                "user_email": item[3],
+                "user_isAdmin": item[4],
+                "user_isMod": item[5]
             })
         cursor.close()
         database.close()

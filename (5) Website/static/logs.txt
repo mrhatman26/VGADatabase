@@ -118,3 +118,17 @@
 [2025.08.25 at 19:42:54]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
 [2025.08.25 at 19:47:09]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
 [2025.08.25 at 19:49:07]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.09.06 at 08:57:23]: 192.168.1.99 (User: Annonymous) successfully accessed / (Home)
+[2025.09.06 at 08:58:19]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/ (Signup)
+[2025.09.06 at 08:58:38]: 192.168.1.99 (User: Annonymous) successfully accessed /users/signup/validate/ (Signup Validation)
+[2025.09.06 at 08:58:39]: 192.168.1.99 successfully created a new account with the username of jonsmith55
+[2025.09.06 at 08:58:39]: 192.168.1.99 (User: Annonymous) successfully accessed /users/login/ (Login)
+[2025.09.06 at 08:58:47]: 192.168.1.99 successfully logged in as jonsmith55
+[2025.09.06 at 08:58:47]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.09.06 at 08:59:08]: 192.168.1.99 (User: jonsmith55) successfully accessed / (Home)
+[2025.09.06 at 08:59:10] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.09.06 at 08:59:11] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
+[2025.09.06 at 08:59:16] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.09.06 at 09:01:16] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/users/ (Admin: User Management)
+[2025.09.06 at 09:01:25] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/ (Admin: Main)
+[2025.09.06 at 09:01:27] (ADMIN): 192.168.1.99 (User: jonsmith55) successfully accessed admin resource /admin/management/databasae/ (Admin: Database Management)
